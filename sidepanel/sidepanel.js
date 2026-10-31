@@ -44,6 +44,10 @@
   let maplibreMap = null;
   let markerObjs = [];
   let pmtilesReady = null;
+  let mapMountGen = 0;
+  let lastMapFingerprint = "";
+  let lastMapPresetId = "";
+  let styleCache = null;
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -302,7 +306,143 @@
       }
     }
     maplibreMap = null;
+    lastMapFingerprint = "";
+    lastMapPresetId = "";
     if (els.teachingMap) els.teachingMap.innerHTML = "";
+  }
+
+  function chapterFocusPoints() {
+    const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
+    const routePts = collectRoutePoints();
+    const focusPts = [];
+    const seen = new Set();
+    for (const p of matched) {
+      if (!p?.id || seen.has(p.id)) continue;
+      if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
+      seen.add(p.id);
+      focusPts.push(p);
+    }
+    for (const s of routePts) {
+      const id = s.placeId || s.id || s.name;
+      if (!id || seen.has(id)) continue;
+      if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
+      seen.add(id);
+      focusPts.push(s);
+    }
+    return { focusPts, routePts };
+  }
+
+  function mapFingerprint() {
+    const { focusPts, routePts } = chapterFocusPoints();
+    const placeIds = focusPts.map((p) => p.id || p.placeId || p.name).join(",");
+    const routeIds = routePts.map((p) => p.placeId || p.name).join(">");
+    const jid = activeJourney?.id || "";
+    const url = current?.url || "";
+    const kingdoms = Boolean(els.kingdomsToggle?.checked);
+    const preset = els.presetSelect?.value || "";
+    return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}`;
+  }
+
+  function fitToChapter(map, preset, focusPts) {
+    if (focusPts.length) {
+      const bounds = new maplibregl.LngLatBounds();
+      for (const p of focusPts) bounds.extend([p.lng, p.lat]);
+      map.fitBounds(bounds, { padding: 40, maxZoom: 8, duration: 0 });
+      return;
+    }
+    if (preset?.bounds?.length === 2) {
+      const [[south, west], [north, east]] = preset.bounds;
+      map.fitBounds(
+        [
+          [west, south],
+          [east, north],
+        ],
+        { padding: 28, maxZoom: 8, duration: 0 }
+      );
+    }
+  }
+
+  function ensureOverlayLayers(map, showKingdoms) {
+    if (showKingdoms && kingdomsGeoJson?.features) {
+      if (!map.getSource("kingdoms")) {
+        map.addSource("kingdoms", { type: "geojson", data: kingdomsGeoJson });
+        map.addLayer({
+          id: "kingdoms-fill",
+          type: "fill",
+          source: "kingdoms",
+          paint: {
+            "fill-color": ["coalesce", ["get", "color"], "#4a6741"],
+            "fill-opacity": ["coalesce", ["get", "fillOpacity"], 0.28],
+          },
+        });
+        map.addLayer({
+          id: "kingdoms-line",
+          type: "line",
+          source: "kingdoms",
+          paint: {
+            "line-color": ["coalesce", ["get", "color"], "#4a6741"],
+            "line-width": 1.5,
+          },
+        });
+      } else {
+        map.getSource("kingdoms").setData(kingdomsGeoJson);
+        if (map.getLayoutProperty("kingdoms-fill", "visibility") === "none") {
+          map.setLayoutProperty("kingdoms-fill", "visibility", "visible");
+          map.setLayoutProperty("kingdoms-line", "visibility", "visible");
+        }
+      }
+    } else if (map.getLayer("kingdoms-fill")) {
+      map.setLayoutProperty("kingdoms-fill", "visibility", "none");
+      map.setLayoutProperty("kingdoms-line", "visibility", "none");
+    }
+
+    if (!map.getSource("route")) {
+      map.addSource("route", { type: "geojson", data: routeToGeoJSON([]) });
+      map.addLayer({
+        id: "route-line",
+        type: "line",
+        source: "route",
+        paint: {
+          "line-color": "#a63024",
+          "line-width": 3,
+          "line-dasharray": [2, 1.5],
+        },
+      });
+    }
+    if (!map.getSource("towns-focus")) {
+      map.addSource("towns-focus", {
+        type: "geojson",
+        data: placesToGeoJSON([], { dim: false }),
+      });
+      map.addLayer({
+        id: "towns-focus-circle",
+        type: "circle",
+        source: "towns-focus",
+        paint: {
+          "circle-radius": 7,
+          "circle-color": "#a63024",
+          "circle-stroke-width": 1,
+          "circle-stroke-color": "#2c2416",
+        },
+      });
+    }
+  }
+
+  function updateMapOverlays(map, preset, showKingdoms) {
+    const { focusPts, routePts } = chapterFocusPoints();
+    ensureOverlayLayers(map, showKingdoms);
+    map.getSource("route")?.setData(routeToGeoJSON(routePts));
+    map.getSource("towns-focus")?.setData(placesToGeoJSON(focusPts, { dim: false }));
+    clearMarkers();
+    addDomMarkers(map, focusPts, { dim: false });
+    fitToChapter(map, preset, focusPts);
+    map.resize();
+    setMapHelp(
+      `${preset?.title || "Map"} — offline MapLibre / OSM (${focusPts.length} place${
+        focusPts.length === 1 ? "" : "s"
+      } in this chapter).`,
+      false
+    );
   }
 
   async function waitForMapSize(el) {
@@ -437,12 +577,15 @@
     }
   }
 
-  async function mountTeachingMap() {
+  async function mountTeachingMap({ forceRemount = false } = {}) {
     if (typeof maplibregl === "undefined") throw new Error("MapLibre failed to load");
     if (!els.teachingMap) throw new Error("Map container missing");
 
-    await Promise.all([loadPresets(), loadAllPlaces(), loadKingdoms(), ensurePmtiles()]);
+    const gen = ++mapMountGen;
+    await Promise.all([loadPresets(), loadKingdoms(), ensurePmtiles()]);
+    if (gen !== mapMountGen) return;
     await waitForMapSize(els.teachingMap);
+    if (gen !== mapMountGen) return;
 
     if (els.presetSelect && !els.presetSelect.dataset.userTouched) {
       const suggested = suggestPresetId();
@@ -472,19 +615,43 @@
       Boolean(els.kingdomsToggle?.checked) && basemapName === "levant";
     if (els.kingdomLegend) els.kingdomLegend.hidden = !showKingdoms;
 
-    destroyMap();
     updateReferencePlate(preset);
 
-    const style = await fetch(chrome.runtime.getURL("media/tiles/style.json")).then(
-      (r) => {
-        if (!r.ok) throw new Error(`style.json HTTP ${r.status}`);
-        return r.json();
+    const fp = mapFingerprint();
+    const presetId = preset?.id || "";
+    const canReuse =
+      !forceRemount &&
+      maplibreMap &&
+      lastMapPresetId === presetId &&
+      typeof maplibreMap.isStyleLoaded === "function" &&
+      maplibreMap.isStyleLoaded();
+
+    if (canReuse) {
+      if (fp === lastMapFingerprint) {
+        maplibreMap.resize();
+        return;
       }
-    );
+      updateMapOverlays(maplibreMap, preset, showKingdoms);
+      lastMapFingerprint = fp;
+      return;
+    }
+
+    destroyMap();
+    if (gen !== mapMountGen) return;
+
+    if (!styleCache) {
+      styleCache = await fetch(chrome.runtime.getURL("media/tiles/style.json")).then(
+        (r) => {
+          if (!r.ok) throw new Error(`style.json HTTP ${r.status}`);
+          return r.json();
+        }
+      );
+    }
+    if (gen !== mapMountGen) return;
 
     const map = new maplibregl.Map({
       container: els.teachingMap,
-      style,
+      style: styleCache,
       center: [35.1, 31.7],
       zoom: 6.5,
       maxZoom: 8,
@@ -505,131 +672,31 @@
       map.once("load", onLoad);
       map.once("error", onError);
     });
-
-    // Chapter-scoped only: matched places on this page + active journey stops.
-    const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
-    const routePts = collectRoutePoints();
-    const focusPts = [];
-    const seen = new Set();
-    for (const p of matched) {
-      if (!p?.id || seen.has(p.id)) continue;
-      if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
-      seen.add(p.id);
-      focusPts.push(p);
-    }
-    for (const s of routePts) {
-      const id = s.placeId || s.id || s.name;
-      if (!id || seen.has(id)) continue;
-      if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
-      seen.add(id);
-      focusPts.push(s);
-    }
-    const contextPts = [];
-
-    if (showKingdoms && kingdomsGeoJson?.features) {
-      map.addSource("kingdoms", { type: "geojson", data: kingdomsGeoJson });
-      map.addLayer({
-        id: "kingdoms-fill",
-        type: "fill",
-        source: "kingdoms",
-        paint: {
-          "fill-color": ["coalesce", ["get", "color"], "#4a6741"],
-          "fill-opacity": ["coalesce", ["get", "fillOpacity"], 0.28],
-        },
-      });
-      map.addLayer({
-        id: "kingdoms-line",
-        type: "line",
-        source: "kingdoms",
-        paint: {
-          "line-color": ["coalesce", ["get", "color"], "#4a6741"],
-          "line-width": 1.5,
-        },
-      });
+    if (gen !== mapMountGen || maplibreMap !== map) {
+      try {
+        map.remove();
+      } catch {
+        /* ignore */
+      }
+      return;
     }
 
-    map.addSource("route", {
-      type: "geojson",
-      data: routeToGeoJSON(routePts),
-    });
-    map.addLayer({
-      id: "route-line",
-      type: "line",
-      source: "route",
-      paint: {
-        "line-color": "#a63024",
-        "line-width": 3,
-        "line-dasharray": [2, 1.5],
-      },
-    });
-
-    // Circle layers as backup; DOM markers carry readable labels.
-    map.addSource("towns-dim", {
-      type: "geojson",
-      data: placesToGeoJSON(contextPts, { dim: true }),
-    });
-    map.addSource("towns-focus", {
-      type: "geojson",
-      data: placesToGeoJSON(focusPts, { dim: false }),
-    });
-    map.addLayer({
-      id: "towns-dim-circle",
-      type: "circle",
-      source: "towns-dim",
-      paint: {
-        "circle-radius": 4,
-        "circle-color": "#8a7a60",
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "#2c2416",
-        "circle-opacity": 0.65,
-      },
-    });
-    map.addLayer({
-      id: "towns-focus-circle",
-      type: "circle",
-      source: "towns-focus",
-      paint: {
-        "circle-radius": 7,
-        "circle-color": "#a63024",
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "#2c2416",
-      },
-    });
-
-    addDomMarkers(map, contextPts.slice(0, 25), { dim: true });
-    addDomMarkers(map, focusPts, { dim: false });
-
-    if (preset?.bounds?.length === 2) {
-      const [[south, west], [north, east]] = preset.bounds;
-      map.fitBounds(
-        [
-          [west, south],
-          [east, north],
-        ],
-        { padding: 28, maxZoom: 8, duration: 0 }
-      );
-    } else if (focusPts.length) {
-      const bounds = new maplibregl.LngLatBounds();
-      for (const p of focusPts) bounds.extend([p.lng, p.lat]);
-      map.fitBounds(bounds, { padding: 40, maxZoom: 8, duration: 0 });
-    }
+    updateMapOverlays(map, preset, showKingdoms);
+    lastMapFingerprint = fp;
+    lastMapPresetId = presetId;
 
     map.resize();
-    setTimeout(() => map.resize(), 80);
-    setTimeout(() => map.resize(), 250);
-
-    const townCount = contextPts.length + focusPts.length;
-    setMapHelp(
-      `${preset?.title || "Map"} — offline MapLibre / OSM (${townCount} period town${
-        townCount === 1 ? "" : "s"
-      }).`,
-      false
-    );
+    setTimeout(() => {
+      if (maplibreMap === map) map.resize();
+    }, 80);
+    setTimeout(() => {
+      if (maplibreMap === map) map.resize();
+    }, 250);
   }
 
-  async function renderMap() {
+  async function renderMap(opts = {}) {
     try {
-      await mountTeachingMap();
+      await mountTeachingMap(opts);
     } catch (err) {
       console.error(err);
       setMapHelp(`Map unavailable (${err?.message || err}). Reload the extension.`, true);
@@ -740,15 +807,17 @@
 
     if (payload.clearing) {
       setStatus(`${chapBit}Loading chapter…`);
-    } else {
-      setStatus(
-        `${chapBit}Found ${placeCount} place${placeCount === 1 ? "" : "s"} and ${journeyCount} journey${
-          journeyCount === 1 ? "" : "s"
-        }.`
-      );
+      // Don't tear down the basemap while the next chapter loads — only pins update later.
+      return;
     }
 
-    // Keep open map in sync with the chapter (drop previous chapter's pins).
+    setStatus(
+      `${chapBit}Found ${placeCount} place${placeCount === 1 ? "" : "s"} and ${journeyCount} journey${
+        journeyCount === 1 ? "" : "s"
+      }.`
+    );
+
+    // Keep open map in sync with the chapter (reuse MapLibre instance; update overlays).
     if (!els.mapDock.hidden) {
       if (activeJourney) {
         const still = (payload.journeys || []).find((j) => j.id === activeJourney.id);
@@ -771,7 +840,10 @@
           : "Places in this chapter";
         setMapsLinkFromPoints(payload.places || []);
       }
-      if (!payload.clearing) requestAnimationFrame(() => renderMap());
+      const fp = mapFingerprint();
+      if (fp !== lastMapFingerprint) {
+        requestAnimationFrame(() => renderMap());
+      }
     }
   }
 
@@ -831,6 +903,7 @@
   });
   els.presetSelect?.addEventListener("change", () => {
     if (els.presetSelect) els.presetSelect.dataset.userTouched = "1";
+    // Preset only changes framing/overlays — keep the same basemap instance.
     if (!els.mapDock.hidden) renderMap();
   });
 

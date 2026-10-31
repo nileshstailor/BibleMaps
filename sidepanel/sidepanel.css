@@ -307,7 +307,8 @@ main {
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #d8e2ea;
+  /* Match style.json land tone so a loading frame doesn't look like empty ocean */
+  background: #e2dfda;
   position: relative;
 }
 
