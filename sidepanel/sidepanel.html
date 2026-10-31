@@ -55,7 +55,7 @@
       </div>
       <div id="modernPane" class="map-pane">
         <p class="muted" id="modernHelp">
-          Opens Google Maps with the journey polyline / multi-stop route.
+          Street map with named pins. Use the link for Google Maps directions.
         </p>
         <div id="modernEmbed" class="map-embed" hidden></div>
         <a id="modernMapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
@@ -65,19 +65,11 @@
       </div>
       <div id="thenPane" class="map-pane" hidden>
         <div class="then-toolbar">
-          <div class="map-modes basemap-modes" role="group" aria-label="Then basemap">
-            <button id="basemapGoogle" class="mode-btn active" type="button" data-basemap="google">
-              Pins
-            </button>
-            <button id="basemapOverlay" class="mode-btn" type="button" data-basemap="overlay">
-              Kingdoms
-            </button>
-          </div>
-          <label class="kingdom-toggle" id="kingdomToggleWrap" hidden>
+          <label class="kingdom-toggle">
             <input type="checkbox" id="kingdomsToggle" checked />
-            Draw kingdom outlines
+            Show kingdoms (approx.)
           </label>
-          <div class="kingdom-legend" id="kingdomLegend" hidden>
+          <div class="kingdom-legend" id="kingdomLegend" aria-hidden="false">
             <span><i class="swatch israel"></i> Israel</span>
             <span><i class="swatch judah"></i> Judah</span>
             <span><i class="swatch philistia"></i> Philistia</span>
@@ -85,8 +77,7 @@
         </div>
         <div id="thenMap" class="then-map" aria-label="Then map"></div>
         <p class="muted small" id="thenHelp">
-          Pins = street map with named balloons. Kingdoms adds Israel / Judah / Philistia outlines.
-          Use “Open in Google Maps” for the full Google app (free embeds can’t label many pins).
+          One map: named place pins plus optional kingdom outlines on a street basemap.
         </p>
       </div>
     </section>

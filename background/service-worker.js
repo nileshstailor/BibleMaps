@@ -10,8 +10,11 @@ chrome.runtime.onInstalled.addListener(async () => {
     if (chrome.sidePanel?.setPanelBehavior) {
       await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
     }
+    if (chrome.sidePanel?.setOptions) {
+      await chrome.sidePanel.setOptions({ path: PANEL_PATH, enabled: true });
+    }
   } catch (err) {
-    console.warn("Bible Maps: sidePanel behavior unavailable", err);
+    console.warn("Bible Maps: sidePanel setup unavailable", err);
   }
 });
 
@@ -26,10 +29,6 @@ chrome.action.onClicked.addListener(async (tab) => {
   }
 });
 
-/**
- * Latest detection payload keyed by tab id.
- * Side panel asks for the active tab's results.
- */
 const latestByTab = new Map();
 
 chrome.tabs.onRemoved.addListener((tabId) => {
@@ -52,7 +51,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.storage.session
         ?.set?.({ [`detection:${tabId}`]: payload })
         .catch?.(() => {});
-      // Fan out to any open extension pages (side panel).
       chrome.runtime
         .sendMessage({ type: "BIBLE_MAPS_DETECTION_UPDATED", payload })
         .catch(() => {});
@@ -87,25 +85,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   if (type === "BIBLE_MAPS_OPEN_PANEL") {
-    (async () => {
-      try {
-        const tabId =
-          sender.tab?.id ??
-          (await chrome.tabs.query({ active: true, currentWindow: true }))[0]
-            ?.id;
-        if (typeof tabId === "number" && chrome.sidePanel?.open) {
-          await chrome.sidePanel.setOptions?.({
-            tabId,
-            path: PANEL_PATH,
-            enabled: true,
-          });
-          await chrome.sidePanel.open({ tabId });
-        }
-        sendResponse({ ok: true });
-      } catch (err) {
-        sendResponse({ ok: false, error: String(err) });
-      }
-    })();
+    // IMPORTANT: chrome.sidePanel.open() must run in the same turn as the
+    // user gesture. Do not await anything before calling open().
+    const tabId = sender.tab?.id;
+    if (typeof tabId !== "number" || !chrome.sidePanel?.open) {
+      sendResponse({ ok: false, error: "Side panel unavailable" });
+      return false;
+    }
+    const openPromise = chrome.sidePanel.open({ tabId });
+    // setOptions can follow; must not precede open()
+    try {
+      chrome.sidePanel.setOptions?.({
+        tabId,
+        path: PANEL_PATH,
+        enabled: true,
+      });
+    } catch {
+      /* ignore */
+    }
+    openPromise
+      .then(() => sendResponse({ ok: true }))
+      .catch((err) => sendResponse({ ok: false, error: String(err) }));
     return true;
   }
 

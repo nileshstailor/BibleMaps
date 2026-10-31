@@ -265,10 +265,21 @@
         /* ignore */
       }
     }
+    // Fire open immediately (same gesture turn). Check lastError for failures.
     try {
       chrome.runtime.sendMessage(
-        { type: "BIBLE_MAPS_OPEN_PANEL" },
-        () => void chrome.runtime.lastError
+        { type: "BIBLE_MAPS_OPEN_PANEL", placeId: hit.placeId },
+        (response) => {
+          const err = chrome.runtime.lastError?.message;
+          if (err) {
+            if (/context invalidated/i.test(err)) shutdown(err);
+            else showToast("Could not open side panel — click the extension icon");
+            return;
+          }
+          if (response && response.ok === false) {
+            showToast("Could not open side panel — click the extension icon");
+          }
+        }
       );
     } catch (err) {
       shutdown(String(err?.message || err));
@@ -386,6 +397,21 @@
   }
 
   function hitFromPoint(x, y) {
+    // Geometric hit-test first — more reliable with CSS Custom Highlights
+    // than caretRangeFromPoint alone.
+    for (const hit of STATE.hits) {
+      try {
+        const rects = hit.range.getClientRects();
+        for (const r of rects) {
+          if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+            return hit;
+          }
+        }
+      } catch {
+        /* stale range */
+      }
+    }
+
     let range = null;
     if (document.caretRangeFromPoint) {
       range = document.caretRangeFromPoint(x, y);

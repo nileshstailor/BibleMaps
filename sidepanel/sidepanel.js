@@ -21,10 +21,7 @@
     thenMap: document.getElementById("thenMap"),
     thenHelp: document.getElementById("thenHelp"),
     kingdomsToggle: document.getElementById("kingdomsToggle"),
-    kingdomToggleWrap: document.getElementById("kingdomToggleWrap"),
     kingdomLegend: document.getElementById("kingdomLegend"),
-    basemapGoogle: document.getElementById("basemapGoogle"),
-    basemapOverlay: document.getElementById("basemapOverlay"),
   };
 
   let current = null;
@@ -32,7 +29,6 @@
   let activePlaceMarkers = [];
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
-  let thenBasemap = "google"; // google (pins) | overlay (kingdoms)
   let leafletMap = null;
   let leafletMarkers = null;
   let leafletKingdoms = null;
@@ -162,7 +158,7 @@
     const thenBtn = document.createElement("button");
     thenBtn.type = "button";
     thenBtn.className = "text-btn";
-    thenBtn.textContent = "Open map + kingdoms";
+    thenBtn.textContent = "Open map";
     thenBtn.addEventListener("click", () => openPlacesThenMap(places || []));
     toolbar.appendChild(thenBtn);
     els.placesPanel.appendChild(toolbar);
@@ -384,12 +380,7 @@
   async function renderThenMap() {
     try {
       const points = collectPoints();
-      const isOverlay = thenBasemap === "overlay";
-      const drawKingdoms = isOverlay && Boolean(els.kingdomsToggle?.checked);
-
-      els.basemapGoogle?.classList.toggle("active", !isOverlay);
-      els.basemapOverlay?.classList.toggle("active", isOverlay);
-      if (els.kingdomToggleWrap) els.kingdomToggleWrap.hidden = !isOverlay;
+      const drawKingdoms = Boolean(els.kingdomsToggle?.checked);
       if (els.kingdomLegend) els.kingdomLegend.hidden = !drawKingdoms;
 
       await mountStreetMap(els.thenMap, points, {
@@ -397,9 +388,8 @@
         drawRoute: Boolean(activeJourney),
       });
       setThenHelp(
-        isOverlay
-          ? "Street map with named pins and schematic kingdom outlines (approximate)."
-          : "Street map with named balloons on each place. Free Google embeds can’t label many pins — use Open in Google Maps for Google’s app.",
+        "One map: named pins" +
+          (drawKingdoms ? " plus schematic kingdom outlines (approximate)." : "."),
         false
       );
     } catch (err) {
@@ -407,7 +397,7 @@
       destroyLeaflet();
       mountGoogleEmbed(els.thenMap, collectPoints(), 8);
       setThenHelp(
-        `Labeled map unavailable (${err?.message || err}). Falling back to a basic Google embed.`,
+        `Map unavailable (${err?.message || err}). Falling back to a basic Google embed.`,
         true
       );
     }
@@ -434,7 +424,7 @@
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Map";
-    els.mapSubtitle.textContent = "Named pins + optional kingdom overlays";
+    els.mapSubtitle.textContent = "Pins + kingdoms on one map";
     const pts = places || [];
     if (pts.length === 1) {
       els.modernMapsLink.href = googlePlaceUrl(pts[0]);
@@ -448,7 +438,7 @@
     }
     renderModernEmbed(pts);
     els.modernStops.innerHTML =
-      "<li>Then → Pins shows named balloons; Then → Kingdoms adds borders.</li>";
+      "<li>Then map shows named pins and kingdom overlays together.</li>";
     setMode("then");
   }
 
@@ -501,24 +491,14 @@
     }
     const placeCount = payload.places?.length || 0;
     const journeyCount = payload.journeys?.length || 0;
-    const where = payload.url ? shortUrl(payload.url) : "current tab";
     setStatus(
       `Found ${placeCount} place${placeCount === 1 ? "" : "s"} and ${journeyCount} journey${
         journeyCount === 1 ? "" : "s"
-      } on ${where}.`
+      }.`
     );
     activePlaceMarkers = payload.places || [];
     renderPlaces(payload.places || []);
     renderJourneys(payload.journeys || []);
-  }
-
-  function shortUrl(url) {
-    try {
-      const u = new URL(url);
-      return u.pathname.replace(/\/+$/, "") || u.host;
-    } catch {
-      return "bible.com";
-    }
   }
 
   async function refreshFromBackground() {
@@ -565,16 +545,8 @@
   els.modeModern.addEventListener("click", () => setMode("modern"));
   els.modeThen.addEventListener("click", () => setMode("then"));
 
-  els.basemapGoogle?.addEventListener("click", () => {
-    thenBasemap = "google";
-    renderThenMap();
-  });
-  els.basemapOverlay?.addEventListener("click", () => {
-    thenBasemap = "overlay";
-    renderThenMap();
-  });
   els.kingdomsToggle?.addEventListener("change", () => {
-    if (thenBasemap === "overlay") renderThenMap();
+    if (!els.thenPane.hidden) renderThenMap();
   });
 
   els.modernMapsLink.addEventListener("click", (e) => {

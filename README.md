@@ -62,6 +62,6 @@ BibleMaps/
 - Google Maps waypoint limits may thin very long itineraries.
 - True 3D terrain / Cesium-style flythrough is explicitly out of v1.
 - Kingdom polygons are schematic teaching overlays, not a scholarly boundary dataset.
-- Google embed needs `frame-src` permission in the extension CSP; kingdom outlines use Esri tiles (OSM often blocks `chrome-extension://`).
+- In-panel maps use Esri street tiles (OSM often blocks `chrome-extension://`). Yahoo Maps is discontinued; Bing/Azure Maps needs an API key. Carto and Esri are the usual free-ish tile options that work from extensions.
 - bible.com class names change often; selectors are defensive but may need updates.
 - bible.com `401 /authenticate` and some React hydration messages can be site-side; after upgrading from older Bible Maps builds, **hard-refresh** the tab once so leftover `<mark>` nodes are gone (we no longer unwrap them, because that triggered React #418).
