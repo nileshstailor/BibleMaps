@@ -26,9 +26,13 @@
   let thenLayerGroup = null;
 
   function googlePlaceUrl(place) {
-    const q = encodeURIComponent(
-      `${place.lat},${place.lng} (${place.modernName || place.name})`
-    );
+    // Prefer a clean lat,lng pin. Mixing "lat,lng (Name)" makes Maps search fail
+    // (e.g. Egypt → "can't find 30.0444,31.2357 (Egypt)").
+    if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
+      const ll = `${place.lat},${place.lng}`;
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ll)}`;
+    }
+    const q = encodeURIComponent(place.modernName || place.name || "");
     return `https://www.google.com/maps/search/?api=1&query=${q}`;
   }
 

@@ -117,6 +117,15 @@
     "eraNotes": "Early Israelite cult center; Tabernacle tradition before Jerusalem."
   },
   {
+    "id": "tirzah",
+    "name": "Tirzah",
+    "aliases": ["Tirzah"],
+    "lat": 32.287,
+    "lng": 35.338,
+    "modernName": "Tell el-Farah (North), West Bank",
+    "eraNotes": "Early capital of the northern kingdom (Jeroboam and successors) before Samaria."
+  },
+  {
     "id": "megiddo",
     "name": "Megiddo",
     "aliases": ["Megiddo", "Armageddon"],
