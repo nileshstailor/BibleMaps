@@ -29,6 +29,34 @@
       .replace(/\u00A0/g, " ");
   }
 
+  // Standalone English words / too-ambiguous toponyms (e.g. Thebes alias "No").
+  const BLOCKED_ALIASES = new Set([
+    "no",
+    "on",
+    "or",
+    "so",
+    "an",
+    "as",
+    "at",
+    "be",
+    "by",
+    "do",
+    "go",
+    "he",
+    "if",
+    "in",
+    "is",
+    "it",
+    "me",
+    "my",
+    "of",
+    "to",
+    "up",
+    "us",
+    "we",
+    "am",
+  ]);
+
   function buildPlaceMatchers(places) {
     const entries = [];
     for (const place of places) {
@@ -36,6 +64,7 @@
         new Set([place.name, ...(place.aliases || [])].filter(Boolean))
       );
       for (const alias of aliases) {
+        if (BLOCKED_ALIASES.has(alias.toLowerCase())) continue;
         entries.push({
           alias,
           placeId: place.id,

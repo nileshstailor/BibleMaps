@@ -605,7 +605,7 @@
   {
     "id": "egypt_thebes",
     "name": "Thebes",
-    "aliases": ["Thebes", "No", "No-Amon"],
+    "aliases": ["Thebes", "No-Amon", "No Amon"],
     "lat": 25.7188,
     "lng": 32.6573,
     "modernName": "Luxor, Egypt",

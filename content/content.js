@@ -1,13 +1,18 @@
 /**
  * Bible Maps content script — detect places on bible.com with ZERO DOM
  * mutation of verse content (CSS Custom Highlight API only).
- * Mutating React-managed nodes caused Minified React error #418.
  */
 (() => {
-  const DATA_URLS = {
-    places: chrome.runtime.getURL("data/places.json"),
-    journeys: chrome.runtime.getURL("data/journeys.json"),
-  };
+  let DATA_URLS;
+  try {
+    DATA_URLS = {
+      places: chrome.runtime.getURL("data/places.json"),
+      journeys: chrome.runtime.getURL("data/journeys.json"),
+    };
+  } catch (err) {
+    console.warn("[Bible Maps] Extension context unavailable at boot", err);
+    return;
+  }
 
   const STATE = {
     places: [],
@@ -16,13 +21,16 @@
     matchers: [],
     ready: false,
     scanning: false,
+    dead: false,
     quietUntil: 0,
     lastUrl: location.href,
     debounceTimer: null,
+    navTimer: null,
     observer: null,
     hits: [],
     highlightSupported: typeof CSS !== "undefined" && !!CSS.highlights,
     warnedLegacy: false,
+    warnedDead: false,
   };
 
   const VERSE_SELECTORS = [
@@ -35,6 +43,42 @@
     "article",
   ];
 
+  function isContextValid() {
+    try {
+      return Boolean(chrome.runtime?.id);
+    } catch {
+      return false;
+    }
+  }
+
+  function shutdown(reason) {
+    if (STATE.dead) return;
+    STATE.dead = true;
+    STATE.ready = false;
+    clearTimeout(STATE.debounceTimer);
+    if (STATE.navTimer) clearInterval(STATE.navTimer);
+    if (STATE.observer) {
+      try {
+        STATE.observer.disconnect();
+      } catch {
+        /* ignore */
+      }
+      STATE.observer = null;
+    }
+    clearHighlights();
+    if (!STATE.warnedDead) {
+      STATE.warnedDead = true;
+      console.info(
+        `[Bible Maps] Stopped (${reason}). Reload this tab after reloading the extension.`
+      );
+      try {
+        showToast("Bible Maps updated — refresh this tab");
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+
   function pickScanRoot() {
     for (const sel of VERSE_SELECTORS) {
       const el = document.querySelector(sel);
@@ -44,6 +88,10 @@
   }
 
   async function loadData() {
+    if (!isContextValid()) {
+      shutdown("extension context invalidated");
+      return;
+    }
     const [places, journeys] = await Promise.all([
       fetch(DATA_URLS.places).then((r) => r.json()),
       fetch(DATA_URLS.journeys).then((r) => r.json()),
@@ -69,7 +117,6 @@
   }
 
   function applyHighlights(hits) {
-    // Drop stale ranges (React may have replaced text nodes).
     const live = [];
     for (const hit of hits) {
       try {
@@ -96,14 +143,16 @@
   function clearHighlights() {
     STATE.hits = [];
     if (STATE.highlightSupported) {
-      CSS.highlights.delete("bible-maps-places");
-      CSS.highlights.delete("bible-maps-places-active");
+      try {
+        CSS.highlights.delete("bible-maps-places");
+        CSS.highlights.delete("bible-maps-places-active");
+      } catch {
+        /* ignore */
+      }
     }
   }
 
   function showToast(message) {
-    // Host toast in an isolated closed shadow root so we never alter
-    // bible.com's light-DOM tree that React hydrates.
     let host = document.getElementById("bible-maps-toast-host");
     if (!host) {
       host = document.createElement("div");
@@ -144,19 +193,18 @@
   }
 
   function warnIfLegacyMarks() {
-    // Do NOT unwrap marks — that mutates React's tree and triggers #418.
-    // Old builds left <mark class="bible-maps-place">; user must hard-refresh.
     if (STATE.warnedLegacy) return;
     if (document.querySelector("mark.bible-maps-place")) {
       STATE.warnedLegacy = true;
       showToast("Old Bible Maps marks found — hard-refresh this tab (Cmd+Shift+R)");
-      console.warn(
-        "[Bible Maps] Legacy <mark.bible-maps-place> nodes are present from an older build. Hard-refresh the page; do not rely on DOM unwrap (causes React #418)."
-      );
     }
   }
 
   function publish(places, journeys) {
+    if (!isContextValid()) {
+      shutdown("extension context invalidated");
+      return;
+    }
     const payload = {
       url: location.href,
       title: document.title,
@@ -188,14 +236,29 @@
       }),
     };
 
-    chrome.runtime.sendMessage(
-      { type: "BIBLE_MAPS_DETECTION", payload },
-      () => void chrome.runtime.lastError
-    );
+    try {
+      chrome.runtime.sendMessage(
+        { type: "BIBLE_MAPS_DETECTION", payload },
+        () => {
+          if (chrome.runtime.lastError) {
+            const msg = chrome.runtime.lastError.message || "";
+            if (/context invalidated|extension/i.test(msg)) {
+              shutdown(msg);
+            }
+          }
+        }
+      );
+    } catch (err) {
+      shutdown(String(err?.message || err));
+    }
   }
 
   function scan() {
-    if (!STATE.ready || STATE.scanning) return;
+    if (STATE.dead || !STATE.ready || STATE.scanning) return;
+    if (!isContextValid()) {
+      shutdown("extension context invalidated");
+      return;
+    }
     if (Date.now() < STATE.quietUntil) return;
     STATE.scanning = true;
     try {
@@ -218,15 +281,20 @@
 
       publish(places, journeys);
     } catch (err) {
-      console.warn("Bible Maps scan failed", err);
+      const msg = String(err?.message || err);
+      if (/context invalidated/i.test(msg)) {
+        shutdown(msg);
+      } else {
+        console.warn("Bible Maps scan failed", err);
+      }
     } finally {
       STATE.scanning = false;
-      // Ignore our own follow-on observer noise / React paint churn.
       STATE.quietUntil = Date.now() + 400;
     }
   }
 
   function scheduleScan(delay = 400) {
+    if (STATE.dead) return;
     clearTimeout(STATE.debounceTimer);
     STATE.debounceTimer = setTimeout(scan, delay);
   }
@@ -262,6 +330,7 @@
   }
 
   function onClick(event) {
+    if (STATE.dead) return;
     if (event.target?.closest?.("#bible-maps-toast-host")) return;
     const hit = hitFromPoint(event.clientX, event.clientY);
     if (!hit) return;
@@ -273,18 +342,27 @@
         /* ignore */
       }
     }
-    chrome.runtime.sendMessage(
-      { type: "BIBLE_MAPS_OPEN_PANEL" },
-      () => void chrome.runtime.lastError
-    );
+    if (!isContextValid()) {
+      shutdown("extension context invalidated");
+      return;
+    }
+    try {
+      chrome.runtime.sendMessage(
+        { type: "BIBLE_MAPS_OPEN_PANEL" },
+        () => void chrome.runtime.lastError
+      );
+    } catch (err) {
+      shutdown(String(err?.message || err));
+      return;
+    }
     showToast(`${hit.place?.name || "Place"} — see Bible Maps panel`);
   }
 
   function observeDom() {
+    if (STATE.dead) return;
     if (STATE.observer) STATE.observer.disconnect();
     STATE.observer = new MutationObserver((mutations) => {
-      if (STATE.scanning || Date.now() < STATE.quietUntil) return;
-      // Ignore toast host and pure attribute flips.
+      if (STATE.dead || STATE.scanning || Date.now() < STATE.quietUntil) return;
       const relevant = mutations.some((m) => {
         if (m.type === "characterData") return true;
         const nodes = [...m.addedNodes, ...m.removedNodes];
@@ -307,11 +385,11 @@
 
   function observeSpaNavigation() {
     const notify = () => {
+      if (STATE.dead) return;
       if (location.href !== STATE.lastUrl) {
         STATE.lastUrl = location.href;
         clearHighlights();
         STATE.warnedLegacy = false;
-        // Re-bind observer to new chapter root after SPA nav.
         setTimeout(() => {
           observeDom();
           scheduleScan(600);
@@ -329,10 +407,14 @@
     wrap("pushState");
     wrap("replaceState");
     window.addEventListener("popstate", notify);
-    setInterval(notify, 2000);
+    STATE.navTimer = setInterval(notify, 2000);
   }
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+    if (STATE.dead || !isContextValid()) {
+      shutdown("extension context invalidated");
+      return false;
+    }
     if (message?.type === "BIBLE_MAPS_RESCORE") {
       scheduleScan(0);
       sendResponse({ ok: true });
@@ -345,13 +427,20 @@
     try {
       await loadData();
     } catch (err) {
-      console.error("Bible Maps failed to load gazetteer", err);
+      const msg = String(err?.message || err);
+      if (/context invalidated/i.test(msg)) {
+        shutdown(msg);
+      } else {
+        console.error("Bible Maps failed to load gazetteer", err);
+      }
       return;
     }
+    if (STATE.dead || !STATE.ready) return;
+
     document.addEventListener("click", onClick, true);
     observeSpaNavigation();
-    // Wait until after bible.com hydration / first paint before first scan.
     const start = () => {
+      if (STATE.dead) return;
       observeDom();
       scheduleScan(800);
     };
@@ -366,6 +455,5 @@
     }
   }
 
-  // document_idle is fine; still defer past hydration.
   boot();
 })();
