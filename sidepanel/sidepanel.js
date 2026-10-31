@@ -179,6 +179,7 @@
         return r.json();
       })
       .then((data) => {
+        if (!data?.features?.length) throw new Error(`${file} empty`);
         basemapCache[key] = data;
         return data;
       });
@@ -321,27 +322,19 @@
 
   function basemapStyle(feature) {
     const kind = feature.properties?.kind;
-    if (kind === "frame") {
-      return {
-        color: "#6a8494",
-        weight: 0,
-        fillColor: "#9eb6c4",
-        fillOpacity: 1,
-      };
-    }
     if (kind === "water") {
       return {
-        color: "#6a8494",
+        color: "#5f7f92",
         weight: 1,
-        fillColor: "#7fa0b3",
+        fillColor: "#8eacc0",
         fillOpacity: 0.95,
       };
     }
     return {
-      color: "#8a7350",
-      weight: 1,
-      fillColor: "#e6d4ae",
-      fillOpacity: 0.95,
+      color: "#6e5a38",
+      weight: 1.25,
+      fillColor: "#dfc892",
+      fillOpacity: 1,
     };
   }
 
@@ -379,9 +372,65 @@
         m.bindTooltip(label, { direction: "top", opacity: 0.9 });
       }
       m.bindPopup(`<strong>${label}</strong>${detail ? `<br/>${detail}` : ""}`);
-      bounds.push(L.latLng(p.lat, p.lng).toBounds(dim ? 12000 : 8000));
+      bounds.push(L.latLngBounds([p.lat - 0.12, p.lng - 0.12], [p.lat + 0.12, p.lng + 0.12]));
     });
     return bounds;
+  }
+
+  async function waitForMapSize(el) {
+    for (let i = 0; i < 40; i += 1) {
+      if (el && el.clientWidth > 40 && el.clientHeight > 40) return true;
+      await new Promise((r) => requestAnimationFrame(r));
+    }
+    return Boolean(el && el.clientWidth > 0);
+  }
+
+  /** Tiny inline fallback if GeoJSON fetch fails. */
+  function fallbackBasemap(name) {
+    if (name === "mediterranean" || name === "near-east") {
+      return {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: { kind: "land", name: "Land" },
+            geometry: {
+              type: "Polygon",
+              coordinates: [
+                [
+                  [10, 30],
+                  [42, 30],
+                  [42, 45],
+                  [10, 45],
+                  [10, 30],
+                ],
+              ],
+            },
+          },
+        ],
+      };
+    }
+    return {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: { kind: "land", name: "Canaan" },
+          geometry: {
+            type: "Polygon",
+            coordinates: [
+              [
+                [34.2, 29.6],
+                [35.9, 29.6],
+                [36.1, 33.5],
+                [34.3, 33.5],
+                [34.2, 29.6],
+              ],
+            ],
+          },
+        },
+      ],
+    };
   }
 
   function filterPeriodPlaces(places, placeEras, focusIds) {
@@ -419,7 +468,10 @@
 
   async function mountTeachingMap() {
     if (typeof L === "undefined") throw new Error("Leaflet failed to load");
+    if (!els.teachingMap) throw new Error("Map container missing");
+
     await Promise.all([loadPresets(), loadAllPlaces(), loadKingdoms()]);
+    await waitForMapSize(els.teachingMap);
 
     if (els.presetSelect && !els.presetSelect.dataset.userTouched) {
       const suggested = suggestPresetId();
@@ -429,10 +481,10 @@
     }
 
     const preset = getPreset(els.presetSelect?.value) || getPreset("divided_kingdom");
+    const basemapName = preset?.basemap || "levant";
 
-    // Only offer kingdom toggle on Levant presets where outlines make sense
     if (els.kingdomsToggleWrap) {
-      const allowKingdoms = preset?.basemap === "levant";
+      const allowKingdoms = basemapName === "levant";
       els.kingdomsToggleWrap.hidden = !allowKingdoms;
       if (!allowKingdoms && els.kingdomsToggle) {
         els.kingdomsToggle.checked = false;
@@ -446,9 +498,9 @@
       }
     }
     const showKingdoms =
-      Boolean(els.kingdomsToggle?.checked) && preset?.basemap === "levant";
+      Boolean(els.kingdomsToggle?.checked) && basemapName === "levant";
     if (els.kingdomLegend) {
-      els.kingdomLegend.hidden = !(els.kingdomsToggle?.checked && preset?.basemap === "levant");
+      els.kingdomLegend.hidden = !showKingdoms;
     }
 
     destroyLeaflet();
@@ -459,67 +511,89 @@
       attributionControl: false,
     });
     leafletMap = map;
+    // Set a view immediately so SVG paths project before async work finishes.
+    map.setView([31.7, 35.1], 8);
 
-    const basemap = await loadBasemap(preset?.basemap || "levant");
-    L.geoJSON(basemap, { style: basemapStyle, interactive: false }).addTo(map);
+    let basemap;
+    try {
+      basemap = await loadBasemap(basemapName);
+    } catch (err) {
+      console.warn("Bible Maps: basemap fetch failed, using fallback", err);
+      basemap = fallbackBasemap(basemapName);
+    }
+    if (!basemap?.features?.length) basemap = fallbackBasemap(basemapName);
+
+    const basemapLayer = L.geoJSON(basemap, {
+      style: basemapStyle,
+      interactive: false,
+    }).addTo(map);
 
     const bounds = [];
+    try {
+      bounds.push(basemapLayer.getBounds());
+    } catch {
+      /* ignore */
+    }
+
     if (showKingdoms && kingdomsGeoJson?.features) {
-      const kg = L.geoJSON(
-        { type: "FeatureCollection", features: kingdomsGeoJson.features },
-        {
-          style: kingdomStyle,
-          onEachFeature(feature, layer) {
-            const p = feature.properties || {};
-            layer.bindPopup(
-              `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
-                p.eraLabel || ""
-              )}`
-            );
-          },
-        }
-      ).addTo(map);
       try {
+        const kg = L.geoJSON(
+          { type: "FeatureCollection", features: kingdomsGeoJson.features },
+          {
+            style: kingdomStyle,
+            onEachFeature(feature, layer) {
+              const p = feature.properties || {};
+              layer.bindPopup(
+                `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
+                  p.eraLabel || ""
+                )}`
+              );
+            },
+          }
+        ).addTo(map);
         bounds.push(kg.getBounds());
-      } catch {
-        /* ignore */
+      } catch (err) {
+        console.warn("Bible Maps: kingdoms overlay failed", err);
       }
     }
 
+    const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
+    const gazetteer = Array.isArray(allPlaces) ? allPlaces : [];
     const routePts = collectRoutePoints();
     const focusIds = new Set([
       ...routePts.map((p) => p.placeId || p.id).filter(Boolean),
-      ...(activePlaceMarkers || []).map((p) => p.id).filter(Boolean),
+      ...matched.map((p) => p.id).filter(Boolean),
     ]);
 
     const periodPlaces = filterPeriodPlaces(
-      allPlaces,
+      gazetteer,
       preset?.placeEras || ["divided"],
       [...focusIds]
     ).map((p) => ({
       ...p,
-      // Prefer detection-enriched modernName/note when available
-      ...(activePlaceMarkers.find((a) => a.id === p.id) || {}),
+      ...(matched.find((a) => a.id === p.id) || {}),
     }));
 
-    // Dim context towns vs highlighted matched/route stops
     const highlightIds = new Set([
       ...routePts.map((p) => p.placeId || p.id).filter(Boolean),
-      ...(activePlaceMarkers || []).map((p) => p.id),
+      ...matched.map((p) => p.id).filter(Boolean),
     ]);
     const contextPts = periodPlaces.filter((p) => !highlightIds.has(p.id));
     const highlightPts = periodPlaces.filter((p) => highlightIds.has(p.id));
-    // Always include route stops even if not in period filter
     for (const s of routePts) {
-      if (!highlightPts.some((h) => h.id === s.placeId || h.name === s.name)) {
+      if (!highlightPts.some((h) => h.placeId === s.placeId || h.id === s.placeId || h.name === s.name)) {
         highlightPts.push(s);
       }
     }
+    // If nothing matched yet, still show period towns so the map isn't empty.
+    const focusPts = highlightPts.length
+      ? highlightPts
+      : periodPlaces.slice(0, 40);
 
     const markerLayer = L.layerGroup().addTo(map);
     bounds.push(...addNamedMarkers(markerLayer, contextPts, { drawRoute: false, dim: true }));
     bounds.push(
-      ...addNamedMarkers(markerLayer, highlightPts.length ? highlightPts : routePts, {
+      ...addNamedMarkers(markerLayer, focusPts, {
         drawRoute: Boolean(activeJourney) && routePts.length > 1,
         dim: false,
       })
@@ -532,21 +606,29 @@
           [south, west],
           [north, east],
         ],
-        { padding: [12, 12] }
+        { padding: [16, 16], maxZoom: 10 }
       );
     } else if (bounds.length) {
       let merged = bounds[0];
-      for (let i = 1; i < bounds.length; i += 1) merged = merged.extend(bounds[i]);
-      map.fitBounds(merged.pad(0.1));
-    } else {
-      map.setView([31.7, 35.1], 8);
+      for (let i = 1; i < bounds.length; i += 1) {
+        try {
+          merged = merged.extend(bounds[i]);
+        } catch {
+          /* ignore */
+        }
+      }
+      map.fitBounds(merged.pad(0.08), { maxZoom: 10 });
     }
 
-    setTimeout(() => map.invalidateSize(), 80);
-    setTimeout(() => map.invalidateSize(), 250);
+    map.invalidateSize();
+    setTimeout(() => map.invalidateSize(), 50);
+    setTimeout(() => map.invalidateSize(), 200);
 
+    const townCount = contextPts.length + focusPts.length;
     setMapHelp(
-      `${preset?.title || "Teaching map"} — offline vector basemap with period towns. Open Google Maps for modern streets.`,
+      `${preset?.title || "Teaching map"} — ${townCount} period town${
+        townCount === 1 ? "" : "s"
+      } on offline vector map.`,
       false
     );
   }
@@ -556,8 +638,12 @@
       await mountTeachingMap();
     } catch (err) {
       console.error(err);
-      destroyLeaflet();
-      setMapHelp(`Map unavailable (${err?.message || err}).`, true);
+      setMapHelp(`Map unavailable (${err?.message || err}). Reload the extension.`, true);
+      if (els.teachingMap && !leafletMap) {
+        els.teachingMap.innerHTML = `<p class="muted" style="padding:12px">Could not draw map: ${escapeHtml(
+          String(err?.message || err)
+        )}</p>`;
+      }
     }
   }
 
