@@ -187,24 +187,12 @@
     return results;
   }
 
-  /** Remove leftover <mark> from older extension versions (one-time cleanup). */
-  function clearLegacyMarks(root) {
-    const marks = root.querySelectorAll("mark.bible-maps-place");
-    marks.forEach((mark) => {
-      const parent = mark.parentNode;
-      if (!parent) return;
-      parent.replaceChild(document.createTextNode(mark.textContent || ""), mark);
-      parent.normalize();
-    });
-  }
-
   global.BibleMapsMatcher = {
     buildPlaceMatchers,
     findMatchesInText,
     collectTextNodes,
     collectMatchRanges,
     detectJourneys,
-    clearLegacyMarks,
     normalizeQuotes,
   };
 })(typeof window !== "undefined" ? window : globalThis);

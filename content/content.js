@@ -1,6 +1,7 @@
 /**
- * Bible Maps content script — detect places on bible.com without mutating
- * React's DOM (CSS Custom Highlight API). Avoids React error #418.
+ * Bible Maps content script — detect places on bible.com with ZERO DOM
+ * mutation of verse content (CSS Custom Highlight API only).
+ * Mutating React-managed nodes caused Minified React error #418.
  */
 (() => {
   const DATA_URLS = {
@@ -15,26 +16,23 @@
     matchers: [],
     ready: false,
     scanning: false,
+    quietUntil: 0,
     lastUrl: location.href,
     debounceTimer: null,
     observer: null,
-    hits: [], // { range, placeId, place }
+    hits: [],
     highlightSupported: typeof CSS !== "undefined" && !!CSS.highlights,
+    warnedLegacy: false,
   };
 
   const VERSE_SELECTORS = [
     "[data-usfm]",
     "[class*='ChapterContent_verse']",
     "[class*='ChapterContent_chapter']",
-    "[class*='verse']",
-    "p.verse",
-    ".verse",
-    "span.verse",
+    "[class*='ChapterContent']",
     "[data-verse-id]",
     "main",
     "article",
-    "#react-app-Bible",
-    "#__next",
   ];
 
   function pickScanRoot() {
@@ -71,12 +69,28 @@
   }
 
   function applyHighlights(hits) {
-    STATE.hits = hits;
+    // Drop stale ranges (React may have replaced text nodes).
+    const live = [];
+    for (const hit of hits) {
+      try {
+        if (hit.range.startContainer && hit.range.startContainer.isConnected) {
+          live.push(hit);
+        }
+      } catch {
+        /* stale */
+      }
+    }
+    STATE.hits = live;
     if (!STATE.highlightSupported) return;
-
-    const highlight = new Highlight(...hits.map((h) => h.range));
-    CSS.highlights.set("bible-maps-places", highlight);
-    CSS.highlights.delete("bible-maps-places-active");
+    if (!live.length) {
+      CSS.highlights.delete("bible-maps-places");
+      CSS.highlights.delete("bible-maps-places-active");
+      return;
+    }
+    CSS.highlights.set(
+      "bible-maps-places",
+      new Highlight(...live.map((h) => h.range))
+    );
   }
 
   function clearHighlights() {
@@ -88,18 +102,58 @@
   }
 
   function showToast(message) {
-    let toast = document.querySelector(".bible-maps-toast");
-    if (!toast) {
-      toast = document.createElement("div");
-      toast.className = "bible-maps-toast";
-      document.documentElement.appendChild(toast);
+    // Host toast in an isolated closed shadow root so we never alter
+    // bible.com's light-DOM tree that React hydrates.
+    let host = document.getElementById("bible-maps-toast-host");
+    if (!host) {
+      host = document.createElement("div");
+      host.id = "bible-maps-toast-host";
+      host.style.all = "initial";
+      host.style.position = "fixed";
+      host.style.zIndex = "2147483646";
+      host.style.right = "16px";
+      host.style.bottom = "16px";
+      host.style.pointerEvents = "none";
+      const shadow = host.attachShadow({ mode: "closed" });
+      shadow.innerHTML = `
+        <style>
+          .toast {
+            max-width: min(320px, calc(100vw - 32px));
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #2c2416;
+            color: #f4e9d4;
+            font: 13px/1.35 Georgia, "Times New Roman", serif;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 160ms ease, transform 160ms ease;
+          }
+          .toast.show { opacity: 1; transform: translateY(0); }
+        </style>
+        <div class="toast"></div>
+      `;
+      document.documentElement.appendChild(host);
+      host._bmShadow = shadow;
     }
+    const toast = host._bmShadow.querySelector(".toast");
     toast.textContent = message;
-    toast.classList.add("bible-maps-toast-visible");
+    toast.classList.add("show");
     clearTimeout(showToast._t);
-    showToast._t = setTimeout(() => {
-      toast.classList.remove("bible-maps-toast-visible");
-    }, 2200);
+    showToast._t = setTimeout(() => toast.classList.remove("show"), 2800);
+  }
+
+  function warnIfLegacyMarks() {
+    // Do NOT unwrap marks — that mutates React's tree and triggers #418.
+    // Old builds left <mark class="bible-maps-place">; user must hard-refresh.
+    if (STATE.warnedLegacy) return;
+    if (document.querySelector("mark.bible-maps-place")) {
+      STATE.warnedLegacy = true;
+      showToast("Old Bible Maps marks found — hard-refresh this tab (Cmd+Shift+R)");
+      console.warn(
+        "[Bible Maps] Legacy <mark.bible-maps-place> nodes are present from an older build. Hard-refresh the page; do not rely on DOM unwrap (causes React #418)."
+      );
+    }
   }
 
   function publish(places, journeys) {
@@ -142,38 +196,37 @@
 
   function scan() {
     if (!STATE.ready || STATE.scanning) return;
+    if (Date.now() < STATE.quietUntil) return;
     STATE.scanning = true;
     try {
+      warnIfLegacyMarks();
+
       const root = pickScanRoot();
-      const matcher = window.BibleMapsMatcher;
-
-      // Cleanup marks from older builds once; do not re-wrap (breaks React).
-      matcher.clearLegacyMarks(document);
-
-      const hits = matcher.collectMatchRanges(root, STATE.matchers);
+      const hits = window.BibleMapsMatcher.collectMatchRanges(
+        root,
+        STATE.matchers
+      );
       applyHighlights(hits);
 
       const places = uniquePlacesFromHits(hits);
       const pageText = root.innerText || document.body.innerText || "";
-      const journeys = matcher.detectJourneys(
+      const journeys = window.BibleMapsMatcher.detectJourneys(
         places.map((p) => p.id),
         STATE.journeys,
         pageText
       );
 
       publish(places, journeys);
-
-      if (!STATE.highlightSupported && places.length) {
-        showToast("Places found (highlight API unavailable — see side panel)");
-      }
     } catch (err) {
       console.warn("Bible Maps scan failed", err);
     } finally {
       STATE.scanning = false;
+      // Ignore our own follow-on observer noise / React paint churn.
+      STATE.quietUntil = Date.now() + 400;
     }
   }
 
-  function scheduleScan(delay = 220) {
+  function scheduleScan(delay = 400) {
     clearTimeout(STATE.debounceTimer);
     STATE.debounceTimer = setTimeout(scan, delay);
   }
@@ -195,23 +248,6 @@
     for (const hit of STATE.hits) {
       try {
         if (
-          hit.range.isPointInRange(range.startContainer, range.startOffset) ||
-          (range.startContainer.nodeType === Node.TEXT_NODE &&
-            hit.range.intersectsNode(range.startContainer) &&
-            range.startOffset >= hit.range.startOffset &&
-            range.startOffset <= hit.range.endOffset)
-        ) {
-          return hit;
-        }
-      } catch {
-        /* ranges can go stale after React re-render */
-      }
-    }
-
-    // Fallback: compare text node + offset containment
-    for (const hit of STATE.hits) {
-      try {
-        if (
           hit.range.startContainer === range.startContainer &&
           range.startOffset >= hit.range.startOffset &&
           range.startOffset <= hit.range.endOffset
@@ -219,18 +255,23 @@
           return hit;
         }
       } catch {
-        /* ignore */
+        /* stale range */
       }
     }
     return null;
   }
 
   function onClick(event) {
+    if (event.target?.closest?.("#bible-maps-toast-host")) return;
     const hit = hitFromPoint(event.clientX, event.clientY);
     if (!hit) return;
 
     if (STATE.highlightSupported) {
-      CSS.highlights.set("bible-maps-places-active", new Highlight(hit.range));
+      try {
+        CSS.highlights.set("bible-maps-places-active", new Highlight(hit.range));
+      } catch {
+        /* ignore */
+      }
     }
     chrome.runtime.sendMessage(
       { type: "BIBLE_MAPS_OPEN_PANEL" },
@@ -241,11 +282,23 @@
 
   function observeDom() {
     if (STATE.observer) STATE.observer.disconnect();
-    STATE.observer = new MutationObserver(() => {
-      if (STATE.scanning) return;
-      scheduleScan(350);
+    STATE.observer = new MutationObserver((mutations) => {
+      if (STATE.scanning || Date.now() < STATE.quietUntil) return;
+      // Ignore toast host and pure attribute flips.
+      const relevant = mutations.some((m) => {
+        if (m.type === "characterData") return true;
+        const nodes = [...m.addedNodes, ...m.removedNodes];
+        return nodes.some((n) => {
+          if (n.nodeType === Node.ELEMENT_NODE) {
+            if (n.id === "bible-maps-toast-host") return false;
+          }
+          return n.nodeType === Node.ELEMENT_NODE || n.nodeType === Node.TEXT_NODE;
+        });
+      });
+      if (relevant) scheduleScan(500);
     });
-    STATE.observer.observe(document.documentElement, {
+    const root = pickScanRoot();
+    STATE.observer.observe(root === document.body ? document.body : root, {
       childList: true,
       subtree: true,
       characterData: true,
@@ -257,7 +310,12 @@
       if (location.href !== STATE.lastUrl) {
         STATE.lastUrl = location.href;
         clearHighlights();
-        scheduleScan(450);
+        STATE.warnedLegacy = false;
+        // Re-bind observer to new chapter root after SPA nav.
+        setTimeout(() => {
+          observeDom();
+          scheduleScan(600);
+        }, 300);
       }
     };
     const wrap = (type) => {
@@ -271,7 +329,7 @@
     wrap("pushState");
     wrap("replaceState");
     window.addEventListener("popstate", notify);
-    setInterval(notify, 1500);
+    setInterval(notify, 2000);
   }
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
@@ -291,14 +349,23 @@
       return;
     }
     document.addEventListener("click", onClick, true);
-    observeDom();
     observeSpaNavigation();
-    scheduleScan(400);
+    // Wait until after bible.com hydration / first paint before first scan.
+    const start = () => {
+      observeDom();
+      scheduleScan(800);
+    };
+    if (document.readyState === "complete") {
+      setTimeout(start, 500);
+    } else {
+      window.addEventListener(
+        "load",
+        () => setTimeout(start, 500),
+        { once: true }
+      );
+    }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
+  // document_idle is fine; still defer past hydration.
+  boot();
 })();

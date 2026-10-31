@@ -64,4 +64,4 @@ BibleMaps/
 - Kingdom polygons are schematic teaching overlays, not a scholarly boundary dataset.
 - Then map is schematic/offline (not a slippy OSM basemap) so it works when tile CDNs block extension origins.
 - bible.com class names change often; selectors are defensive but may need updates.
-- bible.com `401 /authenticate` console noise is their own logged-out API, not this extension.
+- bible.com `401 /authenticate` and some React hydration messages can be site-side; after upgrading from older Bible Maps builds, **hard-refresh** the tab once so leftover `<mark>` nodes are gone (we no longer unwrap them, because that triggered React #418).
