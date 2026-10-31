@@ -18,6 +18,7 @@
     modernMapsLink: document.getElementById("modernMapsLink"),
     modernStops: document.getElementById("modernStops"),
     thenMap: document.getElementById("thenMap"),
+    thenHelp: document.getElementById("thenHelp"),
     kingdomsToggle: document.getElementById("kingdomsToggle"),
     kingdomLegend: document.getElementById("kingdomLegend"),
   };
@@ -30,9 +31,9 @@
   let kingdomLayer = null;
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
+  let mapInitError = null;
 
   function googlePlaceUrl(place) {
-    // Prefer a clean lat,lng pin. Mixing "lat,lng (Name)" makes Maps search fail.
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
       const ll = `${place.lat},${place.lng}`;
       return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ll)}`;
@@ -79,6 +80,12 @@
     els.status.textContent = text;
   }
 
+  function setThenHelp(text, isError) {
+    if (!els.thenHelp) return;
+    els.thenHelp.textContent = text;
+    els.thenHelp.style.color = isError ? "#a63024" : "";
+  }
+
   function escapeHtml(s) {
     return String(s)
       .replace(/&/g, "&amp;")
@@ -95,7 +102,10 @@
     if (kingdomsGeoJson) return Promise.resolve(kingdomsGeoJson);
     if (kingdomsLoadPromise) return kingdomsLoadPromise;
     kingdomsLoadPromise = fetch(chrome.runtime.getURL("data/kingdoms.json"))
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error(`kingdoms.json HTTP ${r.status}`);
+        return r.json();
+      })
       .then((data) => {
         kingdomsGeoJson = data;
         return data;
@@ -181,15 +191,11 @@
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Then map";
-    els.mapSubtitle.textContent =
-      kingdomsGeoJson?.meta?.title || "Schematic kingdoms on OpenStreetMap";
+    els.mapSubtitle.textContent = "Schematic kingdoms on OpenStreetMap";
     els.modernMapsLink.href = "#";
     els.modernStops.innerHTML =
-      "<li>Use Then mode for kingdom overlays. Modern Google Maps links are on each place card.</li>";
+      "<li>Switch to Then for kingdom overlays. Modern Google Maps links are on each place card.</li>";
     setMode("then");
-    requestAnimationFrame(() =>
-      ensureThenMap({ stops: [], places: activePlaceMarkers })
-    );
   }
 
   function openJourney(journey) {
@@ -216,9 +222,6 @@
     });
 
     setMode("modern");
-    requestAnimationFrame(() =>
-      ensureThenMap({ stops, places: activePlaceMarkers })
-    );
   }
 
   function setMode(mode) {
@@ -228,11 +231,17 @@
     els.modernPane.hidden = !isModern;
     els.thenPane.hidden = isModern;
     if (!isModern) {
-      ensureThenMap({
-        stops: activeJourney?.stops || [],
-        places: activePlaceMarkers,
+      // Wait until the pane is visible so Leaflet gets a real size.
+      requestAnimationFrame(() => {
+        ensureThenMap({
+          stops: activeJourney?.stops || [],
+          places: activePlaceMarkers,
+        }).then(() => {
+          thenMap?.invalidateSize();
+          setTimeout(() => thenMap?.invalidateSize(), 100);
+          setTimeout(() => thenMap?.invalidateSize(), 300);
+        });
       });
-      setTimeout(() => thenMap?.invalidateSize(), 60);
     }
   }
 
@@ -247,131 +256,185 @@
     };
   }
 
+  function initThenMapIfNeeded() {
+    if (thenMap) return thenMap;
+    if (typeof L === "undefined") {
+      mapInitError = "Leaflet failed to load (L is undefined).";
+      setThenHelp(mapInitError, true);
+      throw new Error(mapInitError);
+    }
+    if (window.L?.Icon?.Default) {
+      const iconBase = chrome.runtime.getURL("lib/images/");
+      L.Icon.Default.mergeOptions({
+        iconUrl: iconBase + "marker-icon.png",
+        iconRetinaUrl: iconBase + "marker-icon-2x.png",
+        shadowUrl: iconBase + "marker-shadow.png",
+      });
+    }
+
+    // If a previous failed attempt left Leaflet state on the node, clear it.
+    if (els.thenMap._leaflet_id) {
+      els.thenMap._leaflet_id = null;
+      els.thenMap.innerHTML = "";
+    }
+
+    thenMap = L.map(els.thenMap, {
+      zoomControl: true,
+      attributionControl: true,
+    });
+
+    // Prefer OSM tiles; Carto as alternate style is optional.
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(thenMap);
+
+    thenLayerGroup = L.layerGroup().addTo(thenMap);
+    thenMap.setView([31.7, 35.1], 8);
+    mapInitError = null;
+    return thenMap;
+  }
+
   async function syncKingdomLayer() {
     await loadKingdoms();
-    if (!thenMap || !kingdomsGeoJson) return;
+    if (!thenMap) return;
 
     const show = Boolean(els.kingdomsToggle?.checked);
-    els.kingdomLegend.hidden = !show;
+    if (els.kingdomLegend) els.kingdomLegend.hidden = !show;
 
     if (kingdomLayer) {
       thenMap.removeLayer(kingdomLayer);
       kingdomLayer = null;
     }
-    if (!show) return;
+    if (!show || !kingdomsGeoJson?.features) return;
 
-    kingdomLayer = L.geoJSON(kingdomsGeoJson, {
-      style: kingdomStyle,
-      onEachFeature(feature, layer) {
-        const p = feature.properties || {};
-        layer.bindPopup(
-          `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
-            p.eraLabel || ""
-          )}`
-        );
-      },
-    }).addTo(thenMap);
-    // Keep journey/place markers above fills
+    // Pass only features — avoid handing Leaflet the extra `meta` bag alone.
+    kingdomLayer = L.geoJSON(
+      { type: "FeatureCollection", features: kingdomsGeoJson.features },
+      {
+        style: kingdomStyle,
+        onEachFeature(feature, layer) {
+          const p = feature.properties || {};
+          layer.bindPopup(
+            `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
+              p.eraLabel || ""
+            )}`
+          );
+        },
+      }
+    ).addTo(thenMap);
+
     if (thenLayerGroup) thenLayerGroup.bringToFront();
   }
 
-  async function ensureThenMap({ stops = [], places = [] } = {}) {
-    const routePts = stops
-      .filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lng))
-      .map((s) => [s.lat, s.lng]);
-    const placePts = places
-      .filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lng))
-      .map((s) => [s.lat, s.lng]);
+  function fitMap(boundsList) {
+    if (!thenMap) return;
+    const valid = boundsList.filter((b) => b && b.isValid && b.isValid());
+    if (!valid.length) {
+      thenMap.setView([31.7, 35.1], 8);
+      return;
+    }
+    let merged = valid[0];
+    for (let i = 1; i < valid.length; i += 1) merged = merged.extend(valid[i]);
+    // Pad zero-area single-point bounds
+    const sw = merged.getSouthWest();
+    const ne = merged.getNorthEast();
+    if (sw.equals(ne)) {
+      thenMap.setView(sw, 9);
+      return;
+    }
+    thenMap.fitBounds(merged.pad(0.12));
+  }
 
-    if (!thenMap) {
-      if (window.L?.Icon?.Default) {
-        const iconBase = chrome.runtime.getURL("lib/images/");
-        L.Icon.Default.mergeOptions({
-          iconUrl: iconBase + "marker-icon.png",
-          iconRetinaUrl: iconBase + "marker-icon-2x.png",
-          shadowUrl: iconBase + "marker-shadow.png",
+  async function ensureThenMap({ stops = [], places = [] } = {}) {
+    try {
+      initThenMapIfNeeded();
+      await syncKingdomLayer();
+      thenLayerGroup.clearLayers();
+
+      const bounds = [];
+      const routePts = stops.filter(
+        (s) => Number.isFinite(s.lat) && Number.isFinite(s.lng)
+      );
+
+      if (routePts.length) {
+        const latLngs = routePts.map((s) => L.latLng(s.lat, s.lng));
+        const line = L.polyline(latLngs, {
+          color: "#a63024",
+          weight: 3.5,
+          opacity: 0.9,
+          dashArray: "8 6",
+        }).addTo(thenLayerGroup);
+        bounds.push(line.getBounds());
+
+        routePts.forEach((stop, index) => {
+          const marker = L.circleMarker([stop.lat, stop.lng], {
+            radius: 6,
+            color: "#2c2416",
+            weight: 1,
+            fillColor:
+              index === 0
+                ? "#4a6741"
+                : index === routePts.length - 1
+                  ? "#a63024"
+                  : "#c9a227",
+            fillOpacity: 0.95,
+          }).addTo(thenLayerGroup);
+          marker.bindPopup(
+            `<strong>${escapeHtml(stop.name)}</strong><br/>${escapeHtml(
+              stop.note || stop.modernName || ""
+            )}`
+          );
+        });
+      } else {
+        places.forEach((place) => {
+          if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return;
+          const marker = L.circleMarker([place.lat, place.lng], {
+            radius: 6,
+            color: "#2c2416",
+            weight: 1,
+            fillColor: "#a63024",
+            fillOpacity: 0.95,
+          }).addTo(thenLayerGroup);
+          marker.bindPopup(
+            `<strong>${escapeHtml(place.name)}</strong><br/>${escapeHtml(
+              place.modernName || ""
+            )}`
+          );
+          bounds.push(L.latLng(place.lat, place.lng).toBounds(12000));
         });
       }
-      thenMap = L.map(els.thenMap, {
-        zoomControl: true,
-        attributionControl: true,
-      });
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CARTO',
-        subdomains: "abcd",
-        maxZoom: 18,
-      }).addTo(thenMap);
-      thenLayerGroup = L.layerGroup().addTo(thenMap);
-    }
 
-    await syncKingdomLayer();
-    thenLayerGroup.clearLayers();
-
-    const bounds = [];
-
-    if (routePts.length) {
-      const latLngs = routePts.map(([lat, lng]) => L.latLng(lat, lng));
-      const line = L.polyline(latLngs, {
-        color: "#a63024",
-        weight: 3.5,
-        opacity: 0.9,
-        dashArray: "8 6",
-      }).addTo(thenLayerGroup);
-      bounds.push(line.getBounds());
-
-      stops.forEach((stop, index) => {
-        if (!Number.isFinite(stop.lat) || !Number.isFinite(stop.lng)) return;
-        const marker = L.circleMarker([stop.lat, stop.lng], {
-          radius: 6,
-          color: "#2c2416",
-          weight: 1,
-          fillColor:
-            index === 0 ? "#4a6741" : index === stops.length - 1 ? "#a63024" : "#c9a227",
-          fillOpacity: 0.95,
-        }).addTo(thenLayerGroup);
-        marker.bindPopup(
-          `<strong>${escapeHtml(stop.name)}</strong><br/>${escapeHtml(
-            stop.note || stop.modernName || ""
-          )}`
-        );
-      });
-    } else {
-      places.forEach((place) => {
-        if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return;
-        const marker = L.circleMarker([place.lat, place.lng], {
-          radius: 6,
-          color: "#2c2416",
-          weight: 1,
-          fillColor: "#a63024",
-          fillOpacity: 0.95,
-        }).addTo(thenLayerGroup);
-        marker.bindPopup(
-          `<strong>${escapeHtml(place.name)}</strong><br/>${escapeHtml(
-            place.modernName || ""
-          )}`
-        );
-        bounds.push(L.latLngBounds([place.lat, place.lng], [place.lat, place.lng]));
-      });
-    }
-
-    if (kingdomLayer && els.kingdomsToggle?.checked) {
-      try {
-        bounds.push(kingdomLayer.getBounds());
-      } catch {
-        /* empty */
+      if (kingdomLayer && els.kingdomsToggle?.checked) {
+        try {
+          const kb = kingdomLayer.getBounds();
+          if (kb && kb.isValid()) bounds.push(kb);
+        } catch {
+          /* ignore */
+        }
       }
-    }
 
-    if (bounds.length) {
-      let merged = bounds[0];
-      for (let i = 1; i < bounds.length; i += 1) merged = merged.extend(bounds[i]);
-      thenMap.fitBounds(merged.pad(0.12));
-    } else {
-      thenMap.setView([31.7, 35.1], 8);
-    }
+      fitMap(bounds);
+      thenLayerGroup.bringToFront();
+      thenMap.invalidateSize();
 
-    thenLayerGroup.bringToFront();
+      const meta = kingdomsGeoJson?.meta;
+      setThenHelp(
+        meta
+          ? `${meta.disclaimer || "Schematic teaching overlays on OpenStreetMap."}`
+          : "OpenStreetMap basemap with optional kingdom overlays.",
+        false
+      );
+      if (els.mapSubtitle && meta?.title) {
+        // Keep journey subtitle when present; otherwise show kingdom title.
+        if (!activeJourney) els.mapSubtitle.textContent = meta.title;
+      }
+    } catch (err) {
+      console.error("Bible Maps Then map error", err);
+      setThenHelp(`Map error: ${err?.message || err}`, true);
+      setStatus(`Map error: ${err?.message || err}`);
+    }
   }
 
   function applyPayload(payload) {
@@ -446,13 +509,10 @@
   els.modeModern.addEventListener("click", () => setMode("modern"));
   els.modeThen.addEventListener("click", () => setMode("then"));
   els.kingdomsToggle?.addEventListener("change", () => {
-    syncKingdomLayer().then(() => {
-      if (!els.thenPane.hidden) {
-        ensureThenMap({
-          stops: activeJourney?.stops || [],
-          places: activePlaceMarkers,
-        });
-      }
+    if (els.thenPane.hidden) return;
+    ensureThenMap({
+      stops: activeJourney?.stops || [],
+      places: activePlaceMarkers,
     });
   });
 
@@ -472,6 +532,10 @@
       applyPayload(message.payload);
     }
   });
+
+  if (typeof L === "undefined") {
+    setStatus("Map library failed to load. Reload the extension.");
+  }
 
   loadKingdoms();
   refreshFromBackground();

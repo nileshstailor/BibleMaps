@@ -298,10 +298,17 @@ main {
 
 .then-map {
   height: 280px;
+  min-height: 280px;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line);
   background: #cbb892;
+}
+
+.then-map .leaflet-container {
+  width: 100%;
+  height: 100%;
 }
 
 .stop-list {
