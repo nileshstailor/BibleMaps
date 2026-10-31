@@ -2,8 +2,8 @@
 
 Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 
-- **Places** → Open in Google Maps (modern coordinates)
-- **Journeys** → **Modern** multi-stop Google Maps route, plus **Then** (same geometry on a muted historical-style Leaflet basemap)
+- **Places** → Open in Google Maps (modern coordinates), plus **Open Then map + kingdoms**
+- **Journeys** → **Modern** multi-stop Google Maps route, plus **Then** (OSM/Leaflet with optional schematic Israel / Judah / Philistia overlays)
 
 No LLM, no required remote API key for v1. Matching uses a local gazetteer (`data/places.json`) and journey catalog (`data/journeys.json`).
 
@@ -44,6 +44,7 @@ BibleMaps/
   content/matcher.js             # gazetteer / journey matching
   data/places.json               # ~95 biblical places
   data/journeys.json             # Abraham, Exodus, Paul’s journeys
+  data/kingdoms.json             # schematic Israel / Judah / Philistia polygons
   sidepanel/sidepanel.html|css|js
   lib/leaflet.*                  # vendored Leaflet for Then map
   icons/icon16.png|icon48.png|icon128.png
@@ -61,4 +62,5 @@ BibleMaps/
 - Journey detection is heuristic (alias cues + co-occurring stops), not full narrative NLP.
 - Google Maps waypoint limits may thin very long itineraries.
 - True 3D terrain / Cesium-style flythrough is explicitly out of v1.
+- Kingdom polygons are schematic teaching overlays, not a scholarly boundary dataset.
 - bible.com class names change often; selectors are defensive but may need updates.

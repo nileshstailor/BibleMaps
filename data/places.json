@@ -734,8 +734,8 @@
     "aliases": ["Egypt", "land of Egypt", "the land of Egypt"],
     "lat": 30.0444,
     "lng": 31.2357,
-    "modernName": "Egypt",
-    "eraNotes": "Nile civilization; patriarchal sojourns and Exodus setting. Pin centered on Cairo region for map links."
+    "modernName": "Cairo, Egypt",
+    "eraNotes": "Nile civilization; patriarchal sojourns and Exodus setting. Map pin uses Cairo-region coordinates."
   },
   {
     "id": "canaan",

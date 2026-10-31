@@ -1,0 +1,95 @@
+{
+  "type": "FeatureCollection",
+  "meta": {
+    "title": "Divided kingdoms (schematic)",
+    "era": "Approx. after Solomon — Israel until 722 BCE; Judah continues later",
+    "disclaimer": "Illustrative teaching overlays, not a scholarly GIS edition. Borders shifted over time and are debated."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "israel",
+        "name": "Kingdom of Israel",
+        "eraLabel": "Northern kingdom",
+        "color": "#4a6741",
+        "fillOpacity": 0.28
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [35.55, 33.28],
+            [35.78, 33.05],
+            [35.72, 32.7],
+            [35.65, 32.45],
+            [35.58, 32.2],
+            [35.5, 31.95],
+            [35.35, 31.88],
+            [35.15, 31.9],
+            [34.95, 32.05],
+            [34.88, 32.25],
+            [34.92, 32.55],
+            [35.05, 32.85],
+            [35.2, 33.1],
+            [35.4, 33.25],
+            [35.55, 33.28]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "judah",
+        "name": "Kingdom of Judah",
+        "eraLabel": "Southern kingdom",
+        "color": "#c9a227",
+        "fillOpacity": 0.32
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [35.15, 31.9],
+            [35.35, 31.88],
+            [35.48, 31.7],
+            [35.52, 31.45],
+            [35.45, 31.25],
+            [35.2, 31.15],
+            [34.95, 31.2],
+            [34.82, 31.4],
+            [34.85, 31.65],
+            [34.95, 31.82],
+            [35.15, 31.9]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "philistia",
+        "name": "Philistia",
+        "eraLabel": "Coastal pentapolis region",
+        "color": "#5b6e8c",
+        "fillOpacity": 0.26
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [34.55, 31.85],
+            [34.78, 31.82],
+            [34.82, 31.55],
+            [34.7, 31.35],
+            [34.48, 31.4],
+            [34.42, 31.6],
+            [34.45, 31.78],
+            [34.55, 31.85]
+          ]
+        ]
+      }
+    }
+  ]
+}

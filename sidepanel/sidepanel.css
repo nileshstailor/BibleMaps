@@ -242,8 +242,62 @@ main {
   gap: 10px;
 }
 
+.then-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.kingdom-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+}
+
+.kingdom-toggle input {
+  accent-color: var(--olive);
+}
+
+.kingdom-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.kingdom-legend[hidden] {
+  display: none;
+}
+
+.kingdom-legend .swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: -1px;
+  border: 1px solid rgba(44, 36, 22, 0.35);
+}
+
+.kingdom-legend .swatch.israel {
+  background: rgba(74, 103, 65, 0.55);
+}
+
+.kingdom-legend .swatch.judah {
+  background: rgba(201, 162, 39, 0.65);
+}
+
+.kingdom-legend .swatch.philistia {
+  background: rgba(91, 110, 140, 0.55);
+}
+
 .then-map {
-  height: 260px;
+  height: 280px;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line);

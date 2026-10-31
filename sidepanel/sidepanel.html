@@ -63,10 +63,21 @@
         <ol id="modernStops" class="stop-list"></ol>
       </div>
       <div id="thenPane" class="map-pane" hidden>
+        <div class="then-toolbar">
+          <label class="kingdom-toggle">
+            <input type="checkbox" id="kingdomsToggle" checked />
+            Show kingdoms (approx.)
+          </label>
+          <div class="kingdom-legend" id="kingdomLegend" aria-hidden="false">
+            <span><i class="swatch israel"></i> Israel</span>
+            <span><i class="swatch judah"></i> Judah</span>
+            <span><i class="swatch philistia"></i> Philistia</span>
+          </div>
+        </div>
         <div id="thenMap" class="then-map" aria-label="Historical-style journey map"></div>
-        <p class="muted small">
-          Same stop geometry on a muted basemap — a “then-style” overlay, not a full 3D
-          reconstruction.
+        <p class="muted small" id="thenHelp">
+          OpenStreetMap basemap with schematic divided-kingdom overlays (teaching outlines, not
+          precise scholarly borders). Journey paths use the same stop geometry when available.
         </p>
       </div>
     </section>
