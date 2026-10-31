@@ -330,20 +330,8 @@ main {
   gap: 6px;
 }
 
-.atlas-select-label {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
-.atlas-select {
-  width: 100%;
-  font: inherit;
-  font-size: 0.84rem;
-  padding: 7px 8px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: rgba(255, 250, 240, 0.9);
-  color: var(--ink);
+.map-toolbar[hidden] {
+  display: none;
 }
 
 .kingdom-toggle {

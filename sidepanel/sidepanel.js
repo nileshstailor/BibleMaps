@@ -18,7 +18,7 @@
     mapDock: document.getElementById("mapDock"),
     mapTitle: document.getElementById("mapTitle"),
     mapSubtitle: document.getElementById("mapSubtitle"),
-    presetSelect: document.getElementById("presetSelect"),
+    mapToolbar: document.getElementById("mapToolbar"),
     kingdomsToggle: document.getElementById("kingdomsToggle"),
     kingdomsToggleWrap: document.getElementById("kingdomsToggleWrap"),
     kingdomLegend: document.getElementById("kingdomLegend"),
@@ -168,7 +168,6 @@
       })
       .then((data) => {
         presetsCatalog = data;
-        populatePresetSelect();
         return data;
       })
       .catch((err) => {
@@ -179,25 +178,11 @@
     return presetsLoadPromise;
   }
 
-  function populatePresetSelect() {
-    if (!els.presetSelect || !presetsCatalog?.presets) return;
-    const currentVal = els.presetSelect.value;
-    els.presetSelect.innerHTML = "";
-    for (const m of presetsCatalog.presets) {
-      const opt = document.createElement("option");
-      opt.value = m.id;
-      opt.textContent = `${m.title}${m.era ? ` — ${m.era}` : ""}`;
-      els.presetSelect.appendChild(opt);
-    }
-    if ([...els.presetSelect.options].some((o) => o.value === currentVal)) {
-      els.presetSelect.value = currentVal;
-    }
-  }
-
   function getPreset(id) {
     return presetsCatalog?.presets?.find((p) => p.id === id) || null;
   }
 
+  /** Silent era framing from the active journey / chapter places. */
   function suggestPresetId() {
     const jid = activeJourney?.id || "";
     if (jid === "paul_first") return "paul_first";
@@ -211,6 +196,10 @@
     const gospelHits = places.filter((p) => (p.eras || []).includes("gospels")).length;
     if (gospelHits >= 2 && gospelHits >= places.length / 2) return "jesus";
     return "divided_kingdom";
+  }
+
+  function resolvePreset() {
+    return getPreset(suggestPresetId()) || getPreset("divided_kingdom");
   }
 
   function renderPlaces(places) {
@@ -332,7 +321,6 @@
     els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
     setJourneyMapsLink(journey.stops || []);
     fillJourneyStopList(journey);
-    if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
     requestAnimationFrame(() => renderMap());
   }
 
@@ -396,7 +384,7 @@
     const jid = activeJourney?.id || "";
     const url = current?.url || "";
     const kingdoms = Boolean(els.kingdomsToggle?.checked);
-    const preset = els.presetSelect?.value || "";
+    const preset = suggestPresetId();
     return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}`;
   }
 
@@ -691,32 +679,27 @@
     await waitForMapSize(els.teachingMap);
     if (gen !== mapMountGen) return;
 
-    if (els.presetSelect && !els.presetSelect.dataset.userTouched) {
-      const suggested = suggestPresetId();
-      if ([...els.presetSelect.options].some((o) => o.value === suggested)) {
-        els.presetSelect.value = suggested;
-      }
-    }
-
-    const preset = getPreset(els.presetSelect?.value) || getPreset("divided_kingdom");
+    const preset = resolvePreset();
     const basemapName = preset?.basemap || "levant";
+    const allowKingdoms = Boolean(preset?.showKingdoms) && basemapName === "levant";
 
     if (els.kingdomsToggleWrap) {
-      const allowKingdoms = basemapName === "levant";
       els.kingdomsToggleWrap.hidden = !allowKingdoms;
       if (!allowKingdoms && els.kingdomsToggle) {
         els.kingdomsToggle.checked = false;
+        delete els.kingdomsToggle.dataset.userTouched;
       } else if (
         allowKingdoms &&
         els.kingdomsToggle &&
-        !els.kingdomsToggle.dataset.userTouched &&
-        preset?.showKingdoms
+        !els.kingdomsToggle.dataset.userTouched
       ) {
         els.kingdomsToggle.checked = true;
       }
     }
-    const showKingdoms =
-      Boolean(els.kingdomsToggle?.checked) && basemapName === "levant";
+    if (els.mapToolbar) {
+      els.mapToolbar.hidden = !allowKingdoms;
+    }
+    const showKingdoms = allowKingdoms && Boolean(els.kingdomsToggle?.checked);
     if (els.kingdomLegend) els.kingdomLegend.hidden = !showKingdoms;
 
     updateReferencePlate(preset);
@@ -1041,11 +1024,6 @@
 
   els.kingdomsToggle?.addEventListener("change", () => {
     if (els.kingdomsToggle) els.kingdomsToggle.dataset.userTouched = "1";
-    renderMap();
-  });
-  els.presetSelect?.addEventListener("change", () => {
-    if (els.presetSelect) els.presetSelect.dataset.userTouched = "1";
-    // Preset only changes framing/overlays — keep the same basemap instance.
     renderMap();
   });
 
