@@ -25,6 +25,7 @@
     teachingMap: document.getElementById("teachingMap"),
     mapHelp: document.getElementById("mapHelp"),
     mapsLink: document.getElementById("mapsLink"),
+    stopListWrap: document.getElementById("stopListWrap"),
     stopList: document.getElementById("stopList"),
     referencePlate: document.getElementById("referencePlate"),
     referencePlateImg: document.getElementById("referencePlateImg"),
@@ -222,19 +223,28 @@
       return;
     }
     for (const place of places) {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.innerHTML = `
-        <h3>${escapeHtml(place.name)}</h3>
-        <p class="meta">${escapeHtml(place.modernName || "")}</p>
-        <p class="notes">${escapeHtml(place.eraNotes || "")}</p>
-        <div class="actions">
-          <a class="primary-btn" href="${googlePlaceUrl(place)}" target="_blank" rel="noopener">
-            Open in Google Maps
-          </a>
+      const row = document.createElement("details");
+      row.className = "acc-row";
+      const modern = place.modernName ? ` · ${place.modernName}` : "";
+      row.innerHTML = `
+        <summary>
+          <span class="acc-title">${escapeHtml(place.name)}</span>
+          <span class="acc-aside">${escapeHtml(modern)}</span>
+        </summary>
+        <div class="acc-body">
+          ${
+            place.eraNotes
+              ? `<p class="notes">${escapeHtml(place.eraNotes)}</p>`
+              : ""
+          }
+          <div class="actions">
+            <a class="primary-btn" href="${googlePlaceUrl(place)}" target="_blank" rel="noopener">
+              Open in Google Maps
+            </a>
+          </div>
         </div>
       `;
-      els.placesPanel.appendChild(card);
+      els.placesPanel.appendChild(row);
     }
   }
 
@@ -246,43 +256,60 @@
       return;
     }
     for (const journey of journeys) {
-      const card = document.createElement("article");
-      card.className = "card";
+      const row = document.createElement("details");
+      row.className = "acc-row";
       const refs = (journey.scriptureRefs || []).join(" · ");
       const hitLabel =
         journey.hitCount != null
-          ? `<span class="badge">${journey.hitCount}/${journey.stopCount} stops mentioned</span>`
+          ? `<span class="badge">${journey.hitCount}/${journey.stopCount}</span>`
           : "";
-      card.innerHTML = `
-        <h3>${escapeHtml(journey.name)}${hitLabel}</h3>
-        <p class="meta">${escapeHtml(refs)}</p>
-        <p class="notes">${escapeHtml(journey.summary || "")}</p>
-        <div class="actions">
-          <button class="text-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
-            Show on map
-          </button>
+      row.innerHTML = `
+        <summary>
+          <span class="acc-title">${escapeHtml(journey.name)}${hitLabel}</span>
+          <span class="acc-aside">${escapeHtml(refs)}</span>
+        </summary>
+        <div class="acc-body">
+          ${
+            journey.summary
+              ? `<p class="notes">${escapeHtml(journey.summary)}</p>`
+              : ""
+          }
+          <div class="actions">
+            <button class="text-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
+              Show on map
+            </button>
+          </div>
         </div>
       `;
-      card.querySelector("button")?.addEventListener("click", () => showJourneyOnMap(journey));
-      els.journeysPanel.appendChild(card);
+      row.querySelector("button")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        showJourneyOnMap(journey);
+      });
+      els.journeysPanel.appendChild(row);
     }
   }
 
-  function fillStopList(points, emptyText) {
+  function hideStopList() {
+    if (els.stopListWrap) els.stopListWrap.hidden = true;
+    if (els.stopList) els.stopList.innerHTML = "";
+  }
+
+  function fillJourneyStopList(journey) {
+    if (!els.stopList || !els.stopListWrap) return;
     els.stopList.innerHTML = "";
-    if (!points?.length) {
-      const li = document.createElement("li");
-      li.textContent = emptyText || "No places matched in this chapter yet.";
-      els.stopList.appendChild(li);
+    const stops = journey?.stops || [];
+    if (!stops.length) {
+      els.stopListWrap.hidden = true;
       return;
     }
-    points.forEach((p) => {
+    stops.forEach((stop) => {
       const li = document.createElement("li");
-      li.textContent = `${p.name}${
-        p.note || p.modernName ? ` — ${p.note || p.modernName}` : ""
-      }`;
+      li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
+      if (journey.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
+      li.title = stop.modernName || "";
       els.stopList.appendChild(li);
     });
+    els.stopListWrap.hidden = false;
   }
 
   /** Keep the always-visible map chrome in sync with chapter places. */
@@ -294,7 +321,8 @@
     els.mapSubtitle.textContent = chap ? `Places in ${chap}` : "Places in this chapter";
     // Places: region / single-pin link only — no walking directions.
     setPlacesMapsLink(places || []);
-    fillStopList(places || []);
+    // Place names live in the accordion above the map — don't duplicate under it.
+    hideStopList();
   }
 
   function showJourneyOnMap(journey) {
@@ -302,16 +330,8 @@
     activePlaceMarkers = current?.places || [];
     els.mapTitle.textContent = journey.name;
     els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
-    const stops = journey.stops || [];
-    setJourneyMapsLink(stops);
-    els.stopList.innerHTML = "";
-    stops.forEach((stop) => {
-      const li = document.createElement("li");
-      li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
-      if (journey.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
-      li.title = stop.modernName || "";
-      els.stopList.appendChild(li);
-    });
+    setJourneyMapsLink(journey.stops || []);
+    fillJourneyStopList(journey);
     if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
     requestAnimationFrame(() => renderMap());
   }
@@ -960,14 +980,7 @@
         els.mapTitle.textContent = still.name;
         els.mapSubtitle.textContent = (still.scriptureRefs || []).join(" · ");
         setJourneyMapsLink(still.stops || []);
-        els.stopList.innerHTML = "";
-        (still.stops || []).forEach((stop) => {
-          const li = document.createElement("li");
-          li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
-          if (still.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
-          li.title = stop.modernName || "";
-          els.stopList.appendChild(li);
-        });
+        fillJourneyStopList(still);
       } else {
         syncPlacesMapChrome(payload.places || []);
       }

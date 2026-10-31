@@ -25,6 +25,22 @@
       Open a bible.com passage to detect places.
     </section>
 
+    <div class="list-block">
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+          Places
+        </button>
+        <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+          Journeys
+        </button>
+      </nav>
+
+      <main>
+        <section id="placesPanel" class="panel active" role="tabpanel"></section>
+        <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
+      </main>
+    </div>
+
     <section class="map-dock" id="mapDock">
       <div class="map-dock-header">
         <div>
@@ -55,7 +71,11 @@
       <a id="mapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
         >Open in Google Maps</a
       >
-      <ol id="stopList" class="stop-list"></ol>
+
+      <details class="map-extras" id="stopListWrap" hidden>
+        <summary>Route stops</summary>
+        <ol id="stopList" class="stop-list"></ol>
+      </details>
 
       <details class="reference-plate" id="referencePlate">
         <summary>Reference atlas plate</summary>
@@ -64,22 +84,8 @@
       </details>
     </section>
 
-    <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
-        Places
-      </button>
-      <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
-        Journeys
-      </button>
-    </nav>
-
-    <main>
-      <section id="placesPanel" class="panel active" role="tabpanel"></section>
-      <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
-    </main>
-
     <footer class="app-footer">
-      Curated gazetteer · MapLibre offline · © OpenStreetMap · v1.3.1
+      Curated gazetteer · MapLibre offline · © OpenStreetMap · v1.3.2
     </footer>
 
     <script src="../lib/maplibre/maplibre-gl-csp.js"></script>

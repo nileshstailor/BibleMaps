@@ -20,6 +20,7 @@
 html,
 body {
   margin: 0;
+  height: 100%;
   min-height: 100%;
 }
 
@@ -31,8 +32,9 @@ body {
     linear-gradient(165deg, #f7edd4 0%, #e8d7b0 48%, #d9c49a 100%);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 14px 14px 18px;
+  gap: 10px;
+  padding: 12px 12px 14px;
+  overflow: hidden;
 }
 
 .app-header {
@@ -40,6 +42,7 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
+  flex: 0 0 auto;
 }
 
 .brand {
@@ -62,18 +65,29 @@ body {
 }
 
 .status {
-  padding: 10px 12px;
+  padding: 8px 10px;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 10px;
-  font-size: 0.86rem;
-  line-height: 1.4;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  flex: 0 0 auto;
+}
+
+.list-block {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: min(34vh, 260px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
+  flex: 0 0 auto;
 }
 
 .tab,
@@ -117,14 +131,19 @@ body {
 }
 
 main {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 250, 240, 0.55);
 }
 
 .panel {
   display: none;
   flex-direction: column;
-  gap: 10px;
+  gap: 0;
 }
 
 .panel.active {
@@ -133,8 +152,79 @@ main {
 
 .empty {
   color: var(--muted);
-  font-size: 0.9rem;
-  padding: 8px 2px;
+  font-size: 0.86rem;
+  padding: 10px 12px;
+  margin: 0;
+}
+
+.acc-row {
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+}
+
+.acc-row:last-child {
+  border-bottom: none;
+}
+
+.acc-row > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.25;
+  user-select: none;
+}
+
+.acc-row > summary::-webkit-details-marker {
+  display: none;
+}
+
+.acc-row > summary::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--muted);
+  margin-right: 2px;
+  flex: 0 0 auto;
+  align-self: center;
+  transition: transform 0.12s ease;
+}
+
+.acc-row[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.acc-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.acc-aside {
+  flex: 0 1 auto;
+  max-width: 48%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.acc-body {
+  padding: 0 10px 10px 22px;
+}
+
+.acc-body .notes {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--ink);
 }
 
 .card {
@@ -172,9 +262,9 @@ main {
 .primary-btn,
 .text-btn {
   border-radius: 8px;
-  padding: 8px 12px;
+  padding: 6px 10px;
   text-decoration: none;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
 }
 
 .primary-btn {
@@ -200,11 +290,15 @@ main {
   border: 1px solid var(--line);
   background: rgba(255, 250, 240, 0.92);
   border-radius: 14px;
-  padding: 12px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   box-shadow: var(--shadow);
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .map-dock-header {
@@ -301,8 +395,8 @@ main {
 }
 
 .teaching-map {
-  height: 340px;
-  min-height: 340px;
+  height: min(280px, 42vh);
+  min-height: 200px;
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
@@ -310,12 +404,30 @@ main {
   /* Match style.json land tone so a loading frame doesn't look like empty ocean */
   background: #e2dfda;
   position: relative;
+  flex: 0 0 auto;
 }
 
 .teaching-map .maplibregl-map {
   width: 100%;
   height: 100%;
-  min-height: 340px;
+  min-height: 200px;
+}
+
+.map-extras {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 250, 240, 0.7);
+  font-size: 0.82rem;
+}
+
+.map-extras[hidden] {
+  display: none;
+}
+
+.map-extras summary {
+  cursor: pointer;
+  color: var(--muted);
 }
 
 .bm-marker {
@@ -410,6 +522,7 @@ main {
   color: var(--muted);
   font-size: 0.72rem;
   text-align: center;
+  flex: 0 0 auto;
 }
 
 .badge {
