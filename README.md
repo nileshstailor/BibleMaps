@@ -52,6 +52,6 @@ BibleMaps/
 ## Notes
 
 - Matching uses the local gazetteer; no AI geocoding.
-- Kingdom polygons are schematic teaching overlays.
+- Kingdom polygons are teaching overlays digitized from `media/historical/divided-kingdom.jpg` (Knowing the Bible / USGS topography).
 - Reference atlas JPGs under `media/historical/` are optional art, not the basemap.
 - Keep ODbL attribution if you redistribute the PMTiles extract.
