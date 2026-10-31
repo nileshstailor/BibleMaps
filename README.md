@@ -1,3 +1,64 @@
 # Bible Maps
 
-Chrome extension source lives on feature branches / pull requests.
+Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
+
+- **Places** → Open in Google Maps (modern coordinates)
+- **Journeys** → **Modern** multi-stop Google Maps route, plus **Then** (same geometry on a muted historical-style Leaflet basemap)
+
+No LLM, no required remote API key for v1. Matching uses a local gazetteer (`data/places.json`) and journey catalog (`data/journeys.json`).
+
+## Load unpacked
+
+1. Open Chrome and go to `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked**
+4. Select this folder: `BibleMaps` (the directory that contains `manifest.json`)
+5. Pin **Bible Maps** from the extensions menu if you like
+
+No build step is required. Leaflet is vendored under `lib/`.
+
+## Verify on a sample passage
+
+1. Open a passage rich in place names, for example:
+   - [Acts 13 (NIV) — Paul’s first journey geography](https://www.bible.com/bible/111/ACT.13.NIV)
+   - [John 6 — Capernaum / Sea of Galilee](https://www.bible.com/bible/111/JHN.6.NIV)
+   - [Genesis 12 — Abraham / Canaan / Egypt](https://www.bible.com/bible/111/GEN.12.NIV)
+2. Wait a moment for highlights (amber underlines on place names).
+3. Click the **Bible Maps** toolbar icon to open the side panel (or click a highlighted place).
+4. Confirm:
+   - **Places** lists matches with working **Open in Google Maps** links
+   - **Journeys** may list Paul’s / Abraham / Exodus outlines when enough stops or journey cues appear
+   - Open a journey → **Modern** (Google Maps) and **Then** (Leaflet muted overlay)
+
+Tip: use **Refresh** in the side panel after bible.com finishes its SPA navigation.
+
+## Extension structure
+
+```
+BibleMaps/
+  manifest.json
+  README.md
+  background/service-worker.js   # message routing + side panel open
+  content/content.js             # SPA-aware scan + highlight
+  content/content.css
+  content/matcher.js             # gazetteer / journey matching
+  data/places.json               # ~95 biblical places
+  data/journeys.json             # Abraham, Exodus, Paul’s journeys
+  sidepanel/sidepanel.html|css|js
+  lib/leaflet.*                  # vendored Leaflet for Then map
+  icons/icon16.png|icon48.png|icon128.png
+```
+
+## Architecture notes
+
+- **Content script** runs on `*.bible.com`, walks verse/reader DOM text, wraps curated alias hits in `<mark class="bible-maps-place">`, and watches mutations + history for SPA chapter changes.
+- **Background service worker** only routes detection payloads and opens `chrome.sidePanel`.
+- **Side panel** reads the active tab’s latest detection and builds Maps / Leaflet views locally.
+
+## Gaps / later
+
+- Place coverage is high-frequency, not exhaustive; some Exodus stops are geographically debated.
+- Journey detection is heuristic (alias cues + co-occurring stops), not full narrative NLP.
+- Google Maps waypoint limits may thin very long itineraries.
+- True 3D terrain / Cesium-style flythrough is explicitly out of v1.
+- bible.com class names change often; selectors are defensive but may need updates.

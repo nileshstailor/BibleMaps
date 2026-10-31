@@ -1,0 +1,131 @@
+[
+  {
+    "id": "abraham_travels",
+    "name": "Abraham’s Travels",
+    "aliases": ["Abraham", "Abram"],
+    "scriptureRefs": ["Genesis 11:31–12:9", "Genesis 13", "Genesis 20", "Genesis 22"],
+    "summary": "Outline of Abraham’s migration from Mesopotamia into Canaan, with sojourns toward Egypt and key patriarchal sites.",
+    "stops": [
+      { "placeId": "ur", "note": "Departure from Ur of the Chaldeans" },
+      { "placeId": "haran", "note": "Family sojourn in Haran" },
+      { "placeId": "shechem", "note": "First altar in Canaan" },
+      { "placeId": "bethel", "note": "Altar between Bethel and Ai" },
+      { "placeId": "egypt_land", "note": "Sojourn during famine" },
+      { "placeId": "hebron", "note": "Settles by the oaks of Mamre" },
+      { "placeId": "beersheba", "note": "Covenant and wells in the south" }
+    ],
+    "pathHints": "Overland arc Ur → Haran → Canaan, with a temporary southward loop toward Egypt."
+  },
+  {
+    "id": "exodus_outline",
+    "name": "Exodus Outline",
+    "aliases": ["Exodus", "the Exodus"],
+    "scriptureRefs": ["Exodus 12–19", "Numbers 33", "Deuteronomy 1–2"],
+    "summary": "High-level wilderness itinerary from the Nile Delta to Sinai and on toward the Plains of Moab. Several stops are geographically debated.",
+    "stops": [
+      { "placeId": "egypt_rameses", "note": "Departure from Rameses" },
+      { "placeId": "succoth", "note": "First encampment" },
+      { "placeId": "etham", "note": "Edge of the wilderness" },
+      { "placeId": "pi_hahiroth", "note": "Before the sea crossing" },
+      { "placeId": "marah", "note": "Bitter waters" },
+      { "placeId": "elim", "note": "Oasis with springs and palms" },
+      { "placeId": "rephidim", "note": "Water from the rock; Amalek" },
+      { "placeId": "sinai", "note": "Covenant at the mountain" },
+      { "placeId": "kadesh_barnea", "note": "Spies and long sojourn" },
+      { "placeId": "ezion_geber", "note": "Southern route marker" },
+      { "placeId": "moab_plains", "note": "Camp opposite Jericho" },
+      { "placeId": "jericho", "note": "Entry toward Canaan" }
+    ],
+    "pathHints": "Delta → Isthmus/Sinai corridor → South Sinai tradition → Negev/Kadesh → Arabah → Moab."
+  },
+  {
+    "id": "paul_first",
+    "name": "Paul’s First Missionary Journey",
+    "aliases": ["first missionary journey", "Paul and Barnabas"],
+    "scriptureRefs": ["Acts 13–14"],
+    "summary": "Paul and Barnabas travel from Syrian Antioch through Cyprus into southern Asia Minor and return.",
+    "stops": [
+      { "placeId": "antioch", "note": "Commissioned and sent out" },
+      { "placeId": "seleucia", "note": "Sail from the port of Antioch" },
+      { "placeId": "cyprus_salamis", "note": "Proclaim in the synagogues" },
+      { "placeId": "cyprus_paphos", "note": "Sergius Paulus" },
+      { "placeId": "perga", "note": "Landing in Pamphylia" },
+      { "placeId": "antioch_pisidia", "note": "Sabbath sermon in the synagogue" },
+      { "placeId": "iconium", "note": "Ministry amid opposition" },
+      { "placeId": "lystra", "note": "Healing and misunderstanding" },
+      { "placeId": "derbe", "note": "Make many disciples" },
+      { "placeId": "lystra", "note": "Return visit; strengthen disciples" },
+      { "placeId": "iconium", "note": "Return through the cities" },
+      { "placeId": "antioch_pisidia", "note": "Return through Pisidian Antioch" },
+      { "placeId": "perga", "note": "Speak the word in Perga" },
+      { "placeId": "attalia", "note": "Sail home" },
+      { "placeId": "antioch", "note": "Report to the church" }
+    ],
+    "pathHints": "Syria → Cyprus (east to west) → Pamphylia → Pisidia/Lycaonia loop → return via Attalia."
+  },
+  {
+    "id": "paul_second",
+    "name": "Paul’s Second Missionary Journey",
+    "aliases": ["second missionary journey"],
+    "scriptureRefs": ["Acts 15:36–18:22"],
+    "summary": "Paul revisits Galatian churches, crosses into Macedonia and Achaia, then returns via Ephesus and Caesarea.",
+    "stops": [
+      { "placeId": "antioch", "note": "Departure after the Jerusalem council season" },
+      { "placeId": "tarsus", "note": "Through Cilicia/Syria corridor (hometown region)" },
+      { "placeId": "derbe", "note": "Strengthen the churches" },
+      { "placeId": "lystra", "note": "Timothy joins" },
+      { "placeId": "iconium", "note": "Deliver the decrees" },
+      { "placeId": "troas", "note": "Macedonian call vision" },
+      { "placeId": "philippi", "note": "Lydia; prison and release" },
+      { "placeId": "thessalonica", "note": "Reasoning in the synagogue" },
+      { "placeId": "berea", "note": "Noble examination of the Scriptures" },
+      { "placeId": "athens", "note": "Areopagus address" },
+      { "placeId": "corinth", "note": "Extended ministry with Aquila and Priscilla" },
+      { "placeId": "cenchreae", "note": "Eastern harbor; haircut vow tradition" },
+      { "placeId": "ephesus", "note": "Brief visit; promise to return" },
+      { "placeId": "caesarea", "note": "Land in Judea" },
+      { "placeId": "jerusalem", "note": "Greet the church" },
+      { "placeId": "antioch", "note": "Return base" }
+    ],
+    "pathHints": "Antioch → Asia Minor interior → Troas → Macedonia → Achaia → brief Ephesus → Caesarea/Jerusalem → Antioch."
+  },
+  {
+    "id": "paul_third",
+    "name": "Paul’s Third Missionary Journey",
+    "aliases": ["third missionary journey"],
+    "scriptureRefs": ["Acts 18:23–21:17"],
+    "summary": "Paul travels through Galatia and Phrygia, spends extended time in Ephesus, revisits Macedonia and Achaia, then returns toward Jerusalem.",
+    "stops": [
+      { "placeId": "antioch", "note": "Set out again" },
+      { "placeId": "ephesus", "note": "Two-plus years of ministry" },
+      { "placeId": "troas", "note": "Travel corridor toward Macedonia" },
+      { "placeId": "philippi", "note": "Macedonia revisit" },
+      { "placeId": "thessalonica", "note": "Encourage the churches" },
+      { "placeId": "corinth", "note": "Three months in Greece" },
+      { "placeId": "philippi", "note": "Passover season departure" },
+      { "placeId": "troas", "note": "Eutychus; departure by land/sea" },
+      { "placeId": "ephesus", "note": "Miletus farewell nearby tradition (Ephesus region)" },
+      { "placeId": "tyre", "note": "Disciples warn Paul" },
+      { "placeId": "caesarea", "note": "Stay with Philip; Agabus" },
+      { "placeId": "jerusalem", "note": "Arrival and reception" }
+    ],
+    "pathHints": "Focus on long Ephesian residence, then a western loop through Macedonia/Achaia before the coastal return to Judea."
+  },
+  {
+    "id": "paul_rome",
+    "name": "Paul’s Journey to Rome",
+    "aliases": ["voyage to Rome", "Paul to Rome"],
+    "scriptureRefs": ["Acts 27–28"],
+    "summary": "Paul’s custody voyage from Caesarea to Rome, including shipwreck on Malta.",
+    "stops": [
+      { "placeId": "caesarea", "note": "Embark under guard" },
+      { "placeId": "sidon", "note": "Humane stop" },
+      { "placeId": "myra", "note": "Transfer to an Alexandrian ship" },
+      { "placeId": "crete_fair_havens", "note": "Difficult sailing season" },
+      { "placeId": "malta", "note": "Shipwreck and wintering" },
+      { "placeId": "puteoli", "note": "Land in Italy" },
+      { "placeId": "rome", "note": "House arrest and witness" }
+    ],
+    "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Italian west coast → Rome."
+  }
+]

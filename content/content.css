@@ -1,0 +1,44 @@
+mark.bible-maps-place {
+  background: linear-gradient(180deg, rgba(201, 162, 39, 0.35), rgba(201, 162, 39, 0.55));
+  border-bottom: 2px solid #8b5a2b;
+  border-radius: 2px;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 1px;
+  text-decoration: none;
+}
+
+mark.bible-maps-place:hover,
+mark.bible-maps-place:focus {
+  background: rgba(166, 48, 36, 0.28);
+  border-bottom-color: #a63024;
+  outline: none;
+}
+
+mark.bible-maps-place[data-bm-active="true"] {
+  background: rgba(74, 103, 65, 0.35);
+  border-bottom-color: #4a6741;
+}
+
+.bible-maps-toast {
+  position: fixed;
+  z-index: 2147483646;
+  right: 16px;
+  bottom: 16px;
+  max-width: min(320px, calc(100vw - 32px));
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #2c2416;
+  color: #f4e9d4;
+  font: 13px/1.35 Georgia, "Times New Roman", serif;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 160ms ease, transform 160ms ease;
+  pointer-events: none;
+}
+
+.bible-maps-toast.bible-maps-toast-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

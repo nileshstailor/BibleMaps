@@ -1,0 +1,289 @@
+:root {
+  --ink: #2c2416;
+  --muted: #6d5f4a;
+  --parchment: #f3e6c9;
+  --parchment-deep: #e5d3a8;
+  --olive: #4a6741;
+  --terra: #a63024;
+  --gold: #c9a227;
+  --panel: rgba(255, 250, 240, 0.86);
+  --line: rgba(44, 36, 22, 0.14);
+  --shadow: 0 10px 30px rgba(44, 36, 22, 0.12);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  color: var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-width: 300px;
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(201, 162, 39, 0.18), transparent 42%),
+    radial-gradient(ellipse at 90% 10%, rgba(74, 103, 65, 0.14), transparent 40%),
+    linear-gradient(165deg, #f7edd4 0%, #e8d7b0 48%, #d9c49a 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 14px 18px;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.tagline {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.status {
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.tab,
+.ghost-btn,
+.mode-btn,
+.primary-btn,
+.text-btn {
+  font: inherit;
+  cursor: pointer;
+}
+
+.tab,
+.mode-btn {
+  border: 1px solid var(--line);
+  background: rgba(255, 250, 240, 0.55);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 10px;
+}
+
+.tab.active,
+.mode-btn.active {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: #f7f1e4;
+}
+
+.ghost-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.ghost-btn:hover,
+.tab:hover,
+.mode-btn:hover {
+  border-color: rgba(74, 103, 65, 0.45);
+}
+
+main {
+  flex: 1;
+  min-height: 0;
+}
+
+.panel {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.panel.active {
+  display: flex;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 8px 2px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 1.02rem;
+}
+
+.card .meta {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.card .notes {
+  margin: 0 0 10px;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.primary-btn,
+.text-btn {
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-size: 0.84rem;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--terra);
+  color: #fff8ef;
+  border: none;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.text-btn {
+  background: rgba(74, 103, 65, 0.12);
+  color: var(--olive);
+  border: 1px solid rgba(74, 103, 65, 0.28);
+}
+
+.map-dock {
+  border: 1px solid var(--line);
+  background: rgba(255, 250, 240, 0.92);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.map-dock-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.map-dock-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.muted.small {
+  font-size: 0.74rem;
+}
+
+.map-modes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.map-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.then-map {
+  height: 260px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #cbb892;
+}
+
+.stop-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.stop-list li + li {
+  margin-top: 4px;
+}
+
+.app-footer {
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: rgba(201, 162, 39, 0.28);
+  color: #6a4f12;
+  font-size: 0.72rem;
+  vertical-align: middle;
+}
+
+/* Leaflet tint for “then” mood */
+.then-map .leaflet-tile-pane {
+  filter: sepia(0.55) saturate(0.55) contrast(0.95) brightness(0.96);
+}
+
+.then-map .leaflet-container {
+  background: #cbb892;
+  font: inherit;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bible Maps</title>
+    <link rel="stylesheet" href="../lib/leaflet.css" />
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <img src="../icons/icon48.png" width="28" height="28" alt="" />
+        <div>
+          <h1>Bible Maps</h1>
+          <p class="tagline">Places &amp; journeys on today’s map</p>
+        </div>
+      </div>
+      <button id="refreshBtn" class="ghost-btn" type="button" title="Rescan page">
+        Refresh
+      </button>
+    </header>
+
+    <section class="status" id="status">
+      Open a bible.com passage to detect places.
+    </section>
+
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+        Places
+      </button>
+      <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+        Journeys
+      </button>
+    </nav>
+
+    <main>
+      <section id="placesPanel" class="panel active" role="tabpanel"></section>
+      <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
+    </main>
+
+    <section class="map-dock" id="mapDock" hidden>
+      <div class="map-dock-header">
+        <div>
+          <h2 id="mapTitle">Journey map</h2>
+          <p id="mapSubtitle" class="muted"></p>
+        </div>
+        <button id="closeMapBtn" class="ghost-btn" type="button">Close</button>
+      </div>
+      <div class="map-modes" role="group" aria-label="Map mode">
+        <button id="modeModern" class="mode-btn active" type="button" data-mode="modern">
+          Modern
+        </button>
+        <button id="modeThen" class="mode-btn" type="button" data-mode="then">Then</button>
+      </div>
+      <div id="modernPane" class="map-pane">
+        <p class="muted" id="modernHelp">
+          Opens Google Maps with the journey polyline / multi-stop route.
+        </p>
+        <a id="modernMapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
+          >Open in Google Maps</a
+        >
+        <ol id="modernStops" class="stop-list"></ol>
+      </div>
+      <div id="thenPane" class="map-pane" hidden>
+        <div id="thenMap" class="then-map" aria-label="Historical-style journey map"></div>
+        <p class="muted small">
+          Same stop geometry on a muted basemap — a “then-style” overlay, not a full 3D
+          reconstruction.
+        </p>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      Curated gazetteer · no AI lookup · v1
+    </footer>
+
+    <script src="../lib/leaflet.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
