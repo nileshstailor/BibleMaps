@@ -34,6 +34,8 @@
 
   let current = null;
   let activeJourney = null;
+  let selectedJourneyId = null;
+  let activeTab = "places";
   let activePlaceMarkers = [];
   let allPlaces = null;
   let placesLoadPromise = null;
@@ -360,12 +362,41 @@
   }
 
   function showJourneyOnMap(journey) {
+    if (!journey) return;
     activeJourney = journey;
+    selectedJourneyId = journey.id || null;
     activePlaceMarkers = current?.places || [];
     els.mapTitle.textContent = journey.name;
     els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
     setJourneyMapsLink(journey.stops || []);
     fillJourneyStopList(journey);
+    requestAnimationFrame(() => renderMap());
+  }
+
+  function pickJourneyForTab() {
+    const journeys = current?.journeys || [];
+    if (!journeys.length) return null;
+    if (selectedJourneyId) {
+      const preferred = journeys.find((j) => j.id === selectedJourneyId);
+      if (preferred) return preferred;
+    }
+    if (activeJourney) {
+      const still = journeys.find((j) => j.id === activeJourney.id);
+      if (still) return still;
+    }
+    return journeys[0];
+  }
+
+  /** Keep the always-visible map aligned with Places vs Journeys tab. */
+  function syncMapForActiveTab() {
+    if (activeTab === "journeys") {
+      const journey = pickJourneyForTab();
+      if (journey) {
+        showJourneyOnMap(journey);
+        return;
+      }
+    }
+    syncPlacesMapChrome(current?.places || []);
     requestAnimationFrame(() => renderMap());
   }
 
@@ -1004,35 +1035,39 @@
       }.`
     );
 
-    // Always-visible map: keep chrome + overlays in sync (reuse MapLibre instance).
-    if (activeJourney) {
-      const still = (payload.journeys || []).find((j) => j.id === activeJourney.id);
-      if (still) {
-        // Refresh journey chrome without remounting the basemap unless overlays change.
-        activeJourney = still;
-        els.mapTitle.textContent = still.name;
-        els.mapSubtitle.textContent = (still.scriptureRefs || []).join(" · ");
-        setJourneyMapsLink(still.stops || []);
-        fillJourneyStopList(still);
+    // Always-visible map: keep chrome + overlays in sync with the active tab.
+    if (activeTab === "journeys") {
+      const journey = pickJourneyForTab();
+      if (journey) {
+        const same =
+          activeJourney?.id === journey.id &&
+          mapFingerprint() === lastMapFingerprint &&
+          maplibreMap;
+        if (!same) showJourneyOnMap(journey);
+        else {
+          activeJourney = journey;
+          selectedJourneyId = journey.id || selectedJourneyId;
+          fillJourneyStopList(journey);
+        }
       } else {
         syncPlacesMapChrome(payload.places || []);
+        const fp = mapFingerprint();
+        if (fp !== lastMapFingerprint || !maplibreMap) {
+          requestAnimationFrame(() => renderMap());
+        }
       }
-    } else {
-      // Only refresh places chrome text/links when map content actually changes,
-      // so polls don't thrash the dock while an accordion is open.
-      const fp = mapFingerprint();
-      if (fp !== lastMapFingerprint || !maplibreMap) {
-        syncPlacesMapChrome(payload.places || []);
-      } else {
-        activePlaceMarkers = payload.places || [];
-        const label = chap ? `Places in ${chap}` : "Places in this chapter";
-        if (els.mapSubtitle.textContent !== label) els.mapSubtitle.textContent = label;
-      }
+      return;
     }
 
+    // Places tab — only refresh chrome when map content changes.
     const fp = mapFingerprint();
     if (fp !== lastMapFingerprint || !maplibreMap) {
+      syncPlacesMapChrome(payload.places || []);
       requestAnimationFrame(() => renderMap());
+    } else {
+      activePlaceMarkers = payload.places || [];
+      const label = chap ? `Places in ${chap}` : "Places in this chapter";
+      if (els.mapSubtitle.textContent !== label) els.mapSubtitle.textContent = label;
     }
   }
 
@@ -1074,6 +1109,10 @@
       els.journeysPanel.classList.toggle("active", which === "journeys");
       els.placesPanel.hidden = which !== "places";
       els.journeysPanel.hidden = which !== "journeys";
+      if (which && which !== activeTab) {
+        activeTab = which;
+        syncMapForActiveTab();
+      }
     });
   });
 
