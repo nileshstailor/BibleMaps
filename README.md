@@ -2,8 +2,8 @@
 
 Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 
-- **Places** → Open in Google Maps (modern coordinates), plus **Open Then map + kingdoms**
-- **Journeys** → **Modern** multi-stop Google Maps route, plus **Then** (offline SVG schematic map with Israel / Judah / Philistia overlays — no tile CDN)
+- **Places** → Open in Google Maps, plus in-panel **Google embed** / kingdom overlay map
+- **Journeys** → **Modern** embedded Google Map + multi-stop link; **Then** → Google embed or **Kingdoms** (Esri street tiles + schematic borders)
 
 No LLM, no required remote API key for v1. Matching uses a local gazetteer (`data/places.json`) and journey catalog (`data/journeys.json`).
 
@@ -53,7 +53,7 @@ BibleMaps/
 
 - **Content script** runs on `*.bible.com` and matches gazetteer aliases with the **CSS Custom Highlight API** (no DOM wrapping — avoids React hydration errors on bible.com).
 - **Background service worker** only routes detection payloads and opens `chrome.sidePanel`.
-- **Side panel** reads the active tab’s latest detection; **Then** map is an offline SVG (no Leaflet/OSM network).
+- **Side panel** embeds Google Maps via iframe (no API key) and can draw kingdom polygons on Esri tiles via Leaflet when OSM tiles are blocked from the extension origin.
 
 ## Gaps / later
 

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bible Maps</title>
+    <link rel="stylesheet" href="../lib/leaflet.css" />
     <link rel="stylesheet" href="sidepanel.css" />
   </head>
   <body>
@@ -56,6 +57,7 @@
         <p class="muted" id="modernHelp">
           Opens Google Maps with the journey polyline / multi-stop route.
         </p>
+        <div id="modernEmbed" class="map-embed" hidden></div>
         <a id="modernMapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
           >Open in Google Maps</a
         >
@@ -63,20 +65,28 @@
       </div>
       <div id="thenPane" class="map-pane" hidden>
         <div class="then-toolbar">
-          <label class="kingdom-toggle">
+          <div class="map-modes basemap-modes" role="group" aria-label="Then basemap">
+            <button id="basemapGoogle" class="mode-btn active" type="button" data-basemap="google">
+              Google
+            </button>
+            <button id="basemapOverlay" class="mode-btn" type="button" data-basemap="overlay">
+              Kingdoms
+            </button>
+          </div>
+          <label class="kingdom-toggle" id="kingdomToggleWrap" hidden>
             <input type="checkbox" id="kingdomsToggle" checked />
-            Show kingdoms (approx.)
+            Draw kingdom outlines
           </label>
-          <div class="kingdom-legend" id="kingdomLegend" aria-hidden="false">
+          <div class="kingdom-legend" id="kingdomLegend" hidden>
             <span><i class="swatch israel"></i> Israel</span>
             <span><i class="swatch judah"></i> Judah</span>
             <span><i class="swatch philistia"></i> Philistia</span>
           </div>
         </div>
-        <div id="thenMap" class="then-map" aria-label="Historical-style journey map"></div>
+        <div id="thenMap" class="then-map" aria-label="Then map"></div>
         <p class="muted small" id="thenHelp">
-          Offline schematic Then map (no external tiles). Kingdom outlines are teaching
-          approximations, not scholarly borders.
+          Google = embedded Google Map. Kingdoms = real street map with schematic Israel / Judah /
+          Philistia outlines (approximate).
         </p>
       </div>
     </section>
@@ -85,7 +95,7 @@
       Curated gazetteer · no AI lookup · v1
     </footer>
 
-    <script src="svg-map.js"></script>
+    <script src="../lib/leaflet.js"></script>
     <script src="sidepanel.js"></script>
   </body>
 </html>

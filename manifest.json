@@ -1,15 +1,24 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Highlight biblical places and journeys on bible.com and open them on modern and historical-style maps.",
   "permissions": ["sidePanel", "storage", "activeTab", "tabs"],
-  "host_permissions": ["https://*.bible.com/*", "https://bible.com/*"],
+  "host_permissions": [
+    "https://*.bible.com/*",
+    "https://bible.com/*",
+    "https://*.google.com/*",
+    "https://*.googleapis.com/*",
+    "https://*.gstatic.com/*",
+    "https://server.arcgisonline.com/*",
+    "https://*.basemaps.cartocdn.com/*",
+    "https://*.openstreetmap.org/*"
+  ],
   "background": {
     "service_worker": "background/service-worker.js"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' https:"
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-src https://www.google.com https://maps.google.com https://www.openstreetmap.org https://*.google.com"
   },
   "action": {
     "default_title": "Bible Maps",
