@@ -127,5 +127,24 @@
       { "placeId": "rome", "note": "House arrest and witness" }
     ],
     "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Italian west coast → Rome."
+  },
+  {
+    "id": "jeroboam_wife_shiloh",
+    "name": "Jeroboam’s Wife to Shiloh",
+    "aliases": [
+      "Jeroboam",
+      "Jeroboam’s wife",
+      "wife of Jeroboam",
+      "Ahijah",
+      "Ahijah the prophet"
+    ],
+    "scriptureRefs": ["1 Kings 14:1–18"],
+    "summary": "Jeroboam’s wife travels from Tirzah to Shiloh to consult Ahijah about their sick son, then returns to Tirzah.",
+    "stops": [
+      { "placeId": "tirzah", "note": "Departs from Jeroboam’s house in Tirzah" },
+      { "placeId": "shiloh", "note": "Meets Ahijah the prophet" },
+      { "placeId": "tirzah", "note": "Returns to Tirzah" }
+    ],
+    "pathHints": "Short highland round trip: Tirzah → Shiloh → Tirzah."
   }
 ]

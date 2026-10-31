@@ -313,7 +313,8 @@ main {
 }
 
 .then-map,
-.map-embed {
+.map-embed,
+.atlas-plate {
   height: 320px;
   min-height: 320px;
   width: 100%;
@@ -321,6 +322,20 @@ main {
   overflow: hidden;
   border: 1px solid var(--line);
   background: #d7c4a1;
+}
+
+.atlas-plate {
+  margin-bottom: 8px;
+  background: #f7f1e4;
+  overflow: auto;
+}
+
+.atlas-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  object-fit: contain;
 }
 
 .then-map iframe,

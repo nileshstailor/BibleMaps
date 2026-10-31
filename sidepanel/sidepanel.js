@@ -23,6 +23,8 @@
     kingdomsToggle: document.getElementById("kingdomsToggle"),
     kingdomLegend: document.getElementById("kingdomLegend"),
     atlasSelect: document.getElementById("atlasSelect"),
+    atlasPlate: document.getElementById("atlasPlate"),
+    atlasPlateImg: document.getElementById("atlasPlateImg"),
   };
 
   let current = null;
@@ -389,23 +391,8 @@
     ).addTo(map);
 
     const bounds = [];
-    let atlasMeta = null;
-
-    if (atlasId && atlasCatalog?.maps) {
-      atlasMeta = atlasCatalog.maps.find((m) => m.id === atlasId) || null;
-      if (atlasMeta) {
-        const url = chrome.runtime.getURL(`media/historical/${atlasMeta.file}`);
-        const southWest = L.latLng(atlasMeta.bounds[0][0], atlasMeta.bounds[0][1]);
-        const northEast = L.latLng(atlasMeta.bounds[1][0], atlasMeta.bounds[1][1]);
-        const overlayBounds = L.latLngBounds(southWest, northEast);
-        const overlay = L.imageOverlay(url, overlayBounds, {
-          opacity: atlasMeta.opacity != null ? atlasMeta.opacity : 0.8,
-          interactive: false,
-        }).addTo(map);
-        bounds.push(overlayBounds);
-        if (!asModern) leafletAtlas = overlay;
-      }
-    }
+    // Atlas plates are shown as separate images (not Leaflet imageOverlay).
+    // Forced lat/lng georeferencing was badly wrong for these atlas frames.
 
     if (showKingdoms && kingdomsGeoJson?.features) {
       const kg = L.geoJSON(
@@ -450,7 +437,21 @@
       leafletMap = map;
       leafletMarkers = markerLayer;
     }
-    return { map, atlasMeta };
+    return { map };
+  }
+
+  function renderAtlasPlate(atlasId) {
+    if (!els.atlasPlate || !els.atlasPlateImg) return null;
+    const meta = atlasCatalog?.maps?.find((m) => m.id === atlasId) || null;
+    if (!meta) {
+      els.atlasPlate.hidden = true;
+      els.atlasPlateImg.removeAttribute("src");
+      return null;
+    }
+    els.atlasPlateImg.src = chrome.runtime.getURL(`media/historical/${meta.file}`);
+    els.atlasPlateImg.alt = meta.title;
+    els.atlasPlate.hidden = false;
+    return meta;
   }
 
   async function renderThenMap() {
@@ -460,7 +461,7 @@
       const drawKingdoms = Boolean(els.kingdomsToggle?.checked);
       if (els.kingdomLegend) els.kingdomLegend.hidden = !drawKingdoms;
 
-      // If user hasn't chosen yet, suggest a relevant atlas once.
+      // Suggest a relevant atlas plate once (shown as image, not georeferenced overlay).
       if (els.atlasSelect && !els.atlasSelect.dataset.userTouched) {
         const suggested = suggestAtlasId();
         if ([...els.atlasSelect.options].some((o) => o.value === suggested)) {
@@ -469,20 +470,22 @@
       }
 
       const atlasId = els.atlasSelect?.value || "";
-      const { atlasMeta } = await mountStreetMap(els.thenMap, points, {
+      const atlasMeta = renderAtlasPlate(atlasId);
+
+      await mountStreetMap(els.thenMap, points, {
         showKingdoms: drawKingdoms,
         drawRoute: Boolean(activeJourney),
-        atlasId,
+        atlasId: "", // never stretch atlas onto lat/lng
       });
 
       if (atlasMeta) {
         setThenHelp(
-          `${atlasMeta.title} overlay on a street map with named pins. ${atlasMeta.attribution || ""}`,
+          `${atlasMeta.title} shown as an atlas plate above; street map below keeps accurate pins. ${atlasMeta.attribution || ""}`,
           false
         );
       } else {
         setThenHelp(
-          "Street map with named pins. Choose a historical atlas overlay for period borders from your Bible Maps set.",
+          "Street map with named pins. Pick a historical atlas plate to view period borders without distorting them onto modern coordinates.",
           false
         );
       }

@@ -63,6 +63,7 @@ BibleMaps/
 - True 3D terrain / Cesium-style flythrough is explicitly out of v1.
 - Kingdom polygons are schematic teaching overlays, not a scholarly boundary dataset.
 - In-panel maps use Esri street tiles (OSM often blocks `chrome-extension://`). Yahoo Maps is discontinued; Bing/Azure Maps needs an API key. Carto and Esri are the usual free-ish tile options that work from extensions.
-- `media/historical/` holds compressed atlas overlays sourced from your local `Downloads/Bible Maps` set (Knowing the Bible / USGS topography). These are **image overlays**, not slippy offline tiles or vector borders. Keep licensing in mind if you redistribute the extension.
+- `media/historical/` holds compressed atlas **plates** from your local `Downloads/Bible Maps` set (Knowing the Bible / USGS topography). They display as reference images (not forced onto lat/lng — that georeferencing was inaccurate). Keep licensing in mind if you redistribute.
+- The side panel is static HTML/JS + local JSON — **no LLM / API tokens** are used to generate the UI.
 - bible.com class names change often; selectors are defensive but may need updates.
 - bible.com `401 /authenticate` and some React hydration messages can be site-side; after upgrading from older Bible Maps builds, **hard-refresh** the tab once so leftover `<mark>` nodes are gone (we no longer unwrap them, because that triggered React #418).
