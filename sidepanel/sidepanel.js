@@ -1,5 +1,5 @@
 /**
- * Bible Maps side panel — offline teaching map (no live tiles).
+ * Bible Maps side panel — MapLibre + offline PMTiles basemap.
  */
 (() => {
   const els = {
@@ -33,8 +33,9 @@
   let kingdomsLoadPromise = null;
   let presetsCatalog = null;
   let presetsLoadPromise = null;
-  const basemapCache = {};
-  let leafletMap = null;
+  let maplibreMap = null;
+  let markerObjs = [];
+  let pmtilesReady = null;
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -164,27 +165,6 @@
     return presetsLoadPromise;
   }
 
-  function loadBasemap(name) {
-    const key = name || "levant";
-    if (basemapCache[key]) return Promise.resolve(basemapCache[key]);
-    const file =
-      key === "mediterranean"
-        ? "coast-mediterranean.geojson"
-        : key === "near-east"
-          ? "coast-near-east.geojson"
-          : "coast-levant.geojson";
-    return fetch(chrome.runtime.getURL(`data/${file}`))
-      .then((r) => {
-        if (!r.ok) throw new Error(`${file} HTTP ${r.status}`);
-        return r.json();
-      })
-      .then((data) => {
-        if (!data?.features?.length) throw new Error(`${file} empty`);
-        basemapCache[key] = data;
-        return data;
-      });
-  }
-
   function populatePresetSelect() {
     if (!els.presetSelect || !presetsCatalog?.presets) return;
     const currentVal = els.presetSelect.value;
@@ -213,7 +193,6 @@
     if (jid === "abraham_travels") return "abraham";
     if (jid === "exodus_outline") return "exodus";
     if (jid === "jeroboam_wife_shiloh") return "divided_kingdom";
-    // Gospel-heavy page?
     const places = activePlaceMarkers || [];
     const gospelHits = places.filter((p) => (p.eras || []).includes("gospels")).length;
     if (gospelHits >= 2 && gospelHits >= places.length / 2) return "jesus";
@@ -237,7 +216,7 @@
       const empty = document.createElement("p");
       empty.className = "empty";
       empty.textContent =
-        "No gazetteer places matched yet. You can still open the regional teaching map.";
+        "No gazetteer places matched yet. You can still open the regional map.";
       els.placesPanel.appendChild(empty);
       return;
     }
@@ -294,87 +273,28 @@
     return [];
   }
 
-  function destroyLeaflet() {
-    if (leafletMap) {
+  function clearMarkers() {
+    for (const m of markerObjs) {
       try {
-        leafletMap.remove();
+        m.remove();
       } catch {
         /* ignore */
       }
     }
-    leafletMap = null;
-    if (els.teachingMap) {
-      els.teachingMap._leaflet_id = null;
-      els.teachingMap.innerHTML = "";
-    }
+    markerObjs = [];
   }
 
-  function kingdomStyle(feature) {
-    const p = feature.properties || {};
-    return {
-      color: p.color || "#4a6741",
-      weight: 1.5,
-      opacity: 0.95,
-      fillColor: p.color || "#4a6741",
-      fillOpacity: p.fillOpacity != null ? p.fillOpacity : 0.28,
-    };
-  }
-
-  function basemapStyle(feature) {
-    const kind = feature.properties?.kind;
-    if (kind === "water") {
-      return {
-        color: "#5f7f92",
-        weight: 1,
-        fillColor: "#8eacc0",
-        fillOpacity: 0.95,
-      };
-    }
-    return {
-      color: "#6e5a38",
-      weight: 1.25,
-      fillColor: "#dfc892",
-      fillOpacity: 1,
-    };
-  }
-
-  function addNamedMarkers(layerGroup, points, { drawRoute, dim }) {
-    const bounds = [];
-    const pts = (points || []).filter(
-      (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
-    );
-    if (drawRoute && pts.length > 1) {
-      const line = L.polyline(
-        pts.map((p) => [p.lat, p.lng]),
-        { color: "#a63024", weight: 3, dashArray: "7 5" }
-      ).addTo(layerGroup);
-      bounds.push(line.getBounds());
-    }
-    pts.forEach((p, i) => {
-      const m = L.circleMarker([p.lat, p.lng], {
-        radius: dim ? 4 : 7,
-        color: "#2c2416",
-        weight: 1,
-        fillColor: dim ? "#8a7a60" : i === 0 && drawRoute ? "#4a6741" : "#a63024",
-        fillOpacity: dim ? 0.55 : 0.95,
-      }).addTo(layerGroup);
-      const label = escapeHtml(p.name || "Place");
-      const detail = escapeHtml(p.note || p.modernName || "");
-      if (!dim) {
-        m.bindTooltip(label, {
-          permanent: true,
-          direction: "top",
-          offset: [0, -8],
-          className: "bm-pin-label",
-          opacity: 0.96,
-        });
-      } else {
-        m.bindTooltip(label, { direction: "top", opacity: 0.9 });
+  function destroyMap() {
+    clearMarkers();
+    if (maplibreMap) {
+      try {
+        maplibreMap.remove();
+      } catch {
+        /* ignore */
       }
-      m.bindPopup(`<strong>${label}</strong>${detail ? `<br/>${detail}` : ""}`);
-      bounds.push(L.latLngBounds([p.lat - 0.12, p.lng - 0.12], [p.lat + 0.12, p.lng + 0.12]));
-    });
-    return bounds;
+    }
+    maplibreMap = null;
+    if (els.teachingMap) els.teachingMap.innerHTML = "";
   }
 
   async function waitForMapSize(el) {
@@ -385,52 +305,38 @@
     return Boolean(el && el.clientWidth > 0);
   }
 
-  /** Tiny inline fallback if GeoJSON fetch fails. */
-  function fallbackBasemap(name) {
-    if (name === "mediterranean" || name === "near-east") {
-      return {
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            properties: { kind: "land", name: "Land" },
-            geometry: {
-              type: "Polygon",
-              coordinates: [
-                [
-                  [10, 30],
-                  [42, 30],
-                  [42, 45],
-                  [10, 45],
-                  [10, 30],
-                ],
-              ],
-            },
-          },
-        ],
-      };
-    }
-    return {
-      type: "FeatureCollection",
-      features: [
-        {
-          type: "Feature",
-          properties: { kind: "land", name: "Canaan" },
-          geometry: {
-            type: "Polygon",
-            coordinates: [
-              [
-                [34.2, 29.6],
-                [35.9, 29.6],
-                [36.1, 33.5],
-                [34.3, 33.5],
-                [34.2, 29.6],
-              ],
-            ],
-          },
-        },
-      ],
-    };
+  function ensurePmtiles() {
+    if (pmtilesReady) return pmtilesReady;
+    pmtilesReady = (async () => {
+      if (typeof maplibregl === "undefined") {
+        throw new Error("MapLibre failed to load");
+      }
+      if (typeof pmtiles === "undefined") {
+        throw new Error("PMTiles library failed to load");
+      }
+      maplibregl.workerUrl = chrome.runtime.getURL(
+        "lib/maplibre/maplibre-gl-csp-worker.js"
+      );
+      const protocol = new pmtiles.Protocol();
+      maplibregl.addProtocol("pmtiles", protocol.tile);
+
+      // Load full archive into memory so chrome-extension:// Range is not required.
+      const tileUrl = chrome.runtime.getURL("media/tiles/bible-region.pmtiles");
+      const ab = await fetch(tileUrl).then((r) => {
+        if (!r.ok) throw new Error(`PMTiles HTTP ${r.status}`);
+        return r.arrayBuffer();
+      });
+      const file = new File([ab], "bible-region.pmtiles", {
+        type: "application/octet-stream",
+      });
+      const archive = new pmtiles.PMTiles(new pmtiles.FileSource(file));
+      protocol.add(archive);
+      return true;
+    })().catch((err) => {
+      pmtilesReady = null;
+      throw err;
+    });
+    return pmtilesReady;
   }
 
   function filterPeriodPlaces(places, placeEras, focusIds) {
@@ -453,7 +359,7 @@
       }
       if (els.referencePlateNote) {
         els.referencePlateNote.textContent =
-          "No bundled plate for this era — the interactive map above is the teaching layer.";
+          "No bundled plate for this era — the interactive map above is the basemap.";
       }
       return;
     }
@@ -462,15 +368,72 @@
     els.referencePlateImg.hidden = false;
     if (els.referencePlateNote) {
       els.referencePlateNote.textContent =
-        "Static reference art (not georeferenced). Pins on the map above use gazetteer coordinates.";
+        "Static reference art (not georeferenced). Pins use gazetteer coordinates on the MapLibre basemap.";
+    }
+  }
+
+  function placesToGeoJSON(points, { dim }) {
+    return {
+      type: "FeatureCollection",
+      features: (points || [])
+        .filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng))
+        .map((p, i) => ({
+          type: "Feature",
+          properties: {
+            name: p.name || "Place",
+            detail: p.note || p.modernName || "",
+            dim: Boolean(dim),
+            focus: !dim,
+            order: i,
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [p.lng, p.lat],
+          },
+        })),
+    };
+  }
+
+  function routeToGeoJSON(stops) {
+    const coords = (stops || [])
+      .filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lng))
+      .map((s) => [s.lng, s.lat]);
+    if (coords.length < 2) {
+      return { type: "FeatureCollection", features: [] };
+    }
+    return {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: {},
+          geometry: { type: "LineString", coordinates: coords },
+        },
+      ],
+    };
+  }
+
+  function addDomMarkers(map, points, { dim }) {
+    for (const p of points || []) {
+      if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
+      const el = document.createElement("div");
+      el.className = dim ? "bm-marker bm-marker-dim" : "bm-marker";
+      el.innerHTML = `<span class="bm-marker-dot"></span><span class="bm-marker-label">${escapeHtml(
+        p.name || "Place"
+      )}</span>`;
+      el.title = p.modernName || p.note || p.name || "";
+      const marker = new maplibregl.Marker({ element: el, anchor: "bottom" })
+        .setLngLat([p.lng, p.lat])
+        .addTo(map);
+      markerObjs.push(marker);
     }
   }
 
   async function mountTeachingMap() {
-    if (typeof L === "undefined") throw new Error("Leaflet failed to load");
+    if (typeof maplibregl === "undefined") throw new Error("MapLibre failed to load");
     if (!els.teachingMap) throw new Error("Map container missing");
 
-    await Promise.all([loadPresets(), loadAllPlaces(), loadKingdoms()]);
+    await Promise.all([loadPresets(), loadAllPlaces(), loadKingdoms(), ensurePmtiles()]);
     await waitForMapSize(els.teachingMap);
 
     if (els.presetSelect && !els.presetSelect.dataset.userTouched) {
@@ -499,63 +462,41 @@
     }
     const showKingdoms =
       Boolean(els.kingdomsToggle?.checked) && basemapName === "levant";
-    if (els.kingdomLegend) {
-      els.kingdomLegend.hidden = !showKingdoms;
-    }
+    if (els.kingdomLegend) els.kingdomLegend.hidden = !showKingdoms;
 
-    destroyLeaflet();
+    destroyMap();
     updateReferencePlate(preset);
 
-    const map = L.map(els.teachingMap, {
-      zoomControl: true,
-      attributionControl: false,
-    });
-    leafletMap = map;
-    // Set a view immediately so SVG paths project before async work finishes.
-    map.setView([31.7, 35.1], 8);
-
-    let basemap;
-    try {
-      basemap = await loadBasemap(basemapName);
-    } catch (err) {
-      console.warn("Bible Maps: basemap fetch failed, using fallback", err);
-      basemap = fallbackBasemap(basemapName);
-    }
-    if (!basemap?.features?.length) basemap = fallbackBasemap(basemapName);
-
-    const basemapLayer = L.geoJSON(basemap, {
-      style: basemapStyle,
-      interactive: false,
-    }).addTo(map);
-
-    const bounds = [];
-    try {
-      bounds.push(basemapLayer.getBounds());
-    } catch {
-      /* ignore */
-    }
-
-    if (showKingdoms && kingdomsGeoJson?.features) {
-      try {
-        const kg = L.geoJSON(
-          { type: "FeatureCollection", features: kingdomsGeoJson.features },
-          {
-            style: kingdomStyle,
-            onEachFeature(feature, layer) {
-              const p = feature.properties || {};
-              layer.bindPopup(
-                `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
-                  p.eraLabel || ""
-                )}`
-              );
-            },
-          }
-        ).addTo(map);
-        bounds.push(kg.getBounds());
-      } catch (err) {
-        console.warn("Bible Maps: kingdoms overlay failed", err);
+    const style = await fetch(chrome.runtime.getURL("media/tiles/style.json")).then(
+      (r) => {
+        if (!r.ok) throw new Error(`style.json HTTP ${r.status}`);
+        return r.json();
       }
-    }
+    );
+
+    const map = new maplibregl.Map({
+      container: els.teachingMap,
+      style,
+      center: [35.1, 31.7],
+      zoom: 6.5,
+      maxZoom: 8,
+      attributionControl: true,
+    });
+    maplibreMap = map;
+    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+
+    await new Promise((resolve, reject) => {
+      const onError = (e) => {
+        map.off("load", onLoad);
+        reject(e?.error || e || new Error("MapLibre load failed"));
+      };
+      const onLoad = () => {
+        map.off("error", onError);
+        resolve();
+      };
+      map.once("load", onLoad);
+      map.once("error", onError);
+    });
 
     const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
     const gazetteer = Array.isArray(allPlaces) ? allPlaces : [];
@@ -581,54 +522,113 @@
     const contextPts = periodPlaces.filter((p) => !highlightIds.has(p.id));
     const highlightPts = periodPlaces.filter((p) => highlightIds.has(p.id));
     for (const s of routePts) {
-      if (!highlightPts.some((h) => h.placeId === s.placeId || h.id === s.placeId || h.name === s.name)) {
+      if (
+        !highlightPts.some(
+          (h) => h.placeId === s.placeId || h.id === s.placeId || h.name === s.name
+        )
+      ) {
         highlightPts.push(s);
       }
     }
-    // If nothing matched yet, still show period towns so the map isn't empty.
-    const focusPts = highlightPts.length
-      ? highlightPts
-      : periodPlaces.slice(0, 40);
+    const focusPts = highlightPts.length ? highlightPts : periodPlaces.slice(0, 40);
 
-    const markerLayer = L.layerGroup().addTo(map);
-    bounds.push(...addNamedMarkers(markerLayer, contextPts, { drawRoute: false, dim: true }));
-    bounds.push(
-      ...addNamedMarkers(markerLayer, focusPts, {
-        drawRoute: Boolean(activeJourney) && routePts.length > 1,
-        dim: false,
-      })
-    );
+    if (showKingdoms && kingdomsGeoJson?.features) {
+      map.addSource("kingdoms", { type: "geojson", data: kingdomsGeoJson });
+      map.addLayer({
+        id: "kingdoms-fill",
+        type: "fill",
+        source: "kingdoms",
+        paint: {
+          "fill-color": ["coalesce", ["get", "color"], "#4a6741"],
+          "fill-opacity": ["coalesce", ["get", "fillOpacity"], 0.28],
+        },
+      });
+      map.addLayer({
+        id: "kingdoms-line",
+        type: "line",
+        source: "kingdoms",
+        paint: {
+          "line-color": ["coalesce", ["get", "color"], "#4a6741"],
+          "line-width": 1.5,
+        },
+      });
+    }
+
+    map.addSource("route", {
+      type: "geojson",
+      data: routeToGeoJSON(routePts),
+    });
+    map.addLayer({
+      id: "route-line",
+      type: "line",
+      source: "route",
+      paint: {
+        "line-color": "#a63024",
+        "line-width": 3,
+        "line-dasharray": [2, 1.5],
+      },
+    });
+
+    // Circle layers as backup; DOM markers carry readable labels.
+    map.addSource("towns-dim", {
+      type: "geojson",
+      data: placesToGeoJSON(contextPts, { dim: true }),
+    });
+    map.addSource("towns-focus", {
+      type: "geojson",
+      data: placesToGeoJSON(focusPts, { dim: false }),
+    });
+    map.addLayer({
+      id: "towns-dim-circle",
+      type: "circle",
+      source: "towns-dim",
+      paint: {
+        "circle-radius": 4,
+        "circle-color": "#8a7a60",
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#2c2416",
+        "circle-opacity": 0.65,
+      },
+    });
+    map.addLayer({
+      id: "towns-focus-circle",
+      type: "circle",
+      source: "towns-focus",
+      paint: {
+        "circle-radius": 7,
+        "circle-color": "#a63024",
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#2c2416",
+      },
+    });
+
+    addDomMarkers(map, contextPts.slice(0, 25), { dim: true });
+    addDomMarkers(map, focusPts, { dim: false });
 
     if (preset?.bounds?.length === 2) {
       const [[south, west], [north, east]] = preset.bounds;
       map.fitBounds(
         [
-          [south, west],
-          [north, east],
+          [west, south],
+          [east, north],
         ],
-        { padding: [16, 16], maxZoom: 10 }
+        { padding: 28, maxZoom: 8, duration: 0 }
       );
-    } else if (bounds.length) {
-      let merged = bounds[0];
-      for (let i = 1; i < bounds.length; i += 1) {
-        try {
-          merged = merged.extend(bounds[i]);
-        } catch {
-          /* ignore */
-        }
-      }
-      map.fitBounds(merged.pad(0.08), { maxZoom: 10 });
+    } else if (focusPts.length) {
+      const bounds = new maplibregl.LngLatBounds();
+      for (const p of focusPts) bounds.extend([p.lng, p.lat]);
+      map.fitBounds(bounds, { padding: 40, maxZoom: 8, duration: 0 });
     }
 
-    map.invalidateSize();
-    setTimeout(() => map.invalidateSize(), 50);
-    setTimeout(() => map.invalidateSize(), 200);
+    map.resize();
+    setTimeout(() => map.resize(), 80);
+    setTimeout(() => map.resize(), 250);
 
     const townCount = contextPts.length + focusPts.length;
     setMapHelp(
-      `${preset?.title || "Teaching map"} — ${townCount} period town${
+      `${preset?.title || "Map"} — offline MapLibre / OSM (${townCount} period town${
         townCount === 1 ? "" : "s"
-      } on offline vector map.`,
+      }).`,
       false
     );
   }
@@ -639,7 +639,7 @@
     } catch (err) {
       console.error(err);
       setMapHelp(`Map unavailable (${err?.message || err}). Reload the extension.`, true);
-      if (els.teachingMap && !leafletMap) {
+      if (els.teachingMap && !maplibreMap) {
         els.teachingMap.innerHTML = `<p class="muted" style="padding:12px">Could not draw map: ${escapeHtml(
           String(err?.message || err)
         )}</p>`;
@@ -668,7 +668,7 @@
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Map";
-    els.mapSubtitle.textContent = "Period towns on an offline teaching map";
+    els.mapSubtitle.textContent = "Offline MapLibre basemap + period towns";
     setMapsLinkFromPoints(places || []);
     els.stopList.innerHTML = "";
     if (places?.length) {
@@ -763,7 +763,7 @@
   els.closeMapBtn.addEventListener("click", () => {
     els.mapDock.hidden = true;
     activeJourney = null;
-    destroyLeaflet();
+    destroyMap();
   });
 
   els.kingdomsToggle?.addEventListener("change", () => {

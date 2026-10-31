@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bible Maps</title>
-    <link rel="stylesheet" href="../lib/leaflet.css" />
+    <link rel="stylesheet" href="../lib/maplibre/maplibre-gl.css" />
     <link rel="stylesheet" href="sidepanel.css" />
   </head>
   <body>
@@ -13,7 +13,7 @@
         <img src="../icons/icon48.png" width="28" height="28" alt="" />
         <div>
           <h1>Bible Maps</h1>
-          <p class="tagline">Places &amp; journeys on a teaching map</p>
+          <p class="tagline">Places &amp; journeys on an offline map</p>
         </div>
       </div>
       <button id="refreshBtn" class="ghost-btn" type="button" title="Rescan page">
@@ -62,9 +62,9 @@
         </div>
       </div>
 
-      <div id="teachingMap" class="teaching-map" aria-label="Teaching map"></div>
+      <div id="teachingMap" class="teaching-map" aria-label="Offline map"></div>
       <p class="muted small" id="mapHelp">
-        Offline teaching map — period towns from the gazetteer. No live map tiles.
+        Offline MapLibre basemap (OSM / Protomaps). No live tile servers.
       </p>
 
       <a id="mapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
@@ -80,10 +80,11 @@
     </section>
 
     <footer class="app-footer">
-      Curated gazetteer · offline teaching map · v1.2
+      Curated gazetteer · MapLibre offline · © OpenStreetMap · v1.3
     </footer>
 
-    <script src="../lib/leaflet.js"></script>
+    <script src="../lib/maplibre/maplibre-gl-csp.js"></script>
+    <script src="../lib/maplibre/pmtiles.js"></script>
     <script src="sidepanel.js"></script>
   </body>
 </html>
