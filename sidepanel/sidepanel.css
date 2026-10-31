@@ -340,12 +340,3 @@ main {
   vertical-align: middle;
 }
 
-/* Leaflet tint for “then” mood */
-.then-map .leaflet-tile-pane {
-  filter: sepia(0.55) saturate(0.55) contrast(0.95) brightness(0.96);
-}
-
-.then-map .leaflet-container {
-  background: #cbb892;
-  font: inherit;
-}
