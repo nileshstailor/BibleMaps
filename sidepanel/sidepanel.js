@@ -18,7 +18,6 @@
     mapDock: document.getElementById("mapDock"),
     mapTitle: document.getElementById("mapTitle"),
     mapSubtitle: document.getElementById("mapSubtitle"),
-    closeMapBtn: document.getElementById("closeMapBtn"),
     presetSelect: document.getElementById("presetSelect"),
     kingdomsToggle: document.getElementById("kingdomsToggle"),
     kingdomsToggleWrap: document.getElementById("kingdomsToggleWrap"),
@@ -215,22 +214,10 @@
 
   function renderPlaces(places) {
     els.placesPanel.innerHTML = "";
-    const toolbar = document.createElement("div");
-    toolbar.className = "actions";
-    toolbar.style.marginBottom = "4px";
-    const mapBtn = document.createElement("button");
-    mapBtn.type = "button";
-    mapBtn.className = "text-btn";
-    mapBtn.textContent = "Open map";
-    mapBtn.addEventListener("click", () => openPlacesMap(places || []));
-    toolbar.appendChild(mapBtn);
-    els.placesPanel.appendChild(toolbar);
-
     if (!places?.length) {
       const empty = document.createElement("p");
       empty.className = "empty";
-      empty.textContent =
-        "No gazetteer places matched yet. You can still open the regional map.";
+      empty.textContent = "No gazetteer places matched in this chapter yet.";
       els.placesPanel.appendChild(empty);
       return;
     }
@@ -255,7 +242,7 @@
     els.journeysPanel.innerHTML = "";
     if (!journeys?.length) {
       els.journeysPanel.innerHTML =
-        '<p class="empty">No journey patterns detected. Open the map from Places.</p>';
+        '<p class="empty">No journey patterns detected in this chapter.</p>';
       return;
     }
     for (const journey of journeys) {
@@ -272,13 +259,61 @@
         <p class="notes">${escapeHtml(journey.summary || "")}</p>
         <div class="actions">
           <button class="text-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
-            Open map
+            Show on map
           </button>
         </div>
       `;
-      card.querySelector("button")?.addEventListener("click", () => openJourney(journey));
+      card.querySelector("button")?.addEventListener("click", () => showJourneyOnMap(journey));
       els.journeysPanel.appendChild(card);
     }
+  }
+
+  function fillStopList(points, emptyText) {
+    els.stopList.innerHTML = "";
+    if (!points?.length) {
+      const li = document.createElement("li");
+      li.textContent = emptyText || "No places matched in this chapter yet.";
+      els.stopList.appendChild(li);
+      return;
+    }
+    points.forEach((p) => {
+      const li = document.createElement("li");
+      li.textContent = `${p.name}${
+        p.note || p.modernName ? ` — ${p.note || p.modernName}` : ""
+      }`;
+      els.stopList.appendChild(li);
+    });
+  }
+
+  /** Keep the always-visible map chrome in sync with chapter places. */
+  function syncPlacesMapChrome(places) {
+    activeJourney = null;
+    activePlaceMarkers = places || [];
+    const chap = chapterLabel(current);
+    els.mapTitle.textContent = "Map";
+    els.mapSubtitle.textContent = chap ? `Places in ${chap}` : "Places in this chapter";
+    // Places: region / single-pin link only — no walking directions.
+    setPlacesMapsLink(places || []);
+    fillStopList(places || []);
+  }
+
+  function showJourneyOnMap(journey) {
+    activeJourney = journey;
+    activePlaceMarkers = current?.places || [];
+    els.mapTitle.textContent = journey.name;
+    els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
+    const stops = journey.stops || [];
+    setJourneyMapsLink(stops);
+    els.stopList.innerHTML = "";
+    stops.forEach((stop) => {
+      const li = document.createElement("li");
+      li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
+      if (journey.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
+      li.title = stop.modernName || "";
+      els.stopList.appendChild(li);
+    });
+    if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
+    requestAnimationFrame(() => renderMap());
   }
 
   function collectRoutePoints() {
@@ -766,68 +801,33 @@
     }
   }
 
-  function setMapsLinkFromPoints(pts) {
+  /** Chapter places: pin or region view — never a multi-stop walking route. */
+  function setPlacesMapsLink(pts) {
     if (pts.length === 1) {
       els.mapsLink.href = googlePlaceUrl(pts[0]);
       els.mapsLink.textContent = "Open in Google Maps";
+    } else {
+      els.mapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
+      els.mapsLink.textContent = "Open region in Google Maps";
+    }
+    delete els.mapsLink.dataset.polyline;
+  }
+
+  /** Journey stops: walking directions (+ shift-click polyline search). */
+  function setJourneyMapsLink(stops) {
+    if (stops.length === 1) {
+      els.mapsLink.href = googlePlaceUrl(stops[0]);
+      els.mapsLink.textContent = "Open in Google Maps";
       delete els.mapsLink.dataset.polyline;
-    } else if (pts.length > 1) {
-      els.mapsLink.href = googleJourneyUrl(pts);
+    } else if (stops.length > 1) {
+      els.mapsLink.href = googleJourneyUrl(stops);
       els.mapsLink.textContent = "Open in Google Maps (walking)";
-      els.mapsLink.dataset.polyline = googlePolylineSearchUrl(pts);
+      els.mapsLink.dataset.polyline = googlePolylineSearchUrl(stops);
     } else {
       els.mapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
       els.mapsLink.textContent = "Open region in Google Maps";
       delete els.mapsLink.dataset.polyline;
     }
-  }
-
-  function openPlacesMap(places) {
-    activeJourney = null;
-    activePlaceMarkers = places || [];
-    els.mapDock.hidden = false;
-    els.mapTitle.textContent = "Map";
-    els.mapSubtitle.textContent = chapterLabel(current)
-      ? `Places in ${chapterLabel(current)}`
-      : "Places in this chapter";
-    setMapsLinkFromPoints(places || []);
-    els.stopList.innerHTML = "";
-    if (places?.length) {
-      places.forEach((p) => {
-        const li = document.createElement("li");
-        li.textContent = `${p.name}${p.modernName ? ` — ${p.modernName}` : ""}`;
-        els.stopList.appendChild(li);
-      });
-    } else {
-      const li = document.createElement("li");
-      li.textContent = "No places matched in this chapter yet.";
-      els.stopList.appendChild(li);
-    }
-    if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
-    requestAnimationFrame(() => renderMap());
-  }
-
-  function openJourney(journey) {
-    activeJourney = journey;
-    activePlaceMarkers = current?.places || [];
-    els.mapDock.hidden = false;
-    els.mapTitle.textContent = journey.name;
-    els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
-
-    const stops = journey.stops || [];
-    setMapsLinkFromPoints(stops);
-
-    els.stopList.innerHTML = "";
-    stops.forEach((stop) => {
-      const li = document.createElement("li");
-      li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
-      if (journey.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
-      li.title = stop.modernName || "";
-      els.stopList.appendChild(li);
-    });
-
-    if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
-    requestAnimationFrame(() => renderMap());
   }
 
   function chapterLabel(payload) {
@@ -923,10 +923,10 @@
     current = payload;
     if (!payload) {
       setStatus("Open a bible.com passage, then click Refresh.");
-      activePlaceMarkers = [];
-      activeJourney = null;
       renderPlaces([]);
       renderJourneys([]);
+      syncPlacesMapChrome([]);
+      requestAnimationFrame(() => renderMap());
       return;
     }
 
@@ -951,33 +951,33 @@
       }.`
     );
 
-    // Keep open map in sync with the chapter (reuse MapLibre instance; update overlays).
-    if (!els.mapDock.hidden) {
-      if (activeJourney) {
-        const still = (payload.journeys || []).find((j) => j.id === activeJourney.id);
-        if (still) {
-          activeJourney = still;
-          els.mapTitle.textContent = still.name;
-          els.mapSubtitle.textContent = (still.scriptureRefs || []).join(" · ");
-          setMapsLinkFromPoints(still.stops || []);
-        } else {
-          activeJourney = null;
-          els.mapTitle.textContent = "Map";
-          els.mapSubtitle.textContent = chap
-            ? `Places in ${chap}`
-            : "Places in this chapter";
-          setMapsLinkFromPoints(payload.places || []);
-        }
+    // Always-visible map: keep chrome + overlays in sync (reuse MapLibre instance).
+    if (activeJourney) {
+      const still = (payload.journeys || []).find((j) => j.id === activeJourney.id);
+      if (still) {
+        // Refresh journey chrome without remounting the basemap unless overlays change.
+        activeJourney = still;
+        els.mapTitle.textContent = still.name;
+        els.mapSubtitle.textContent = (still.scriptureRefs || []).join(" · ");
+        setJourneyMapsLink(still.stops || []);
+        els.stopList.innerHTML = "";
+        (still.stops || []).forEach((stop) => {
+          const li = document.createElement("li");
+          li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
+          if (still.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
+          li.title = stop.modernName || "";
+          els.stopList.appendChild(li);
+        });
       } else {
-        els.mapSubtitle.textContent = chap
-          ? `Places in ${chap}`
-          : "Places in this chapter";
-        setMapsLinkFromPoints(payload.places || []);
+        syncPlacesMapChrome(payload.places || []);
       }
-      const fp = mapFingerprint();
-      if (fp !== lastMapFingerprint) {
-        requestAnimationFrame(() => renderMap());
-      }
+    } else {
+      syncPlacesMapChrome(payload.places || []);
+    }
+
+    const fp = mapFingerprint();
+    if (fp !== lastMapFingerprint || !maplibreMap) {
+      requestAnimationFrame(() => renderMap());
     }
   }
 
@@ -1025,20 +1025,15 @@
   els.refreshBtn.addEventListener("click", () =>
     refreshFromBackground({ forceRescan: true })
   );
-  els.closeMapBtn.addEventListener("click", () => {
-    els.mapDock.hidden = true;
-    activeJourney = null;
-    destroyMap();
-  });
 
   els.kingdomsToggle?.addEventListener("change", () => {
     if (els.kingdomsToggle) els.kingdomsToggle.dataset.userTouched = "1";
-    if (!els.mapDock.hidden) renderMap();
+    renderMap();
   });
   els.presetSelect?.addEventListener("change", () => {
     if (els.presetSelect) els.presetSelect.dataset.userTouched = "1";
     // Preset only changes framing/overlays — keep the same basemap instance.
-    if (!els.mapDock.hidden) renderMap();
+    renderMap();
   });
 
   els.mapsLink.addEventListener("click", (e) => {
@@ -1046,6 +1041,7 @@
       e.preventDefault();
       return;
     }
+    // Shift-click polyline search only applies to journey walking links.
     if (e.shiftKey && els.mapsLink.dataset.polyline) {
       e.preventDefault();
       window.open(els.mapsLink.dataset.polyline, "_blank", "noopener");
@@ -1061,6 +1057,9 @@
   loadKingdoms();
   loadPresets();
   loadAllPlaces();
+  // Mount the always-visible map immediately (pins update when detection arrives).
+  syncPlacesMapChrome([]);
+  requestAnimationFrame(() => renderMap());
   refreshFromBackground({ forceRescan: true });
   setTimeout(() => refreshFromBackground({ forceRescan: true }), 500);
   setTimeout(() => refreshFromBackground({ forceRescan: true }), 1500);

@@ -2,8 +2,8 @@
 
 Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 
-- **Places** → Open in Google Maps (modern streets) + offline **MapLibre** map with period towns
-- **Journeys** → Same offline map (era preset + route) + walking directions link in Google Maps
+- **Places** → Offline **MapLibre** map (always visible) with period towns; per-place Google Maps links for modern streets
+- **Journeys** → Same offline map (era preset + route) + optional walking directions link in Google Maps
 
 No LLM and **no live map-tile servers**. The in-panel basemap is [MapLibre GL JS](https://maplibre.org/projects/gl-js/) reading a bundled regional [PMTiles](https://protomaps.com/) extract (OpenStreetMap / Protomaps, ODbL).
 
@@ -20,9 +20,9 @@ No build step is required for day-to-day use. MapLibre and PMTiles are vendored 
 
 1. Open e.g. [1 Kings 14](https://www.bible.com/bible/116/1KI.14.NLT) or [Acts 13](https://www.bible.com/bible/111/ACT.13.NIV)
 2. Wait for light-green place highlights
-3. Open the side panel → **Open map**
+3. Open the side panel — the offline map is already loaded at the top
 4. Confirm land/roads (not a solid blue box), pins, era preset switching, optional kingdom outlines
-5. **Open in Google Maps** still works for modern streets
+5. Per-place **Open in Google Maps** still works for modern streets; journeys can open walking directions
 
 After pulling updates: **Reload** the extension on `chrome://extensions`.
 

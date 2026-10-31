@@ -25,27 +25,12 @@
       Open a bible.com passage to detect places.
     </section>
 
-    <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
-        Places
-      </button>
-      <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
-        Journeys
-      </button>
-    </nav>
-
-    <main>
-      <section id="placesPanel" class="panel active" role="tabpanel"></section>
-      <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
-    </main>
-
-    <section class="map-dock" id="mapDock" hidden>
+    <section class="map-dock" id="mapDock">
       <div class="map-dock-header">
         <div>
           <h2 id="mapTitle">Map</h2>
-          <p id="mapSubtitle" class="muted"></p>
+          <p id="mapSubtitle" class="muted">Places in this chapter</p>
         </div>
-        <button id="closeMapBtn" class="ghost-btn" type="button">Close</button>
       </div>
 
       <div class="map-toolbar">
@@ -79,8 +64,22 @@
       </details>
     </section>
 
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+        Places
+      </button>
+      <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+        Journeys
+      </button>
+    </nav>
+
+    <main>
+      <section id="placesPanel" class="panel active" role="tabpanel"></section>
+      <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
+    </main>
+
     <footer class="app-footer">
-      Curated gazetteer · MapLibre offline · © OpenStreetMap · v1.3
+      Curated gazetteer · MapLibre offline · © OpenStreetMap · v1.3.1
     </footer>
 
     <script src="../lib/maplibre/maplibre-gl-csp.js"></script>
