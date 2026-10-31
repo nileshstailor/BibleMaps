@@ -32,10 +32,11 @@
   let activePlaceMarkers = [];
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
-  let thenBasemap = "google"; // google | overlay
+  let thenBasemap = "google"; // google (pins) | overlay (kingdoms)
   let leafletMap = null;
   let leafletMarkers = null;
   let leafletKingdoms = null;
+  let modernLeafletMap = null;
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -238,20 +239,30 @@
     ></iframe>`;
   }
 
-  function destroyLeaflet() {
-    if (leafletMap) {
+  function destroyLeafletOn(container, mapRef) {
+    if (mapRef) {
       try {
-        leafletMap.remove();
+        mapRef.remove();
       } catch {
         /* ignore */
       }
     }
+    if (container) {
+      container._leaflet_id = null;
+      container.innerHTML = "";
+    }
+  }
+
+  function destroyLeaflet() {
+    destroyLeafletOn(els.thenMap, leafletMap);
     leafletMap = null;
     leafletMarkers = null;
     leafletKingdoms = null;
-    if (els.thenMap) {
-      els.thenMap._leaflet_id = null;
-    }
+  }
+
+  function destroyModernLeaflet() {
+    destroyLeafletOn(els.modernEmbed, modernLeafletMap);
+    modernLeafletMap = null;
   }
 
   function kingdomStyle(feature) {
@@ -265,15 +276,50 @@
     };
   }
 
-  async function mountLeafletOverlay(points) {
-    await loadKingdoms();
-    if (typeof L === "undefined") {
-      throw new Error("Leaflet failed to load");
+  function addNamedMarkers(map, layerGroup, points, { drawRoute }) {
+    const bounds = [];
+    const pts = (points || []).filter(
+      (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
+    );
+    if (drawRoute && pts.length > 1) {
+      const line = L.polyline(
+        pts.map((p) => [p.lat, p.lng]),
+        { color: "#a63024", weight: 3, dashArray: "7 5" }
+      ).addTo(layerGroup);
+      bounds.push(line.getBounds());
     }
+    pts.forEach((p, i) => {
+      const m = L.circleMarker([p.lat, p.lng], {
+        radius: 7,
+        color: "#2c2416",
+        weight: 1,
+        fillColor: i === 0 ? "#4a6741" : "#a63024",
+        fillOpacity: 0.95,
+      }).addTo(layerGroup);
+      const label = escapeHtml(p.name || "Place");
+      const detail = escapeHtml(p.note || p.modernName || "");
+      m.bindTooltip(label, {
+        permanent: true,
+        direction: "top",
+        offset: [0, -8],
+        className: "bm-pin-label",
+        opacity: 0.96,
+      });
+      m.bindPopup(`<strong>${label}</strong>${detail ? `<br/>${detail}` : ""}`);
+      bounds.push(L.latLng(p.lat, p.lng).toBounds(8000));
+    });
+    return bounds;
+  }
 
-    destroyLeaflet();
-    els.thenMap.innerHTML = "";
+  async function mountStreetMap(container, points, options = {}) {
+    const { showKingdoms = false, drawRoute = false, asModern = false } = options;
+    if (typeof L === "undefined") throw new Error("Leaflet failed to load");
+    if (showKingdoms) await loadKingdoms();
 
+    if (asModern) destroyModernLeaflet();
+    else destroyLeaflet();
+
+    container.innerHTML = "";
     if (window.L?.Icon?.Default) {
       const iconBase = chrome.runtime.getURL("lib/images/");
       L.Icon.Default.mergeOptions({
@@ -283,23 +329,17 @@
       });
     }
 
-    leafletMap = L.map(els.thenMap, { zoomControl: true });
-    // Esri street tiles usually work from extension pages (OSM often blocks them).
+    const map = L.map(container, { zoomControl: true });
     L.tileLayer(
       "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-      {
-        attribution: "Tiles &copy; Esri",
-        maxZoom: 19,
-      }
-    ).addTo(leafletMap);
+      { attribution: "Tiles &copy; Esri", maxZoom: 19 }
+    ).addTo(map);
 
-    leafletMarkers = L.layerGroup().addTo(leafletMap);
-    const bounds = [];
+    const markerLayer = L.layerGroup().addTo(map);
+    const bounds = addNamedMarkers(map, markerLayer, points, { drawRoute });
 
-    const drawKingdoms = Boolean(els.kingdomsToggle?.checked);
-    if (els.kingdomLegend) els.kingdomLegend.hidden = !drawKingdoms;
-    if (drawKingdoms && kingdomsGeoJson?.features) {
-      leafletKingdoms = L.geoJSON(
+    if (showKingdoms && kingdomsGeoJson?.features) {
+      const kg = L.geoJSON(
         { type: "FeatureCollection", features: kingdomsGeoJson.features },
         {
           style: kingdomStyle,
@@ -312,91 +352,80 @@
             );
           },
         }
-      ).addTo(leafletMap);
+      ).addTo(map);
       try {
-        bounds.push(leafletKingdoms.getBounds());
+        bounds.push(kg.getBounds());
       } catch {
         /* ignore */
       }
+      if (!asModern) leafletKingdoms = kg;
     }
-
-    const pts = (points || []).filter(
-      (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
-    );
-    if (pts.length > 1 && activeJourney) {
-      const line = L.polyline(
-        pts.map((p) => [p.lat, p.lng]),
-        { color: "#a63024", weight: 3, dashArray: "7 5" }
-      ).addTo(leafletMarkers);
-      bounds.push(line.getBounds());
-    }
-    pts.forEach((p, i) => {
-      const m = L.circleMarker([p.lat, p.lng], {
-        radius: 6,
-        color: "#2c2416",
-        weight: 1,
-        fillColor: i === 0 ? "#4a6741" : "#a63024",
-        fillOpacity: 0.95,
-      }).addTo(leafletMarkers);
-      m.bindPopup(
-        `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
-          p.note || p.modernName || ""
-        )}`
-      );
-      bounds.push(L.latLng(p.lat, p.lng).toBounds(8000));
-    });
 
     if (bounds.length) {
       let merged = bounds[0];
       for (let i = 1; i < bounds.length; i += 1) merged = merged.extend(bounds[i]);
-      leafletMap.fitBounds(merged.pad(0.15));
+      map.fitBounds(merged.pad(0.15));
     } else {
-      leafletMap.setView([31.7, 35.1], 8);
+      map.setView([31.7, 35.1], 8);
     }
 
-    setTimeout(() => leafletMap?.invalidateSize(), 80);
-    setTimeout(() => leafletMap?.invalidateSize(), 250);
+    setTimeout(() => map.invalidateSize(), 80);
+    setTimeout(() => map.invalidateSize(), 250);
+
+    if (asModern) {
+      modernLeafletMap = map;
+    } else {
+      leafletMap = map;
+      leafletMarkers = markerLayer;
+    }
+    return map;
   }
 
   async function renderThenMap() {
     try {
       const points = collectPoints();
       const isOverlay = thenBasemap === "overlay";
+      const drawKingdoms = isOverlay && Boolean(els.kingdomsToggle?.checked);
 
       els.basemapGoogle?.classList.toggle("active", !isOverlay);
       els.basemapOverlay?.classList.toggle("active", isOverlay);
       if (els.kingdomToggleWrap) els.kingdomToggleWrap.hidden = !isOverlay;
-      if (els.kingdomLegend) {
-        els.kingdomLegend.hidden = !(isOverlay && els.kingdomsToggle?.checked);
-      }
+      if (els.kingdomLegend) els.kingdomLegend.hidden = !drawKingdoms;
 
-      if (!isOverlay) {
-        destroyLeaflet();
-        mountGoogleEmbed(els.thenMap, points, points.length > 3 ? 7 : 9);
-        setThenHelp(
-          "Embedded Google Map (no API key). Switch to Kingdoms for schematic borders on a street map.",
-          false
-        );
-        return;
-      }
-
-      await mountLeafletOverlay(points);
+      await mountStreetMap(els.thenMap, points, {
+        showKingdoms: drawKingdoms,
+        drawRoute: Boolean(activeJourney),
+      });
       setThenHelp(
-        "Esri street map with schematic kingdom outlines (teaching approximations). If tiles fail to load, use the Google basemap tab.",
+        isOverlay
+          ? "Street map with named pins and schematic kingdom outlines (approximate)."
+          : "Street map with named balloons on each place. Free Google embeds can’t label many pins — use Open in Google Maps for Google’s app.",
         false
       );
     } catch (err) {
       console.error(err);
-      // Fall back to Google embed if Leaflet/tiles fail.
       destroyLeaflet();
       mountGoogleEmbed(els.thenMap, collectPoints(), 8);
       setThenHelp(
-        `Kingdom overlay unavailable (${err?.message || err}). Showing Google embed instead.`,
+        `Labeled map unavailable (${err?.message || err}). Falling back to a basic Google embed.`,
         true
       );
-      thenBasemap = "google";
-      els.basemapGoogle?.classList.add("active");
-      els.basemapOverlay?.classList.remove("active");
+    }
+  }
+
+  async function renderModernEmbed(points) {
+    if (!els.modernEmbed) return;
+    els.modernEmbed.hidden = false;
+    try {
+      await mountStreetMap(els.modernEmbed, points, {
+        showKingdoms: false,
+        drawRoute: Boolean(activeJourney),
+        asModern: true,
+      });
+    } catch (err) {
+      console.warn(err);
+      destroyModernLeaflet();
+      mountGoogleEmbed(els.modernEmbed, points, 7);
     }
   }
 
@@ -405,21 +434,21 @@
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Map";
-    els.mapSubtitle.textContent = "Google embed + optional kingdom overlays";
+    els.mapSubtitle.textContent = "Named pins + optional kingdom overlays";
     const pts = places || [];
-    if (pts[0]) {
+    if (pts.length === 1) {
       els.modernMapsLink.href = googlePlaceUrl(pts[0]);
-      els.modernMapsLink.textContent = "Open first place in Google Maps";
+      els.modernMapsLink.textContent = "Open in Google Maps";
+    } else if (pts.length > 1) {
+      els.modernMapsLink.href = googleJourneyUrl(pts);
+      els.modernMapsLink.textContent = "Open places in Google Maps";
     } else {
       els.modernMapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
       els.modernMapsLink.textContent = "Open region in Google Maps";
     }
-    if (els.modernEmbed) {
-      els.modernEmbed.hidden = false;
-      mountGoogleEmbed(els.modernEmbed, pts, 8);
-    }
+    renderModernEmbed(pts);
     els.modernStops.innerHTML =
-      "<li>Use Then → Google for the embedded map, or Then → Kingdoms for borders.</li>";
+      "<li>Then → Pins shows named balloons; Then → Kingdoms adds borders.</li>";
     setMode("then");
   }
 
@@ -435,10 +464,7 @@
     els.modernMapsLink.textContent = "Open multi-stop route in Google Maps";
     els.modernMapsLink.dataset.polyline = googlePolylineSearchUrl(stops);
 
-    if (els.modernEmbed) {
-      els.modernEmbed.hidden = false;
-      mountGoogleEmbed(els.modernEmbed, stops, 6);
-    }
+    renderModernEmbed(stops);
 
     els.modernStops.innerHTML = "";
     stops.forEach((stop) => {
@@ -460,8 +486,8 @@
     els.thenPane.hidden = isModern;
     if (!isModern) {
       requestAnimationFrame(() => renderThenMap());
-    } else if (els.modernEmbed && !els.modernEmbed.hidden) {
-      // resize noop for iframe
+    } else {
+      setTimeout(() => modernLeafletMap?.invalidateSize(), 80);
     }
   }
 
@@ -534,6 +560,7 @@
     els.mapDock.hidden = true;
     activeJourney = null;
     destroyLeaflet();
+    destroyModernLeaflet();
   });
   els.modeModern.addEventListener("click", () => setMode("modern"));
   els.modeThen.addEventListener("click", () => setMode("then"));

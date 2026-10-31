@@ -152,44 +152,130 @@
     }
   }
 
-  function showToast(message) {
+  function ensureUiHost() {
     let host = document.getElementById("bible-maps-toast-host");
-    if (!host) {
-      host = document.createElement("div");
-      host.id = "bible-maps-toast-host";
-      host.style.all = "initial";
-      host.style.position = "fixed";
-      host.style.zIndex = "2147483646";
-      host.style.right = "16px";
-      host.style.bottom = "16px";
-      host.style.pointerEvents = "none";
-      const shadow = host.attachShadow({ mode: "closed" });
-      shadow.innerHTML = `
-        <style>
-          .toast {
-            max-width: min(320px, calc(100vw - 32px));
-            padding: 10px 14px;
-            border-radius: 8px;
-            background: #2c2416;
-            color: #f4e9d4;
-            font: 13px/1.35 Georgia, "Times New Roman", serif;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity 160ms ease, transform 160ms ease;
-          }
-          .toast.show { opacity: 1; transform: translateY(0); }
-        </style>
-        <div class="toast"></div>
-      `;
-      document.documentElement.appendChild(host);
-      host._bmShadow = shadow;
-    }
+    if (host?._bmShadow) return host;
+    host = document.createElement("div");
+    host.id = "bible-maps-toast-host";
+    host.style.all = "initial";
+    host.style.position = "fixed";
+    host.style.zIndex = "2147483646";
+    host.style.left = "0";
+    host.style.top = "0";
+    host.style.width = "0";
+    host.style.height = "0";
+    host.style.pointerEvents = "none";
+    const shadow = host.attachShadow({ mode: "closed" });
+    shadow.innerHTML = `
+      <style>
+        .toast {
+          position: fixed;
+          right: 16px;
+          bottom: 16px;
+          max-width: min(320px, calc(100vw - 32px));
+          padding: 10px 14px;
+          border-radius: 8px;
+          background: #2c2416;
+          color: #f4e9d4;
+          font: 13px/1.35 Georgia, "Times New Roman", serif;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+          opacity: 0;
+          transform: translateY(8px);
+          transition: opacity 160ms ease, transform 160ms ease;
+          pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .hover-chip {
+          position: fixed;
+          display: none;
+          z-index: 2147483647;
+          pointer-events: auto;
+          transform: translate(-50%, -120%);
+          padding: 6px 10px;
+          border: none;
+          border-radius: 8px;
+          background: #2f5d3a;
+          color: #f3fff5;
+          font: 12px/1.3 Georgia, "Times New Roman", serif;
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+          cursor: pointer;
+          white-space: nowrap;
+        }
+        .hover-chip:hover { filter: brightness(1.08); }
+        .hover-chip.show { display: inline-flex; align-items: center; gap: 6px; }
+        .hover-chip small { opacity: 0.85; font-size: 10px; }
+      </style>
+      <div class="toast"></div>
+      <button type="button" class="hover-chip" aria-label="Open Bible Maps side panel"></button>
+    `;
+    document.documentElement.appendChild(host);
+    host._bmShadow = shadow;
+    const chip = shadow.querySelector(".hover-chip");
+    chip.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openPanelForHit(chip._bmHit);
+    });
+    chip.addEventListener("mouseenter", () => {
+      clearTimeout(hideHoverChip._t);
+    });
+    chip.addEventListener("mouseleave", () => hideHoverChip(180));
+    return host;
+  }
+
+  function showToast(message) {
+    const host = ensureUiHost();
     const toast = host._bmShadow.querySelector(".toast");
     toast.textContent = message;
     toast.classList.add("show");
     clearTimeout(showToast._t);
     showToast._t = setTimeout(() => toast.classList.remove("show"), 2800);
+  }
+
+  function showHoverChip(hit, clientX, clientY) {
+    const host = ensureUiHost();
+    const chip = host._bmShadow.querySelector(".hover-chip");
+    chip._bmHit = hit;
+    const name = hit.place?.name || "Place";
+    chip.innerHTML = `<span>${name}</span><small>Open side panel</small>`;
+    chip.style.left = `${Math.min(window.innerWidth - 20, Math.max(20, clientX))}px`;
+    chip.style.top = `${Math.max(28, clientY)}px`;
+    chip.classList.add("show");
+    clearTimeout(hideHoverChip._t);
+  }
+
+  function hideHoverChip(delay = 0) {
+    clearTimeout(hideHoverChip._t);
+    hideHoverChip._t = setTimeout(() => {
+      const host = document.getElementById("bible-maps-toast-host");
+      host?._bmShadow?.querySelector(".hover-chip")?.classList.remove("show");
+    }, delay);
+  }
+
+  function openPanelForHit(hit) {
+    if (!hit || STATE.dead) return;
+    if (!isContextValid()) {
+      shutdown("extension context invalidated");
+      return;
+    }
+    if (STATE.highlightSupported) {
+      try {
+        CSS.highlights.set("bible-maps-places-active", new Highlight(hit.range));
+      } catch {
+        /* ignore */
+      }
+    }
+    try {
+      chrome.runtime.sendMessage(
+        { type: "BIBLE_MAPS_OPEN_PANEL" },
+        () => void chrome.runtime.lastError
+      );
+    } catch (err) {
+      shutdown(String(err?.message || err));
+      return;
+    }
+    showToast(`${hit.place?.name || "Place"} — Bible Maps panel`);
+    hideHoverChip(0);
   }
 
   function warnIfLegacyMarks() {
@@ -334,28 +420,21 @@
     if (event.target?.closest?.("#bible-maps-toast-host")) return;
     const hit = hitFromPoint(event.clientX, event.clientY);
     if (!hit) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openPanelForHit(hit);
+  }
 
-    if (STATE.highlightSupported) {
-      try {
-        CSS.highlights.set("bible-maps-places-active", new Highlight(hit.range));
-      } catch {
-        /* ignore */
-      }
-    }
-    if (!isContextValid()) {
-      shutdown("extension context invalidated");
+  function onMouseMove(event) {
+    if (STATE.dead || !STATE.hits.length) {
+      hideHoverChip(0);
       return;
     }
-    try {
-      chrome.runtime.sendMessage(
-        { type: "BIBLE_MAPS_OPEN_PANEL" },
-        () => void chrome.runtime.lastError
-      );
-    } catch (err) {
-      shutdown(String(err?.message || err));
-      return;
-    }
-    showToast(`${hit.place?.name || "Place"} — see Bible Maps panel`);
+    // Ignore when over our own chip host (chip handles its own leave).
+    if (event.target?.id === "bible-maps-toast-host") return;
+    const hit = hitFromPoint(event.clientX, event.clientY);
+    if (hit) showHoverChip(hit, event.clientX, event.clientY);
+    else hideHoverChip(120);
   }
 
   function observeDom() {
@@ -438,6 +517,7 @@
     if (STATE.dead || !STATE.ready) return;
 
     document.addEventListener("click", onClick, true);
+    document.addEventListener("mousemove", onMouseMove, { passive: true });
     observeSpaNavigation();
     const start = () => {
       if (STATE.dead) return;

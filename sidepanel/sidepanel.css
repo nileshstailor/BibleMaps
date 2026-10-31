@@ -321,7 +321,22 @@ main {
 }
 
 .then-map .leaflet-tile-pane {
-  filter: sepia(0.25) saturate(0.75) contrast(0.98);
+  filter: sepia(0.18) saturate(0.8) contrast(0.98);
+}
+
+.leaflet-tooltip.bm-pin-label {
+  background: #fffaf0;
+  border: 1px solid rgba(44, 36, 22, 0.35);
+  border-radius: 6px;
+  color: #2c2416;
+  font: 11px/1.2 Georgia, "Times New Roman", serif;
+  padding: 3px 7px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+}
+
+.leaflet-tooltip.bm-pin-label::before {
+  border-top-color: #fffaf0;
 }
 
 .stop-list {

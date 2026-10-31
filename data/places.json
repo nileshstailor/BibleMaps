@@ -54,6 +54,21 @@
     "eraNotes": "River forming much of the eastern edge of the biblical land; baptism of Jesus associated with its lower reaches."
   },
   {
+    "id": "euphrates",
+    "name": "Euphrates",
+    "aliases": [
+      "Euphrates",
+      "Euphrates River",
+      "the Euphrates",
+      "River Euphrates",
+      "the river Euphrates"
+    ],
+    "lat": 35.12,
+    "lng": 40.43,
+    "modernName": "Euphrates River",
+    "eraNotes": "Major Mesopotamian river; often marks the ideal northeastern reach of the promised land and appears in patriarchal and prophetic texts. Pin near the middle Euphrates corridor."
+  },
+  {
     "id": "jericho",
     "name": "Jericho",
     "aliases": ["Jericho"],

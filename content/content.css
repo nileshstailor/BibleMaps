@@ -1,36 +1,13 @@
-/* Non-mutating highlights (Chrome CSS Custom Highlight API) — does not break React */
+/* Non-mutating highlights (Chrome CSS Custom Highlight API) */
 ::highlight(bible-maps-places) {
-  background-color: rgba(201, 162, 39, 0.42);
+  background-color: rgba(144, 238, 144, 0.55);
   color: inherit;
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-decoration-color: #8b5a2b;
+  text-decoration-color: #3d8b3d;
 }
 
 ::highlight(bible-maps-places-active) {
-  background-color: rgba(74, 103, 65, 0.4);
-  text-decoration-color: #4a6741;
-}
-
-.bible-maps-toast {
-  position: fixed;
-  z-index: 2147483646;
-  right: 16px;
-  bottom: 16px;
-  max-width: min(320px, calc(100vw - 32px));
-  padding: 10px 14px;
-  border-radius: 8px;
-  background: #2c2416;
-  color: #f4e9d4;
-  font: 13px/1.35 Georgia, "Times New Roman", serif;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 160ms ease, transform 160ms ease;
-  pointer-events: none;
-}
-
-.bible-maps-toast.bible-maps-toast-visible {
-  opacity: 1;
-  transform: translateY(0);
+  background-color: rgba(60, 179, 113, 0.55);
+  text-decoration-color: #2e7d4f;
 }
