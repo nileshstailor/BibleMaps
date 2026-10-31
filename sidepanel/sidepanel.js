@@ -322,8 +322,8 @@
       if (typeof pmtiles === "undefined") {
         throw new Error("PMTiles library failed to load");
       }
-      maplibregl.workerUrl = chrome.runtime.getURL(
-        "lib/maplibre/maplibre-gl-csp-worker.js"
+      maplibregl.setWorkerUrl(
+        chrome.runtime.getURL("lib/maplibre/maplibre-gl-csp-worker.js")
       );
       const protocol = new pmtiles.Protocol();
       maplibregl.addProtocol("pmtiles", protocol.tile);
@@ -506,39 +506,25 @@
       map.once("error", onError);
     });
 
+    // Chapter-scoped only: matched places on this page + active journey stops.
     const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
-    const gazetteer = Array.isArray(allPlaces) ? allPlaces : [];
     const routePts = collectRoutePoints();
-    const focusIds = new Set([
-      ...routePts.map((p) => p.placeId || p.id).filter(Boolean),
-      ...matched.map((p) => p.id).filter(Boolean),
-    ]);
-
-    const periodPlaces = filterPeriodPlaces(
-      gazetteer,
-      preset?.placeEras || ["divided"],
-      [...focusIds]
-    ).map((p) => ({
-      ...p,
-      ...(matched.find((a) => a.id === p.id) || {}),
-    }));
-
-    const highlightIds = new Set([
-      ...routePts.map((p) => p.placeId || p.id).filter(Boolean),
-      ...matched.map((p) => p.id).filter(Boolean),
-    ]);
-    const contextPts = periodPlaces.filter((p) => !highlightIds.has(p.id));
-    const highlightPts = periodPlaces.filter((p) => highlightIds.has(p.id));
-    for (const s of routePts) {
-      if (
-        !highlightPts.some(
-          (h) => h.placeId === s.placeId || h.id === s.placeId || h.name === s.name
-        )
-      ) {
-        highlightPts.push(s);
-      }
+    const focusPts = [];
+    const seen = new Set();
+    for (const p of matched) {
+      if (!p?.id || seen.has(p.id)) continue;
+      if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
+      seen.add(p.id);
+      focusPts.push(p);
     }
-    const focusPts = highlightPts.length ? highlightPts : periodPlaces.slice(0, 40);
+    for (const s of routePts) {
+      const id = s.placeId || s.id || s.name;
+      if (!id || seen.has(id)) continue;
+      if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
+      seen.add(id);
+      focusPts.push(s);
+    }
+    const contextPts = [];
 
     if (showKingdoms && kingdomsGeoJson?.features) {
       map.addSource("kingdoms", { type: "geojson", data: kingdomsGeoJson });
@@ -676,7 +662,9 @@
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Map";
-    els.mapSubtitle.textContent = "Offline MapLibre basemap + period towns";
+    els.mapSubtitle.textContent = chapterLabel(current)
+      ? `Places in ${chapterLabel(current)}`
+      : "Places in this chapter";
     setMapsLinkFromPoints(places || []);
     els.stopList.innerHTML = "";
     if (places?.length) {
@@ -685,6 +673,10 @@
         li.textContent = `${p.name}${p.modernName ? ` — ${p.modernName}` : ""}`;
         els.stopList.appendChild(li);
       });
+    } else {
+      const li = document.createElement("li");
+      li.textContent = "No places matched in this chapter yet.";
+      els.stopList.appendChild(li);
     }
     if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
     requestAnimationFrame(() => renderMap());
@@ -713,43 +705,100 @@
     requestAnimationFrame(() => renderMap());
   }
 
+  function chapterLabel(payload) {
+    const url = payload?.url || "";
+    try {
+      const path = new URL(url).pathname;
+      // bible.com paths like /bible/116/1KI.14.NLT
+      const m = path.match(/\/bible\/\d+\/([^/]+)/i);
+      if (m) return m[1].replace(/\./g, " ");
+    } catch {
+      /* ignore */
+    }
+    return payload?.title || "";
+  }
+
   function applyPayload(payload) {
     current = payload;
     if (!payload) {
       setStatus("Open a bible.com passage, then click Refresh.");
+      activePlaceMarkers = [];
+      activeJourney = null;
       renderPlaces([]);
       renderJourneys([]);
       return;
     }
-    const placeCount = payload.places?.length || 0;
-    const journeyCount = payload.journeys?.length || 0;
-    setStatus(
-      `Found ${placeCount} place${placeCount === 1 ? "" : "s"} and ${journeyCount} journey${
-        journeyCount === 1 ? "" : "s"
-      }.`
-    );
+
     activePlaceMarkers = payload.places || [];
     renderPlaces(payload.places || []);
     renderJourneys(payload.journeys || []);
+
+    const placeCount = payload.places?.length || 0;
+    const journeyCount = payload.journeys?.length || 0;
+    const chap = chapterLabel(payload);
+    const chapBit = chap ? `${chap} · ` : "";
+
+    if (payload.clearing) {
+      setStatus(`${chapBit}Loading chapter…`);
+    } else {
+      setStatus(
+        `${chapBit}Found ${placeCount} place${placeCount === 1 ? "" : "s"} and ${journeyCount} journey${
+          journeyCount === 1 ? "" : "s"
+        }.`
+      );
+    }
+
+    // Keep open map in sync with the chapter (drop previous chapter's pins).
+    if (!els.mapDock.hidden) {
+      if (activeJourney) {
+        const still = (payload.journeys || []).find((j) => j.id === activeJourney.id);
+        if (still) {
+          activeJourney = still;
+          els.mapTitle.textContent = still.name;
+          els.mapSubtitle.textContent = (still.scriptureRefs || []).join(" · ");
+          setMapsLinkFromPoints(still.stops || []);
+        } else {
+          activeJourney = null;
+          els.mapTitle.textContent = "Map";
+          els.mapSubtitle.textContent = chap
+            ? `Places in ${chap}`
+            : "Places in this chapter";
+          setMapsLinkFromPoints(payload.places || []);
+        }
+      } else {
+        els.mapSubtitle.textContent = chap
+          ? `Places in ${chap}`
+          : "Places in this chapter";
+        setMapsLinkFromPoints(payload.places || []);
+      }
+      if (!payload.clearing) requestAnimationFrame(() => renderMap());
+    }
   }
 
-  async function refreshFromBackground() {
-    setStatus("Scanning…");
+  let lastPolledUrl = "";
+
+  async function refreshFromBackground({ forceRescan = false } = {}) {
     try {
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (tab?.id) {
+      const tabUrl = tab?.url || "";
+      const urlChanged = tabUrl && tabUrl !== lastPolledUrl;
+      if (urlChanged) lastPolledUrl = tabUrl;
+
+      if (tab?.id && (forceRescan || urlChanged)) {
+        setStatus("Scanning…");
         chrome.tabs.sendMessage(tab.id, { type: "BIBLE_MAPS_RESCORE" }, () => {
           void chrome.runtime.lastError;
         });
       }
+
       const response = await chrome.runtime.sendMessage({
         type: "BIBLE_MAPS_GET_DETECTION",
         tabId: tab?.id,
       });
       if (response?.ok) applyPayload(response.payload);
-      else setStatus(response?.error || "Could not read detection state.");
+      else if (forceRescan) setStatus(response?.error || "Could not read detection state.");
     } catch (err) {
-      setStatus(String(err));
+      if (forceRescan) setStatus(String(err));
     }
   }
 
@@ -767,7 +816,9 @@
     });
   });
 
-  els.refreshBtn.addEventListener("click", refreshFromBackground);
+  els.refreshBtn.addEventListener("click", () =>
+    refreshFromBackground({ forceRescan: true })
+  );
   els.closeMapBtn.addEventListener("click", () => {
     els.mapDock.hidden = true;
     activeJourney = null;
@@ -803,7 +854,12 @@
   loadKingdoms();
   loadPresets();
   loadAllPlaces();
-  refreshFromBackground();
-  setTimeout(refreshFromBackground, 500);
-  setTimeout(refreshFromBackground, 1500);
+  refreshFromBackground({ forceRescan: true });
+  setTimeout(() => refreshFromBackground({ forceRescan: true }), 500);
+  setTimeout(() => refreshFromBackground({ forceRescan: true }), 1500);
+  // Keep panel aligned if the tab SPA-navigates while the panel is open.
+  setInterval(() => {
+    if (document.visibilityState === "hidden") return;
+    refreshFromBackground();
+  }, 1500);
 })();

@@ -33,14 +33,13 @@
     warnedDead: false,
   };
 
+  // Prefer chapter verse content only — avoid chrome/nav/related that leak other places.
   const VERSE_SELECTORS = [
-    "[data-usfm]",
-    "[class*='ChapterContent_verse']",
     "[class*='ChapterContent_chapter']",
     "[class*='ChapterContent']",
+    "[data-usfm]",
+    "[class*='ChapterContent_verse']",
     "[data-verse-id]",
-    "main",
-    "article",
   ];
 
   function isContextValid() {
@@ -84,6 +83,9 @@
       const el = document.querySelector(sel);
       if (el && (el.innerText || "").trim().length > 40) return el;
     }
+    // Last resort only — prefer chapter containers above to avoid site chrome.
+    const main = document.querySelector("main");
+    if (main && (main.innerText || "").trim().length > 40) return main;
     return document.body;
   }
 
@@ -494,11 +496,21 @@
       if (location.href !== STATE.lastUrl) {
         STATE.lastUrl = location.href;
         clearHighlights();
+        STATE.hits = [];
         STATE.warnedLegacy = false;
+        // Clear side panel immediately so the previous chapter does not linger.
+        publish([], []);
         setTimeout(() => {
+          if (STATE.dead) return;
           observeDom();
-          scheduleScan(600);
-        }, 300);
+          scheduleScan(350);
+        }, 250);
+        // SPA verse HTML often arrives late — second pass.
+        setTimeout(() => {
+          if (STATE.dead) return;
+          observeDom();
+          scheduleScan(0);
+        }, 1200);
       }
     };
     const wrap = (type) => {
@@ -512,7 +524,7 @@
     wrap("pushState");
     wrap("replaceState");
     window.addEventListener("popstate", notify);
-    STATE.navTimer = setInterval(notify, 2000);
+    STATE.navTimer = setInterval(notify, 1000);
   }
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {

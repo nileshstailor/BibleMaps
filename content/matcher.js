@@ -193,8 +193,10 @@
       const stopRatio = uniqueStops.length
         ? hitStops.length / uniqueStops.length
         : 0;
+      // Chapter-scoped: require multiple stop hits, or one stop + explicit journey alias.
+      // Avoid single-place false positives (e.g. "Jerusalem" alone ≠ Paul's Rome journey).
       const relevant =
-        aliasHit || hitStops.length >= 2 || (hitStops.length >= 1 && stopRatio >= 0.25);
+        hitStops.length >= 2 || (aliasHit && hitStops.length >= 1);
 
       if (!relevant) continue;
 

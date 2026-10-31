@@ -35,6 +35,33 @@ chrome.tabs.onRemoved.addListener((tabId) => {
   latestByTab.delete(tabId);
 });
 
+// SPA chapter changes: clear stale detection and ask the content script to rescan.
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (!changeInfo.url) return;
+  if (!/bible\.com/i.test(changeInfo.url)) return;
+
+  const cleared = {
+    url: changeInfo.url,
+    title: tab?.title || "",
+    places: [],
+    journeys: [],
+    tabId,
+    updatedAt: Date.now(),
+    clearing: true,
+  };
+  latestByTab.set(tabId, cleared);
+  chrome.storage.session
+    ?.set?.({ [`detection:${tabId}`]: cleared })
+    .catch?.(() => {});
+  chrome.runtime
+    .sendMessage({ type: "BIBLE_MAPS_DETECTION_UPDATED", payload: cleared })
+    .catch(() => {});
+
+  chrome.tabs
+    .sendMessage(tabId, { type: "BIBLE_MAPS_RESCORE" })
+    .catch(() => {});
+});
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const type = message?.type;
 
