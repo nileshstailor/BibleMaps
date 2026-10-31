@@ -68,7 +68,7 @@
         : waypoints;
     const params = new URLSearchParams({
       api: "1",
-      travelmode: "driving",
+      travelmode: "walking",
       origin,
       destination,
     });
