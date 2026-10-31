@@ -2,6 +2,14 @@
  * Bible Maps side panel — MapLibre + offline PMTiles basemap.
  */
 (() => {
+  // CSP build ships with empty WORKER_URL; without this, Worker("") loads
+  // sidepanel.html and throws: Unexpected token '<'
+  if (typeof maplibregl !== "undefined" && typeof maplibregl.setWorkerUrl === "function") {
+    maplibregl.setWorkerUrl(
+      chrome.runtime.getURL("lib/maplibre/maplibre-gl-csp-worker.js")
+    );
+  }
+
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
