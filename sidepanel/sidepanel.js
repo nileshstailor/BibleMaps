@@ -44,10 +44,12 @@
   let maplibreMap = null;
   let markerObjs = [];
   let pmtilesReady = null;
+  let pmtilesProtocol = null;
   let mapMountGen = 0;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
   let styleCache = null;
+  const PMTILES_KEY = "bible-region.pmtiles";
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -453,6 +455,18 @@
     return Boolean(el && el.clientWidth > 0);
   }
 
+  /** In-memory PMTiles source — avoids chrome-extension:// Range and File quirks. */
+  function bufferSource(key, buffer) {
+    return {
+      getKey() {
+        return key;
+      },
+      async getBytes(offset, length) {
+        return { data: buffer.slice(offset, offset + length) };
+      },
+    };
+  }
+
   function ensurePmtiles() {
     if (pmtilesReady) return pmtilesReady;
     pmtilesReady = (async () => {
@@ -465,26 +479,57 @@
       maplibregl.setWorkerUrl(
         chrome.runtime.getURL("lib/maplibre/maplibre-gl-csp-worker.js")
       );
-      const protocol = new pmtiles.Protocol();
-      maplibregl.addProtocol("pmtiles", protocol.tile);
 
-      // Load full archive into memory so chrome-extension:// Range is not required.
-      const tileUrl = chrome.runtime.getURL("media/tiles/bible-region.pmtiles");
+      // Load full archive into memory (extension URLs often lack HTTP Range).
+      const tileUrl = chrome.runtime.getURL(`media/tiles/${PMTILES_KEY}`);
       const ab = await fetch(tileUrl).then((r) => {
         if (!r.ok) throw new Error(`PMTiles HTTP ${r.status}`);
         return r.arrayBuffer();
       });
-      const file = new File([ab], "bible-region.pmtiles", {
-        type: "application/octet-stream",
-      });
-      const archive = new pmtiles.PMTiles(new pmtiles.FileSource(file));
-      protocol.add(archive);
-      return true;
+      if (!ab || ab.byteLength < 1000) {
+        throw new Error("PMTiles archive missing or empty");
+      }
+
+      try {
+        maplibregl.removeProtocol("pmtiles");
+      } catch {
+        /* first run */
+      }
+      pmtilesProtocol = new pmtiles.Protocol();
+      // MapLibre 5 prefers the async tilev4 handler when present.
+      const loadFn = pmtilesProtocol.tilev4 || pmtilesProtocol.tile;
+      maplibregl.addProtocol("pmtiles", loadFn);
+
+      const archive = new pmtiles.PMTiles(bufferSource(PMTILES_KEY, ab));
+      pmtilesProtocol.add(archive);
+
+      // Sanity-check: header must parse
+      const header = await archive.getHeader();
+      if (header.maxZoom == null) throw new Error("PMTiles header invalid");
+      return header;
     })().catch((err) => {
       pmtilesReady = null;
+      pmtilesProtocol = null;
       throw err;
     });
     return pmtilesReady;
+  }
+
+  function buildOfflineStyle(baseStyle, header) {
+    const style = JSON.parse(JSON.stringify(baseStyle));
+    // Use explicit tile template so MapLibre does not invent a FetchSource
+    // for a bare relative "bible-region.pmtiles" URL if lookup misses.
+    style.sources = {
+      protomaps: {
+        type: "vector",
+        tiles: [`pmtiles://${PMTILES_KEY}/{z}/{x}/{y}`],
+        minzoom: header?.minZoom ?? 0,
+        maxzoom: header?.maxZoom ?? 8,
+        attribution:
+          '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      },
+    };
+    return style;
   }
 
   function filterPeriodPlaces(places, placeEras, focusIds) {
@@ -582,7 +627,11 @@
     if (!els.teachingMap) throw new Error("Map container missing");
 
     const gen = ++mapMountGen;
-    await Promise.all([loadPresets(), loadKingdoms(), ensurePmtiles()]);
+    const [, , header] = await Promise.all([
+      loadPresets(),
+      loadKingdoms(),
+      ensurePmtiles(),
+    ]);
     if (gen !== mapMountGen) return;
     await waitForMapSize(els.teachingMap);
     if (gen !== mapMountGen) return;
@@ -649,16 +698,25 @@
     }
     if (gen !== mapMountGen) return;
 
+    const style = buildOfflineStyle(styleCache, header);
     const map = new maplibregl.Map({
       container: els.teachingMap,
-      style: styleCache,
+      style,
       center: [35.1, 31.7],
       zoom: 6.5,
-      maxZoom: 8,
+      maxZoom: header?.maxZoom ?? 8,
       attributionControl: true,
+      failIfMajorPerformanceCaveat: false,
     });
     maplibreMap = map;
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    map.on("error", (e) => {
+      const msg = e?.error?.message || e?.message || String(e?.error || e || "");
+      if (msg) {
+        console.warn("Bible Maps map error", e);
+        setMapHelp(`Map tile error: ${msg}`, true);
+      }
+    });
 
     await new Promise((resolve, reject) => {
       const onError = (e) => {
