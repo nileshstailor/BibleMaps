@@ -48,6 +48,10 @@
   let mapMountGen = 0;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
+  let lastPlacesFingerprint = "";
+  let lastJourneysFingerprint = "";
+  let openPlaceIds = new Set();
+  let openJourneyIds = new Set();
   let styleCache = null;
   const PMTILES_KEY = "bible-region.pmtiles";
 
@@ -202,9 +206,29 @@
     return getPreset(suggestPresetId()) || getPreset("divided_kingdom");
   }
 
-  function renderPlaces(places) {
+  function placesFingerprint(places) {
+    return (places || [])
+      .map((p) => `${p.id}:${p.name}:${p.modernName || ""}:${p.eraNotes || ""}`)
+      .join("|");
+  }
+
+  function journeysFingerprint(journeys) {
+    return (journeys || [])
+      .map(
+        (j) =>
+          `${j.id}:${j.hitCount ?? ""}:${j.stopCount ?? ""}:${(j.scriptureRefs || []).join(",")}`
+      )
+      .join("|");
+  }
+
+  function renderPlaces(places, { force = false } = {}) {
+    const fp = placesFingerprint(places);
+    if (!force && fp === lastPlacesFingerprint) return;
+    lastPlacesFingerprint = fp;
+
     els.placesPanel.innerHTML = "";
     if (!places?.length) {
+      openPlaceIds.clear();
       const empty = document.createElement("p");
       empty.className = "empty";
       empty.textContent = "No gazetteer places matched in this chapter yet.";
@@ -214,6 +238,8 @@
     for (const place of places) {
       const row = document.createElement("details");
       row.className = "acc-row";
+      row.dataset.placeId = place.id || place.name;
+      if (openPlaceIds.has(row.dataset.placeId)) row.open = true;
       const modern = place.modernName ? ` · ${place.modernName}` : "";
       row.innerHTML = `
         <summary>
@@ -233,13 +259,24 @@
           </div>
         </div>
       `;
+      row.addEventListener("toggle", () => {
+        const id = row.dataset.placeId;
+        if (!id) return;
+        if (row.open) openPlaceIds.add(id);
+        else openPlaceIds.delete(id);
+      });
       els.placesPanel.appendChild(row);
     }
   }
 
-  function renderJourneys(journeys) {
+  function renderJourneys(journeys, { force = false } = {}) {
+    const fp = journeysFingerprint(journeys);
+    if (!force && fp === lastJourneysFingerprint) return;
+    lastJourneysFingerprint = fp;
+
     els.journeysPanel.innerHTML = "";
     if (!journeys?.length) {
+      openJourneyIds.clear();
       els.journeysPanel.innerHTML =
         '<p class="empty">No journey patterns detected in this chapter.</p>';
       return;
@@ -247,6 +284,8 @@
     for (const journey of journeys) {
       const row = document.createElement("details");
       row.className = "acc-row";
+      row.dataset.journeyId = journey.id || journey.name;
+      if (openJourneyIds.has(row.dataset.journeyId)) row.open = true;
       const refs = (journey.scriptureRefs || []).join(" · ");
       const hitLabel =
         journey.hitCount != null
@@ -270,6 +309,12 @@
           </div>
         </div>
       `;
+      row.addEventListener("toggle", () => {
+        const id = row.dataset.journeyId;
+        if (!id) return;
+        if (row.open) openJourneyIds.add(id);
+        else openJourneyIds.delete(id);
+      });
       row.querySelector("button")?.addEventListener("click", (e) => {
         e.preventDefault();
         showJourneyOnMap(journey);
@@ -926,14 +971,19 @@
     current = payload;
     if (!payload) {
       setStatus("Open a bible.com passage, then click Refresh.");
-      renderPlaces([]);
-      renderJourneys([]);
+      lastPlacesFingerprint = "";
+      lastJourneysFingerprint = "";
+      openPlaceIds.clear();
+      openJourneyIds.clear();
+      renderPlaces([], { force: true });
+      renderJourneys([], { force: true });
       syncPlacesMapChrome([]);
       requestAnimationFrame(() => renderMap());
       return;
     }
 
     activePlaceMarkers = payload.places || [];
+    // Skip DOM rebuild when poll returns the same lists — rebuilding closes accordions.
     renderPlaces(payload.places || []);
     renderJourneys(payload.journeys || []);
 
@@ -968,7 +1018,16 @@
         syncPlacesMapChrome(payload.places || []);
       }
     } else {
-      syncPlacesMapChrome(payload.places || []);
+      // Only refresh places chrome text/links when map content actually changes,
+      // so polls don't thrash the dock while an accordion is open.
+      const fp = mapFingerprint();
+      if (fp !== lastMapFingerprint || !maplibreMap) {
+        syncPlacesMapChrome(payload.places || []);
+      } else {
+        activePlaceMarkers = payload.places || [];
+        const label = chap ? `Places in ${chap}` : "Places in this chapter";
+        if (els.mapSubtitle.textContent !== label) els.mapSubtitle.textContent = label;
+      }
     }
 
     const fp = mapFingerprint();
