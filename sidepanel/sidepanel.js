@@ -22,6 +22,7 @@
     thenHelp: document.getElementById("thenHelp"),
     kingdomsToggle: document.getElementById("kingdomsToggle"),
     kingdomLegend: document.getElementById("kingdomLegend"),
+    atlasSelect: document.getElementById("atlasSelect"),
   };
 
   let current = null;
@@ -29,9 +30,12 @@
   let activePlaceMarkers = [];
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
+  let atlasCatalog = null;
+  let atlasLoadPromise = null;
   let leafletMap = null;
   let leafletMarkers = null;
   let leafletKingdoms = null;
+  let leafletAtlas = null;
   let modernLeafletMap = null;
 
   function googlePlaceUrl(place) {
@@ -150,6 +154,52 @@
     return kingdomsLoadPromise;
   }
 
+  function loadAtlasCatalog() {
+    if (atlasCatalog) return Promise.resolve(atlasCatalog);
+    if (atlasLoadPromise) return atlasLoadPromise;
+    atlasLoadPromise = fetch(chrome.runtime.getURL("media/historical/catalog.json"))
+      .then((r) => {
+        if (!r.ok) throw new Error(`atlas catalog HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        atlasCatalog = data;
+        populateAtlasSelect();
+        return data;
+      })
+      .catch((err) => {
+        console.warn("Bible Maps: atlas catalog failed", err);
+        atlasLoadPromise = null;
+        return null;
+      });
+    return atlasLoadPromise;
+  }
+
+  function populateAtlasSelect() {
+    if (!els.atlasSelect || !atlasCatalog?.maps) return;
+    const current = els.atlasSelect.value;
+    els.atlasSelect.innerHTML = '<option value="">None (street map only)</option>';
+    for (const m of atlasCatalog.maps) {
+      const opt = document.createElement("option");
+      opt.value = m.id;
+      opt.textContent = `${m.title}${m.era ? ` — ${m.era}` : ""}`;
+      els.atlasSelect.appendChild(opt);
+    }
+    if ([...els.atlasSelect.options].some((o) => o.value === current)) {
+      els.atlasSelect.value = current;
+    }
+  }
+
+  function suggestAtlasId() {
+    const jid = activeJourney?.id || "";
+    if (jid === "paul_first") return "paul_first";
+    if (jid === "paul_second") return "paul_second";
+    if (jid === "paul_third") return "paul_third";
+    if (jid === "paul_rome") return "paul_rome";
+    // Default historical kingdom atlas for OT / general Then view
+    return "divided_kingdom";
+  }
+
   function renderPlaces(places) {
     els.placesPanel.innerHTML = "";
     const toolbar = document.createElement("div");
@@ -254,6 +304,7 @@
     leafletMap = null;
     leafletMarkers = null;
     leafletKingdoms = null;
+    leafletAtlas = null;
   }
 
   function destroyModernLeaflet() {
@@ -308,9 +359,15 @@
   }
 
   async function mountStreetMap(container, points, options = {}) {
-    const { showKingdoms = false, drawRoute = false, asModern = false } = options;
+    const {
+      showKingdoms = false,
+      drawRoute = false,
+      asModern = false,
+      atlasId = "",
+    } = options;
     if (typeof L === "undefined") throw new Error("Leaflet failed to load");
     if (showKingdoms) await loadKingdoms();
+    if (atlasId) await loadAtlasCatalog();
 
     if (asModern) destroyModernLeaflet();
     else destroyLeaflet();
@@ -331,8 +388,24 @@
       { attribution: "Tiles &copy; Esri", maxZoom: 19 }
     ).addTo(map);
 
-    const markerLayer = L.layerGroup().addTo(map);
-    const bounds = addNamedMarkers(map, markerLayer, points, { drawRoute });
+    const bounds = [];
+    let atlasMeta = null;
+
+    if (atlasId && atlasCatalog?.maps) {
+      atlasMeta = atlasCatalog.maps.find((m) => m.id === atlasId) || null;
+      if (atlasMeta) {
+        const url = chrome.runtime.getURL(`media/historical/${atlasMeta.file}`);
+        const southWest = L.latLng(atlasMeta.bounds[0][0], atlasMeta.bounds[0][1]);
+        const northEast = L.latLng(atlasMeta.bounds[1][0], atlasMeta.bounds[1][1]);
+        const overlayBounds = L.latLngBounds(southWest, northEast);
+        const overlay = L.imageOverlay(url, overlayBounds, {
+          opacity: atlasMeta.opacity != null ? atlasMeta.opacity : 0.8,
+          interactive: false,
+        }).addTo(map);
+        bounds.push(overlayBounds);
+        if (!asModern) leafletAtlas = overlay;
+      }
+    }
 
     if (showKingdoms && kingdomsGeoJson?.features) {
       const kg = L.geoJSON(
@@ -357,10 +430,13 @@
       if (!asModern) leafletKingdoms = kg;
     }
 
+    const markerLayer = L.layerGroup().addTo(map);
+    bounds.push(...addNamedMarkers(map, markerLayer, points, { drawRoute }));
+
     if (bounds.length) {
       let merged = bounds[0];
       for (let i = 1; i < bounds.length; i += 1) merged = merged.extend(bounds[i]);
-      map.fitBounds(merged.pad(0.15));
+      map.fitBounds(merged.pad(0.08));
     } else {
       map.setView([31.7, 35.1], 8);
     }
@@ -374,24 +450,42 @@
       leafletMap = map;
       leafletMarkers = markerLayer;
     }
-    return map;
+    return { map, atlasMeta };
   }
 
   async function renderThenMap() {
     try {
+      await loadAtlasCatalog();
       const points = collectPoints();
       const drawKingdoms = Boolean(els.kingdomsToggle?.checked);
       if (els.kingdomLegend) els.kingdomLegend.hidden = !drawKingdoms;
 
-      await mountStreetMap(els.thenMap, points, {
+      // If user hasn't chosen yet, suggest a relevant atlas once.
+      if (els.atlasSelect && !els.atlasSelect.dataset.userTouched) {
+        const suggested = suggestAtlasId();
+        if ([...els.atlasSelect.options].some((o) => o.value === suggested)) {
+          els.atlasSelect.value = suggested;
+        }
+      }
+
+      const atlasId = els.atlasSelect?.value || "";
+      const { atlasMeta } = await mountStreetMap(els.thenMap, points, {
         showKingdoms: drawKingdoms,
         drawRoute: Boolean(activeJourney),
+        atlasId,
       });
-      setThenHelp(
-        "One map: named pins" +
-          (drawKingdoms ? " plus schematic kingdom outlines (approximate)." : "."),
-        false
-      );
+
+      if (atlasMeta) {
+        setThenHelp(
+          `${atlasMeta.title} overlay on a street map with named pins. ${atlasMeta.attribution || ""}`,
+          false
+        );
+      } else {
+        setThenHelp(
+          "Street map with named pins. Choose a historical atlas overlay for period borders from your Bible Maps set.",
+          false
+        );
+      }
     } catch (err) {
       console.error(err);
       destroyLeaflet();
@@ -548,6 +642,10 @@
   els.kingdomsToggle?.addEventListener("change", () => {
     if (!els.thenPane.hidden) renderThenMap();
   });
+  els.atlasSelect?.addEventListener("change", () => {
+    if (els.atlasSelect) els.atlasSelect.dataset.userTouched = "1";
+    if (!els.thenPane.hidden) renderThenMap();
+  });
 
   els.modernMapsLink.addEventListener("click", (e) => {
     if (els.modernMapsLink.getAttribute("href") === "#") {
@@ -567,6 +665,7 @@
   });
 
   loadKingdoms();
+  loadAtlasCatalog();
   refreshFromBackground();
   setTimeout(refreshFromBackground, 500);
   setTimeout(refreshFromBackground, 1500);
