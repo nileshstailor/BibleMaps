@@ -3,7 +3,7 @@
 Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 
 - **Places** → Open in Google Maps (modern coordinates), plus **Open Then map + kingdoms**
-- **Journeys** → **Modern** multi-stop Google Maps route, plus **Then** (OSM/Leaflet with optional schematic Israel / Judah / Philistia overlays)
+- **Journeys** → **Modern** multi-stop Google Maps route, plus **Then** (offline SVG schematic map with Israel / Judah / Philistia overlays — no tile CDN)
 
 No LLM, no required remote API key for v1. Matching uses a local gazetteer (`data/places.json`) and journey catalog (`data/journeys.json`).
 
@@ -45,16 +45,15 @@ BibleMaps/
   data/places.json               # ~95 biblical places
   data/journeys.json             # Abraham, Exodus, Paul’s journeys
   data/kingdoms.json             # schematic Israel / Judah / Philistia polygons
-  sidepanel/sidepanel.html|css|js
-  lib/leaflet.*                  # vendored Leaflet for Then map
+  sidepanel/sidepanel.html|css|js|svg-map.js
   icons/icon16.png|icon48.png|icon128.png
 ```
 
 ## Architecture notes
 
-- **Content script** runs on `*.bible.com`, walks verse/reader DOM text, wraps curated alias hits in `<mark class="bible-maps-place">`, and watches mutations + history for SPA chapter changes.
+- **Content script** runs on `*.bible.com` and matches gazetteer aliases with the **CSS Custom Highlight API** (no DOM wrapping — avoids React hydration errors on bible.com).
 - **Background service worker** only routes detection payloads and opens `chrome.sidePanel`.
-- **Side panel** reads the active tab’s latest detection and builds Maps / Leaflet views locally.
+- **Side panel** reads the active tab’s latest detection; **Then** map is an offline SVG (no Leaflet/OSM network).
 
 ## Gaps / later
 
@@ -63,4 +62,6 @@ BibleMaps/
 - Google Maps waypoint limits may thin very long itineraries.
 - True 3D terrain / Cesium-style flythrough is explicitly out of v1.
 - Kingdom polygons are schematic teaching overlays, not a scholarly boundary dataset.
+- Then map is schematic/offline (not a slippy OSM basemap) so it works when tile CDNs block extension origins.
 - bible.com class names change often; selectors are defensive but may need updates.
+- bible.com `401 /authenticate` console noise is their own logged-out API, not this extension.

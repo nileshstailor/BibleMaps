@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bible Maps</title>
-    <link rel="stylesheet" href="../lib/leaflet.css" />
     <link rel="stylesheet" href="sidepanel.css" />
   </head>
   <body>
@@ -76,8 +75,8 @@
         </div>
         <div id="thenMap" class="then-map" aria-label="Historical-style journey map"></div>
         <p class="muted small" id="thenHelp">
-          OpenStreetMap basemap with schematic divided-kingdom overlays (teaching outlines, not
-          precise scholarly borders). Journey paths use the same stop geometry when available.
+          Offline schematic Then map (no external tiles). Kingdom outlines are teaching
+          approximations, not scholarly borders.
         </p>
       </div>
     </section>
@@ -86,7 +85,7 @@
       Curated gazetteer · no AI lookup · v1
     </footer>
 
-    <script src="../lib/leaflet.js"></script>
+    <script src="svg-map.js"></script>
     <script src="sidepanel.js"></script>
   </body>
 </html>

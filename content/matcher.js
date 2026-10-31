@@ -1,6 +1,7 @@
 /**
  * Curated gazetteer matching for biblical place and journey names.
  * Exposes window.BibleMapsMatcher (no bundler).
+ * Does NOT mutate page DOM — returns Ranges for CSS Highlight API.
  */
 (function initBibleMapsMatcher(global) {
   const SKIP_TAGS = new Set([
@@ -28,11 +29,6 @@
       .replace(/\u00A0/g, " ");
   }
 
-  /**
-   * Build matchers sorted longest-first so "Sea of Galilee" wins over "Galilee"
-   * when both exist as aliases (we only have Sea of Galilee as a place here,
-   * but the principle still matters for multi-word names).
-   */
   function buildPlaceMatchers(places) {
     const entries = [];
     for (const place of places) {
@@ -52,7 +48,6 @@
 
     return entries.map((entry) => {
       const pattern = escapeRegExp(entry.alias).replace(/\\ /g, "[\\s\\u00A0]+");
-      // Word-ish boundaries: don't match inside longer alphanumeric tokens.
       const re = new RegExp(`(?<![A-Za-z0-9])(${pattern})(?![A-Za-z0-9])`, "giu");
       return { ...entry, re };
     });
@@ -96,8 +91,6 @@
     if (!node) return true;
     if (node.nodeType === Node.ELEMENT_NODE) {
       if (SKIP_TAGS.has(node.tagName)) return true;
-      if (node.classList?.contains("bible-maps-place")) return true;
-      if (node.closest?.("mark.bible-maps-place")) return true;
       if (node.isContentEditable) return true;
     }
     return false;
@@ -114,10 +107,6 @@
         if (!parent || shouldSkipNode(parent)) {
           return NodeFilter.FILTER_REJECT;
         }
-        // Skip our own marks' text
-        if (parent.closest?.("mark.bible-maps-place")) {
-          return NodeFilter.FILTER_REJECT;
-        }
         return NodeFilter.FILTER_ACCEPT;
       },
     });
@@ -129,32 +118,31 @@
     return nodes;
   }
 
-  function wrapMatchesInTextNode(textNode, matches) {
-    if (!matches.length) return [];
-    const text = textNode.nodeValue;
-    const frag = document.createDocumentFragment();
-    let cursor = 0;
-    const created = [];
-
-    for (const match of matches) {
-      if (match.start > cursor) {
-        frag.appendChild(document.createTextNode(text.slice(cursor, match.start)));
+  /**
+   * Build non-mutating Range hits for CSS Custom Highlight API.
+   */
+  function collectMatchRanges(root, placeMatchers) {
+    const hits = [];
+    const textNodes = collectTextNodes(root);
+    for (const node of textNodes) {
+      const matches = findMatchesInText(node.nodeValue || "", placeMatchers);
+      for (const match of matches) {
+        try {
+          const range = document.createRange();
+          range.setStart(node, match.start);
+          range.setEnd(node, match.end);
+          hits.push({
+            range,
+            placeId: match.placeId,
+            place: match.place,
+            text: match.text,
+          });
+        } catch {
+          /* node may have changed mid-scan */
+        }
       }
-      const mark = document.createElement("mark");
-      mark.className = "bible-maps-place";
-      mark.dataset.placeId = match.placeId;
-      mark.dataset.placeName = match.place.name;
-      mark.title = `${match.place.name} — open Bible Maps`;
-      mark.textContent = text.slice(match.start, match.end);
-      frag.appendChild(mark);
-      created.push(mark);
-      cursor = match.end;
     }
-    if (cursor < text.length) {
-      frag.appendChild(document.createTextNode(text.slice(cursor)));
-    }
-    textNode.parentNode?.replaceChild(frag, textNode);
-    return created;
+    return hits;
   }
 
   function detectJourneys(foundPlaceIds, journeys, pageText) {
@@ -173,7 +161,6 @@
           return a && text.includes(a.toLowerCase());
         });
 
-      // Journey is relevant if its name appears, or enough of its stops appear.
       const stopRatio = uniqueStops.length
         ? hitStops.length / uniqueStops.length
         : 0;
@@ -200,7 +187,8 @@
     return results;
   }
 
-  function clearHighlights(root) {
+  /** Remove leftover <mark> from older extension versions (one-time cleanup). */
+  function clearLegacyMarks(root) {
     const marks = root.querySelectorAll("mark.bible-maps-place");
     marks.forEach((mark) => {
       const parent = mark.parentNode;
@@ -214,9 +202,9 @@
     buildPlaceMatchers,
     findMatchesInText,
     collectTextNodes,
-    wrapMatchesInTextNode,
+    collectMatchRanges,
     detectJourneys,
-    clearHighlights,
+    clearLegacyMarks,
     normalizeQuotes,
   };
 })(typeof window !== "undefined" ? window : globalThis);

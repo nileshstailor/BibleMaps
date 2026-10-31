@@ -1,23 +1,15 @@
-mark.bible-maps-place {
-  background: linear-gradient(180deg, rgba(201, 162, 39, 0.35), rgba(201, 162, 39, 0.55));
-  border-bottom: 2px solid #8b5a2b;
-  border-radius: 2px;
+/* Non-mutating highlights (Chrome CSS Custom Highlight API) — does not break React */
+::highlight(bible-maps-places) {
+  background-color: rgba(201, 162, 39, 0.42);
   color: inherit;
-  cursor: pointer;
-  padding: 0 1px;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #8b5a2b;
 }
 
-mark.bible-maps-place:hover,
-mark.bible-maps-place:focus {
-  background: rgba(166, 48, 36, 0.28);
-  border-bottom-color: #a63024;
-  outline: none;
-}
-
-mark.bible-maps-place[data-bm-active="true"] {
-  background: rgba(74, 103, 65, 0.35);
-  border-bottom-color: #4a6741;
+::highlight(bible-maps-places-active) {
+  background-color: rgba(74, 103, 65, 0.4);
+  text-decoration-color: #4a6741;
 }
 
 .bible-maps-toast {

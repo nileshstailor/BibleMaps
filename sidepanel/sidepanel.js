@@ -1,5 +1,5 @@
 /**
- * Bible Maps side panel — lists detected places/journeys and map actions.
+ * Bible Maps side panel — places/journeys + offline SVG Then map.
  */
 (() => {
   const els = {
@@ -26,12 +26,8 @@
   let current = null;
   let activeJourney = null;
   let activePlaceMarkers = [];
-  let thenMap = null;
-  let thenLayerGroup = null;
-  let kingdomLayer = null;
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
-  let mapInitError = null;
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -191,7 +187,7 @@
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Then map";
-    els.mapSubtitle.textContent = "Schematic kingdoms on OpenStreetMap";
+    els.mapSubtitle.textContent = "Schematic kingdoms (offline)";
     els.modernMapsLink.href = "#";
     els.modernStops.innerHTML =
       "<li>Switch to Then for kingdom overlays. Modern Google Maps links are on each place card.</li>";
@@ -231,209 +227,40 @@
     els.modernPane.hidden = !isModern;
     els.thenPane.hidden = isModern;
     if (!isModern) {
-      // Wait until the pane is visible so Leaflet gets a real size.
-      requestAnimationFrame(() => {
-        ensureThenMap({
-          stops: activeJourney?.stops || [],
-          places: activePlaceMarkers,
-        }).then(() => {
-          thenMap?.invalidateSize();
-          setTimeout(() => thenMap?.invalidateSize(), 100);
-          setTimeout(() => thenMap?.invalidateSize(), 300);
-        });
-      });
+      renderThenMap();
     }
   }
 
-  function kingdomStyle(feature) {
-    const p = feature.properties || {};
-    return {
-      color: p.color || "#4a6741",
-      weight: 1.5,
-      opacity: 0.9,
-      fillColor: p.color || "#4a6741",
-      fillOpacity: p.fillOpacity != null ? p.fillOpacity : 0.28,
-    };
-  }
-
-  function initThenMapIfNeeded() {
-    if (thenMap) return thenMap;
-    if (typeof L === "undefined") {
-      mapInitError = "Leaflet failed to load (L is undefined).";
-      setThenHelp(mapInitError, true);
-      throw new Error(mapInitError);
-    }
-    if (window.L?.Icon?.Default) {
-      const iconBase = chrome.runtime.getURL("lib/images/");
-      L.Icon.Default.mergeOptions({
-        iconUrl: iconBase + "marker-icon.png",
-        iconRetinaUrl: iconBase + "marker-icon-2x.png",
-        shadowUrl: iconBase + "marker-shadow.png",
-      });
-    }
-
-    // If a previous failed attempt left Leaflet state on the node, clear it.
-    if (els.thenMap._leaflet_id) {
-      els.thenMap._leaflet_id = null;
-      els.thenMap.innerHTML = "";
-    }
-
-    thenMap = L.map(els.thenMap, {
-      zoomControl: true,
-      attributionControl: true,
-    });
-
-    // Prefer OSM tiles; Carto as alternate style is optional.
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19,
-    }).addTo(thenMap);
-
-    thenLayerGroup = L.layerGroup().addTo(thenMap);
-    thenMap.setView([31.7, 35.1], 8);
-    mapInitError = null;
-    return thenMap;
-  }
-
-  async function syncKingdomLayer() {
-    await loadKingdoms();
-    if (!thenMap) return;
-
-    const show = Boolean(els.kingdomsToggle?.checked);
-    if (els.kingdomLegend) els.kingdomLegend.hidden = !show;
-
-    if (kingdomLayer) {
-      thenMap.removeLayer(kingdomLayer);
-      kingdomLayer = null;
-    }
-    if (!show || !kingdomsGeoJson?.features) return;
-
-    // Pass only features — avoid handing Leaflet the extra `meta` bag alone.
-    kingdomLayer = L.geoJSON(
-      { type: "FeatureCollection", features: kingdomsGeoJson.features },
-      {
-        style: kingdomStyle,
-        onEachFeature(feature, layer) {
-          const p = feature.properties || {};
-          layer.bindPopup(
-            `<strong>${escapeHtml(p.name || "")}</strong><br/>${escapeHtml(
-              p.eraLabel || ""
-            )}`
-          );
-        },
-      }
-    ).addTo(thenMap);
-
-    if (thenLayerGroup) thenLayerGroup.bringToFront();
-  }
-
-  function fitMap(boundsList) {
-    if (!thenMap) return;
-    const valid = boundsList.filter((b) => b && b.isValid && b.isValid());
-    if (!valid.length) {
-      thenMap.setView([31.7, 35.1], 8);
-      return;
-    }
-    let merged = valid[0];
-    for (let i = 1; i < valid.length; i += 1) merged = merged.extend(valid[i]);
-    // Pad zero-area single-point bounds
-    const sw = merged.getSouthWest();
-    const ne = merged.getNorthEast();
-    if (sw.equals(ne)) {
-      thenMap.setView(sw, 9);
-      return;
-    }
-    thenMap.fitBounds(merged.pad(0.12));
-  }
-
-  async function ensureThenMap({ stops = [], places = [] } = {}) {
+  async function renderThenMap() {
     try {
-      initThenMapIfNeeded();
-      await syncKingdomLayer();
-      thenLayerGroup.clearLayers();
+      await loadKingdoms();
+      const show = Boolean(els.kingdomsToggle?.checked);
+      if (els.kingdomLegend) els.kingdomLegend.hidden = !show;
 
-      const bounds = [];
-      const routePts = stops.filter(
-        (s) => Number.isFinite(s.lat) && Number.isFinite(s.lng)
-      );
-
-      if (routePts.length) {
-        const latLngs = routePts.map((s) => L.latLng(s.lat, s.lng));
-        const line = L.polyline(latLngs, {
-          color: "#a63024",
-          weight: 3.5,
-          opacity: 0.9,
-          dashArray: "8 6",
-        }).addTo(thenLayerGroup);
-        bounds.push(line.getBounds());
-
-        routePts.forEach((stop, index) => {
-          const marker = L.circleMarker([stop.lat, stop.lng], {
-            radius: 6,
-            color: "#2c2416",
-            weight: 1,
-            fillColor:
-              index === 0
-                ? "#4a6741"
-                : index === routePts.length - 1
-                  ? "#a63024"
-                  : "#c9a227",
-            fillOpacity: 0.95,
-          }).addTo(thenLayerGroup);
-          marker.bindPopup(
-            `<strong>${escapeHtml(stop.name)}</strong><br/>${escapeHtml(
-              stop.note || stop.modernName || ""
-            )}`
-          );
-        });
-      } else {
-        places.forEach((place) => {
-          if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return;
-          const marker = L.circleMarker([place.lat, place.lng], {
-            radius: 6,
-            color: "#2c2416",
-            weight: 1,
-            fillColor: "#a63024",
-            fillOpacity: 0.95,
-          }).addTo(thenLayerGroup);
-          marker.bindPopup(
-            `<strong>${escapeHtml(place.name)}</strong><br/>${escapeHtml(
-              place.modernName || ""
-            )}`
-          );
-          bounds.push(L.latLng(place.lat, place.lng).toBounds(12000));
-        });
+      if (!window.BibleMapsSvgMap) {
+        throw new Error("SVG map module failed to load");
       }
 
-      if (kingdomLayer && els.kingdomsToggle?.checked) {
-        try {
-          const kb = kingdomLayer.getBounds();
-          if (kb && kb.isValid()) bounds.push(kb);
-        } catch {
-          /* ignore */
-        }
-      }
-
-      fitMap(bounds);
-      thenLayerGroup.bringToFront();
-      thenMap.invalidateSize();
+      window.BibleMapsSvgMap.render({
+        container: els.thenMap,
+        kingdoms: kingdomsGeoJson,
+        showKingdoms: show,
+        stops: activeJourney?.stops || [],
+        places: activePlaceMarkers,
+      });
 
       const meta = kingdomsGeoJson?.meta;
       setThenHelp(
-        meta
-          ? `${meta.disclaimer || "Schematic teaching overlays on OpenStreetMap."}`
-          : "OpenStreetMap basemap with optional kingdom overlays.",
+        meta?.disclaimer ||
+          "Offline schematic Then map — no Leaflet/OSM tile network required.",
         false
       );
-      if (els.mapSubtitle && meta?.title) {
-        // Keep journey subtitle when present; otherwise show kingdom title.
-        if (!activeJourney) els.mapSubtitle.textContent = meta.title;
+      if (!activeJourney && meta?.title) {
+        els.mapSubtitle.textContent = meta.title;
       }
     } catch (err) {
-      console.error("Bible Maps Then map error", err);
+      console.error(err);
       setThenHelp(`Map error: ${err?.message || err}`, true);
-      setStatus(`Map error: ${err?.message || err}`);
     }
   }
 
@@ -509,11 +336,7 @@
   els.modeModern.addEventListener("click", () => setMode("modern"));
   els.modeThen.addEventListener("click", () => setMode("then"));
   els.kingdomsToggle?.addEventListener("change", () => {
-    if (els.thenPane.hidden) return;
-    ensureThenMap({
-      stops: activeJourney?.stops || [],
-      places: activePlaceMarkers,
-    });
+    if (!els.thenPane.hidden) renderThenMap();
   });
 
   els.modernMapsLink.addEventListener("click", (e) => {
@@ -532,10 +355,6 @@
       applyPayload(message.payload);
     }
   });
-
-  if (typeof L === "undefined") {
-    setStatus("Map library failed to load. Reload the extension.");
-  }
 
   loadKingdoms();
   refreshFromBackground();

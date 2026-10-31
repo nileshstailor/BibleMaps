@@ -1,6 +1,6 @@
 /**
- * Bible Maps content script — detect & highlight places on bible.com,
- * observe SPA navigation, report results to the background/side panel.
+ * Bible Maps content script — detect places on bible.com without mutating
+ * React's DOM (CSS Custom Highlight API). Avoids React error #418.
  */
 (() => {
   const DATA_URLS = {
@@ -15,10 +15,11 @@
     matchers: [],
     ready: false,
     scanning: false,
-    applying: false,
     lastUrl: location.href,
     debounceTimer: null,
     observer: null,
+    hits: [], // { range, placeId, place }
+    highlightSupported: typeof CSS !== "undefined" && !!CSS.highlights,
   };
 
   const VERSE_SELECTORS = [
@@ -56,18 +57,34 @@
     STATE.ready = true;
   }
 
-  function uniquePlacesFromMarks(marks) {
+  function uniquePlacesFromHits(hits) {
     const seen = new Set();
     const list = [];
-    for (const mark of marks) {
-      const id = mark.dataset.placeId;
-      if (!id || seen.has(id)) continue;
-      seen.add(id);
-      const place = STATE.placeById.get(id);
+    for (const hit of hits) {
+      if (!hit.placeId || seen.has(hit.placeId)) continue;
+      seen.add(hit.placeId);
+      const place = STATE.placeById.get(hit.placeId);
       if (place) list.push(place);
     }
     list.sort((a, b) => a.name.localeCompare(b.name));
     return list;
+  }
+
+  function applyHighlights(hits) {
+    STATE.hits = hits;
+    if (!STATE.highlightSupported) return;
+
+    const highlight = new Highlight(...hits.map((h) => h.range));
+    CSS.highlights.set("bible-maps-places", highlight);
+    CSS.highlights.delete("bible-maps-places-active");
+  }
+
+  function clearHighlights() {
+    STATE.hits = [];
+    if (STATE.highlightSupported) {
+      CSS.highlights.delete("bible-maps-places");
+      CSS.highlights.delete("bible-maps-places-active");
+    }
   }
 
   function showToast(message) {
@@ -126,27 +143,17 @@
   function scan() {
     if (!STATE.ready || STATE.scanning) return;
     STATE.scanning = true;
-    STATE.applying = true;
     try {
       const root = pickScanRoot();
       const matcher = window.BibleMapsMatcher;
 
-      // Avoid fighting React by clearing only our marks, then re-wrapping.
-      matcher.clearHighlights(document);
+      // Cleanup marks from older builds once; do not re-wrap (breaks React).
+      matcher.clearLegacyMarks(document);
 
-      const textNodes = matcher.collectTextNodes(root);
-      const createdMarks = [];
-      for (const node of textNodes) {
-        const matches = matcher.findMatchesInText(
-          node.nodeValue || "",
-          STATE.matchers
-        );
-        if (matches.length) {
-          createdMarks.push(...matcher.wrapMatchesInTextNode(node, matches));
-        }
-      }
+      const hits = matcher.collectMatchRanges(root, STATE.matchers);
+      applyHighlights(hits);
 
-      const places = uniquePlacesFromMarks(createdMarks);
+      const places = uniquePlacesFromHits(hits);
       const pageText = root.innerText || document.body.innerText || "";
       const journeys = matcher.detectJourneys(
         places.map((p) => p.id),
@@ -155,59 +162,88 @@
       );
 
       publish(places, journeys);
+
+      if (!STATE.highlightSupported && places.length) {
+        showToast("Places found (highlight API unavailable — see side panel)");
+      }
     } catch (err) {
       console.warn("Bible Maps scan failed", err);
     } finally {
-      // Let the current mutation batch settle before accepting new ones.
-      setTimeout(() => {
-        STATE.applying = false;
-        STATE.scanning = false;
-      }, 0);
+      STATE.scanning = false;
     }
   }
 
-  function scheduleScan(delay = 180) {
+  function scheduleScan(delay = 220) {
     clearTimeout(STATE.debounceTimer);
     STATE.debounceTimer = setTimeout(scan, delay);
   }
 
+  function hitFromPoint(x, y) {
+    let range = null;
+    if (document.caretRangeFromPoint) {
+      range = document.caretRangeFromPoint(x, y);
+    } else if (document.caretPositionFromPoint) {
+      const pos = document.caretPositionFromPoint(x, y);
+      if (pos?.offsetNode) {
+        range = document.createRange();
+        range.setStart(pos.offsetNode, pos.offset);
+        range.collapse(true);
+      }
+    }
+    if (!range) return null;
+
+    for (const hit of STATE.hits) {
+      try {
+        if (
+          hit.range.isPointInRange(range.startContainer, range.startOffset) ||
+          (range.startContainer.nodeType === Node.TEXT_NODE &&
+            hit.range.intersectsNode(range.startContainer) &&
+            range.startOffset >= hit.range.startOffset &&
+            range.startOffset <= hit.range.endOffset)
+        ) {
+          return hit;
+        }
+      } catch {
+        /* ranges can go stale after React re-render */
+      }
+    }
+
+    // Fallback: compare text node + offset containment
+    for (const hit of STATE.hits) {
+      try {
+        if (
+          hit.range.startContainer === range.startContainer &&
+          range.startOffset >= hit.range.startOffset &&
+          range.startOffset <= hit.range.endOffset
+        ) {
+          return hit;
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+    return null;
+  }
+
   function onClick(event) {
-    const mark = event.target?.closest?.("mark.bible-maps-place");
-    if (!mark) return;
-    event.preventDefault();
-    event.stopPropagation();
-    document
-      .querySelectorAll('mark.bible-maps-place[data-bm-active="true"]')
-      .forEach((el) => el.removeAttribute("data-bm-active"));
-    mark.dataset.bmActive = "true";
+    const hit = hitFromPoint(event.clientX, event.clientY);
+    if (!hit) return;
+
+    if (STATE.highlightSupported) {
+      CSS.highlights.set("bible-maps-places-active", new Highlight(hit.range));
+    }
     chrome.runtime.sendMessage(
       { type: "BIBLE_MAPS_OPEN_PANEL" },
       () => void chrome.runtime.lastError
     );
-    showToast(`${mark.dataset.placeName || "Place"} — see Bible Maps panel`);
-    scheduleScan(50);
+    showToast(`${hit.place?.name || "Place"} — see Bible Maps panel`);
   }
 
   function observeDom() {
     if (STATE.observer) STATE.observer.disconnect();
-    STATE.observer = new MutationObserver((mutations) => {
-      if (STATE.applying || STATE.scanning) return;
-      // Ignore mutations that are only our own marks being added/removed.
-      const relevant = mutations.some((m) => {
-        const nodes = [...m.addedNodes, ...m.removedNodes];
-        if (!nodes.length && m.type === "characterData") return true;
-        return nodes.some((n) => {
-          if (n.nodeType !== Node.ELEMENT_NODE && n.nodeType !== Node.TEXT_NODE) {
-            return false;
-          }
-          if (n.nodeType === Node.ELEMENT_NODE) {
-            if (n.classList?.contains("bible-maps-place")) return false;
-            if (n.classList?.contains("bible-maps-toast")) return false;
-          }
-          return true;
-        });
-      });
-      if (relevant) scheduleScan(250);
+    STATE.observer = new MutationObserver(() => {
+      if (STATE.scanning) return;
+      scheduleScan(350);
     });
     STATE.observer.observe(document.documentElement, {
       childList: true,
@@ -220,7 +256,8 @@
     const notify = () => {
       if (location.href !== STATE.lastUrl) {
         STATE.lastUrl = location.href;
-        scheduleScan(400);
+        clearHighlights();
+        scheduleScan(450);
       }
     };
     const wrap = (type) => {
@@ -234,7 +271,6 @@
     wrap("pushState");
     wrap("replaceState");
     window.addEventListener("popstate", notify);
-    // bible.com also updates content without always changing history immediately
     setInterval(notify, 1500);
   }
 
@@ -257,7 +293,7 @@
     document.addEventListener("click", onClick, true);
     observeDom();
     observeSpaNavigation();
-    scheduleScan(300);
+    scheduleScan(400);
   }
 
   if (document.readyState === "loading") {
