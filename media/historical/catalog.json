@@ -4,145 +4,50 @@
       "id": "divided_kingdom",
       "title": "The Divided Kingdom",
       "file": "divided-kingdom.jpg",
-      "era": "1 Kings 12 \u2013 2 Kings 17",
-      "bounds": [
-        [
-          30.55,
-          34.15
-        ],
-        [
-          33.55,
-          36.15
-        ]
-      ],
-      "opacity": 0.78,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "1 Kings 12 \u2013 2 Kings 17"
     },
     {
       "id": "israel_base",
       "title": "Israel (blank base)",
       "file": "israel-base.jpg",
-      "era": "Regional base",
-      "bounds": [
-        [
-          30.55,
-          34.15
-        ],
-        [
-          33.55,
-          36.15
-        ]
-      ],
-      "opacity": 0.85,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "Regional base"
     },
     {
       "id": "kingdom_david",
       "title": "The Kingdom of David",
       "file": "kingdom-david.jpg",
-      "era": "United monarchy",
-      "bounds": [
-        [
-          30.55,
-          34.15
-        ],
-        [
-          33.55,
-          36.15
-        ]
-      ],
-      "opacity": 0.78,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "United monarchy"
     },
     {
       "id": "jesus",
       "title": "Israel in the Time of Jesus",
       "file": "israel-jesus.jpg",
-      "era": "Gospels",
-      "bounds": [
-        [
-          30.55,
-          34.15
-        ],
-        [
-          33.55,
-          36.15
-        ]
-      ],
-      "opacity": 0.78,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "Gospels"
     },
     {
       "id": "paul_first",
       "title": "Paul's First Missionary Journey",
       "file": "paul-first.jpg",
-      "era": "Acts 13\u201314",
-      "bounds": [
-        [
-          30.5,
-          20.0
-        ],
-        [
-          43.5,
-          40.0
-        ]
-      ],
-      "opacity": 0.82,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "Acts 13\u201314"
     },
     {
       "id": "paul_second",
       "title": "Paul's Second Missionary Journey",
       "file": "paul-second.jpg",
-      "era": "Acts 15\u201318",
-      "bounds": [
-        [
-          30.5,
-          20.0
-        ],
-        [
-          43.5,
-          40.0
-        ]
-      ],
-      "opacity": 0.82,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "Acts 15\u201318"
     },
     {
       "id": "paul_third",
       "title": "Paul's Third Missionary Journey",
       "file": "paul-third.jpg",
-      "era": "Acts 18\u201321",
-      "bounds": [
-        [
-          30.5,
-          20.0
-        ],
-        [
-          43.5,
-          40.0
-        ]
-      ],
-      "opacity": 0.82,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "Acts 18\u201321"
     },
     {
       "id": "paul_rome",
       "title": "Paul's Journey to Rome",
       "file": "paul-rome.jpg",
-      "era": "Acts 27\u201328",
-      "bounds": [
-        [
-          30.5,
-          5.0
-        ],
-        [
-          46.0,
-          40.0
-        ]
-      ],
-      "opacity": 0.82,
-      "attribution": "Historical atlas overlay \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use from your Downloads/Bible Maps set."
+      "era": "Acts 27\u201328"
     }
-  ]
+  ],
+  "attribution": "Reference atlas plates \u00a9 Knowing the Bible (topography courtesy of USGS). Bundled for personal extension use. Interactive map uses recreated vector layers, not these images as georeferenced basemaps."
 }

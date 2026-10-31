@@ -1,5 +1,5 @@
 /**
- * Bible Maps side panel — Google embed + Leaflet kingdom overlays.
+ * Bible Maps side panel — offline teaching map (no live tiles).
  */
 (() => {
   const els = {
@@ -11,34 +11,30 @@
     mapTitle: document.getElementById("mapTitle"),
     mapSubtitle: document.getElementById("mapSubtitle"),
     closeMapBtn: document.getElementById("closeMapBtn"),
-    modeModern: document.getElementById("modeModern"),
-    modeThen: document.getElementById("modeThen"),
-    modernPane: document.getElementById("modernPane"),
-    thenPane: document.getElementById("thenPane"),
-    modernEmbed: document.getElementById("modernEmbed"),
-    modernMapsLink: document.getElementById("modernMapsLink"),
-    modernStops: document.getElementById("modernStops"),
-    thenMap: document.getElementById("thenMap"),
-    thenHelp: document.getElementById("thenHelp"),
+    presetSelect: document.getElementById("presetSelect"),
     kingdomsToggle: document.getElementById("kingdomsToggle"),
+    kingdomsToggleWrap: document.getElementById("kingdomsToggleWrap"),
     kingdomLegend: document.getElementById("kingdomLegend"),
-    atlasSelect: document.getElementById("atlasSelect"),
-    atlasPlate: document.getElementById("atlasPlate"),
-    atlasPlateImg: document.getElementById("atlasPlateImg"),
+    teachingMap: document.getElementById("teachingMap"),
+    mapHelp: document.getElementById("mapHelp"),
+    mapsLink: document.getElementById("mapsLink"),
+    stopList: document.getElementById("stopList"),
+    referencePlate: document.getElementById("referencePlate"),
+    referencePlateImg: document.getElementById("referencePlateImg"),
+    referencePlateNote: document.getElementById("referencePlateNote"),
   };
 
   let current = null;
   let activeJourney = null;
   let activePlaceMarkers = [];
+  let allPlaces = null;
+  let placesLoadPromise = null;
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
-  let atlasCatalog = null;
-  let atlasLoadPromise = null;
+  let presetsCatalog = null;
+  let presetsLoadPromise = null;
+  const basemapCache = {};
   let leafletMap = null;
-  let leafletMarkers = null;
-  let leafletKingdoms = null;
-  let leafletAtlas = null;
-  let modernLeafletMap = null;
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -85,43 +81,14 @@
     return `https://www.google.com/maps/dir/${path}`;
   }
 
-  /** Embeddable Google Map (no API key). Loads as https iframe — real tiles. */
-  function googleEmbedSrc(points, zoom) {
-    const pts = (points || []).filter(
-      (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
-    );
-    if (!pts.length) {
-      return `https://maps.google.com/maps?q=31.7784,35.2296&z=8&output=embed`;
-    }
-    if (pts.length === 1) {
-      return `https://maps.google.com/maps?q=${pts[0].lat},${pts[0].lng}&z=${
-        zoom || 10
-      }&output=embed`;
-    }
-    if (pts.length === 2) {
-      return `https://maps.google.com/maps?saddr=${pts[0].lat},${pts[0].lng}&daddr=${pts[1].lat},${pts[1].lng}&output=embed`;
-    }
-    const lats = pts.map((p) => p.lat);
-    const lngs = pts.map((p) => p.lng);
-    const clat = (Math.min(...lats) + Math.max(...lats)) / 2;
-    const clng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
-    const span = Math.max(
-      Math.max(...lats) - Math.min(...lats),
-      Math.max(...lngs) - Math.min(...lngs)
-    );
-    const z = zoom || (span > 8 ? 5 : span > 3 ? 6 : span > 1 ? 8 : 9);
-    // Multi-point: center the region (full route link is on Modern).
-    return `https://maps.google.com/maps?q=${clat},${clng}&z=${z}&output=embed`;
-  }
-
   function setStatus(text) {
     els.status.textContent = text;
   }
 
-  function setThenHelp(text, isError) {
-    if (!els.thenHelp) return;
-    els.thenHelp.textContent = text;
-    els.thenHelp.style.color = isError ? "#a63024" : "";
+  function setMapHelp(text, isError) {
+    if (!els.mapHelp) return;
+    els.mapHelp.textContent = text;
+    els.mapHelp.style.color = isError ? "#a63024" : "";
   }
 
   function escapeHtml(s) {
@@ -156,49 +123,99 @@
     return kingdomsLoadPromise;
   }
 
-  function loadAtlasCatalog() {
-    if (atlasCatalog) return Promise.resolve(atlasCatalog);
-    if (atlasLoadPromise) return atlasLoadPromise;
-    atlasLoadPromise = fetch(chrome.runtime.getURL("media/historical/catalog.json"))
+  function loadAllPlaces() {
+    if (allPlaces) return Promise.resolve(allPlaces);
+    if (placesLoadPromise) return placesLoadPromise;
+    placesLoadPromise = fetch(chrome.runtime.getURL("data/places.json"))
       .then((r) => {
-        if (!r.ok) throw new Error(`atlas catalog HTTP ${r.status}`);
+        if (!r.ok) throw new Error(`places.json HTTP ${r.status}`);
         return r.json();
       })
       .then((data) => {
-        atlasCatalog = data;
-        populateAtlasSelect();
+        allPlaces = data;
         return data;
       })
       .catch((err) => {
-        console.warn("Bible Maps: atlas catalog failed", err);
-        atlasLoadPromise = null;
-        return null;
+        console.warn("Bible Maps: places failed to load", err);
+        placesLoadPromise = null;
+        return [];
       });
-    return atlasLoadPromise;
+    return placesLoadPromise;
   }
 
-  function populateAtlasSelect() {
-    if (!els.atlasSelect || !atlasCatalog?.maps) return;
-    const current = els.atlasSelect.value;
-    els.atlasSelect.innerHTML = '<option value="">None (street map only)</option>';
-    for (const m of atlasCatalog.maps) {
+  function loadPresets() {
+    if (presetsCatalog) return Promise.resolve(presetsCatalog);
+    if (presetsLoadPromise) return presetsLoadPromise;
+    presetsLoadPromise = fetch(chrome.runtime.getURL("data/atlas-presets.json"))
+      .then((r) => {
+        if (!r.ok) throw new Error(`atlas-presets.json HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        presetsCatalog = data;
+        populatePresetSelect();
+        return data;
+      })
+      .catch((err) => {
+        console.warn("Bible Maps: presets failed", err);
+        presetsLoadPromise = null;
+        return null;
+      });
+    return presetsLoadPromise;
+  }
+
+  function loadBasemap(name) {
+    const key = name || "levant";
+    if (basemapCache[key]) return Promise.resolve(basemapCache[key]);
+    const file =
+      key === "mediterranean"
+        ? "coast-mediterranean.geojson"
+        : key === "near-east"
+          ? "coast-near-east.geojson"
+          : "coast-levant.geojson";
+    return fetch(chrome.runtime.getURL(`data/${file}`))
+      .then((r) => {
+        if (!r.ok) throw new Error(`${file} HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        basemapCache[key] = data;
+        return data;
+      });
+  }
+
+  function populatePresetSelect() {
+    if (!els.presetSelect || !presetsCatalog?.presets) return;
+    const currentVal = els.presetSelect.value;
+    els.presetSelect.innerHTML = "";
+    for (const m of presetsCatalog.presets) {
       const opt = document.createElement("option");
       opt.value = m.id;
       opt.textContent = `${m.title}${m.era ? ` — ${m.era}` : ""}`;
-      els.atlasSelect.appendChild(opt);
+      els.presetSelect.appendChild(opt);
     }
-    if ([...els.atlasSelect.options].some((o) => o.value === current)) {
-      els.atlasSelect.value = current;
+    if ([...els.presetSelect.options].some((o) => o.value === currentVal)) {
+      els.presetSelect.value = currentVal;
     }
   }
 
-  function suggestAtlasId() {
+  function getPreset(id) {
+    return presetsCatalog?.presets?.find((p) => p.id === id) || null;
+  }
+
+  function suggestPresetId() {
     const jid = activeJourney?.id || "";
     if (jid === "paul_first") return "paul_first";
     if (jid === "paul_second") return "paul_second";
     if (jid === "paul_third") return "paul_third";
     if (jid === "paul_rome") return "paul_rome";
-    // Default historical kingdom atlas for OT / general Then view
+    if (jid === "abraham_travels") return "abraham";
+    if (jid === "exodus_outline") return "exodus";
+    if (jid === "jeroboam_wife_shiloh") return "divided_kingdom";
+    // Gospel-heavy page?
+    const places = activePlaceMarkers || [];
+    const gospelHits = places.filter((p) => (p.eras || []).includes("gospels")).length;
+    if (gospelHits >= 2 && gospelHits >= places.length / 2) return "jesus";
     return "divided_kingdom";
   }
 
@@ -207,19 +224,19 @@
     const toolbar = document.createElement("div");
     toolbar.className = "actions";
     toolbar.style.marginBottom = "4px";
-    const thenBtn = document.createElement("button");
-    thenBtn.type = "button";
-    thenBtn.className = "text-btn";
-    thenBtn.textContent = "Open map";
-    thenBtn.addEventListener("click", () => openPlacesThenMap(places || []));
-    toolbar.appendChild(thenBtn);
+    const mapBtn = document.createElement("button");
+    mapBtn.type = "button";
+    mapBtn.className = "text-btn";
+    mapBtn.textContent = "Open map";
+    mapBtn.addEventListener("click", () => openPlacesMap(places || []));
+    toolbar.appendChild(mapBtn);
     els.placesPanel.appendChild(toolbar);
 
     if (!places?.length) {
       const empty = document.createElement("p");
       empty.className = "empty";
       empty.textContent =
-        "No gazetteer places matched yet. You can still open the map for the region / kingdoms.";
+        "No gazetteer places matched yet. You can still open the regional teaching map.";
       els.placesPanel.appendChild(empty);
       return;
     }
@@ -244,7 +261,7 @@
     els.journeysPanel.innerHTML = "";
     if (!journeys?.length) {
       els.journeysPanel.innerHTML =
-        '<p class="empty">No journey patterns detected. Open the map from Places for Google / kingdom views.</p>';
+        '<p class="empty">No journey patterns detected. Open the map from Places.</p>';
       return;
     }
     for (const journey of journeys) {
@@ -261,7 +278,7 @@
         <p class="notes">${escapeHtml(journey.summary || "")}</p>
         <div class="actions">
           <button class="text-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
-            View Modern / Then map
+            Open map
           </button>
         </div>
       `;
@@ -270,48 +287,25 @@
     }
   }
 
-  function collectPoints() {
+  function collectRoutePoints() {
     const stops = activeJourney?.stops || [];
     if (stops.some((s) => Number.isFinite(s.lat))) return stops;
-    return activePlaceMarkers || [];
+    return [];
   }
 
-  function mountGoogleEmbed(container, points, zoom) {
-    const src = googleEmbedSrc(points, zoom);
-    container.innerHTML = `<iframe
-      title="Google Map"
-      src="${src}"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      allowfullscreen
-    ></iframe>`;
-  }
-
-  function destroyLeafletOn(container, mapRef) {
-    if (mapRef) {
+  function destroyLeaflet() {
+    if (leafletMap) {
       try {
-        mapRef.remove();
+        leafletMap.remove();
       } catch {
         /* ignore */
       }
     }
-    if (container) {
-      container._leaflet_id = null;
-      container.innerHTML = "";
-    }
-  }
-
-  function destroyLeaflet() {
-    destroyLeafletOn(els.thenMap, leafletMap);
     leafletMap = null;
-    leafletMarkers = null;
-    leafletKingdoms = null;
-    leafletAtlas = null;
-  }
-
-  function destroyModernLeaflet() {
-    destroyLeafletOn(els.modernEmbed, modernLeafletMap);
-    modernLeafletMap = null;
+    if (els.teachingMap) {
+      els.teachingMap._leaflet_id = null;
+      els.teachingMap.innerHTML = "";
+    }
   }
 
   function kingdomStyle(feature) {
@@ -325,7 +319,33 @@
     };
   }
 
-  function addNamedMarkers(map, layerGroup, points, { drawRoute }) {
+  function basemapStyle(feature) {
+    const kind = feature.properties?.kind;
+    if (kind === "frame") {
+      return {
+        color: "#6a8494",
+        weight: 0,
+        fillColor: "#9eb6c4",
+        fillOpacity: 1,
+      };
+    }
+    if (kind === "water") {
+      return {
+        color: "#6a8494",
+        weight: 1,
+        fillColor: "#7fa0b3",
+        fillOpacity: 0.95,
+      };
+    }
+    return {
+      color: "#8a7350",
+      weight: 1,
+      fillColor: "#e6d4ae",
+      fillOpacity: 0.95,
+    };
+  }
+
+  function addNamedMarkers(layerGroup, points, { drawRoute, dim }) {
     const bounds = [];
     const pts = (points || []).filter(
       (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
@@ -339,61 +359,111 @@
     }
     pts.forEach((p, i) => {
       const m = L.circleMarker([p.lat, p.lng], {
-        radius: 7,
+        radius: dim ? 4 : 7,
         color: "#2c2416",
         weight: 1,
-        fillColor: i === 0 ? "#4a6741" : "#a63024",
-        fillOpacity: 0.95,
+        fillColor: dim ? "#8a7a60" : i === 0 && drawRoute ? "#4a6741" : "#a63024",
+        fillOpacity: dim ? 0.55 : 0.95,
       }).addTo(layerGroup);
       const label = escapeHtml(p.name || "Place");
       const detail = escapeHtml(p.note || p.modernName || "");
-      m.bindTooltip(label, {
-        permanent: true,
-        direction: "top",
-        offset: [0, -8],
-        className: "bm-pin-label",
-        opacity: 0.96,
-      });
+      if (!dim) {
+        m.bindTooltip(label, {
+          permanent: true,
+          direction: "top",
+          offset: [0, -8],
+          className: "bm-pin-label",
+          opacity: 0.96,
+        });
+      } else {
+        m.bindTooltip(label, { direction: "top", opacity: 0.9 });
+      }
       m.bindPopup(`<strong>${label}</strong>${detail ? `<br/>${detail}` : ""}`);
-      bounds.push(L.latLng(p.lat, p.lng).toBounds(8000));
+      bounds.push(L.latLng(p.lat, p.lng).toBounds(dim ? 12000 : 8000));
     });
     return bounds;
   }
 
-  async function mountStreetMap(container, points, options = {}) {
-    const {
-      showKingdoms = false,
-      drawRoute = false,
-      asModern = false,
-      atlasId = "",
-    } = options;
+  function filterPeriodPlaces(places, placeEras, focusIds) {
+    const eraSet = new Set(placeEras || []);
+    const focus = new Set(focusIds || []);
+    return (places || []).filter((p) => {
+      if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) return false;
+      if (focus.has(p.id)) return true;
+      const eras = p.eras || [];
+      return eras.some((e) => eraSet.has(e));
+    });
+  }
+
+  function updateReferencePlate(preset) {
+    const file = preset?.referencePlate;
+    if (!file || !els.referencePlateImg) {
+      if (els.referencePlateImg) {
+        els.referencePlateImg.hidden = true;
+        els.referencePlateImg.removeAttribute("src");
+      }
+      if (els.referencePlateNote) {
+        els.referencePlateNote.textContent =
+          "No bundled plate for this era — the interactive map above is the teaching layer.";
+      }
+      return;
+    }
+    els.referencePlateImg.src = chrome.runtime.getURL(`media/historical/${file}`);
+    els.referencePlateImg.alt = preset.title || "Reference atlas plate";
+    els.referencePlateImg.hidden = false;
+    if (els.referencePlateNote) {
+      els.referencePlateNote.textContent =
+        "Static reference art (not georeferenced). Pins on the map above use gazetteer coordinates.";
+    }
+  }
+
+  async function mountTeachingMap() {
     if (typeof L === "undefined") throw new Error("Leaflet failed to load");
-    if (showKingdoms) await loadKingdoms();
-    if (atlasId) await loadAtlasCatalog();
+    await Promise.all([loadPresets(), loadAllPlaces(), loadKingdoms()]);
 
-    if (asModern) destroyModernLeaflet();
-    else destroyLeaflet();
-
-    container.innerHTML = "";
-    if (window.L?.Icon?.Default) {
-      const iconBase = chrome.runtime.getURL("lib/images/");
-      L.Icon.Default.mergeOptions({
-        iconUrl: iconBase + "marker-icon.png",
-        iconRetinaUrl: iconBase + "marker-icon-2x.png",
-        shadowUrl: iconBase + "marker-shadow.png",
-      });
+    if (els.presetSelect && !els.presetSelect.dataset.userTouched) {
+      const suggested = suggestPresetId();
+      if ([...els.presetSelect.options].some((o) => o.value === suggested)) {
+        els.presetSelect.value = suggested;
+      }
     }
 
-    const map = L.map(container, { zoomControl: true });
-    L.tileLayer(
-      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
-      { attribution: "Tiles &copy; Esri", maxZoom: 19 }
-    ).addTo(map);
+    const preset = getPreset(els.presetSelect?.value) || getPreset("divided_kingdom");
+
+    // Only offer kingdom toggle on Levant presets where outlines make sense
+    if (els.kingdomsToggleWrap) {
+      const allowKingdoms = preset?.basemap === "levant";
+      els.kingdomsToggleWrap.hidden = !allowKingdoms;
+      if (!allowKingdoms && els.kingdomsToggle) {
+        els.kingdomsToggle.checked = false;
+      } else if (
+        allowKingdoms &&
+        els.kingdomsToggle &&
+        !els.kingdomsToggle.dataset.userTouched &&
+        preset?.showKingdoms
+      ) {
+        els.kingdomsToggle.checked = true;
+      }
+    }
+    const showKingdoms =
+      Boolean(els.kingdomsToggle?.checked) && preset?.basemap === "levant";
+    if (els.kingdomLegend) {
+      els.kingdomLegend.hidden = !(els.kingdomsToggle?.checked && preset?.basemap === "levant");
+    }
+
+    destroyLeaflet();
+    updateReferencePlate(preset);
+
+    const map = L.map(els.teachingMap, {
+      zoomControl: true,
+      attributionControl: false,
+    });
+    leafletMap = map;
+
+    const basemap = await loadBasemap(preset?.basemap || "levant");
+    L.geoJSON(basemap, { style: basemapStyle, interactive: false }).addTo(map);
 
     const bounds = [];
-    // Atlas plates are shown as separate images (not Leaflet imageOverlay).
-    // Forced lat/lng georeferencing was badly wrong for these atlas frames.
-
     if (showKingdoms && kingdomsGeoJson?.features) {
       const kg = L.geoJSON(
         { type: "FeatureCollection", features: kingdomsGeoJson.features },
@@ -414,16 +484,60 @@
       } catch {
         /* ignore */
       }
-      if (!asModern) leafletKingdoms = kg;
+    }
+
+    const routePts = collectRoutePoints();
+    const focusIds = new Set([
+      ...routePts.map((p) => p.placeId || p.id).filter(Boolean),
+      ...(activePlaceMarkers || []).map((p) => p.id).filter(Boolean),
+    ]);
+
+    const periodPlaces = filterPeriodPlaces(
+      allPlaces,
+      preset?.placeEras || ["divided"],
+      [...focusIds]
+    ).map((p) => ({
+      ...p,
+      // Prefer detection-enriched modernName/note when available
+      ...(activePlaceMarkers.find((a) => a.id === p.id) || {}),
+    }));
+
+    // Dim context towns vs highlighted matched/route stops
+    const highlightIds = new Set([
+      ...routePts.map((p) => p.placeId || p.id).filter(Boolean),
+      ...(activePlaceMarkers || []).map((p) => p.id),
+    ]);
+    const contextPts = periodPlaces.filter((p) => !highlightIds.has(p.id));
+    const highlightPts = periodPlaces.filter((p) => highlightIds.has(p.id));
+    // Always include route stops even if not in period filter
+    for (const s of routePts) {
+      if (!highlightPts.some((h) => h.id === s.placeId || h.name === s.name)) {
+        highlightPts.push(s);
+      }
     }
 
     const markerLayer = L.layerGroup().addTo(map);
-    bounds.push(...addNamedMarkers(map, markerLayer, points, { drawRoute }));
+    bounds.push(...addNamedMarkers(markerLayer, contextPts, { drawRoute: false, dim: true }));
+    bounds.push(
+      ...addNamedMarkers(markerLayer, highlightPts.length ? highlightPts : routePts, {
+        drawRoute: Boolean(activeJourney) && routePts.length > 1,
+        dim: false,
+      })
+    );
 
-    if (bounds.length) {
+    if (preset?.bounds?.length === 2) {
+      const [[south, west], [north, east]] = preset.bounds;
+      map.fitBounds(
+        [
+          [south, west],
+          [north, east],
+        ],
+        { padding: [12, 12] }
+      );
+    } else if (bounds.length) {
       let merged = bounds[0];
       for (let i = 1; i < bounds.length; i += 1) merged = merged.extend(bounds[i]);
-      map.fitBounds(merged.pad(0.08));
+      map.fitBounds(merged.pad(0.1));
     } else {
       map.setView([31.7, 35.1], 8);
     }
@@ -431,112 +545,55 @@
     setTimeout(() => map.invalidateSize(), 80);
     setTimeout(() => map.invalidateSize(), 250);
 
-    if (asModern) {
-      modernLeafletMap = map;
-    } else {
-      leafletMap = map;
-      leafletMarkers = markerLayer;
-    }
-    return { map };
+    setMapHelp(
+      `${preset?.title || "Teaching map"} — offline vector basemap with period towns. Open Google Maps for modern streets.`,
+      false
+    );
   }
 
-  function renderAtlasPlate(atlasId) {
-    if (!els.atlasPlate || !els.atlasPlateImg) return null;
-    const meta = atlasCatalog?.maps?.find((m) => m.id === atlasId) || null;
-    if (!meta) {
-      els.atlasPlate.hidden = true;
-      els.atlasPlateImg.removeAttribute("src");
-      return null;
-    }
-    els.atlasPlateImg.src = chrome.runtime.getURL(`media/historical/${meta.file}`);
-    els.atlasPlateImg.alt = meta.title;
-    els.atlasPlate.hidden = false;
-    return meta;
-  }
-
-  async function renderThenMap() {
+  async function renderMap() {
     try {
-      await loadAtlasCatalog();
-      const points = collectPoints();
-      const drawKingdoms = Boolean(els.kingdomsToggle?.checked);
-      if (els.kingdomLegend) els.kingdomLegend.hidden = !drawKingdoms;
-
-      // Suggest a relevant atlas plate once (shown as image, not georeferenced overlay).
-      if (els.atlasSelect && !els.atlasSelect.dataset.userTouched) {
-        const suggested = suggestAtlasId();
-        if ([...els.atlasSelect.options].some((o) => o.value === suggested)) {
-          els.atlasSelect.value = suggested;
-        }
-      }
-
-      const atlasId = els.atlasSelect?.value || "";
-      const atlasMeta = renderAtlasPlate(atlasId);
-
-      await mountStreetMap(els.thenMap, points, {
-        showKingdoms: drawKingdoms,
-        drawRoute: Boolean(activeJourney),
-        atlasId: "", // never stretch atlas onto lat/lng
-      });
-
-      if (atlasMeta) {
-        setThenHelp(
-          `${atlasMeta.title} shown as an atlas plate above; street map below keeps accurate pins. ${atlasMeta.attribution || ""}`,
-          false
-        );
-      } else {
-        setThenHelp(
-          "Street map with named pins. Pick a historical atlas plate to view period borders without distorting them onto modern coordinates.",
-          false
-        );
-      }
+      await mountTeachingMap();
     } catch (err) {
       console.error(err);
       destroyLeaflet();
-      mountGoogleEmbed(els.thenMap, collectPoints(), 8);
-      setThenHelp(
-        `Map unavailable (${err?.message || err}). Falling back to a basic Google embed.`,
-        true
-      );
+      setMapHelp(`Map unavailable (${err?.message || err}).`, true);
     }
   }
 
-  async function renderModernEmbed(points) {
-    if (!els.modernEmbed) return;
-    els.modernEmbed.hidden = false;
-    try {
-      await mountStreetMap(els.modernEmbed, points, {
-        showKingdoms: false,
-        drawRoute: Boolean(activeJourney),
-        asModern: true,
-      });
-    } catch (err) {
-      console.warn(err);
-      destroyModernLeaflet();
-      mountGoogleEmbed(els.modernEmbed, points, 7);
+  function setMapsLinkFromPoints(pts) {
+    if (pts.length === 1) {
+      els.mapsLink.href = googlePlaceUrl(pts[0]);
+      els.mapsLink.textContent = "Open in Google Maps";
+      delete els.mapsLink.dataset.polyline;
+    } else if (pts.length > 1) {
+      els.mapsLink.href = googleJourneyUrl(pts);
+      els.mapsLink.textContent = "Open in Google Maps (walking)";
+      els.mapsLink.dataset.polyline = googlePolylineSearchUrl(pts);
+    } else {
+      els.mapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
+      els.mapsLink.textContent = "Open region in Google Maps";
+      delete els.mapsLink.dataset.polyline;
     }
   }
 
-  function openPlacesThenMap(places) {
+  function openPlacesMap(places) {
     activeJourney = null;
     activePlaceMarkers = places || [];
     els.mapDock.hidden = false;
     els.mapTitle.textContent = "Map";
-    els.mapSubtitle.textContent = "Pins + kingdoms on one map";
-    const pts = places || [];
-    if (pts.length === 1) {
-      els.modernMapsLink.href = googlePlaceUrl(pts[0]);
-      els.modernMapsLink.textContent = "Open in Google Maps";
-    } else if (pts.length > 1) {
-      els.modernMapsLink.href = googleJourneyUrl(pts);
-      els.modernMapsLink.textContent = "Open places in Google Maps";
-    } else {
-      els.modernMapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
-      els.modernMapsLink.textContent = "Open region in Google Maps";
+    els.mapSubtitle.textContent = "Period towns on an offline teaching map";
+    setMapsLinkFromPoints(places || []);
+    els.stopList.innerHTML = "";
+    if (places?.length) {
+      places.forEach((p) => {
+        const li = document.createElement("li");
+        li.textContent = `${p.name}${p.modernName ? ` — ${p.modernName}` : ""}`;
+        els.stopList.appendChild(li);
+      });
     }
-    renderModernEmbed(pts);
-    els.modernStops.innerHTML =
-      "<li>Then map shows named pins and kingdom overlays together.</li>";
-    setMode("then");
+    if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
+    requestAnimationFrame(() => renderMap());
   }
 
   function openJourney(journey) {
@@ -547,35 +604,19 @@
     els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
 
     const stops = journey.stops || [];
-    els.modernMapsLink.href = googleJourneyUrl(stops);
-    els.modernMapsLink.textContent = "Open multi-stop route in Google Maps";
-    els.modernMapsLink.dataset.polyline = googlePolylineSearchUrl(stops);
+    setMapsLinkFromPoints(stops);
 
-    renderModernEmbed(stops);
-
-    els.modernStops.innerHTML = "";
+    els.stopList.innerHTML = "";
     stops.forEach((stop) => {
       const li = document.createElement("li");
       li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
       if (journey.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
       li.title = stop.modernName || "";
-      els.modernStops.appendChild(li);
+      els.stopList.appendChild(li);
     });
 
-    setMode("modern");
-  }
-
-  function setMode(mode) {
-    const isModern = mode === "modern";
-    els.modeModern.classList.toggle("active", isModern);
-    els.modeThen.classList.toggle("active", !isModern);
-    els.modernPane.hidden = !isModern;
-    els.thenPane.hidden = isModern;
-    if (!isModern) {
-      requestAnimationFrame(() => renderThenMap());
-    } else {
-      setTimeout(() => modernLeafletMap?.invalidateSize(), 80);
-    }
+    if (els.presetSelect) delete els.presetSelect.dataset.userTouched;
+    requestAnimationFrame(() => renderMap());
   }
 
   function applyPayload(payload) {
@@ -637,27 +678,25 @@
     els.mapDock.hidden = true;
     activeJourney = null;
     destroyLeaflet();
-    destroyModernLeaflet();
   });
-  els.modeModern.addEventListener("click", () => setMode("modern"));
-  els.modeThen.addEventListener("click", () => setMode("then"));
 
   els.kingdomsToggle?.addEventListener("change", () => {
-    if (!els.thenPane.hidden) renderThenMap();
+    if (els.kingdomsToggle) els.kingdomsToggle.dataset.userTouched = "1";
+    if (!els.mapDock.hidden) renderMap();
   });
-  els.atlasSelect?.addEventListener("change", () => {
-    if (els.atlasSelect) els.atlasSelect.dataset.userTouched = "1";
-    if (!els.thenPane.hidden) renderThenMap();
+  els.presetSelect?.addEventListener("change", () => {
+    if (els.presetSelect) els.presetSelect.dataset.userTouched = "1";
+    if (!els.mapDock.hidden) renderMap();
   });
 
-  els.modernMapsLink.addEventListener("click", (e) => {
-    if (els.modernMapsLink.getAttribute("href") === "#") {
+  els.mapsLink.addEventListener("click", (e) => {
+    if (els.mapsLink.getAttribute("href") === "#") {
       e.preventDefault();
       return;
     }
-    if (e.shiftKey && els.modernMapsLink.dataset.polyline) {
+    if (e.shiftKey && els.mapsLink.dataset.polyline) {
       e.preventDefault();
-      window.open(els.modernMapsLink.dataset.polyline, "_blank", "noopener");
+      window.open(els.mapsLink.dataset.polyline, "_blank", "noopener");
     }
   });
 
@@ -668,7 +707,8 @@
   });
 
   loadKingdoms();
-  loadAtlasCatalog();
+  loadPresets();
+  loadAllPlaces();
   refreshFromBackground();
   setTimeout(refreshFromBackground, 500);
   setTimeout(refreshFromBackground, 1500);

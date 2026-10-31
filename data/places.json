@@ -2,56 +2,114 @@
   {
     "id": "jerusalem",
     "name": "Jerusalem",
-    "aliases": ["Jerusalem", "Salem", "Zion", "City of David", "Jebus"],
+    "aliases": [
+      "Jerusalem",
+      "Salem",
+      "Zion",
+      "City of David",
+      "Jebus"
+    ],
     "lat": 31.7784,
     "lng": 35.2296,
     "modernName": "Jerusalem, Israel",
-    "eraNotes": "Capital of Judah/Israel; Temple Mount area. Continuous habitation into the modern city."
+    "eraNotes": "Capital of Judah/Israel; Temple Mount area. Continuous habitation into the modern city.",
+    "eras": [
+      "united",
+      "divided",
+      "exile",
+      "gospels",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "bethlehem",
     "name": "Bethlehem",
-    "aliases": ["Bethlehem", "Bethlehem Ephrathah", "Ephrath"],
+    "aliases": [
+      "Bethlehem",
+      "Bethlehem Ephrathah",
+      "Ephrath"
+    ],
     "lat": 31.7054,
     "lng": 35.2024,
     "modernName": "Bethlehem, West Bank",
-    "eraNotes": "Judahite town south of Jerusalem; associated with David and Jesus’ birth narratives."
+    "eraNotes": "Judahite town south of Jerusalem; associated with David and Jesus’ birth narratives.",
+    "eras": [
+      "united",
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "nazareth",
     "name": "Nazareth",
-    "aliases": ["Nazareth"],
+    "aliases": [
+      "Nazareth"
+    ],
     "lat": 32.6996,
     "lng": 35.3035,
     "modernName": "Nazareth, Israel",
-    "eraNotes": "Galilean village; childhood home of Jesus in the Gospels."
+    "eraNotes": "Galilean village; childhood home of Jesus in the Gospels.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "capernaum",
     "name": "Capernaum",
-    "aliases": ["Capernaum", "Kfar Nahum"],
+    "aliases": [
+      "Capernaum",
+      "Kfar Nahum"
+    ],
     "lat": 32.8803,
     "lng": 35.575,
     "modernName": "Capernaum (Kfar Nahum), Israel",
-    "eraNotes": "Fishing town on the NW shore of the Sea of Galilee; base for Jesus’ Galilean ministry."
+    "eraNotes": "Fishing town on the NW shore of the Sea of Galilee; base for Jesus’ Galilean ministry.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "galilee_sea",
     "name": "Sea of Galilee",
-    "aliases": ["Sea of Galilee", "Lake of Gennesaret", "Sea of Tiberias", "Kinneret"],
+    "aliases": [
+      "Sea of Galilee",
+      "Lake of Gennesaret",
+      "Sea of Tiberias",
+      "Kinneret"
+    ],
     "lat": 32.822,
     "lng": 35.59,
     "modernName": "Sea of Galilee, Israel",
-    "eraNotes": "Freshwater lake in northern Israel; setting for many Gospel scenes."
+    "eraNotes": "Freshwater lake in northern Israel; setting for many Gospel scenes.",
+    "eras": [
+      "gospels",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "jordan_river",
     "name": "Jordan River",
-    "aliases": ["Jordan River", "Jordan", "the Jordan"],
+    "aliases": [
+      "Jordan River",
+      "Jordan",
+      "the Jordan"
+    ],
     "lat": 31.76,
     "lng": 35.55,
     "modernName": "Jordan River",
-    "eraNotes": "River forming much of the eastern edge of the biblical land; baptism of Jesus associated with its lower reaches."
+    "eraNotes": "River forming much of the eastern edge of the biblical land; baptism of Jesus associated with its lower reaches.",
+    "eras": [
+      "conquest",
+      "gospels",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "euphrates",
@@ -66,825 +124,1502 @@
     "lat": 35.12,
     "lng": 40.43,
     "modernName": "Euphrates River",
-    "eraNotes": "Major Mesopotamian river; often marks the ideal northeastern reach of the promised land and appears in patriarchal and prophetic texts. Pin near the middle Euphrates corridor."
+    "eraNotes": "Major Mesopotamian river; often marks the ideal northeastern reach of the promised land and appears in patriarchal and prophetic texts. Pin near the middle Euphrates corridor.",
+    "eras": [
+      "patriarchs",
+      "exile"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "jericho",
     "name": "Jericho",
-    "aliases": ["Jericho"],
+    "aliases": [
+      "Jericho"
+    ],
     "lat": 31.8706,
     "lng": 35.4444,
     "modernName": "Jericho, West Bank",
-    "eraNotes": "Oasis city in the Jordan Valley; associated with Joshua’s conquest and NT visits."
+    "eraNotes": "Oasis city in the Jordan Valley; associated with Joshua’s conquest and NT visits.",
+    "eras": [
+      "conquest",
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "hebron",
     "name": "Hebron",
-    "aliases": ["Hebron", "Kiriath Arba", "Kirjath-arba"],
+    "aliases": [
+      "Hebron",
+      "Kiriath Arba",
+      "Kirjath-arba"
+    ],
     "lat": 31.5326,
     "lng": 35.0998,
     "modernName": "Hebron, West Bank",
-    "eraNotes": "Patriarchal city; burial tradition at Machpelah."
+    "eraNotes": "Patriarchal city; burial tradition at Machpelah.",
+    "eras": [
+      "patriarchs",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "beersheba",
     "name": "Beersheba",
-    "aliases": ["Beersheba", "Beer-sheba", "Beer Sheba"],
+    "aliases": [
+      "Beersheba",
+      "Beer-sheba",
+      "Beer Sheba"
+    ],
     "lat": 31.2518,
     "lng": 34.7913,
     "modernName": "Be'er Sheva, Israel",
-    "eraNotes": "Southern landmark of Israelite territory; patriarchal wells tradition."
+    "eraNotes": "Southern landmark of Israelite territory; patriarchal wells tradition.",
+    "eras": [
+      "patriarchs",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "shechem",
     "name": "Shechem",
-    "aliases": ["Shechem", "Sychar"],
+    "aliases": [
+      "Shechem",
+      "Sychar"
+    ],
     "lat": 32.2135,
     "lng": 35.2819,
     "modernName": "Nablus / Tell Balata area, West Bank",
-    "eraNotes": "Central hill-country city; Jacob and Joseph traditions; nearby Sychar in John."
+    "eraNotes": "Central hill-country city; Jacob and Joseph traditions; nearby Sychar in John.",
+    "eras": [
+      "patriarchs",
+      "conquest",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "bethel",
     "name": "Bethel",
-    "aliases": ["Bethel", "Luz"],
+    "aliases": [
+      "Bethel",
+      "Luz"
+    ],
     "lat": 31.9306,
     "lng": 35.221,
     "modernName": "Beitin / Bethel area, West Bank",
-    "eraNotes": "Important sanctuary site in patriarchal and Israelite narratives."
+    "eraNotes": "Important sanctuary site in patriarchal and Israelite narratives.",
+    "eras": [
+      "patriarchs",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "ai",
     "name": "Ai",
-    "aliases": ["Ai", "Hai"],
+    "aliases": [
+      "Ai",
+      "Hai"
+    ],
     "lat": 31.9167,
     "lng": 35.2611,
     "modernName": "et-Tell / Ai region, West Bank",
-    "eraNotes": "Town associated with Joshua’s campaigns east of Bethel."
+    "eraNotes": "Town associated with Joshua’s campaigns east of Bethel.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
   },
   {
     "id": "shiloh",
     "name": "Shiloh",
-    "aliases": ["Shiloh"],
+    "aliases": [
+      "Shiloh"
+    ],
     "lat": 32.0556,
     "lng": 35.2897,
     "modernName": "Khirbet Seilun, West Bank",
-    "eraNotes": "Early Israelite cult center; Tabernacle tradition before Jerusalem."
+    "eraNotes": "Early Israelite cult center; Tabernacle tradition before Jerusalem.",
+    "eras": [
+      "conquest",
+      "judges",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "tirzah",
     "name": "Tirzah",
-    "aliases": ["Tirzah"],
+    "aliases": [
+      "Tirzah"
+    ],
     "lat": 32.287,
     "lng": 35.338,
     "modernName": "Tell el-Farah (North), West Bank",
-    "eraNotes": "Early capital of the northern kingdom (Jeroboam and successors) before Samaria."
+    "eraNotes": "Early capital of the northern kingdom (Jeroboam and successors) before Samaria.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "megiddo",
     "name": "Megiddo",
-    "aliases": ["Megiddo", "Armageddon"],
+    "aliases": [
+      "Megiddo",
+      "Armageddon"
+    ],
     "lat": 32.585,
     "lng": 35.185,
     "modernName": "Tel Megiddo, Israel",
-    "eraNotes": "Strategic Jezreel Valley fortress; later apocalyptic association."
+    "eraNotes": "Strategic Jezreel Valley fortress; later apocalyptic association.",
+    "eras": [
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "hazor",
     "name": "Hazor",
-    "aliases": ["Hazor"],
+    "aliases": [
+      "Hazor"
+    ],
     "lat": 33.0167,
     "lng": 35.5681,
     "modernName": "Tel Hazor, Israel",
-    "eraNotes": "Major Canaanite/Israelite city in Upper Galilee."
+    "eraNotes": "Major Canaanite/Israelite city in Upper Galilee.",
+    "eras": [
+      "conquest",
+      "united"
+    ],
+    "region": "levant"
   },
   {
     "id": "dan",
     "name": "Dan",
-    "aliases": ["Dan", "Laish", "Leshem"],
+    "aliases": [
+      "Dan",
+      "Laish",
+      "Leshem"
+    ],
     "lat": 33.2486,
     "lng": 35.6525,
     "modernName": "Tel Dan, Israel",
-    "eraNotes": "Northern boundary marker of Israel; sanctuary tradition."
+    "eraNotes": "Northern boundary marker of Israel; sanctuary tradition.",
+    "eras": [
+      "conquest",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "caesarea",
     "name": "Caesarea",
-    "aliases": ["Caesarea", "Caesarea Maritima", "Caesarea by the Sea"],
+    "aliases": [
+      "Caesarea",
+      "Caesarea Maritima",
+      "Caesarea by the Sea"
+    ],
     "lat": 32.5005,
     "lng": 34.8917,
     "modernName": "Caesarea, Israel",
-    "eraNotes": "Herodian port and Roman capital of Judea; key Acts setting."
+    "eraNotes": "Herodian port and Roman capital of Judea; key Acts setting.",
+    "eras": [
+      "acts",
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "caesarea_philippi",
     "name": "Caesarea Philippi",
-    "aliases": ["Caesarea Philippi", "Paneas", "Banias"],
+    "aliases": [
+      "Caesarea Philippi",
+      "Paneas",
+      "Banias"
+    ],
     "lat": 33.2483,
     "lng": 35.6944,
     "modernName": "Banias, Golan Heights",
-    "eraNotes": "Northern city at Hermon springs; Peter’s confession setting."
+    "eraNotes": "Northern city at Hermon springs; Peter’s confession setting.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "joppa",
     "name": "Joppa",
-    "aliases": ["Joppa", "Jaffa", "Japho"],
+    "aliases": [
+      "Joppa",
+      "Jaffa",
+      "Japho"
+    ],
     "lat": 32.0535,
     "lng": 34.7505,
     "modernName": "Jaffa / Yafo, Tel Aviv, Israel",
-    "eraNotes": "Mediterranean port; Jonah and Peter traditions."
+    "eraNotes": "Mediterranean port; Jonah and Peter traditions.",
+    "eras": [
+      "united",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "ashkelon",
     "name": "Ashkelon",
-    "aliases": ["Ashkelon", "Askelon"],
+    "aliases": [
+      "Ashkelon",
+      "Askelon"
+    ],
     "lat": 31.6688,
     "lng": 34.5743,
     "modernName": "Ashkelon, Israel",
-    "eraNotes": "Philistine coastal city."
+    "eraNotes": "Philistine coastal city.",
+    "eras": [
+      "judges",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "gaza",
     "name": "Gaza",
-    "aliases": ["Gaza", "Azzah"],
+    "aliases": [
+      "Gaza",
+      "Azzah"
+    ],
     "lat": 31.5017,
     "lng": 34.4668,
     "modernName": "Gaza",
-    "eraNotes": "Philistine city; Samson and Acts road traditions."
+    "eraNotes": "Philistine city; Samson and Acts road traditions.",
+    "eras": [
+      "judges",
+      "united",
+      "divided",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "ashdod",
     "name": "Ashdod",
-    "aliases": ["Ashdod", "Azotus"],
+    "aliases": [
+      "Ashdod",
+      "Azotus"
+    ],
     "lat": 31.8044,
     "lng": 34.6553,
     "modernName": "Ashdod, Israel",
-    "eraNotes": "Philistine city; Azotus in Acts."
+    "eraNotes": "Philistine city; Azotus in Acts.",
+    "eras": [
+      "united",
+      "divided",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "gath",
     "name": "Gath",
-    "aliases": ["Gath"],
+    "aliases": [
+      "Gath"
+    ],
     "lat": 31.7,
     "lng": 34.847,
     "modernName": "Tell es-Safi area, Israel",
-    "eraNotes": "Philistine city associated with Goliath."
+    "eraNotes": "Philistine city associated with Goliath.",
+    "eras": [
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "ekron",
     "name": "Ekron",
-    "aliases": ["Ekron"],
+    "aliases": [
+      "Ekron"
+    ],
     "lat": 31.778,
     "lng": 34.846,
     "modernName": "Tel Miqne area, Israel",
-    "eraNotes": "Philistine city; Ark narrative."
+    "eraNotes": "Philistine city; Ark narrative.",
+    "eras": [
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   },
   {
     "id": "samaria_city",
     "name": "Samaria",
-    "aliases": ["Samaria", "Sebaste"],
+    "aliases": [
+      "Samaria",
+      "Sebaste"
+    ],
     "lat": 32.2764,
     "lng": 35.1903,
     "modernName": "Sebastia, West Bank",
-    "eraNotes": "Capital of the northern kingdom; later Sebaste."
+    "eraNotes": "Capital of the northern kingdom; later Sebaste.",
+    "eras": [
+      "divided",
+      "exile"
+    ],
+    "region": "levant"
   },
   {
     "id": "emmaus",
     "name": "Emmaus",
-    "aliases": ["Emmaus"],
+    "aliases": [
+      "Emmaus"
+    ],
     "lat": 31.8394,
     "lng": 34.9897,
     "modernName": "Emmaus / Nicopolis tradition (Israel)",
-    "eraNotes": "Village associated with the post-resurrection road story; location debated."
+    "eraNotes": "Village associated with the post-resurrection road story; location debated.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "bethany",
     "name": "Bethany",
-    "aliases": ["Bethany", "Bethany beyond the Jordan"],
+    "aliases": [
+      "Bethany",
+      "Bethany beyond the Jordan"
+    ],
     "lat": 31.7717,
     "lng": 35.2553,
     "modernName": "al-Eizariya / Bethany area, West Bank",
-    "eraNotes": "Village near Jerusalem; Lazarus tradition. Distinct from Bethany-beyond-Jordan debates."
+    "eraNotes": "Village near Jerusalem; Lazarus tradition. Distinct from Bethany-beyond-Jordan debates.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "bethsaida",
     "name": "Bethsaida",
-    "aliases": ["Bethsaida"],
+    "aliases": [
+      "Bethsaida"
+    ],
     "lat": 32.91,
     "lng": 35.63,
     "modernName": "et-Tell / el-Araj area, Israel",
-    "eraNotes": "Fishing town near the Sea of Galilee; exact site debated."
+    "eraNotes": "Fishing town near the Sea of Galilee; exact site debated.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "chorazin",
     "name": "Chorazin",
-    "aliases": ["Chorazin", "Korazin"],
+    "aliases": [
+      "Chorazin",
+      "Korazin"
+    ],
     "lat": 32.9114,
     "lng": 35.5642,
     "modernName": "Korazim, Israel",
-    "eraNotes": "Galilean town rebuked with Bethsaida and Capernaum."
+    "eraNotes": "Galilean town rebuked with Bethsaida and Capernaum.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "cana",
     "name": "Cana",
-    "aliases": ["Cana", "Cana of Galilee"],
+    "aliases": [
+      "Cana",
+      "Cana of Galilee"
+    ],
     "lat": 32.7464,
     "lng": 35.3386,
     "modernName": "Kafr Kanna area, Israel",
-    "eraNotes": "Wedding at Cana tradition; site identification debated."
+    "eraNotes": "Wedding at Cana tradition; site identification debated.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "nain",
     "name": "Nain",
-    "aliases": ["Nain"],
+    "aliases": [
+      "Nain"
+    ],
     "lat": 32.6306,
     "lng": 35.3486,
     "modernName": "Nein, Israel",
-    "eraNotes": "Village south of Nazareth; raising of the widow’s son."
+    "eraNotes": "Village south of Nazareth; raising of the widow’s son.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "sidon",
     "name": "Sidon",
-    "aliases": ["Sidon", "Zidon"],
+    "aliases": [
+      "Sidon",
+      "Zidon"
+    ],
     "lat": 33.5606,
     "lng": 35.3758,
     "modernName": "Sidon, Lebanon",
-    "eraNotes": "Phoenician coastal city."
+    "eraNotes": "Phoenician coastal city.",
+    "eras": [
+      "united",
+      "divided",
+      "gospels",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "tyre",
     "name": "Tyre",
-    "aliases": ["Tyre"],
+    "aliases": [
+      "Tyre"
+    ],
     "lat": 33.2705,
     "lng": 35.2033,
     "modernName": "Tyre, Lebanon",
-    "eraNotes": "Phoenician island/coastal city; prophetic and NT connections."
+    "eraNotes": "Phoenician island/coastal city; prophetic and NT connections.",
+    "eras": [
+      "united",
+      "divided",
+      "gospels",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "damascus",
     "name": "Damascus",
-    "aliases": ["Damascus"],
+    "aliases": [
+      "Damascus"
+    ],
     "lat": 33.5138,
     "lng": 36.2765,
     "modernName": "Damascus, Syria",
-    "eraNotes": "Aramean capital; Paul’s conversion road tradition."
+    "eraNotes": "Aramean capital; Paul’s conversion road tradition.",
+    "eras": [
+      "divided",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "antioch",
     "name": "Antioch",
-    "aliases": ["Antioch", "Antioch of Syria", "Syrian Antioch"],
+    "aliases": [
+      "Antioch",
+      "Antioch of Syria",
+      "Syrian Antioch"
+    ],
     "lat": 36.2026,
     "lng": 36.1612,
     "modernName": "Antakya, Turkey",
-    "eraNotes": "Major Hellenistic city; early Christian mission hub in Acts."
+    "eraNotes": "Major Hellenistic city; early Christian mission hub in Acts.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean"
   },
   {
     "id": "antioch_pisidia",
     "name": "Antioch of Pisidia",
-    "aliases": ["Antioch of Pisidia", "Pisidian Antioch"],
+    "aliases": [
+      "Antioch of Pisidia",
+      "Pisidian Antioch"
+    ],
     "lat": 38.3042,
     "lng": 31.1894,
     "modernName": "Yalvaç area, Turkey",
-    "eraNotes": "Roman colony visited on Paul’s first missionary journey."
+    "eraNotes": "Roman colony visited on Paul’s first missionary journey.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "tarsus",
     "name": "Tarsus",
-    "aliases": ["Tarsus"],
+    "aliases": [
+      "Tarsus"
+    ],
     "lat": 36.9177,
     "lng": 34.8957,
     "modernName": "Tarsus, Turkey",
-    "eraNotes": "Cilician city; Paul’s hometown."
+    "eraNotes": "Cilician city; Paul’s hometown.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "iconium",
     "name": "Iconium",
-    "aliases": ["Iconium"],
+    "aliases": [
+      "Iconium"
+    ],
     "lat": 37.8746,
     "lng": 32.4932,
     "modernName": "Konya, Turkey",
-    "eraNotes": "City on Paul’s first missionary journey."
+    "eraNotes": "City on Paul’s first missionary journey.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "lystra",
     "name": "Lystra",
-    "aliases": ["Lystra"],
+    "aliases": [
+      "Lystra"
+    ],
     "lat": 37.6,
     "lng": 32.333,
     "modernName": "Hatunsaray area, Turkey",
-    "eraNotes": "Lycaonian town; Timothy’s home region."
+    "eraNotes": "Lycaonian town; Timothy’s home region.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "derbe",
     "name": "Derbe",
-    "aliases": ["Derbe"],
+    "aliases": [
+      "Derbe"
+    ],
     "lat": 37.35,
     "lng": 33.2,
     "modernName": "Kerti Höyük area, Turkey",
-    "eraNotes": "Lycaonian town on Paul’s first journey."
+    "eraNotes": "Lycaonian town on Paul’s first journey.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "perga",
     "name": "Perga",
-    "aliases": ["Perga", "Perge"],
+    "aliases": [
+      "Perga",
+      "Perge"
+    ],
     "lat": 36.9594,
     "lng": 30.8542,
     "modernName": "Aksu / Perge, Turkey",
-    "eraNotes": "Pamphylian city visited early on Paul’s journeys."
+    "eraNotes": "Pamphylian city visited early on Paul’s journeys.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "attalia",
     "name": "Attalia",
-    "aliases": ["Attalia", "Attaleia"],
+    "aliases": [
+      "Attalia",
+      "Attaleia"
+    ],
     "lat": 36.8969,
     "lng": 30.7133,
     "modernName": "Antalya, Turkey",
-    "eraNotes": "Pamphylian port; return harbor after first journey."
+    "eraNotes": "Pamphylian port; return harbor after first journey.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "seleucia",
     "name": "Seleucia",
-    "aliases": ["Seleucia", "Seleucia Pieria"],
+    "aliases": [
+      "Seleucia",
+      "Seleucia Pieria"
+    ],
     "lat": 36.1167,
     "lng": 35.9167,
     "modernName": "Samandağ / Çevlik area, Turkey",
-    "eraNotes": "Port of Antioch from which Paul and Barnabas sailed."
+    "eraNotes": "Port of Antioch from which Paul and Barnabas sailed.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean"
   },
   {
     "id": "cyprus_salamis",
     "name": "Salamis",
-    "aliases": ["Salamis"],
+    "aliases": [
+      "Salamis"
+    ],
     "lat": 35.1856,
     "lng": 33.9025,
     "modernName": "Salamis, Cyprus",
-    "eraNotes": "Eastern Cypriot city; first stop after sailing from Seleucia."
+    "eraNotes": "Eastern Cypriot city; first stop after sailing from Seleucia.",
+    "eras": [
+      "acts"
+    ],
+    "region": "cyprus"
   },
   {
     "id": "cyprus_paphos",
     "name": "Paphos",
-    "aliases": ["Paphos"],
+    "aliases": [
+      "Paphos"
+    ],
     "lat": 34.772,
     "lng": 32.4297,
     "modernName": "Paphos, Cyprus",
-    "eraNotes": "Western Cypriot city; encounter with Sergius Paulus."
+    "eraNotes": "Western Cypriot city; encounter with Sergius Paulus.",
+    "eras": [
+      "acts"
+    ],
+    "region": "cyprus"
   },
   {
     "id": "ephesus",
     "name": "Ephesus",
-    "aliases": ["Ephesus"],
+    "aliases": [
+      "Ephesus"
+    ],
     "lat": 37.9394,
     "lng": 27.3408,
     "modernName": "Selçuk / Ephesus, Turkey",
-    "eraNotes": "Major Asian metropolis; long Pauline stay; Artemis cult."
+    "eraNotes": "Major Asian metropolis; long Pauline stay; Artemis cult.",
+    "eras": [
+      "acts",
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "smyrna",
     "name": "Smyrna",
-    "aliases": ["Smyrna"],
+    "aliases": [
+      "Smyrna"
+    ],
     "lat": 38.4192,
     "lng": 27.1287,
     "modernName": "İzmir, Turkey",
-    "eraNotes": "Asian coastal city; one of the seven churches of Revelation."
+    "eraNotes": "Asian coastal city; one of the seven churches of Revelation.",
+    "eras": [
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "pergammum",
     "name": "Pergamum",
-    "aliases": ["Pergamum", "Pergamon"],
+    "aliases": [
+      "Pergamum",
+      "Pergamon"
+    ],
     "lat": 39.1167,
     "lng": 27.1833,
     "modernName": "Bergama, Turkey",
-    "eraNotes": "Asian city; one of the seven churches of Revelation."
+    "eraNotes": "Asian city; one of the seven churches of Revelation.",
+    "eras": [
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "thyatira",
     "name": "Thyatira",
-    "aliases": ["Thyatira"],
+    "aliases": [
+      "Thyatira"
+    ],
     "lat": 38.9208,
     "lng": 27.8361,
     "modernName": "Akhisar, Turkey",
-    "eraNotes": "Lydian city; Lydia of Thyatira in Acts; Revelation church."
+    "eraNotes": "Lydian city; Lydia of Thyatira in Acts; Revelation church.",
+    "eras": [
+      "acts",
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "sardis",
     "name": "Sardis",
-    "aliases": ["Sardis"],
+    "aliases": [
+      "Sardis"
+    ],
     "lat": 38.4883,
     "lng": 28.0403,
     "modernName": "Sart, Turkey",
-    "eraNotes": "Former Lydian capital; Revelation church."
+    "eraNotes": "Former Lydian capital; Revelation church.",
+    "eras": [
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "philadelphia_asia",
     "name": "Philadelphia",
-    "aliases": ["Philadelphia"],
+    "aliases": [
+      "Philadelphia"
+    ],
     "lat": 38.35,
     "lng": 28.5167,
     "modernName": "Alaşehir, Turkey",
-    "eraNotes": "Asian city; one of the seven churches of Revelation."
+    "eraNotes": "Asian city; one of the seven churches of Revelation.",
+    "eras": [
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "laodicea",
     "name": "Laodicea",
-    "aliases": ["Laodicea", "Laodicea on the Lycus"],
+    "aliases": [
+      "Laodicea",
+      "Laodicea on the Lycus"
+    ],
     "lat": 37.8358,
     "lng": 29.1075,
     "modernName": "Denizli area, Turkey",
-    "eraNotes": "Wealthy Lycus Valley city; Revelation church."
+    "eraNotes": "Wealthy Lycus Valley city; Revelation church.",
+    "eras": [
+      "revelation"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "colossae",
     "name": "Colossae",
-    "aliases": ["Colossae", "Colosse"],
+    "aliases": [
+      "Colossae",
+      "Colosse"
+    ],
     "lat": 37.7936,
     "lng": 29.2594,
     "modernName": "Honaz area, Turkey",
-    "eraNotes": "Phrygian town; letter to the Colossians."
+    "eraNotes": "Phrygian town; letter to the Colossians.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "troas",
     "name": "Troas",
-    "aliases": ["Troas", "Alexandria Troas"],
+    "aliases": [
+      "Troas",
+      "Alexandria Troas"
+    ],
     "lat": 39.7514,
     "lng": 26.1586,
     "modernName": "Dalyan / Alexandria Troas, Turkey",
-    "eraNotes": "Aegean port; Macedonian call vision."
+    "eraNotes": "Aegean port; Macedonian call vision.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "philippi",
     "name": "Philippi",
-    "aliases": ["Philippi"],
+    "aliases": [
+      "Philippi"
+    ],
     "lat": 41.0131,
     "lng": 24.2864,
     "modernName": "Filippoi, Greece",
-    "eraNotes": "Roman colony in Macedonia; first European church tradition."
+    "eraNotes": "Roman colony in Macedonia; first European church tradition.",
+    "eras": [
+      "acts"
+    ],
+    "region": "greece"
   },
   {
     "id": "thessalonica",
     "name": "Thessalonica",
-    "aliases": ["Thessalonica", "Thessaloniki"],
+    "aliases": [
+      "Thessalonica",
+      "Thessaloniki"
+    ],
     "lat": 40.6401,
     "lng": 22.9444,
     "modernName": "Thessaloniki, Greece",
-    "eraNotes": "Macedonian capital; Pauline letters."
+    "eraNotes": "Macedonian capital; Pauline letters.",
+    "eras": [
+      "acts"
+    ],
+    "region": "greece"
   },
   {
     "id": "berea",
     "name": "Berea",
-    "aliases": ["Berea", "Beroea"],
+    "aliases": [
+      "Berea",
+      "Beroea"
+    ],
     "lat": 40.5211,
     "lng": 22.2028,
     "modernName": "Veria, Greece",
-    "eraNotes": "Macedonian city praised for examining the Scriptures."
+    "eraNotes": "Macedonian city praised for examining the Scriptures.",
+    "eras": [
+      "acts"
+    ],
+    "region": "greece"
   },
   {
     "id": "athens",
     "name": "Athens",
-    "aliases": ["Athens"],
+    "aliases": [
+      "Athens"
+    ],
     "lat": 37.9715,
     "lng": 23.7267,
     "modernName": "Athens, Greece",
-    "eraNotes": "Greek cultural center; Areopagus speech."
+    "eraNotes": "Greek cultural center; Areopagus speech.",
+    "eras": [
+      "acts"
+    ],
+    "region": "greece"
   },
   {
     "id": "corinth",
     "name": "Corinth",
-    "aliases": ["Corinth"],
+    "aliases": [
+      "Corinth"
+    ],
     "lat": 37.9061,
     "lng": 22.8803,
     "modernName": "Ancient Corinth, Greece",
-    "eraNotes": "Major Achaian city; long Pauline ministry; Corinthian letters."
+    "eraNotes": "Major Achaian city; long Pauline ministry; Corinthian letters.",
+    "eras": [
+      "acts"
+    ],
+    "region": "greece"
   },
   {
     "id": "cenchreae",
     "name": "Cenchreae",
-    "aliases": ["Cenchreae", "Cenchrea"],
+    "aliases": [
+      "Cenchreae",
+      "Cenchrea"
+    ],
     "lat": 37.8847,
     "lng": 22.9953,
     "modernName": "Kechries, Greece",
-    "eraNotes": "Eastern port of Corinth; Phoebe’s church."
+    "eraNotes": "Eastern port of Corinth; Phoebe’s church.",
+    "eras": [
+      "acts"
+    ],
+    "region": "greece"
   },
   {
     "id": "rome",
     "name": "Rome",
-    "aliases": ["Rome"],
+    "aliases": [
+      "Rome"
+    ],
     "lat": 41.8902,
     "lng": 12.4922,
     "modernName": "Rome, Italy",
-    "eraNotes": "Imperial capital; destination of Paul’s appeal; letter to the Romans."
+    "eraNotes": "Imperial capital; destination of Paul’s appeal; letter to the Romans.",
+    "eras": [
+      "acts"
+    ],
+    "region": "italy"
   },
   {
     "id": "puteoli",
     "name": "Puteoli",
-    "aliases": ["Puteoli"],
+    "aliases": [
+      "Puteoli"
+    ],
     "lat": 40.8258,
     "lng": 14.1208,
     "modernName": "Pozzuoli, Italy",
-    "eraNotes": "Italian port where Paul landed en route to Rome."
+    "eraNotes": "Italian port where Paul landed en route to Rome.",
+    "eras": [
+      "acts"
+    ],
+    "region": "italy"
   },
   {
     "id": "malta",
     "name": "Malta",
-    "aliases": ["Malta", "Melita"],
+    "aliases": [
+      "Malta",
+      "Melita"
+    ],
     "lat": 35.8997,
     "lng": 14.5147,
     "modernName": "Malta",
-    "eraNotes": "Island of Paul’s shipwreck in Acts 27–28."
+    "eraNotes": "Island of Paul’s shipwreck in Acts 27–28.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean"
   },
   {
     "id": "crete_fair_havens",
     "name": "Fair Havens",
-    "aliases": ["Fair Havens"],
+    "aliases": [
+      "Fair Havens"
+    ],
     "lat": 34.9275,
     "lng": 24.8081,
     "modernName": "Kali Limenes, Crete, Greece",
-    "eraNotes": "Harbor on Crete during Paul’s voyage to Rome."
+    "eraNotes": "Harbor on Crete during Paul’s voyage to Rome.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean"
   },
   {
     "id": "myra",
     "name": "Myra",
-    "aliases": ["Myra"],
+    "aliases": [
+      "Myra"
+    ],
     "lat": 36.2583,
     "lng": 29.9853,
     "modernName": "Demre, Turkey",
-    "eraNotes": "Lycian port; ship transfer on the voyage to Rome."
+    "eraNotes": "Lycian port; ship transfer on the voyage to Rome.",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
   },
   {
     "id": "egypt_memphis",
     "name": "Memphis",
-    "aliases": ["Memphis", "Noph"],
+    "aliases": [
+      "Memphis",
+      "Noph"
+    ],
     "lat": 29.8447,
     "lng": 31.2508,
     "modernName": "Mit Rahina area, Egypt",
-    "eraNotes": "Ancient Egyptian capital region referenced in prophetic literature."
+    "eraNotes": "Ancient Egyptian capital region referenced in prophetic literature.",
+    "eras": [
+      "patriarchs",
+      "exodus",
+      "exile"
+    ],
+    "region": "egypt"
   },
   {
     "id": "egypt_thebes",
     "name": "Thebes",
-    "aliases": ["Thebes", "No-Amon", "No Amon"],
+    "aliases": [
+      "Thebes",
+      "No-Amon",
+      "No Amon"
+    ],
     "lat": 25.7188,
     "lng": 32.6573,
     "modernName": "Luxor, Egypt",
-    "eraNotes": "Upper Egyptian capital; prophetic oracles against No-Amon."
+    "eraNotes": "Upper Egyptian capital; prophetic oracles against No-Amon.",
+    "eras": [
+      "exodus",
+      "exile"
+    ],
+    "region": "egypt"
   },
   {
     "id": "egypt_rameses",
     "name": "Rameses",
-    "aliases": ["Rameses", "Raamses", "Ramesses"],
+    "aliases": [
+      "Rameses",
+      "Raamses",
+      "Ramesses"
+    ],
     "lat": 30.805,
     "lng": 31.838,
     "modernName": "Qantir / Pi-Ramesses area, Egypt",
-    "eraNotes": "Store-city and traditional Exodus departure region."
+    "eraNotes": "Store-city and traditional Exodus departure region.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "succoth",
     "name": "Succoth",
-    "aliases": ["Succoth", "Sukkoth"],
+    "aliases": [
+      "Succoth",
+      "Sukkoth"
+    ],
     "lat": 30.55,
     "lng": 32.05,
     "modernName": "Eastern Nile Delta region, Egypt",
-    "eraNotes": "First Exodus encampment after leaving Rameses; exact site debated."
+    "eraNotes": "First Exodus encampment after leaving Rameses; exact site debated.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "etham",
     "name": "Etham",
-    "aliases": ["Etham"],
+    "aliases": [
+      "Etham"
+    ],
     "lat": 30.35,
     "lng": 32.35,
     "modernName": "Edge of the wilderness near the Isthmus of Suez",
-    "eraNotes": "Exodus staging point before the sea crossing traditions."
+    "eraNotes": "Exodus staging point before the sea crossing traditions.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "pi_hahiroth",
     "name": "Pi-hahiroth",
-    "aliases": ["Pi-hahiroth", "Pi Hahiroth"],
+    "aliases": [
+      "Pi-hahiroth",
+      "Pi Hahiroth"
+    ],
     "lat": 30.05,
     "lng": 32.55,
     "modernName": "Northern Red Sea / Bitter Lakes region (debated)",
-    "eraNotes": "Campsite before the sea crossing; geography debated."
+    "eraNotes": "Campsite before the sea crossing; geography debated.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "marah",
     "name": "Marah",
-    "aliases": ["Marah"],
+    "aliases": [
+      "Marah"
+    ],
     "lat": 29.5,
     "lng": 32.95,
     "modernName": "NW Sinai bitter-water tradition (debated)",
-    "eraNotes": "First wilderness water crisis after the sea."
+    "eraNotes": "First wilderness water crisis after the sea.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "elim",
     "name": "Elim",
-    "aliases": ["Elim"],
+    "aliases": [
+      "Elim"
+    ],
     "lat": 29.25,
     "lng": 33.15,
     "modernName": "NW Sinai oasis tradition (debated)",
-    "eraNotes": "Oasis with springs and palms in Exodus itinerary."
+    "eraNotes": "Oasis with springs and palms in Exodus itinerary.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "rephidim",
     "name": "Rephidim",
-    "aliases": ["Rephidim"],
+    "aliases": [
+      "Rephidim"
+    ],
     "lat": 28.7,
     "lng": 33.75,
     "modernName": "SW Sinai region (debated)",
-    "eraNotes": "Site of water from the rock and Amalek conflict traditions."
+    "eraNotes": "Site of water from the rock and Amalek conflict traditions.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "sinai",
     "name": "Mount Sinai",
-    "aliases": ["Mount Sinai", "Sinai", "Horeb", "Mount Horeb"],
+    "aliases": [
+      "Mount Sinai",
+      "Sinai",
+      "Horeb",
+      "Mount Horeb"
+    ],
     "lat": 28.539,
     "lng": 33.975,
     "modernName": "Jebel Musa tradition, South Sinai, Egypt",
-    "eraNotes": "Traditional mountain of the covenant; alternative Horeb/Sinai proposals exist."
+    "eraNotes": "Traditional mountain of the covenant; alternative Horeb/Sinai proposals exist.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "kadesh_barnea",
     "name": "Kadesh-barnea",
-    "aliases": ["Kadesh-barnea", "Kadesh", "Kadesh Barnea"],
+    "aliases": [
+      "Kadesh-barnea",
+      "Kadesh",
+      "Kadesh Barnea"
+    ],
     "lat": 30.6822,
     "lng": 34.4278,
     "modernName": "Ein el-Qudeirat area, Sinai/Negev border",
-    "eraNotes": "Major wilderness staging area; spy narrative and long sojourn traditions."
+    "eraNotes": "Major wilderness staging area; spy narrative and long sojourn traditions.",
+    "eras": [
+      "exodus",
+      "conquest"
+    ],
+    "region": "levant"
   },
   {
     "id": "ezion_geber",
     "name": "Ezion-geber",
-    "aliases": ["Ezion-geber", "Ezion Geber", "Eziongeber"],
+    "aliases": [
+      "Ezion-geber",
+      "Ezion Geber",
+      "Eziongeber"
+    ],
     "lat": 29.547,
     "lng": 34.978,
     "modernName": "Gulf of Aqaba / Eilat–Aqaba area",
-    "eraNotes": "Red Sea port region associated with wilderness itinerary and later trade."
+    "eraNotes": "Red Sea port region associated with wilderness itinerary and later trade.",
+    "eras": [
+      "exodus",
+      "united"
+    ],
+    "region": "levant"
   },
   {
     "id": "moab_plains",
     "name": "Plains of Moab",
-    "aliases": ["Plains of Moab", "Moab"],
+    "aliases": [
+      "Plains of Moab",
+      "Moab"
+    ],
     "lat": 31.8,
     "lng": 35.7,
     "modernName": "East of the Jordan opposite Jericho, Jordan",
-    "eraNotes": "Final wilderness camp before crossing into Canaan."
+    "eraNotes": "Final wilderness camp before crossing into Canaan.",
+    "eras": [
+      "exodus",
+      "conquest"
+    ],
+    "region": "levant"
   },
   {
     "id": "ur",
     "name": "Ur",
-    "aliases": ["Ur", "Ur of the Chaldeans", "Ur of the Chaldees"],
+    "aliases": [
+      "Ur",
+      "Ur of the Chaldeans",
+      "Ur of the Chaldees"
+    ],
     "lat": 30.9626,
     "lng": 46.1046,
     "modernName": "Tell el-Muqayyar, Iraq",
-    "eraNotes": "Traditional starting point of Abraham’s migration."
+    "eraNotes": "Traditional starting point of Abraham’s migration.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "haran",
     "name": "Haran",
-    "aliases": ["Haran", "Harran"],
+    "aliases": [
+      "Haran",
+      "Harran"
+    ],
     "lat": 36.86,
     "lng": 39.031,
     "modernName": "Harran, Turkey",
-    "eraNotes": "Upper Mesopotamian city; Abraham’s family sojourn."
+    "eraNotes": "Upper Mesopotamian city; Abraham’s family sojourn.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "egypt_land",
     "name": "Egypt",
-    "aliases": ["Egypt", "land of Egypt", "the land of Egypt"],
+    "aliases": [
+      "Egypt",
+      "land of Egypt",
+      "the land of Egypt"
+    ],
     "lat": 30.0444,
     "lng": 31.2357,
     "modernName": "Cairo, Egypt",
-    "eraNotes": "Nile civilization; patriarchal sojourns and Exodus setting. Map pin uses Cairo-region coordinates."
+    "eraNotes": "Nile civilization; patriarchal sojourns and Exodus setting. Map pin uses Cairo-region coordinates.",
+    "eras": [
+      "patriarchs",
+      "exodus"
+    ],
+    "region": "egypt"
   },
   {
     "id": "canaan",
     "name": "Canaan",
-    "aliases": ["Canaan", "land of Canaan", "the land of Canaan"],
+    "aliases": [
+      "Canaan",
+      "land of Canaan",
+      "the land of Canaan"
+    ],
     "lat": 31.95,
     "lng": 35.2,
     "modernName": "Levant / Israel–Palestine region",
-    "eraNotes": "Promised land region in patriarchal and conquest narratives."
+    "eraNotes": "Promised land region in patriarchal and conquest narratives.",
+    "eras": [
+      "patriarchs",
+      "conquest"
+    ],
+    "region": "levant"
   },
   {
     "id": "babylon",
     "name": "Babylon",
-    "aliases": ["Babylon", "Babel"],
+    "aliases": [
+      "Babylon",
+      "Babel"
+    ],
     "lat": 32.542,
     "lng": 44.421,
     "modernName": "Hillah area, Iraq",
-    "eraNotes": "Mesopotamian capital; exile destination and prophetic oracles."
+    "eraNotes": "Mesopotamian capital; exile destination and prophetic oracles.",
+    "eras": [
+      "exile"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "nineveh",
     "name": "Nineveh",
-    "aliases": ["Nineveh"],
+    "aliases": [
+      "Nineveh"
+    ],
     "lat": 36.3594,
     "lng": 43.1531,
     "modernName": "Mosul area, Iraq",
-    "eraNotes": "Assyrian capital; Jonah narrative."
+    "eraNotes": "Assyrian capital; Jonah narrative.",
+    "eras": [
+      "exile",
+      "divided"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "susa",
     "name": "Susa",
-    "aliases": ["Susa", "Shushan"],
+    "aliases": [
+      "Susa",
+      "Shushan"
+    ],
     "lat": 32.1892,
     "lng": 48.2578,
     "modernName": "Shush, Iran",
-    "eraNotes": "Persian royal city; Esther and Nehemiah settings."
+    "eraNotes": "Persian royal city; Esther and Nehemiah settings.",
+    "eras": [
+      "exile"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "persepolis_region",
     "name": "Persia",
-    "aliases": ["Persia", "Kingdom of Persia", "Medo-Persia"],
+    "aliases": [
+      "Persia",
+      "Kingdom of Persia",
+      "Medo-Persia"
+    ],
     "lat": 29.934,
     "lng": 52.891,
     "modernName": "Iran (Persepolis region marker)",
-    "eraNotes": "Imperial setting for later OT narratives; marker near Persepolis."
+    "eraNotes": "Imperial setting for later OT narratives; marker near Persepolis.",
+    "eras": [
+      "exile"
+    ],
+    "region": "mesopotamia"
   },
   {
     "id": "patmos",
     "name": "Patmos",
-    "aliases": ["Patmos"],
+    "aliases": [
+      "Patmos"
+    ],
     "lat": 37.3089,
     "lng": 26.545,
     "modernName": "Patmos, Greece",
-    "eraNotes": "Aegean island of John’s exile in Revelation."
+    "eraNotes": "Aegean island of John’s exile in Revelation.",
+    "eras": [
+      "revelation"
+    ],
+    "region": "mediterranean"
   },
   {
     "id": "gilgal",
     "name": "Gilgal",
-    "aliases": ["Gilgal"],
+    "aliases": [
+      "Gilgal"
+    ],
     "lat": 31.85,
     "lng": 35.48,
     "modernName": "Jordan Valley near Jericho (debated)",
-    "eraNotes": "Early Israelite camp after crossing the Jordan."
+    "eraNotes": "Early Israelite camp after crossing the Jordan.",
+    "eras": [
+      "conquest",
+      "judges"
+    ],
+    "region": "levant"
   },
   {
     "id": "mizpah",
     "name": "Mizpah",
-    "aliases": ["Mizpah", "Mizpeh"],
+    "aliases": [
+      "Mizpah",
+      "Mizpeh"
+    ],
     "lat": 31.866,
     "lng": 35.2,
     "modernName": "Tell en-Nasbeh tradition, West Bank",
-    "eraNotes": "Benjaminite assembly site; multiple Mizpahs exist in the text."
+    "eraNotes": "Benjaminite assembly site; multiple Mizpahs exist in the text.",
+    "eras": [
+      "judges",
+      "united",
+      "exile"
+    ],
+    "region": "levant"
   },
   {
     "id": "gibeah",
     "name": "Gibeah",
-    "aliases": ["Gibeah", "Gibeah of Saul"],
+    "aliases": [
+      "Gibeah",
+      "Gibeah of Saul"
+    ],
     "lat": 31.833,
     "lng": 35.23,
     "modernName": "Tell el-Ful area, Jerusalem",
-    "eraNotes": "Benjaminite town associated with Saul."
+    "eraNotes": "Benjaminite town associated with Saul.",
+    "eras": [
+      "judges",
+      "united"
+    ],
+    "region": "levant"
   },
   {
     "id": "ramah",
     "name": "Ramah",
-    "aliases": ["Ramah", "Ramah of Benjamin"],
+    "aliases": [
+      "Ramah",
+      "Ramah of Benjamin"
+    ],
     "lat": 31.85,
     "lng": 35.23,
     "modernName": "er-Ram area, West Bank",
-    "eraNotes": "Benjaminite town; Samuel and exile-road traditions."
+    "eraNotes": "Benjaminite town; Samuel and exile-road traditions.",
+    "eras": [
+      "judges",
+      "united",
+      "exile"
+    ],
+    "region": "levant"
   },
   {
     "id": "en_gedi",
     "name": "En-gedi",
-    "aliases": ["En-gedi", "Engedi", "En Gedi"],
+    "aliases": [
+      "En-gedi",
+      "Engedi",
+      "En Gedi"
+    ],
     "lat": 31.4614,
     "lng": 35.3922,
     "modernName": "Ein Gedi, Israel",
-    "eraNotes": "Oasis on the western Dead Sea; David’s wilderness refuge."
+    "eraNotes": "Oasis on the western Dead Sea; David’s wilderness refuge.",
+    "eras": [
+      "united"
+    ],
+    "region": "levant"
   },
   {
     "id": "dead_sea",
     "name": "Dead Sea",
-    "aliases": ["Dead Sea", "Salt Sea", "Sea of the Arabah"],
+    "aliases": [
+      "Dead Sea",
+      "Salt Sea",
+      "Sea of the Arabah"
+    ],
     "lat": 31.5,
     "lng": 35.5,
     "modernName": "Dead Sea",
-    "eraNotes": "Hypersaline lake; biblical Salt Sea."
+    "eraNotes": "Hypersaline lake; biblical Salt Sea.",
+    "eras": [
+      "united",
+      "divided",
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "mount_of_olives",
     "name": "Mount of Olives",
-    "aliases": ["Mount of Olives", "Olivet"],
+    "aliases": [
+      "Mount of Olives",
+      "Olivet"
+    ],
     "lat": 31.7781,
     "lng": 35.2431,
     "modernName": "Mount of Olives, Jerusalem",
-    "eraNotes": "Ridge east of Jerusalem; key Gospel settings."
+    "eraNotes": "Ridge east of Jerusalem; key Gospel settings.",
+    "eras": [
+      "gospels",
+      "acts"
+    ],
+    "region": "levant"
   },
   {
     "id": "golgotha",
     "name": "Golgotha",
-    "aliases": ["Golgotha", "Place of the Skull", "Calvary"],
+    "aliases": [
+      "Golgotha",
+      "Place of the Skull",
+      "Calvary"
+    ],
     "lat": 31.7785,
     "lng": 35.2296,
     "modernName": "Church of the Holy Sepulchre / Gordon's Calvary area, Jerusalem",
-    "eraNotes": "Traditional crucifixion site; exact spot debated within Jerusalem."
+    "eraNotes": "Traditional crucifixion site; exact spot debated within Jerusalem.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   },
   {
     "id": "bethphage",
     "name": "Bethphage",
-    "aliases": ["Bethphage"],
+    "aliases": [
+      "Bethphage"
+    ],
     "lat": 31.778,
     "lng": 35.251,
     "modernName": "Mount of Olives eastern slope, Jerusalem",
-    "eraNotes": "Village near Bethany on the approach to Jerusalem."
+    "eraNotes": "Village near Bethany on the approach to Jerusalem.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
   }
 ]

@@ -230,19 +230,7 @@ main {
   font-size: 0.74rem;
 }
 
-.map-modes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
-.map-pane {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.then-toolbar {
+.map-toolbar {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -312,47 +300,44 @@ main {
   background: rgba(91, 110, 140, 0.55);
 }
 
-.then-map,
-.map-embed,
-.atlas-plate {
-  height: 320px;
-  min-height: 320px;
+.teaching-map {
+  height: 340px;
+  min-height: 340px;
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #d7c4a1;
+  background: #9eb6c4;
 }
 
-.atlas-plate {
-  margin-bottom: 8px;
-  background: #f7f1e4;
-  overflow: auto;
-}
-
-.atlas-plate img {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-height: 100%;
-  object-fit: contain;
-}
-
-.then-map iframe,
-.map-embed iframe,
-.then-map .leaflet-container {
+.teaching-map .leaflet-container {
   display: block;
   width: 100%;
   height: 100%;
   border: 0;
+  background: #9eb6c4;
 }
 
-.basemap-modes {
-  margin-bottom: 2px;
+.reference-plate {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(255, 250, 240, 0.7);
+  font-size: 0.82rem;
 }
 
-.then-map .leaflet-tile-pane {
-  filter: sepia(0.18) saturate(0.8) contrast(0.98);
+.reference-plate summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.reference-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
 }
 
 .leaflet-tooltip.bm-pin-label {

@@ -13,7 +13,7 @@
         <img src="../icons/icon48.png" width="28" height="28" alt="" />
         <div>
           <h1>Bible Maps</h1>
-          <p class="tagline">Places &amp; journeys on today’s map</p>
+          <p class="tagline">Places &amp; journeys on a teaching map</p>
         </div>
       </div>
       <button id="refreshBtn" class="ghost-btn" type="button" title="Rescan page">
@@ -42,56 +42,45 @@
     <section class="map-dock" id="mapDock" hidden>
       <div class="map-dock-header">
         <div>
-          <h2 id="mapTitle">Journey map</h2>
+          <h2 id="mapTitle">Map</h2>
           <p id="mapSubtitle" class="muted"></p>
         </div>
         <button id="closeMapBtn" class="ghost-btn" type="button">Close</button>
       </div>
-      <div class="map-modes" role="group" aria-label="Map mode">
-        <button id="modeModern" class="mode-btn active" type="button" data-mode="modern">
-          Modern
-        </button>
-        <button id="modeThen" class="mode-btn" type="button" data-mode="then">Then</button>
-      </div>
-      <div id="modernPane" class="map-pane">
-        <p class="muted" id="modernHelp">
-          Street map with named pins. Use the link for Google Maps directions.
-        </p>
-        <div id="modernEmbed" class="map-embed" hidden></div>
-        <a id="modernMapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
-          >Open in Google Maps</a
-        >
-        <ol id="modernStops" class="stop-list"></ol>
-      </div>
-      <div id="thenPane" class="map-pane" hidden>
-        <div class="then-toolbar">
-          <label class="atlas-select-label" for="atlasSelect">Historical atlas</label>
-          <select id="atlasSelect" class="atlas-select" aria-label="Historical atlas overlay">
-            <option value="">None (street map only)</option>
-          </select>
-          <label class="kingdom-toggle">
-            <input type="checkbox" id="kingdomsToggle" />
-            Sketch outlines too
-          </label>
-          <div class="kingdom-legend" id="kingdomLegend" hidden>
-            <span><i class="swatch israel"></i> Israel</span>
-            <span><i class="swatch judah"></i> Judah</span>
-            <span><i class="swatch philistia"></i> Philistia</span>
-          </div>
+
+      <div class="map-toolbar">
+        <label class="atlas-select-label" for="presetSelect">Era map</label>
+        <select id="presetSelect" class="atlas-select" aria-label="Era teaching map"></select>
+        <label class="kingdom-toggle" id="kingdomsToggleWrap">
+          <input type="checkbox" id="kingdomsToggle" />
+          Kingdom outlines
+        </label>
+        <div class="kingdom-legend" id="kingdomLegend" hidden>
+          <span><i class="swatch israel"></i> Israel</span>
+          <span><i class="swatch judah"></i> Judah</span>
+          <span><i class="swatch philistia"></i> Philistia</span>
         </div>
-        <div id="atlasPlate" class="atlas-plate" hidden>
-          <img id="atlasPlateImg" alt="Historical atlas plate" />
-        </div>
-        <div id="thenMap" class="then-map" aria-label="Then map"></div>
-        <p class="muted small" id="thenHelp">
-          Street map keeps accurate pins. Historical atlas shows as a separate plate (not stretched
-          onto modern lat/lng — those georeferences were wrong). Sketch outlines optional.
-        </p>
       </div>
+
+      <div id="teachingMap" class="teaching-map" aria-label="Teaching map"></div>
+      <p class="muted small" id="mapHelp">
+        Offline teaching map — period towns from the gazetteer. No live map tiles.
+      </p>
+
+      <a id="mapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
+        >Open in Google Maps</a
+      >
+      <ol id="stopList" class="stop-list"></ol>
+
+      <details class="reference-plate" id="referencePlate">
+        <summary>Reference atlas plate</summary>
+        <img id="referencePlateImg" alt="Historical atlas plate" hidden />
+        <p class="muted small" id="referencePlateNote"></p>
+      </details>
     </section>
 
     <footer class="app-footer">
-      Curated gazetteer · no AI lookup · v1
+      Curated gazetteer · offline teaching map · v1.2
     </footer>
 
     <script src="../lib/leaflet.js"></script>

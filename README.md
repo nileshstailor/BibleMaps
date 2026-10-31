@@ -2,10 +2,10 @@
 
 Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 
-- **Places** → Open in Google Maps, plus in-panel **Google embed** / kingdom overlay map
-- **Journeys** → **Modern** embedded Google Map + multi-stop link; **Then** → Google embed or **Kingdoms** (Esri street tiles + schematic borders)
+- **Places** → Open in Google Maps (modern streets) + offline **teaching map** with period towns
+- **Journeys** → Same teaching map (era preset + route) + walking directions link in Google Maps
 
-No LLM, no required remote API key for v1. Matching uses a local gazetteer (`data/places.json`) and journey catalog (`data/journeys.json`).
+No LLM, no map-tile network for the in-panel map. Matching uses a local gazetteer (`data/places.json`) and journey catalog (`data/journeys.json`). The side panel basemap is recreated vector GeoJSON (coast / land / kingdoms), not live Esri or Google tiles.
 
 ## Load unpacked
 
@@ -21,16 +21,17 @@ No build step is required. Leaflet is vendored under `lib/`.
 
 1. Open a passage rich in place names, for example:
    - [Acts 13 (NIV) — Paul’s first journey geography](https://www.bible.com/bible/111/ACT.13.NIV)
+   - [1 Kings 14 — Tirzah / Shiloh](https://www.bible.com/bible/116/1KI.14.NLT)
    - [John 6 — Capernaum / Sea of Galilee](https://www.bible.com/bible/111/JHN.6.NIV)
-   - [Genesis 12 — Abraham / Canaan / Egypt](https://www.bible.com/bible/111/GEN.12.NIV)
-2. Wait a moment for highlights (amber underlines on place names).
-3. Click the **Bible Maps** toolbar icon to open the side panel (or click a highlighted place).
+2. Wait a moment for highlights (light green on place names).
+3. Click the **Bible Maps** toolbar icon to open the side panel (or click a highlighted place / hover chip).
 4. Confirm:
    - **Places** lists matches with working **Open in Google Maps** links
-   - **Journeys** may list Paul’s / Abraham / Exodus outlines when enough stops or journey cues appear
-   - Open a journey → **Modern** (Google Maps) and **Then** (Leaflet muted overlay)
+   - **Open map** shows one offline teaching map (era preset selector; optional kingdom outlines on Levant maps)
+   - **Journeys** open the matching era map with a route line
+   - Optional **Reference atlas plate** shows bundled JPG art (not georeferenced)
 
-Tip: use **Refresh** in the side panel after bible.com finishes its SPA navigation.
+Tip: use **Refresh** in the side panel after bible.com finishes its SPA navigation. Reload the extension after pulling this version.
 
 ## Extension structure
 
@@ -38,32 +39,31 @@ Tip: use **Refresh** in the side panel after bible.com finishes its SPA navigati
 BibleMaps/
   manifest.json
   README.md
-  background/service-worker.js   # message routing + side panel open
-  content/content.js             # SPA-aware scan + highlight
-  content/content.css
-  content/matcher.js             # gazetteer / journey matching
-  data/places.json               # ~95 biblical places
-  data/journeys.json             # Abraham, Exodus, Paul’s journeys
-  data/kingdoms.json             # schematic Israel / Judah / Philistia polygons
-  sidepanel/sidepanel.html|css|js|svg-map.js
-  icons/icon16.png|icon48.png|icon128.png
+  background/service-worker.js
+  content/content.js|css + matcher.js
+  data/places.json              # gazetteer + era/region tags
+  data/journeys.json
+  data/kingdoms.json
+  data/atlas-presets.json       # era teaching-map recipes
+  data/coast-*.geojson          # offline vector basemaps
+  media/historical/             # optional reference JPG plates
+  sidepanel/sidepanel.html|css|js
+  lib/leaflet.*                 # vendored Leaflet
+  icons/
 ```
 
 ## Architecture notes
 
-- **Content script** runs on `*.bible.com` and matches gazetteer aliases with the **CSS Custom Highlight API** (no DOM wrapping — avoids React hydration errors on bible.com).
-- **Background service worker** only routes detection payloads and opens `chrome.sidePanel`.
-- **Side panel** embeds Google Maps via iframe (no API key) and can draw kingdom polygons on Esri tiles via Leaflet when OSM tiles are blocked from the extension origin.
+- **Content script** matches gazetteer aliases with the **CSS Custom Highlight API** (no DOM wrapping — avoids React hydration errors on bible.com).
+- **Background service worker** routes detection payloads and opens `chrome.sidePanel` synchronously on gesture.
+- **Side panel** draws an offline Leaflet teaching map (vector coast + period towns + optional kingdoms). Google Maps is an external link for modern streets/walking only — not an in-panel tile layer.
+- Bundled atlas JPGs are **reference art** only; pins use gazetteer lat/lng on the recreated vector map.
 
 ## Gaps / later
 
 - Place coverage is high-frequency, not exhaustive; some Exodus stops are geographically debated.
+- Coast polygons are schematic teaching outlines, not cartographic surveys.
 - Journey detection is heuristic (alias cues + co-occurring stops), not full narrative NLP.
-- Google Maps waypoint limits may thin very long itineraries.
-- True 3D terrain / Cesium-style flythrough is explicitly out of v1.
 - Kingdom polygons are schematic teaching overlays, not a scholarly boundary dataset.
-- In-panel maps use Esri street tiles (OSM often blocks `chrome-extension://`). Yahoo Maps is discontinued; Bing/Azure Maps needs an API key. Carto and Esri are the usual free-ish tile options that work from extensions.
-- `media/historical/` holds compressed atlas **plates** from your local `Downloads/Bible Maps` set (Knowing the Bible / USGS topography). They display as reference images (not forced onto lat/lng — that georeferencing was inaccurate). Keep licensing in mind if you redistribute.
-- The side panel is static HTML/JS + local JSON — **no LLM / API tokens** are used to generate the UI.
+- Keep licensing in mind if you redistribute the Knowing the Bible reference plates under `media/historical/`.
 - bible.com class names change often; selectors are defensive but may need updates.
-- bible.com `401 /authenticate` and some React hydration messages can be site-side; after upgrading from older Bible Maps builds, **hard-refresh** the tab once so leftover `<mark>` nodes are gone (we no longer unwrap them, because that triggered React #418).

@@ -1,0 +1,225 @@
+{
+  "presets": [
+    {
+      "id": "divided_kingdom",
+      "title": "Divided Kingdom",
+      "era": "1 Kings \u2013 2 Kings",
+      "basemap": "levant",
+      "placeEras": [
+        "divided",
+        "united"
+      ],
+      "showKingdoms": true,
+      "referencePlate": "divided-kingdom.jpg",
+      "bounds": [
+        [
+          30.6,
+          34.2
+        ],
+        [
+          33.6,
+          36.2
+        ]
+      ]
+    },
+    {
+      "id": "kingdom_david",
+      "title": "United Monarchy",
+      "era": "Saul\u2013David\u2013Solomon",
+      "basemap": "levant",
+      "placeEras": [
+        "united",
+        "judges"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "kingdom-david.jpg",
+      "bounds": [
+        [
+          30.6,
+          34.2
+        ],
+        [
+          33.6,
+          36.2
+        ]
+      ]
+    },
+    {
+      "id": "jesus",
+      "title": "Time of Jesus",
+      "era": "Gospels",
+      "basemap": "levant",
+      "placeEras": [
+        "gospels"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "israel-jesus.jpg",
+      "bounds": [
+        [
+          30.8,
+          34.3
+        ],
+        [
+          33.5,
+          36.0
+        ]
+      ]
+    },
+    {
+      "id": "levant_general",
+      "title": "Land of Israel",
+      "era": "Regional",
+      "basemap": "levant",
+      "placeEras": [
+        "conquest",
+        "judges",
+        "united",
+        "divided",
+        "gospels"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "israel-base.jpg",
+      "bounds": [
+        [
+          30.55,
+          34.15
+        ],
+        [
+          33.55,
+          36.15
+        ]
+      ]
+    },
+    {
+      "id": "abraham",
+      "title": "Abraham\u2019s World",
+      "era": "Patriarchs",
+      "basemap": "near-east",
+      "placeEras": [
+        "patriarchs"
+      ],
+      "showKingdoms": false,
+      "referencePlate": null,
+      "bounds": [
+        [
+          28.0,
+          30.0
+        ],
+        [
+          42.0,
+          52.0
+        ]
+      ]
+    },
+    {
+      "id": "exodus",
+      "title": "Exodus Outline",
+      "era": "Exodus",
+      "basemap": "near-east",
+      "placeEras": [
+        "exodus",
+        "conquest"
+      ],
+      "showKingdoms": false,
+      "referencePlate": null,
+      "bounds": [
+        [
+          27.0,
+          29.0
+        ],
+        [
+          35.0,
+          38.0
+        ]
+      ]
+    },
+    {
+      "id": "paul_first",
+      "title": "Paul\u2019s First Journey",
+      "era": "Acts 13\u201314",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "paul-first.jpg",
+      "bounds": [
+        [
+          30.5,
+          28.0
+        ],
+        [
+          42.0,
+          38.0
+        ]
+      ],
+      "journeyId": "paul_first"
+    },
+    {
+      "id": "paul_second",
+      "title": "Paul\u2019s Second Journey",
+      "era": "Acts 15\u201318",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "paul-second.jpg",
+      "bounds": [
+        [
+          30.5,
+          20.0
+        ],
+        [
+          43.5,
+          40.0
+        ]
+      ],
+      "journeyId": "paul_second"
+    },
+    {
+      "id": "paul_third",
+      "title": "Paul\u2019s Third Journey",
+      "era": "Acts 18\u201321",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "paul-third.jpg",
+      "bounds": [
+        [
+          30.5,
+          20.0
+        ],
+        [
+          43.5,
+          40.0
+        ]
+      ],
+      "journeyId": "paul_third"
+    },
+    {
+      "id": "paul_rome",
+      "title": "Paul\u2019s Journey to Rome",
+      "era": "Acts 27\u201328",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "paul-rome.jpg",
+      "bounds": [
+        [
+          30.5,
+          5.0
+        ],
+        [
+          46.0,
+          40.0
+        ]
+      ],
+      "journeyId": "paul_rome"
+    }
+  ]
+}
