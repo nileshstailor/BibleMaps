@@ -20,7 +20,7 @@ No build step is required for day-to-day use. MapLibre and PMTiles are vendored 
 
 1. Open e.g. [1 Kings 14](https://www.bible.com/bible/116/1KI.14.NLT) or [Acts 13](https://www.bible.com/bible/111/ACT.13.NIV)
 2. Wait for light-green place highlights
-3. Open the side panel — Places/Journeys accordion on top, offline map below (both visible without paging far)
+3. Open the side panel — Places/Journeys accordion on top, offline map below; scroll the panel as one page
 4. Confirm land/roads (not a solid blue box), pins, auto-framing for the chapter/journey, optional kingdom outlines when relevant
 5. Expand a place row for notes / Google Maps; journeys can open walking directions
 
