@@ -10,10 +10,12 @@
     );
   }
 
+  const THEME_KEY = "bibleMapsTheme";
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
     journeysPanel: document.getElementById("journeysPanel"),
+    themeBtn: document.getElementById("themeBtn"),
     refreshBtn: document.getElementById("refreshBtn"),
     mapDock: document.getElementById("mapDock"),
     mapTitle: document.getElementById("mapTitle"),
@@ -1516,6 +1518,64 @@
     });
   });
 
+  function currentTheme() {
+    const attr = document.documentElement.getAttribute("data-theme");
+    return attr === "night" ? "night" : "day";
+  }
+
+  function applyTheme(theme, { persist = true } = {}) {
+    const next = theme === "night" ? "night" : "day";
+    document.documentElement.setAttribute("data-theme", next);
+    const isNight = next === "night";
+    if (els.themeBtn) {
+      els.themeBtn.setAttribute("aria-pressed", isNight ? "true" : "false");
+      els.themeBtn.title = isNight ? "Switch to day mode" : "Switch to night mode";
+      els.themeBtn.setAttribute(
+        "aria-label",
+        isNight ? "Switch to day mode" : "Switch to night mode"
+      );
+      const icon = els.themeBtn.querySelector(".theme-btn-icon");
+      const label = els.themeBtn.querySelector(".theme-btn-label");
+      if (icon) icon.textContent = isNight ? "☀" : "☾";
+      if (label) label.textContent = isNight ? "Day" : "Night";
+    }
+    if (!persist) return;
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch {
+      /* ignore */
+    }
+    try {
+      chrome.storage?.local?.set?.({ [THEME_KEY]: next });
+    } catch {
+      /* ignore */
+    }
+  }
+
+  async function initTheme() {
+    applyTheme(currentTheme(), { persist: false });
+    try {
+      const stored = await chrome.storage?.local?.get?.(THEME_KEY);
+      const fromStore = stored?.[THEME_KEY];
+      if (fromStore === "night" || fromStore === "day") {
+        applyTheme(fromStore, { persist: false });
+        try {
+          localStorage.setItem(THEME_KEY, fromStore);
+        } catch {
+          /* ignore */
+        }
+        return;
+      }
+    } catch {
+      /* ignore */
+    }
+    applyTheme(currentTheme(), { persist: true });
+  }
+
+  els.themeBtn?.addEventListener("click", () => {
+    applyTheme(currentTheme() === "night" ? "day" : "night");
+  });
+
   els.refreshBtn.addEventListener("click", () =>
     refreshFromBackground({ forceRescan: true })
   );
@@ -1546,6 +1606,7 @@
     }
   });
 
+  initTheme();
   loadKingdoms();
   loadPresets();
   loadEraMap();

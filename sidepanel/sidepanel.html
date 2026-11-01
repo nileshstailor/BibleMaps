@@ -6,6 +6,18 @@
     <title>Bible Maps</title>
     <link rel="stylesheet" href="../lib/maplibre/maplibre-gl.css" />
     <link rel="stylesheet" href="sidepanel.css" />
+    <script>
+      (() => {
+        try {
+          const theme = localStorage.getItem("bibleMapsTheme");
+          if (theme === "night" || theme === "day") {
+            document.documentElement.setAttribute("data-theme", theme);
+          }
+        } catch {
+          /* ignore */
+        }
+      })();
+    </script>
   </head>
   <body>
     <header class="app-header">
@@ -16,9 +28,22 @@
           <p class="tagline">Places &amp; journeys on an offline map</p>
         </div>
       </div>
-      <button id="refreshBtn" class="ghost-btn" type="button" title="Rescan page">
-        Refresh
-      </button>
+      <div class="header-actions">
+        <button
+          id="themeBtn"
+          class="ghost-btn theme-btn"
+          type="button"
+          title="Switch to night mode"
+          aria-label="Switch to night mode"
+          aria-pressed="false"
+        >
+          <span class="theme-btn-icon" aria-hidden="true">☾</span>
+          <span class="theme-btn-label">Night</span>
+        </button>
+        <button id="refreshBtn" class="ghost-btn" type="button" title="Rescan page">
+          Refresh
+        </button>
+      </div>
     </header>
 
     <section class="status" id="status">

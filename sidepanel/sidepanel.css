@@ -9,8 +9,61 @@
   --panel: rgba(255, 250, 240, 0.86);
   --line: rgba(44, 36, 22, 0.14);
   --shadow: 0 10px 30px rgba(44, 36, 22, 0.12);
+  --bg-spot-gold: rgba(201, 162, 39, 0.18);
+  --bg-spot-olive: rgba(74, 103, 65, 0.14);
+  --bg-grad-0: #f7edd4;
+  --bg-grad-1: #e8d7b0;
+  --bg-grad-2: #d9c49a;
+  --surface: rgba(255, 250, 240, 0.55);
+  --surface-strong: rgba(255, 250, 240, 0.72);
+  --surface-dock: rgba(255, 250, 240, 0.92);
+  --surface-soft: rgba(255, 250, 240, 0.7);
+  --tab-active-ink: #f7f1e4;
+  --btn-primary-ink: #fff8ef;
+  --badge-bg: rgba(201, 162, 39, 0.28);
+  --badge-ink: #6a4f12;
+  --map-frame: #e2dfda;
+  --marker-label-bg: #fffaf0;
+  --marker-label-ink: #2c2416;
+  --marker-label-border: rgba(44, 36, 22, 0.35);
+  --kingdom-label: rgba(44, 36, 22, 0.52);
+  --kingdom-label-glow: rgba(255, 250, 240, 0.95);
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   color: var(--ink);
+  color-scheme: light;
+}
+
+html[data-theme="night"] {
+  --ink: #efe4c8;
+  --muted: #b5a584;
+  --parchment: #2a2418;
+  --parchment-deep: #1c1810;
+  --olive: #8faf7a;
+  --terra: #d46858;
+  --gold: #d4b45a;
+  --panel: rgba(36, 30, 20, 0.9);
+  --line: rgba(239, 228, 200, 0.14);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --bg-spot-gold: rgba(212, 180, 90, 0.1);
+  --bg-spot-olive: rgba(143, 175, 122, 0.1);
+  --bg-grad-0: #1a1610;
+  --bg-grad-1: #241e14;
+  --bg-grad-2: #2e2618;
+  --surface: rgba(42, 36, 24, 0.72);
+  --surface-strong: rgba(42, 36, 24, 0.86);
+  --surface-dock: rgba(32, 27, 18, 0.94);
+  --surface-soft: rgba(42, 36, 24, 0.78);
+  --tab-active-ink: #1a1610;
+  --btn-primary-ink: #1a1610;
+  --badge-bg: rgba(212, 180, 90, 0.22);
+  --badge-ink: #e6d39a;
+  --map-frame: #2a261f;
+  --marker-label-bg: #2a2418;
+  --marker-label-ink: #efe4c8;
+  --marker-label-border: rgba(239, 228, 200, 0.28);
+  --kingdom-label: rgba(239, 228, 200, 0.62);
+  --kingdom-label-glow: rgba(26, 22, 16, 0.9);
+  color-scheme: dark;
 }
 
 * {
@@ -26,9 +79,9 @@ body {
 body {
   min-width: 300px;
   background:
-    radial-gradient(ellipse at 10% 0%, rgba(201, 162, 39, 0.18), transparent 42%),
-    radial-gradient(ellipse at 90% 10%, rgba(74, 103, 65, 0.14), transparent 40%),
-    linear-gradient(165deg, #f7edd4 0%, #e8d7b0 48%, #d9c49a 100%);
+    radial-gradient(ellipse at 10% 0%, var(--bg-spot-gold), transparent 42%),
+    radial-gradient(ellipse at 90% 10%, var(--bg-spot-olive), transparent 40%),
+    linear-gradient(165deg, var(--bg-grad-0) 0%, var(--bg-grad-1) 48%, var(--bg-grad-2) 100%);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -40,6 +93,24 @@ body {
   align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.theme-btn-icon {
+  font-size: 0.95rem;
+  line-height: 1;
 }
 
 .brand {
@@ -94,7 +165,7 @@ body {
 .tab,
 .mode-btn {
   border: 1px solid var(--line);
-  background: rgba(255, 250, 240, 0.55);
+  background: var(--surface);
   color: var(--ink);
   border-radius: 999px;
   padding: 8px 10px;
@@ -104,7 +175,7 @@ body {
 .mode-btn.active {
   background: var(--olive);
   border-color: var(--olive);
-  color: #f7f1e4;
+  color: var(--tab-active-ink);
 }
 
 .ghost-btn {
@@ -142,7 +213,7 @@ body {
 .acc-row {
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: rgba(255, 250, 240, 0.72);
+  background: var(--surface-strong);
   margin-bottom: 6px;
 }
 
@@ -261,7 +332,7 @@ body {
   align-items: center;
   justify-content: center;
   background: var(--terra);
-  color: #fff8ef;
+  color: var(--btn-primary-ink);
   border: none;
 }
 
@@ -283,7 +354,7 @@ body {
 
 .map-dock {
   border: 1px solid var(--line);
-  background: rgba(255, 250, 240, 0.92);
+  background: var(--surface-dock);
   border-radius: 14px;
   padding: 10px;
   display: flex;
@@ -369,7 +440,7 @@ body {
   overflow: hidden;
   border: 1px solid var(--line);
   /* Match style.json land tone so a loading frame doesn't look like empty ocean */
-  background: #e2dfda;
+  background: var(--map-frame);
   position: relative;
 }
 
@@ -382,7 +453,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 8px 10px;
-  background: rgba(255, 250, 240, 0.7);
+  background: var(--surface-soft);
   font-size: 0.82rem;
 }
 
@@ -420,10 +491,10 @@ body {
 }
 
 .bm-marker-label {
-  background: #fffaf0;
-  border: 1px solid rgba(44, 36, 22, 0.35);
+  background: var(--marker-label-bg);
+  border: 1px solid var(--marker-label-border);
   border-radius: 6px;
-  color: #2c2416;
+  color: var(--marker-label-ink);
   font: 11px/1.2 Georgia, "Times New Roman", serif;
   padding: 2px 6px;
   white-space: nowrap;
@@ -453,11 +524,11 @@ body {
   white-space: nowrap;
   font: 600 10px/1.15 "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
   letter-spacing: 0.14em;
-  color: rgba(44, 36, 22, 0.52);
+  color: var(--kingdom-label);
   text-shadow:
-    0 0 4px rgba(255, 250, 240, 0.95),
-    0 1px 0 rgba(255, 250, 240, 0.85),
-    0 -1px 0 rgba(255, 250, 240, 0.55);
+    0 0 4px var(--kingdom-label-glow),
+    0 1px 0 var(--kingdom-label-glow),
+    0 -1px 0 var(--kingdom-label-glow);
   opacity: 0.88;
   transform: translateY(1px);
 }
@@ -466,7 +537,7 @@ body {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 8px 10px;
-  background: rgba(255, 250, 240, 0.7);
+  background: var(--surface-soft);
   font-size: 0.82rem;
 }
 
@@ -516,8 +587,8 @@ body {
   margin-left: 6px;
   padding: 1px 7px;
   border-radius: 999px;
-  background: rgba(201, 162, 39, 0.28);
-  color: #6a4f12;
+  background: var(--badge-bg);
+  color: var(--badge-ink);
   font-size: 0.72rem;
   vertical-align: middle;
 }
