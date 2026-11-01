@@ -78,6 +78,7 @@ body {
 
 body {
   min-width: 300px;
+  min-height: 100vh;
   background:
     radial-gradient(ellipse at 10% 0%, var(--bg-spot-gold), transparent 42%),
     radial-gradient(ellipse at 90% 10%, var(--bg-spot-olive), transparent 40%),
@@ -592,28 +593,42 @@ body {
 
 .app-footer {
   display: flex;
-  justify-content: flex-end;
-  margin-top: -4px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 4px;
 }
 
 .tip-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  gap: 6px;
+  padding: 5px 10px;
   border-radius: 999px;
   text-decoration: none;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  color: var(--muted);
+  opacity: 0.72;
+  transition: opacity 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.tip-link-glyph {
+  font-size: 0.95rem;
   line-height: 1;
-  opacity: 0.38;
-  color: inherit;
-  transition: opacity 0.15s ease;
+}
+
+.tip-link-text {
+  letter-spacing: 0.01em;
 }
 
 .tip-link:hover,
 .tip-link:focus-visible {
-  opacity: 0.85;
+  opacity: 1;
+  color: var(--ink);
+  background: var(--surface);
   outline: none;
 }
 
