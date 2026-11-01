@@ -1,5 +1,7 @@
 /**
- * Bible Maps side panel — MapLibre + offline PMTiles basemap.
+ * Bible Maps side panel — MapLibre + offline PMTiles basemap,
+ * with optional online raster fill when the user is online and pans
+ * outside (or past) the bundled extract.
  */
 (() => {
   // CSP build ships with empty WORKER_URL; without this, Worker("") loads
@@ -68,6 +70,9 @@
   const PMTILES_KEY = "bible-region.pmtiles";
   /** Town context on click — closer than chapter overview, not street-level. */
   const PLACE_FOCUS_ZOOM = 10;
+  /** Carto light/dark raster — OSM-based world coverage when online. */
+  const ONLINE_RASTER_SOURCE = "online-raster";
+  const ONLINE_RASTER_LAYER = "online-basemap";
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -779,11 +784,23 @@
     return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}`;
   }
 
+  function isOnline() {
+    return typeof navigator !== "undefined" ? navigator.onLine !== false : true;
+  }
+
+  function onlineRasterTilesUrl(theme = currentTheme()) {
+    const variant = theme === "night" ? "dark_all" : "light_all";
+    // Carto CDN; OSM data. Used only as a fill under/outside the offline extract.
+    return `https://basemaps.cartocdn.com/${variant}/{z}/{x}/{y}.png`;
+  }
+
   function mapMaxZoom(header) {
     // Native tiles maxzoom 9 (wide biblical world, small archive); overzoom for pin focus.
+    // When online, allow deeper zoom via the world raster underlay.
     const tileMax = Number(header?.maxZoom);
     const base = Number.isFinite(tileMax) ? tileMax : 9;
-    return Math.min(14, Math.max(12, base + 3));
+    const offlineCap = Math.min(14, Math.max(12, base + 3));
+    return isOnline() ? Math.max(offlineCap, 16) : offlineCap;
   }
 
   function fitMaxZoom(header) {
@@ -1072,7 +1089,142 @@
           '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       },
     };
+
+    // Online world raster under the vector extract: fills gaps when the user
+    // pans outside the bundled bbox (or wants more context) while online.
+    // Offline stays vector-only — no remote tile requests.
+    if (isOnline()) {
+      style.sources[ONLINE_RASTER_SOURCE] = {
+        type: "raster",
+        tiles: [onlineRasterTilesUrl()],
+        tileSize: 256,
+        maxzoom: 18,
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+      };
+      const layers = Array.isArray(style.layers) ? style.layers : [];
+      const bgIdx = layers.findIndex((l) => l.id === "background");
+      const onlineLayer = {
+        id: ONLINE_RASTER_LAYER,
+        type: "raster",
+        source: ONLINE_RASTER_SOURCE,
+        layout: { visibility: "none" },
+        paint: { "raster-opacity": 1 },
+      };
+      if (bgIdx >= 0) layers.splice(bgIdx + 1, 0, onlineLayer);
+      else layers.unshift(onlineLayer);
+      style.layers = layers;
+    }
     return style;
+  }
+
+  function offlineExtractBounds(header = pmtilesHeader) {
+    if (!header) return null;
+    const west = Number(header.minLon);
+    const south = Number(header.minLat);
+    const east = Number(header.maxLon);
+    const north = Number(header.maxLat);
+    if (![west, south, east, north].every(Number.isFinite)) return null;
+    return { west, south, east, north };
+  }
+
+  /** True when the viewport sticks out past the bundled PMTiles bbox. */
+  function viewNeedsOnlineFill(map, header = pmtilesHeader) {
+    if (!isOnline() || !map || typeof map.getBounds !== "function") return false;
+    const box = offlineExtractBounds(header);
+    if (!box) return isOnline();
+    const b = map.getBounds();
+    const pad = 0.15; // small pad so edge pans still get fill
+    return (
+      b.getWest() < box.west - pad ||
+      b.getEast() > box.east + pad ||
+      b.getSouth() < box.south - pad ||
+      b.getNorth() > box.north + pad
+    );
+  }
+
+  function updateOnlineRasterVisibility(map = maplibreMap) {
+    if (!map?.getLayer?.(ONLINE_RASTER_LAYER)) return;
+    const show = viewNeedsOnlineFill(map);
+    try {
+      map.setLayoutProperty(
+        ONLINE_RASTER_LAYER,
+        "visibility",
+        show ? "visible" : "none"
+      );
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function syncOnlineRasterLayer(map = maplibreMap) {
+    if (!map || typeof map.getSource !== "function") return;
+    const want = isOnline();
+    const hasSource = Boolean(map.getSource(ONLINE_RASTER_SOURCE));
+    const hasLayer = Boolean(map.getLayer?.(ONLINE_RASTER_LAYER));
+
+    if (!want) {
+      try {
+        if (hasLayer) map.removeLayer(ONLINE_RASTER_LAYER);
+        if (hasSource) map.removeSource(ONLINE_RASTER_SOURCE);
+      } catch {
+        /* ignore */
+      }
+      return;
+    }
+
+    const tiles = [onlineRasterTilesUrl()];
+    if (!hasSource) {
+      try {
+        map.addSource(ONLINE_RASTER_SOURCE, {
+          type: "raster",
+          tiles,
+          tileSize: 256,
+          maxzoom: 18,
+          attribution:
+            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+        });
+      } catch (err) {
+        console.warn("Bible Maps: could not add online raster source", err);
+        return;
+      }
+    } else {
+      // Swap light/dark tiles on theme change by recreating the source.
+      try {
+        if (hasLayer) map.removeLayer(ONLINE_RASTER_LAYER);
+        map.removeSource(ONLINE_RASTER_SOURCE);
+        map.addSource(ONLINE_RASTER_SOURCE, {
+          type: "raster",
+          tiles,
+          tileSize: 256,
+          maxzoom: 18,
+          attribution:
+            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+        });
+      } catch (err) {
+        console.warn("Bible Maps: could not refresh online raster source", err);
+        return;
+      }
+    }
+
+    if (!map.getLayer?.(ONLINE_RASTER_LAYER)) {
+      try {
+        const beforeId = map.getLayer("earth") ? "earth" : undefined;
+        map.addLayer(
+          {
+            id: ONLINE_RASTER_LAYER,
+            type: "raster",
+            source: ONLINE_RASTER_SOURCE,
+            layout: { visibility: "none" },
+            paint: { "raster-opacity": 1 },
+          },
+          beforeId
+        );
+      } catch (err) {
+        console.warn("Bible Maps: could not add online raster layer", err);
+      }
+    }
+    updateOnlineRasterVisibility(map);
   }
 
   function filterPeriodPlaces(places, placeEras, focusIds) {
@@ -1294,6 +1446,7 @@
     }
 
     updateMapOverlays(map, preset, showKingdoms);
+    syncOnlineRasterLayer(map);
     lastMapFingerprint = fp;
     lastMapPresetId = presetId;
 
@@ -1599,6 +1752,7 @@
       const icon = els.themeBtn.querySelector(".icon-btn-glyph");
       if (icon) icon.textContent = isNight ? "☀" : "☾";
     }
+    syncOnlineRasterLayer(maplibreMap);
     if (!persist) return;
     try {
       localStorage.setItem(THEME_KEY, next);
@@ -1611,6 +1765,9 @@
       /* ignore */
     }
   }
+
+  window.addEventListener("online", () => syncOnlineRasterLayer(maplibreMap));
+  window.addEventListener("offline", () => syncOnlineRasterLayer(maplibreMap));
 
   async function initTheme() {
     applyTheme(currentTheme(), { persist: false });

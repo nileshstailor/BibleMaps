@@ -5,7 +5,7 @@ Manifest V3 Chrome extension for [bible.com](https://www.bible.com). It detects 
 - **Places** → Offline **MapLibre** map (always visible) with period towns; per-place Google Maps links for modern streets
 - **Journeys** → Same offline map (era preset + route) + optional walking directions link in Google Maps
 
-No LLM and **no live map-tile servers**. The in-panel basemap is [MapLibre GL JS](https://maplibre.org/projects/gl-js/) reading a bundled regional [PMTiles](https://protomaps.com/) extract (OpenStreetMap / Protomaps, ODbL).
+No LLM. The in-panel basemap is [MapLibre GL JS](https://maplibre.org/projects/gl-js/) reading a bundled regional [PMTiles](https://protomaps.com/) extract (OpenStreetMap / Protomaps, ODbL). **When you are online**, a light world raster (CARTO/OSM) sits under that extract so panning outside the offline bbox still shows geography; offline stays fully local.
 
 ## Load unpacked
 
@@ -26,13 +26,14 @@ No build step is required for day-to-day use. MapLibre and PMTiles are vendored 
 
 After pulling updates: **Reload** the extension on `chrome://extensions`.
 
-## Offline tiles
+## Offline tiles (+ online fill)
 
 - Bundled archive: `media/tiles/bible-region.pmtiles` (~41 MB, maxzoom 9, bbox `12,28,43.2,43` — Rome → Nineveh). Sized to load safely in the Chrome side panel (a denser ~93 MB extract OOM-crashed the panel). MapLibre overzooms past z9 for town pin focus.
 - Style: `media/tiles/style.json` (Protomaps light layers without remote fonts)
+- **Online fill:** if `navigator.onLine`, a CARTO raster underlay covers the world outside/under the extract (day/night variants). No requests when offline.
 - Rebuild (optional): install the [go-pmtiles](https://github.com/protomaps/go-pmtiles/releases) CLI as `scripts/pmtiles`, then run `scripts/build-pmtiles.sh` (override with `PROTOMAPS_BBOX` / `PROTOMAPS_MAXZOOM`)
 
-Attribution on the map: Protomaps + © OpenStreetMap contributors.
+Attribution on the map: Protomaps + © OpenStreetMap (+ CARTO when the online underlay is active).
 
 ## Structure
 
