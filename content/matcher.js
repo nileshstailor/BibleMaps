@@ -96,7 +96,11 @@
 
     return entries.map((entry) => {
       const pattern = escapeRegExp(entry.alias).replace(/\\ /g, "[\\s\\u00A0]+");
-      const re = new RegExp(`(?<![A-Za-z0-9])(${pattern})(?![A-Za-z0-9])`, "giu");
+      // Treat hyphen/apostrophe as word chars so "Tubal" does not hit inside "Tubal-cain".
+      const re = new RegExp(
+        `(?<![A-Za-z0-9'\\-\\u2010-\\u2014])(${pattern})(?![A-Za-z0-9'\\-\\u2010-\\u2014])`,
+        "giu"
+      );
       return { ...entry, re };
     });
   }

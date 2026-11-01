@@ -1,9 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.4.17",
+  "version": "1.4.18",
   "description": "Highlight biblical places and journeys on bible.com and open them on an offline MapLibre map.",
-  "permissions": ["sidePanel", "storage", "activeTab", "tabs"],
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
   "host_permissions": [
     "https://*.bible.com/*",
     "https://bible.com/*",
@@ -35,16 +40,30 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.bible.com/*", "https://bible.com/*"],
-      "js": ["content/matcher.js", "content/content.js"],
-      "css": ["content/content.css"],
+      "matches": [
+        "https://*.bible.com/*",
+        "https://bible.com/*"
+      ],
+      "js": [
+        "content/matcher.js",
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
       "run_at": "document_idle"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["data/*", "icons/*"],
-      "matches": ["https://*.bible.com/*", "https://bible.com/*"]
+      "resources": [
+        "data/*",
+        "icons/*"
+      ],
+      "matches": [
+        "https://*.bible.com/*",
+        "https://bible.com/*"
+      ]
     }
   ]
 }
