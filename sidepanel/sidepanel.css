@@ -597,56 +597,53 @@ body {
   align-items: center;
   flex-shrink: 0;
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
-/* Buy Me a Coffee official yellow-button look (local CSS; no remote widget). */
+/* BMC-inspired, restrained: their yellow as accent, panel typography. */
 .bmc-button {
   --bmc-yellow: #ffdd00;
-  --bmc-ink: #0d0c22;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  min-height: 44px;
-  padding: 0 18px 0 14px;
-  border-radius: 24px;
-  border: 1.5px solid var(--bmc-ink);
-  background: var(--bmc-yellow);
-  color: var(--bmc-ink);
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 12px 0 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  background: color-mix(in srgb, var(--bmc-yellow) 72%, var(--surface-dock));
+  color: var(--ink);
   text-decoration: none;
-  box-shadow: 0 3px 0 0 var(--bmc-ink);
-  transform: translateY(0);
+  box-shadow: none;
   transition:
-    transform 0.12s ease,
-    box-shadow 0.12s ease,
-    filter 0.12s ease;
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .bmc-button-icon {
   flex: 0 0 auto;
   display: block;
+  opacity: 0.85;
 }
 
 .bmc-button-text {
-  font-family: Cookie, "Segoe Script", "Bradley Hand", "Apple Chancery", cursive;
-  font-size: 1.55rem;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.01em;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
 .bmc-button:hover,
 .bmc-button:focus-visible {
-  filter: brightness(1.03);
-  transform: translateY(1px);
-  box-shadow: 0 2px 0 0 var(--bmc-ink);
+  background: var(--bmc-yellow);
+  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
   outline: none;
 }
 
-.bmc-button:active {
-  transform: translateY(3px);
-  box-shadow: 0 0 0 0 var(--bmc-ink);
+.bmc-button:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--bmc-yellow) 55%, transparent);
 }
 
