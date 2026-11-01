@@ -78,7 +78,10 @@
       "Sea of Galilee",
       "Lake of Gennesaret",
       "Sea of Tiberias",
-      "Kinneret"
+      "Kinneret",
+      "Kinnereth",
+      "Chinnereth",
+      "Chinneroth"
     ],
     "lat": 32.822,
     "lng": 35.59,
@@ -1750,6 +1753,130 @@
     "lng": 35.7,
     "modernName": "Fiq / Aphek region, Golan (1 Kings 20 tradition)",
     "eraNotes": "Town where Aramean forces fled after battle with Ahab (1 Kings 20). Several biblical Apheks exist.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "kidron",
+    "name": "Kidron Valley",
+    "aliases": [
+      "Kidron Valley",
+      "Kidron",
+      "Wadi Kidron",
+      "brook Kidron"
+    ],
+    "lat": 31.7775,
+    "lng": 35.2385,
+    "modernName": "Kidron Valley, Jerusalem",
+    "eraNotes": "Valley east of Jerusalem between the Temple Mount and Mount of Olives; Asa burned Maacah’s Asherah pole here (1 Kings 15).",
+    "eras": [
+      "united",
+      "divided",
+      "gospels"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "aram",
+    "name": "Aram",
+    "aliases": [
+      "Aram",
+      "Syria",
+      "Aramea"
+    ],
+    "lat": 33.5138,
+    "lng": 36.2765,
+    "modernName": "Aramean kingdom centered on Damascus",
+    "eraNotes": "Aramean kingdom north of Israel; Ben-hadad’s realm in 1 Kings 15. NLT “Aram”; many English Bibles “Syria”.",
+    "eras": [
+      "divided",
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ijon",
+    "name": "Ijon",
+    "aliases": [
+      "Ijon"
+    ],
+    "lat": 33.283,
+    "lng": 35.58,
+    "modernName": "Tell Dibbin area, Lebanon (traditional)",
+    "eraNotes": "Northern Israelite town taken by Ben-hadad for Asa (1 Kings 15:20).",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "abel_beth_maacah",
+    "name": "Abel-beth-maacah",
+    "aliases": [
+      "Abel-beth-maacah",
+      "Abel Beth Maacah",
+      "Abel Beth-maacah",
+      "Abelbethmaacah",
+      "Abel of Beth-maacah"
+    ],
+    "lat": 33.258,
+    "lng": 35.58,
+    "modernName": "Tel Abel Beth Maacah, Israel",
+    "eraNotes": "Northern border town near Dan; captured by Ben-hadad (1 Kings 15:20).",
+    "eras": [
+      "divided",
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "naphtali",
+    "name": "Naphtali",
+    "aliases": [
+      "Naphtali",
+      "land of Naphtali"
+    ],
+    "lat": 32.95,
+    "lng": 35.45,
+    "modernName": "Upper Galilee tribal territory, Israel",
+    "eraNotes": "Northern tribal territory; Ben-hadad struck “all the land of Naphtali” (1 Kings 15:20).",
+    "eras": [
+      "conquest",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "geba",
+    "name": "Geba",
+    "aliases": [
+      "Geba",
+      "Geba in Benjamin",
+      "Geba of Benjamin"
+    ],
+    "lat": 31.857,
+    "lng": 35.261,
+    "modernName": "Jabaʿ area, West Bank (traditional)",
+    "eraNotes": "Benjaminite town fortified by Asa with stones from Ramah (1 Kings 15:22).",
+    "eras": [
+      "united",
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gibbethon",
+    "name": "Gibbethon",
+    "aliases": [
+      "Gibbethon"
+    ],
+    "lat": 31.866,
+    "lng": 34.847,
+    "modernName": "Tel Malot / Tell el-Melat area, Israel (debated)",
+    "eraNotes": "Philistine town Nadab was besieging when Baasha killed him (1 Kings 15:27).",
     "eras": [
       "divided"
     ],
