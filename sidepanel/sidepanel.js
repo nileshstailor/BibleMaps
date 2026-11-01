@@ -46,6 +46,7 @@
   let presetsLoadPromise = null;
   let maplibreMap = null;
   let markerObjs = [];
+  let kingdomLabelMarkers = [];
   let pmtilesReady = null;
   let pmtilesProtocol = null;
   let pmtilesHeader = null;
@@ -512,6 +513,40 @@
     markerObjs = [];
   }
 
+  function clearKingdomLabels() {
+    for (const m of kingdomLabelMarkers) {
+      try {
+        m.remove();
+      } catch {
+        /* ignore */
+      }
+    }
+    kingdomLabelMarkers = [];
+  }
+
+  function addKingdomLabels(map) {
+    clearKingdomLabels();
+    if (!map || !kingdomsGeoJson?.features?.length) return;
+    for (const f of kingdomsGeoJson.features) {
+      const p = f.properties || {};
+      const lng = Number(p.labelLng);
+      const lat = Number(p.labelLat);
+      if (!Number.isFinite(lng) || !Number.isFinite(lat)) continue;
+      const el = document.createElement("div");
+      el.className = "bm-kingdom-label";
+      el.textContent = String(p.shortName || shortKingdomName(p)).toUpperCase();
+      const marker = new maplibregl.Marker({
+        element: el,
+        anchor: "center",
+        pitchAlignment: "viewport",
+        rotationAlignment: "viewport",
+      })
+        .setLngLat([lng, lat])
+        .addTo(map);
+      kingdomLabelMarkers.push(marker);
+    }
+  }
+
   function showPlacesTab() {
     const tab = document.querySelector('.tab[data-tab="places"]');
     if (!tab) return;
@@ -619,6 +654,7 @@
 
   function destroyMap() {
     clearMarkers();
+    clearKingdomLabels();
     if (maplibreMap) {
       try {
         maplibreMap.remove();
@@ -721,7 +757,8 @@
           source: "kingdoms",
           paint: {
             "line-color": ["coalesce", ["get", "color"], "#4a6741"],
-            "line-width": 1.5,
+            "line-width": 1.25,
+            "line-opacity": 0.85,
           },
         });
       } else {
@@ -731,9 +768,13 @@
           map.setLayoutProperty("kingdoms-line", "visibility", "visible");
         }
       }
-    } else if (map.getLayer("kingdoms-fill")) {
-      map.setLayoutProperty("kingdoms-fill", "visibility", "none");
-      map.setLayoutProperty("kingdoms-line", "visibility", "none");
+      addKingdomLabels(map);
+    } else {
+      clearKingdomLabels();
+      if (map.getLayer("kingdoms-fill")) {
+        map.setLayoutProperty("kingdoms-fill", "visibility", "none");
+        map.setLayoutProperty("kingdoms-line", "visibility", "none");
+      }
     }
 
     if (!map.getSource("route")) {
