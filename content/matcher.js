@@ -30,6 +30,7 @@
   }
 
   // Standalone English words / too-ambiguous toponyms (e.g. Thebes alias "No").
+  // Also block bare person/tribe names that collide with places (Dan the son vs city).
   const BLOCKED_ALIASES = new Set([
     "no",
     "on",
@@ -55,7 +56,25 @@
     "us",
     "we",
     "am",
+    "dan",
   ]);
+
+  // Multi-word aliases that are also ordinary English (ESV Gen 1:21 "great sea creatures").
+  const BLOCKED_FOLLOW_WORDS = new Map([
+    [
+      "great sea",
+      new Set(["creature", "creatures", "monster", "monsters", "animal", "animals"]),
+    ],
+    [
+      "the great sea",
+      new Set(["creature", "creatures", "monster", "monsters", "animal", "animals"]),
+    ],
+  ]);
+
+  function followingWord(source, end) {
+    const m = /^[\s\u00A0]+([A-Za-z]+)/.exec(source.slice(end));
+    return m ? m[1].toLowerCase() : "";
+  }
 
   function buildPlaceMatchers(places) {
     const entries = [];
@@ -93,6 +112,10 @@
       while ((m = matcher.re.exec(source)) !== null) {
         const start = m.index;
         const end = start + m[0].length;
+        const blockedFollow = BLOCKED_FOLLOW_WORDS.get(matcher.alias.toLowerCase());
+        if (blockedFollow && blockedFollow.has(followingWord(source, end))) {
+          continue;
+        }
         let overlaps = false;
         for (let i = start; i < end; i += 1) {
           if (occupied[i]) {

@@ -320,14 +320,22 @@
     "id": "dan",
     "name": "Dan",
     "aliases": [
-      "Dan",
       "Laish",
-      "Leshem"
+      "Leshem",
+      "City of Dan",
+      "from Dan to Beersheba",
+      "from Dan even to Beersheba",
+      "Dan to Beersheba",
+      "Dan even to Beersheba",
+      "in Dan",
+      "at Dan",
+      "unto Dan",
+      "O Dan"
     ],
     "lat": 33.2486,
     "lng": 35.6525,
     "modernName": "Tel Dan, Israel",
-    "eraNotes": "Northern boundary marker of Israel; sanctuary tradition.",
+    "eraNotes": "Northern city (ex-Laish) and boundary marker; bare 'Dan' is not matched — it is usually the person/tribe.",
     "eras": [
       "conquest",
       "divided"
