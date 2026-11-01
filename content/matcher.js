@@ -57,7 +57,6 @@
     "us",
     "we",
     "am",
-    "dan",
     "kue",
     "lud",
     "magog",
@@ -69,6 +68,10 @@
     "uz",
     "zebulun",
   ]);
+
+  // Bare person/place collisions that are OK only in town-list geography
+  // (e.g. 1 Kgs 15:20 "Ijon, Dan, Abel-beth-maacah").
+  const CONTEXT_REQUIRED_ALIASES = new Set(["dan"]);
 
   // Multi-word aliases that are also ordinary English (ESV Gen 1:21 "great sea creatures").
   const BLOCKED_FOLLOW_WORDS = new Map([
@@ -85,6 +88,19 @@
   function followingWord(source, end) {
     const m = /^[\s\u00A0]+([A-Za-z]+)/.exec(source.slice(end));
     return m ? m[1].toLowerCase() : "";
+  }
+
+  /** True for ", Dan," / ", Dan and" / "and Dan," town-list patterns. */
+  function isPlaceListContext(source, start, end) {
+    const before = source.slice(Math.max(0, start - 24), start);
+    const after = source.slice(end, Math.min(source.length, end + 24));
+    if (/,\s*$/.test(before) && (/^\s*,/.test(after) || /^\s+and\s+/i.test(after))) {
+      return true;
+    }
+    if (/\band\s+$/i.test(before) && /^\s*,/.test(after)) {
+      return true;
+    }
+    return false;
   }
 
   /**
@@ -170,6 +186,12 @@
           continue;
         }
         if (isGenealogyContext(source, start, end)) {
+          continue;
+        }
+        if (
+          CONTEXT_REQUIRED_ALIASES.has(matcher.alias.toLowerCase()) &&
+          !isPlaceListContext(source, start, end)
+        ) {
           continue;
         }
         let overlaps = false;

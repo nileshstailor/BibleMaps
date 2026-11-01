@@ -332,12 +332,13 @@
       "in Dan",
       "at Dan",
       "unto Dan",
-      "O Dan"
+      "O Dan",
+      "as far north as Dan"
     ],
     "lat": 33.2486,
     "lng": 35.6525,
     "modernName": "Tel Dan, Israel",
-    "eraNotes": "Northern city (ex-Laish) and boundary marker; bare 'Dan' is not matched — it is usually the person/tribe.",
+    "eraNotes": "Northern city (ex-Laish) and boundary marker. Bare 'Dan' matches only in town lists (e.g. Ijon, Dan, Abel-beth-maacah) or set phrases; person/tribe uses are skipped.",
     "eras": [
       "conquest",
       "divided"
