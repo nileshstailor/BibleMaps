@@ -1881,5 +1881,40 @@
       "divided"
     ],
     "region": "levant"
+  },
+  {
+    "id": "tishbe",
+    "name": "Tishbe",
+    "aliases": [
+      "Tishbe",
+      "Thisbe",
+      "Tishbite"
+    ],
+    "lat": 32.367,
+    "lng": 35.717,
+    "modernName": "Listib / el-Istib area near Ajloun, Jordan (traditional; exact site debated)",
+    "eraNotes": "Hometown of Elijah the Tishbite (1 Kings 17:1). Traditional identification near Mar Elias / Listib in Gilead; Iron Age site uncertain.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gilead",
+    "name": "Gilead",
+    "aliases": [
+      "Gilead",
+      "land of Gilead"
+    ],
+    "lat": 32.35,
+    "lng": 35.85,
+    "modernName": "Highlands east of the Jordan, Jordan",
+    "eraNotes": "Transjordan region where Elijah was from (Tishbe in Gilead). Also associated with Jabesh-gilead, Ramoth-gilead, and other towns.",
+    "eras": [
+      "conquest",
+      "united",
+      "divided"
+    ],
+    "region": "levant"
   }
 ]

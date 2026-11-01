@@ -564,8 +564,12 @@
     "scriptureRefs": [
       "1 Kings 17:1–24"
     ],
-    "summary": "During the drought Elijah hides by the Brook Cherith, then goes to Zarephath of Sidon where God sustains a widow’s household.",
+    "summary": "Elijah the Tishbite announces the drought, hides by the Brook Cherith, then goes to Zarephath of Sidon where God sustains a widow’s household.",
     "stops": [
+      {
+        "placeId": "tishbe",
+        "note": "Elijah’s hometown in Gilead (1 Kings 17:1)"
+      },
       {
         "placeId": "cherith",
         "note": "Hides east of the Jordan; fed by ravens"
@@ -579,7 +583,7 @@
         "note": "Zarephath belongs to Sidon"
       }
     ],
-    "pathHints": "Gilead/Cherith → Phoenician coast at Zarephath (Sidon region)."
+    "pathHints": "Tishbe in Gilead → Cherith → Phoenician coast at Zarephath (Sidon region)."
   },
   {
     "id": "elijah_carmel_jezreel",
