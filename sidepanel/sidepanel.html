@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bible Maps</title>
+    <link rel="stylesheet" href="../lib/maplibre/maplibre-gl.css" />
+    <link rel="stylesheet" href="sidepanel.css" />
+    <script src="theme-boot.js"></script>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <img src="../icons/icon48.png" width="28" height="28" alt="" />
+        <h1>Bible Maps</h1>
+      </div>
+      <div class="header-actions">
+        <button
+          id="themeBtn"
+          class="ghost-btn icon-btn"
+          type="button"
+          title="Switch to night mode"
+          aria-label="Switch to night mode"
+          aria-pressed="false"
+        >
+          <span class="icon-btn-glyph" aria-hidden="true">☾</span>
+        </button>
+        <button
+          id="refreshBtn"
+          class="ghost-btn icon-btn"
+          type="button"
+          title="Rescan page"
+          aria-label="Rescan page"
+        >
+          <span class="icon-btn-glyph" aria-hidden="true">↻</span>
+        </button>
+      </div>
+    </header>
+
+    <section class="status" id="status">
+      Open a bible.com passage to detect places.
+    </section>
+
+    <div class="list-block">
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+          Places
+        </button>
+        <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+          Journeys
+        </button>
+      </nav>
+
+      <main>
+        <section id="placesPanel" class="panel active" role="tabpanel"></section>
+        <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
+      </main>
+    </div>
+
+    <section class="map-dock" id="mapDock">
+      <div class="map-dock-header">
+        <div>
+          <h2 id="mapTitle">Map</h2>
+          <p id="mapSubtitle" class="muted">Places in this chapter</p>
+        </div>
+      </div>
+
+      <div class="map-toolbar" id="mapToolbar">
+        <label class="kingdom-toggle" id="kingdomsToggleWrap" hidden>
+          <input type="checkbox" id="kingdomsToggle" />
+          Kingdom outlines
+        </label>
+        <div class="kingdom-legend" id="kingdomLegend" hidden></div>
+      </div>
+
+      <div id="teachingMap" class="teaching-map" aria-label="Map"></div>
+      <p class="muted small" id="mapHelp" hidden></p>
+
+      <a id="mapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
+        >Open in Google Maps</a
+      >
+
+      <details class="map-extras" id="stopListWrap" hidden>
+        <summary>Route stops</summary>
+        <ol id="stopList" class="stop-list"></ol>
+      </details>
+
+      <details class="reference-plate" id="referencePlate">
+        <summary>Reference atlas plate</summary>
+        <img id="referencePlateImg" alt="Historical atlas plate" hidden />
+        <p class="muted small" id="referencePlateNote"></p>
+      </details>
+    </section>
+
+    <footer class="app-footer">
+      <a
+        class="bmc-button"
+        href="https://www.buymeacoffee.com/gujunilesh"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg
+          class="bmc-button-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            fill="currentColor"
+            d="M4 6h13a1 1 0 0 1 1 1v1h1.5A2.5 2.5 0 0 1 22 10.5v1A2.5 2.5 0 0 1 19.5 14H18v1a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V7a1 1 0 0 1 1-1zm14 3v3h1.5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H18zM6 8v7a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8H6zm1-4h2v1.5H7V4zm4 0h2v1.5h-2V4zm4 0h2v1.5h-2V4z"
+          />
+        </svg>
+        <span class="bmc-button-text">Buy me a coffee</span>
+      </a>
+    </footer>
+
+    <script src="../lib/maplibre/maplibre-gl-csp.js"></script>
+    <script src="../lib/maplibre/pmtiles.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

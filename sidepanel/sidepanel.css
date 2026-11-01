@@ -1,0 +1,649 @@
+:root {
+  --ink: #2c2416;
+  --muted: #6d5f4a;
+  --parchment: #f3e6c9;
+  --parchment-deep: #e5d3a8;
+  --olive: #4a6741;
+  --terra: #a63024;
+  --gold: #c9a227;
+  --panel: rgba(255, 250, 240, 0.86);
+  --line: rgba(44, 36, 22, 0.14);
+  --shadow: 0 10px 30px rgba(44, 36, 22, 0.12);
+  --bg-spot-gold: rgba(201, 162, 39, 0.18);
+  --bg-spot-olive: rgba(74, 103, 65, 0.14);
+  --bg-grad-0: #f7edd4;
+  --bg-grad-1: #e8d7b0;
+  --bg-grad-2: #d9c49a;
+  --surface: rgba(255, 250, 240, 0.55);
+  --surface-strong: rgba(255, 250, 240, 0.72);
+  --surface-dock: rgba(255, 250, 240, 0.92);
+  --surface-soft: rgba(255, 250, 240, 0.7);
+  --tab-active-ink: #f7f1e4;
+  --btn-primary-ink: #fff8ef;
+  --badge-bg: rgba(201, 162, 39, 0.28);
+  --badge-ink: #6a4f12;
+  --map-frame: #e2dfda;
+  --marker-label-bg: #fffaf0;
+  --marker-label-ink: #2c2416;
+  --marker-label-border: rgba(44, 36, 22, 0.35);
+  --kingdom-label: rgba(44, 36, 22, 0.52);
+  --kingdom-label-glow: rgba(255, 250, 240, 0.95);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  color: var(--ink);
+  color-scheme: light;
+}
+
+html[data-theme="night"] {
+  --ink: #efe4c8;
+  --muted: #b5a584;
+  --parchment: #2a2418;
+  --parchment-deep: #1c1810;
+  --olive: #8faf7a;
+  --terra: #d46858;
+  --gold: #d4b45a;
+  --panel: rgba(36, 30, 20, 0.9);
+  --line: rgba(239, 228, 200, 0.14);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --bg-spot-gold: rgba(212, 180, 90, 0.1);
+  --bg-spot-olive: rgba(143, 175, 122, 0.1);
+  --bg-grad-0: #1a1610;
+  --bg-grad-1: #241e14;
+  --bg-grad-2: #2e2618;
+  --surface: rgba(42, 36, 24, 0.72);
+  --surface-strong: rgba(42, 36, 24, 0.86);
+  --surface-dock: rgba(32, 27, 18, 0.94);
+  --surface-soft: rgba(42, 36, 24, 0.78);
+  --tab-active-ink: #1a1610;
+  --btn-primary-ink: #1a1610;
+  --badge-bg: rgba(212, 180, 90, 0.22);
+  --badge-ink: #e6d39a;
+  --map-frame: #2a261f;
+  --marker-label-bg: #2a2418;
+  --marker-label-ink: #efe4c8;
+  --marker-label-border: rgba(239, 228, 200, 0.28);
+  --kingdom-label: rgba(239, 228, 200, 0.62);
+  --kingdom-label-glow: rgba(26, 22, 16, 0.9);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  min-width: 300px;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 10% 0%, var(--bg-spot-gold), transparent 42%),
+    radial-gradient(ellipse at 90% 10%, var(--bg-spot-olive), transparent 40%),
+    linear-gradient(165deg, var(--bg-grad-0) 0%, var(--bg-grad-1) 48%, var(--bg-grad-2) 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 12px 16px;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.icon-btn-glyph {
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.status {
+  padding: 8px 10px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.list-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.tab,
+.ghost-btn,
+.mode-btn,
+.primary-btn,
+.text-btn {
+  font: inherit;
+  cursor: pointer;
+}
+
+.tab,
+.mode-btn {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 8px 10px;
+}
+
+.tab.active,
+.mode-btn.active {
+  background: var(--olive);
+  border-color: var(--olive);
+  color: var(--tab-active-ink);
+}
+
+.ghost-btn {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.ghost-btn:hover,
+.tab:hover,
+.mode-btn:hover {
+  border-color: rgba(74, 103, 65, 0.45);
+}
+
+.panel {
+  display: none;
+  flex-direction: column;
+  gap: 0;
+}
+
+.panel.active {
+  display: flex;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 0.86rem;
+  padding: 10px 12px;
+  margin: 0;
+}
+
+.acc-row {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-strong);
+  margin-bottom: 6px;
+}
+
+.acc-row:last-child {
+  margin-bottom: 0;
+}
+
+.acc-row.is-focused {
+  border-color: rgba(166, 48, 36, 0.55);
+  box-shadow: 0 0 0 1px rgba(166, 48, 36, 0.2);
+}
+
+.acc-row > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 0.88rem;
+  line-height: 1.25;
+  user-select: none;
+}
+
+.acc-row > summary::-webkit-details-marker {
+  display: none;
+}
+
+.acc-row > summary::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid var(--muted);
+  margin-right: 2px;
+  flex: 0 0 auto;
+  align-self: center;
+  transition: transform 0.12s ease;
+}
+
+.acc-row[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.acc-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.acc-aside {
+  flex: 0 1 auto;
+  max-width: 48%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.acc-body {
+  padding: 0 10px 10px 22px;
+}
+
+.acc-body .notes {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 4px;
+  font-size: 1.02rem;
+}
+
+.card .meta {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.card .notes {
+  margin: 0 0 10px;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.primary-btn,
+.text-btn {
+  border-radius: 8px;
+  padding: 6px 10px;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--terra);
+  color: var(--btn-primary-ink);
+  border: none;
+}
+
+.primary-btn:hover {
+  filter: brightness(1.05);
+}
+
+.text-btn {
+  background: rgba(74, 103, 65, 0.12);
+  color: var(--olive);
+  border: 1px solid rgba(74, 103, 65, 0.28);
+}
+
+.text-btn.journey-map-btn.active-map {
+  background: rgba(166, 48, 36, 0.12);
+  color: var(--terra);
+  border-color: rgba(166, 48, 36, 0.35);
+}
+
+.map-dock {
+  border: 1px solid var(--line);
+  background: var(--surface-dock);
+  border-radius: 14px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--shadow);
+}
+
+.map-dock-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.map-dock-header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.muted.small {
+  font-size: 0.74rem;
+}
+
+.map-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.map-toolbar[hidden] {
+  display: none;
+}
+
+.kingdom-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--ink);
+  cursor: pointer;
+  user-select: none;
+}
+
+.kingdom-toggle input {
+  accent-color: var(--olive);
+}
+
+.kingdom-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.kingdom-legend[hidden] {
+  display: none;
+}
+
+.kingdom-legend .swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: -1px;
+  border: 1px solid rgba(44, 36, 22, 0.35);
+}
+
+
+.teaching-map {
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  /* Match style.json land tone so a loading frame doesn't look like empty ocean */
+  background: var(--map-frame);
+  position: relative;
+}
+
+.teaching-map .maplibregl-map {
+  width: 100%;
+  height: 100%;
+}
+
+.map-extras {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--surface-soft);
+  font-size: 0.82rem;
+}
+
+.map-extras[hidden] {
+  display: none;
+}
+
+.map-extras summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.bm-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  pointer-events: auto;
+}
+
+.bm-marker-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #a63024;
+  border: 1px solid #2c2416;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.bm-marker-dim .bm-marker-dot {
+  width: 7px;
+  height: 7px;
+  background: #8a7a60;
+  opacity: 0.75;
+}
+
+.bm-marker-label {
+  background: var(--marker-label-bg);
+  border: 1px solid var(--marker-label-border);
+  border-radius: 6px;
+  color: var(--marker-label-ink);
+  font: 11px/1.2 Georgia, "Times New Roman", serif;
+  padding: 2px 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+.bm-marker-dim .bm-marker-label {
+  opacity: 0.7;
+  font-size: 10px;
+}
+
+.bm-marker-focus .bm-marker-dot {
+  width: 14px;
+  height: 14px;
+  background: #a63024;
+  box-shadow: 0 0 0 3px rgba(166, 48, 36, 0.28);
+}
+
+.bm-marker-focus .bm-marker-label {
+  font-weight: 700;
+  border-color: rgba(166, 48, 36, 0.55);
+}
+
+.bm-kingdom-label {
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  font: 600 10px/1.15 "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  letter-spacing: 0.14em;
+  color: var(--kingdom-label);
+  text-shadow:
+    0 0 4px var(--kingdom-label-glow),
+    0 1px 0 var(--kingdom-label-glow),
+    0 -1px 0 var(--kingdom-label-glow);
+  opacity: 0.88;
+  transform: translateY(1px);
+}
+
+.reference-plate {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: var(--surface-soft);
+  font-size: 0.82rem;
+}
+
+.reference-plate summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.reference-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.leaflet-tooltip.bm-pin-label {
+  background: #fffaf0;
+  border: 1px solid rgba(44, 36, 22, 0.35);
+  border-radius: 6px;
+  color: #2c2416;
+  font: 11px/1.2 Georgia, "Times New Roman", serif;
+  padding: 3px 7px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  white-space: nowrap;
+}
+
+.leaflet-tooltip.bm-pin-label::before {
+  border-top-color: #fffaf0;
+}
+
+.stop-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.stop-list li + li {
+  margin-top: 4px;
+}
+
+
+.badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--badge-bg);
+  color: var(--badge-ink);
+  font-size: 0.72rem;
+  vertical-align: middle;
+}
+
+.app-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+/* BMC-inspired, restrained: their yellow as accent, panel typography. */
+.bmc-button {
+  --bmc-yellow: #ffdd00;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 0 12px 0 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  background: color-mix(in srgb, var(--bmc-yellow) 72%, var(--surface-dock));
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.bmc-button-icon {
+  flex: 0 0 auto;
+  display: block;
+  opacity: 0.85;
+}
+
+.bmc-button-text {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.bmc-button:hover,
+.bmc-button:focus-visible {
+  background: var(--bmc-yellow);
+  border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+  outline: none;
+}
+
+.bmc-button:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--bmc-yellow) 55%, transparent);
+}
+

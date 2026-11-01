@@ -1,0 +1,9 @@
+
+*.log
+.DS_Store
+.idea/
+.preview-*.jpg
+.preview-*.png
+.vscode/
+node_modules/
+scripts/pmtiles
