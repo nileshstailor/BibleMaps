@@ -105,45 +105,45 @@
 
   /**
    * Skip place hits that are kinship/genealogy formulas in ANY book/chapter
-   * (Genesis lists, Chronicles, Matt 1, Luke 3, Ezra–Nehemiah priests, etc.).
+   * (Genesis lists, Chronicles, Matt 1, Luke 3, Ezra–Nehemiah priests, Ruth 4, etc.).
    * Applies globally in findMatchesInText — not limited to one book.
    */
   function isGenealogyContext(source, start, end) {
-    const before = source.slice(Math.max(0, start - 64), start);
+    const before = source.slice(Math.max(0, start - 160), start);
     const after = source.slice(end, Math.min(source.length, end + 64));
-    // "... son(s)/daughter(s)/father/mother/wife/brother/descendant of NAME"
+    // "... son(s)/daughter(s)/children/father/... of NAME"
     if (
-      /(?:\bsons?|\bdaughters?|\bfathers?|\bmothers?|\bwives?|\bhusbands?|\bbrothers?|\bsisters?|\bdescendants?|\bancestors?|\bgrandsons?|\bgranddaughters?|\bclans?|\bfamilies?)\s+of\s+$/i.test(
+      /(?:\bsons?|\bdaughters?|\bchildren|\bchild|\bfathers?|\bmothers?|\bwives?|\bhusbands?|\bbrothers?|\bsisters?|\bdescendants?|\bancestors?|\bgrandsons?|\bgranddaughters?|\bclans?|\bfamilies?)\s+of\s+$/i.test(
         before
       )
     ) {
       return true;
     }
-    // "NAME, son of ..." / "NAME the son of ..."
+    // "NAME, son of ..." / "NAME the son of ..." / "NAME, father of ..."
     if (
-      /^\s*,?\s*(?:the\s+)?(?:sons?|daughters?|fathers?|mothers?|wives?|husbands?|brothers?|sisters?|descendants?|ancestors?|grandsons?|granddaughters?)\s+of\b/i.test(
+      /^\s*,?\s*(?:the\s+)?(?:sons?|daughters?|children|child|fathers?|mothers?|wives?|husbands?|brothers?|sisters?|descendants?|ancestors?|grandsons?|granddaughters?|clans?|families?)\s+of\b/i.test(
         after
       )
     ) {
       return true;
     }
-    // "NAME was/became the father of ..." / "NAME begat/fathered ..."
+    // "NAME was/became the father of ..." / "NAME begat/fathered/bore ..."
     if (
-      /^\s*(?:begat|begot|begotten|fathered|mothered|bore|became the father of|was the father of|became the mother of|was the mother of|had a son|had a daughter)\b/i.test(
+      /^\s*(?:begat|begot|begotten|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|became the ancestor of|was the ancestor of|had a son|had a daughter|gave birth to)\b/i.test(
         after
       )
     ) {
       return true;
     }
-    // "... begat/was the father of NAME"
+    // "... begat/was the father of/gave birth to NAME"
     if (
-      /\b(?:begat|begot|fathered|mothered|bore|became the father of|was the father of|became the mother of|was the mother of)\s+$/i.test(
+      /\b(?:begat|begot|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|became the ancestor of|was the ancestor of|gave birth to)\s+$/i.test(
         before
       )
     ) {
       return true;
     }
-    // "named his/her son NAME" / "called his name NAME"
+    // "named/called his/her son NAME" / "called his name NAME"
     if (
       /\b(?:named|called)\s+(?:his|her|their)\s+(?:son|daughter|child|name)\s+$/i.test(
         before
@@ -151,8 +151,32 @@
     ) {
       return true;
     }
-    // "NAME son of" without comma (some translations drop "the")
-    if (/^\s+sons?\s+of\b/i.test(after)) {
+    // "had a son/daughter named NAME"
+    if (/\bhad\s+a\s+(?:son|daughter|child)\s+named\s+$/i.test(before)) {
+      return true;
+    }
+    // "bore/bare him/her NAME"
+    if (/\b(?:bore|bare)\s+(?:him|her|them)\s+$/i.test(before)) {
+      return true;
+    }
+    // "NAME son/daughter of" without comma (some translations drop "the")
+    if (/^\s+(?:sons?|daughters?|children|child)\s+of\b/i.test(after)) {
+      return true;
+    }
+    // Genealogy name-lists after "sons/daughters/children of X:" or "... were A, B, and C"
+    // Covers Gen 10 Table of Nations, 1 Chr clan rolls, etc. in every book.
+    if (
+      /(?:\bsons?|\bdaughters?|\bchildren)\s+of\s+[\w'’.\-]+(?:\s*\([^)]*\))?\s*[:;]\s*(?:[\w'’.\-]+(?:\s*\([^)]*\))?\s*,\s*)*(?:and\s+)?$/i.test(
+        before
+      )
+    ) {
+      return true;
+    }
+    if (
+      /(?:\bsons?|\bdaughters?|\bchildren)\s+of\s+[\w'’.\-]+(?:\s*\([^)]*\))?\s+were\s+(?:[\w'’.\-]+(?:\s*\([^)]*\))?\s*,\s*)*(?:and\s+)?$/i.test(
+        before
+      )
+    ) {
       return true;
     }
     return false;
