@@ -866,14 +866,76 @@
         id: "route-line",
         type: "line",
         source: "route",
+        layout: {
+          "line-join": "round",
+          "line-cap": "round",
+        },
         paint: {
           "line-color": "#a63024",
           "line-width": 3,
           "line-dasharray": [2, 1.5],
         },
       });
+      ensureRouteArrowImage(map);
+      map.addLayer({
+        id: "route-arrows",
+        type: "symbol",
+        source: "route",
+        layout: {
+          "symbol-placement": "line",
+          "symbol-spacing": 56,
+          "icon-image": "route-arrow",
+          "icon-size": 0.55,
+          "icon-allow-overlap": true,
+          "icon-ignore-placement": true,
+          "icon-rotation-alignment": "map",
+          "icon-pitch-alignment": "map",
+        },
+      });
+    } else if (!map.getLayer("route-arrows")) {
+      ensureRouteArrowImage(map);
+      map.addLayer({
+        id: "route-arrows",
+        type: "symbol",
+        source: "route",
+        layout: {
+          "symbol-placement": "line",
+          "symbol-spacing": 56,
+          "icon-image": "route-arrow",
+          "icon-size": 0.55,
+          "icon-allow-overlap": true,
+          "icon-ignore-placement": true,
+          "icon-rotation-alignment": "map",
+          "icon-pitch-alignment": "map",
+        },
+      });
     }
     // Place pins are DOM markers only (dot + label) — no second circle layer.
+  }
+
+  function ensureRouteArrowImage(map) {
+    if (!map || map.hasImage("route-arrow")) return;
+    const size = 128;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.clearRect(0, 0, size, size);
+    ctx.fillStyle = "#a63024";
+    ctx.beginPath();
+    // Point along +x so MapLibre line bearing aims the tip forward.
+    ctx.moveTo(size * 0.18, size * 0.22);
+    ctx.lineTo(size * 0.86, size * 0.5);
+    ctx.lineTo(size * 0.18, size * 0.78);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "#fff8ef";
+    ctx.lineWidth = size * 0.06;
+    ctx.stroke();
+    map.addImage("route-arrow", ctx.getImageData(0, 0, size, size), {
+      pixelRatio: 2,
+    });
   }
 
   function updateMapOverlays(map, preset, showKingdoms) {

@@ -1755,14 +1755,15 @@
     "id": "sheba",
     "name": "Sheba",
     "aliases": [
-      "Sheba",
       "Saba",
-      "queen of Sheba"
+      "queen of Sheba",
+      "Queen of Sheba",
+      "from Sheba"
     ],
     "lat": 15.4266,
     "lng": 45.336,
     "modernName": "Marib / Saba region, Yemen (traditional)",
-    "eraNotes": "Homeland of the Queen of Sheba (1 Kings 10). Exact locale debated (Arabia or Horn of Africa).",
+    "eraNotes": "Homeland of the Queen of Sheba (1 Kings 10). Exact locale debated (Arabia or Horn of Africa). Bare 'Sheba' is not matched — it is often a person in genealogies.",
     "eras": [
       "united"
     ],
@@ -1884,13 +1885,14 @@
     "id": "naphtali",
     "name": "Naphtali",
     "aliases": [
-      "Naphtali",
-      "land of Naphtali"
+      "land of Naphtali",
+      "all Naphtali",
+      "all the land of Naphtali"
     ],
     "lat": 32.95,
     "lng": 35.45,
     "modernName": "Upper Galilee tribal territory, Israel",
-    "eraNotes": "Northern tribal territory; Ben-hadad struck “all the land of Naphtali” (1 Kings 15:20).",
+    "eraNotes": "Northern tribal territory; Ben-hadad struck “all the land of Naphtali” (1 Kings 15:20). Bare 'Naphtali' is not matched — usually the son/tribe in lists.",
     "eras": [
       "conquest",
       "united",
@@ -4872,14 +4874,14 @@
     "id": "tob",
     "name": "Tob",
     "aliases": [
-      "Tob",
       "land of Tob",
-      "Ish-tob"
+      "Ish-tob",
+      "Ish Tob"
     ],
     "lat": 32.65,
     "lng": 36.1,
     "modernName": "et-Taiyibeh (proposed)",
-    "eraNotes": "Mercenaries hired by Ammon (2 Sam 10:6).",
+    "eraNotes": "Mercenaries hired by Ammon (2 Sam 10:6). Bare 'Tob' is not matched.",
     "eras": [
       "judges",
       "united"
@@ -5148,13 +5150,14 @@
     "id": "kue",
     "name": "Kue",
     "aliases": [
-      "Kue",
+      "from Kue",
+      "from Coa",
       "Coa"
     ],
     "lat": 37.0,
     "lng": 35.32,
     "modernName": "Cilicia (Adana)",
-    "eraNotes": "Cilician horse market for Solomon (1 Kgs 10:28; 2 Chr 1:16).",
+    "eraNotes": "Cilician horse market for Solomon (1 Kgs 10:28; 2 Chr 1:16). Bare 'Kue' is not matched (too short/ambiguous).",
     "eras": [
       "united"
     ],
@@ -6080,7 +6083,10 @@
       "Judah",
       "land of Judah",
       "cities of Judah",
-      "kingdom of Judah"
+      "kingdom of Judah",
+      "house of Judah",
+      "men of Judah",
+      "king of Judah"
     ],
     "lat": 31.55,
     "lng": 35.05,
@@ -6172,13 +6178,13 @@
     "id": "lud",
     "name": "Lud",
     "aliases": [
-      "Lud",
-      "Ludim"
+      "Ludim",
+      "Lydians"
     ],
     "lat": 38.55,
     "lng": 28.35,
     "modernName": "Lydia, western Turkey",
-    "eraNotes": "Usually Lydia (Isa 66:19; Jer 46:9; Ezek 27:10, 30:5). The NT woman Lydia is deliberately not an alias.",
+    "eraNotes": "Usually Lydia (Isa 66:19; Jer 46:9; Ezek 27:10, 30:5). Bare 'Lud' is not matched; the NT woman Lydia is deliberately not an alias.",
     "eras": [
       "exile"
     ],
@@ -6188,13 +6194,14 @@
     "id": "magog",
     "name": "Magog",
     "aliases": [
-      "Magog",
-      "land of Magog"
+      "land of Magog",
+      "Gog and Magog",
+      "Gog of Magog"
     ],
     "lat": 41.0,
     "lng": 43.5,
     "modernName": "Unknown far north (Caucasus/Scythia proposals)",
-    "eraNotes": "Land of Gog (Ezek 38:2, 39:6); symbolic in Rev 20:8. Location unknown — pin is indicative only.",
+    "eraNotes": "Land of Gog (Ezek 38:2, 39:6); symbolic in Rev 20:8. Location unknown — pin is indicative only. Bare 'Magog' is not matched (Gen 10 person).",
     "eras": [
       "exile",
       "revelation"
@@ -6222,13 +6229,14 @@
     "id": "meshech",
     "name": "Meshech",
     "aliases": [
-      "Meshech",
-      "Mesech"
+      "Mesech",
+      "Meshech and Tubal",
+      "Tubal and Meshech"
     ],
     "lat": 39.4,
     "lng": 32.2,
     "modernName": "Phrygian plateau, Turkey (Assyrian Mushki)",
-    "eraNotes": "Anatolian people paired with Tubal (Ezek 27:13, 32:26, 38:2–3, 39:1).",
+    "eraNotes": "Anatolian people paired with Tubal (Ezek 27:13, 32:26, 38:2–3, 39:1). Bare 'Meshech' is not matched (Gen 10 person).",
     "eras": [
       "exile"
     ],
@@ -6554,12 +6562,13 @@
     "id": "tubal",
     "name": "Tubal",
     "aliases": [
-      "Tubal"
+      "Tubal and Meshech",
+      "Meshech and Tubal"
     ],
     "lat": 38.4,
     "lng": 36.0,
     "modernName": "Central Anatolia (Assyrian Tabal)",
-    "eraNotes": "Anatolian people/land paired with Meshech (Isa 66:19; Ezek 27:13, 32:26, 38–39). Also a person (Gen 10:2).",
+    "eraNotes": "Anatolian people/land paired with Meshech (Isa 66:19; Ezek 27:13, 32:26, 38–39). Bare 'Tubal' is not matched (person in Gen 10; also Tubal-cain).",
     "eras": [
       "exile"
     ],
@@ -6587,13 +6596,13 @@
     "id": "uz",
     "name": "Uz",
     "aliases": [
-      "Uz",
-      "land of Uz"
+      "land of Uz",
+      "the land of Uz"
     ],
     "lat": 30.6,
     "lng": 36.3,
     "modernName": "Edom / north Arabian steppe (debated)",
-    "eraNotes": "Job's homeland; associated with Edom (Lam 4:21; Jer 25:20).",
+    "eraNotes": "Job's homeland; associated with Edom (Lam 4:21; Jer 25:20). Bare 'Uz' is not matched.",
     "eras": [
       "exile"
     ],
@@ -6603,14 +6612,14 @@
     "id": "zebulun",
     "name": "Zebulun",
     "aliases": [
-      "Zebulun",
       "land of Zebulun",
-      "Zabulon"
+      "Zabulon",
+      "land of Zabulon"
     ],
     "lat": 32.75,
     "lng": 35.28,
     "modernName": "Lower Galilee hills west of Nazareth",
-    "eraNotes": "Tribal territory of Lower Galilee; 'land of Zebulun and land of Naphtali' (Isa 9:1; Matt 4:13–15).",
+    "eraNotes": "Tribal territory of Lower Galilee; 'land of Zebulun and land of Naphtali' (Isa 9:1; Matt 4:13–15). Bare 'Zebulun' is not matched — usually the son/tribe in lists.",
     "eras": [
       "conquest",
       "divided",

@@ -30,7 +30,8 @@
   }
 
   // Standalone English words / too-ambiguous toponyms (e.g. Thebes alias "No").
-  // Also block bare person/tribe names that collide with places (Dan the son vs city).
+  // Also block bare person/tribe/people names that collide with places — match via
+  // multi-word aliases on the place instead (e.g. "land of Uz", "queen of Sheba").
   const BLOCKED_ALIASES = new Set([
     "no",
     "on",
@@ -57,6 +58,16 @@
     "we",
     "am",
     "dan",
+    "kue",
+    "lud",
+    "magog",
+    "meshech",
+    "naphtali",
+    "sheba",
+    "tob",
+    "tubal",
+    "uz",
+    "zebulun",
   ]);
 
   // Multi-word aliases that are also ordinary English (ESV Gen 1:21 "great sea creatures").
