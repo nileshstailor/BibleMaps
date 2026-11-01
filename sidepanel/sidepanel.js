@@ -611,30 +611,28 @@
         },
       });
     }
-    if (!map.getSource("towns-focus")) {
-      map.addSource("towns-focus", {
-        type: "geojson",
-        data: placesToGeoJSON([], { dim: false }),
-      });
-      map.addLayer({
-        id: "towns-focus-circle",
-        type: "circle",
-        source: "towns-focus",
-        paint: {
-          "circle-radius": 7,
-          "circle-color": "#a63024",
-          "circle-stroke-width": 1,
-          "circle-stroke-color": "#2c2416",
-        },
-      });
-    }
+    // Place pins are DOM markers only (dot + label) — no second circle layer.
   }
 
   function updateMapOverlays(map, preset, showKingdoms) {
     const { focusPts, routePts } = chapterFocusPoints();
     ensureOverlayLayers(map, showKingdoms);
     map.getSource("route")?.setData(routeToGeoJSON(routePts));
-    map.getSource("towns-focus")?.setData(placesToGeoJSON(focusPts, { dim: false }));
+    // Drop legacy circle layer if an older panel session still has it.
+    if (map.getLayer("towns-focus-circle")) {
+      try {
+        map.removeLayer("towns-focus-circle");
+      } catch {
+        /* ignore */
+      }
+    }
+    if (map.getSource("towns-focus")) {
+      try {
+        map.removeSource("towns-focus");
+      } catch {
+        /* ignore */
+      }
+    }
     clearMarkers();
     addDomMarkers(map, focusPts, { dim: false });
     fitToChapter(map, preset, focusPts, pmtilesHeader);
