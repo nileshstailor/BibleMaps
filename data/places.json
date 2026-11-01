@@ -28,7 +28,10 @@
     "aliases": [
       "Bethlehem",
       "Bethlehem Ephrathah",
-      "Ephrath"
+      "Ephrath",
+      "Ephratah",
+      "Ephrathah",
+      "Bethlehem Ephratah"
     ],
     "lat": 31.7054,
     "lng": 35.2024,
@@ -81,7 +84,9 @@
       "Kinneret",
       "Kinnereth",
       "Chinnereth",
-      "Chinneroth"
+      "Chinneroth",
+      "Cinnereth",
+      "Cinneroth"
     ],
     "lat": 32.822,
     "lng": 35.59,
@@ -138,7 +143,9 @@
     "id": "jericho",
     "name": "Jericho",
     "aliases": [
-      "Jericho"
+      "Jericho",
+      "City of Palm Trees",
+      "City of Palms"
     ],
     "lat": 31.8706,
     "lng": 35.4444,
@@ -193,7 +200,8 @@
     "name": "Shechem",
     "aliases": [
       "Shechem",
-      "Sychar"
+      "Sychar",
+      "Sychem"
     ],
     "lat": 32.2135,
     "lng": 35.2819,
@@ -211,7 +219,10 @@
     "name": "Bethel",
     "aliases": [
       "Bethel",
-      "Luz"
+      "Luz",
+      "El-beth-el",
+      "El-bethel",
+      "El Bethel"
     ],
     "lat": 31.9306,
     "lng": 35.221,
@@ -260,7 +271,8 @@
     "id": "tirzah",
     "name": "Tirzah",
     "aliases": [
-      "Tirzah"
+      "Tirzah",
+      "Tirza"
     ],
     "lat": 32.287,
     "lng": 35.338,
@@ -434,7 +446,8 @@
     "id": "gath",
     "name": "Gath",
     "aliases": [
-      "Gath"
+      "Gath",
+      "Metheg-ammah"
     ],
     "lat": 31.7,
     "lng": 34.847,
@@ -499,7 +512,8 @@
     "name": "Bethany",
     "aliases": [
       "Bethany",
-      "Bethany beyond the Jordan"
+      "Bethany beyond the Jordan",
+      "Ananiah"
     ],
     "lat": 31.7717,
     "lng": 35.2553,
@@ -832,7 +846,8 @@
     "name": "Pergamum",
     "aliases": [
       "Pergamum",
-      "Pergamon"
+      "Pergamon",
+      "Pergamos"
     ],
     "lat": 39.1167,
     "lng": 27.1833,
@@ -863,7 +878,8 @@
     "id": "sardis",
     "name": "Sardis",
     "aliases": [
-      "Sardis"
+      "Sardis",
+      "Sepharad"
     ],
     "lat": 38.4883,
     "lng": 28.0403,
@@ -1240,7 +1256,9 @@
     "id": "rephidim",
     "name": "Rephidim",
     "aliases": [
-      "Rephidim"
+      "Rephidim",
+      "Massah",
+      "Massah and Meribah"
     ],
     "lat": 28.7,
     "lng": 33.75,
@@ -1276,7 +1294,10 @@
     "aliases": [
       "Kadesh-barnea",
       "Kadesh",
-      "Kadesh Barnea"
+      "Kadesh Barnea",
+      "Meribah-kadesh",
+      "Meribath-kadesh",
+      "waters of Meribah"
     ],
     "lat": 30.6822,
     "lng": 34.4278,
@@ -1345,7 +1366,8 @@
     "name": "Haran",
     "aliases": [
       "Haran",
-      "Harran"
+      "Harran",
+      "Charran"
     ],
     "lat": 36.86,
     "lng": 39.031,
@@ -1362,7 +1384,8 @@
     "aliases": [
       "Egypt",
       "land of Egypt",
-      "the land of Egypt"
+      "the land of Egypt",
+      "Mizraim"
     ],
     "lat": 30.0444,
     "lng": 31.2357,
@@ -1398,7 +1421,8 @@
     "name": "Babylon",
     "aliases": [
       "Babylon",
-      "Babel"
+      "Babel",
+      "Sheshach"
     ],
     "lat": 32.542,
     "lng": 44.421,
@@ -1477,7 +1501,8 @@
     "id": "gilgal",
     "name": "Gilgal",
     "aliases": [
-      "Gilgal"
+      "Gilgal",
+      "Beth-gilgal"
     ],
     "lat": 31.85,
     "lng": 35.48,
@@ -1529,7 +1554,8 @@
     "name": "Ramah",
     "aliases": [
       "Ramah",
-      "Ramah of Benjamin"
+      "Ramah of Benjamin",
+      "Rama"
     ],
     "lat": 31.85,
     "lng": 35.23,
@@ -1565,7 +1591,9 @@
     "aliases": [
       "Dead Sea",
       "Salt Sea",
-      "Sea of the Arabah"
+      "Sea of the Arabah",
+      "east sea",
+      "eastern sea"
     ],
     "lat": 31.5,
     "lng": 35.5,
@@ -1583,7 +1611,10 @@
     "name": "Mount of Olives",
     "aliases": [
       "Mount of Olives",
-      "Olivet"
+      "Olivet",
+      "Mount of Corruption",
+      "Mount of Destruction",
+      "Hill of Corruption"
     ],
     "lat": 31.7781,
     "lng": 35.2431,
@@ -1601,7 +1632,10 @@
     "aliases": [
       "Golgotha",
       "Place of the Skull",
-      "Calvary"
+      "Calvary",
+      "Skull, The place of a",
+      "place of a skull",
+      "the Skull"
     ],
     "lat": 31.7785,
     "lng": 35.2296,
@@ -1765,7 +1799,14 @@
       "Kidron Valley",
       "Kidron",
       "Wadi Kidron",
-      "brook Kidron"
+      "brook Kidron",
+      "Cedron",
+      "brook Cedron",
+      "Kedron",
+      "King's Vale",
+      "King's dale",
+      "King's Valley",
+      "valley of Shaveh"
     ],
     "lat": 31.7775,
     "lng": 35.2385,
@@ -1975,7 +2016,8 @@
     "aliases": [
       "Adam (city)",
       "Adam, the city",
-      "city of Adam"
+      "city of Adam",
+      "Adam's city"
     ],
     "lat": 32.103,
     "lng": 35.548,
@@ -2136,7 +2178,9 @@
       "Ararat",
       "land of Ararat",
       "Ararat (Urartu)",
-      "Urartu"
+      "Urartu",
+      "Armenia",
+      "land of Armenia"
     ],
     "lat": 39.702,
     "lng": 44.298,
@@ -2295,7 +2339,8 @@
     "aliases": [
       "Bashan",
       "land of Bashan",
-      "Argob"
+      "Argob",
+      "Bashan-havoth-jair"
     ],
     "lat": 32.85,
     "lng": 36.05,
@@ -2735,7 +2780,8 @@
     "name": "En-gannim",
     "aliases": [
       "En-gannim",
-      "En Gannim"
+      "En Gannim",
+      "Anem"
     ],
     "lat": 32.461,
     "lng": 35.3,
@@ -3039,7 +3085,9 @@
       "Senir",
       "Baal-hermon",
       "Mount Baal-hermon",
-      "Shenir"
+      "Shenir",
+      "Hermonites",
+      "the Hermonites"
     ],
     "lat": 33.416,
     "lng": 35.857,
@@ -3114,7 +3162,8 @@
     "name": "Ibleam",
     "aliases": [
       "Ibleam",
-      "ascent of Gur"
+      "ascent of Gur",
+      "going up to Gur"
     ],
     "lat": 32.443,
     "lng": 35.289,
@@ -3233,7 +3282,8 @@
     "name": "Jokneam",
     "aliases": [
       "Jokneam",
-      "Jokmeam"
+      "Jokmeam",
+      "Yokneam"
     ],
     "lat": 32.665,
     "lng": 35.108,
@@ -3304,7 +3354,10 @@
       "Kiriath-baal",
       "Baale-judah",
       "Kirjath-jearim",
-      "Kirjathjearim"
+      "Kirjathjearim",
+      "Baalah",
+      "Baale of Judah",
+      "Kirjath"
     ],
     "lat": 31.806,
     "lng": 35.101,
@@ -3590,7 +3643,9 @@
     "aliases": [
       "Moriah",
       "land of Moriah",
-      "Mount Moriah"
+      "Mount Moriah",
+      "Jehovah-jireh",
+      "Jehovah Jireh"
     ],
     "lat": 31.778,
     "lng": 35.2354,
@@ -3704,7 +3759,8 @@
       "Paddan-aram",
       "Paddan Aram",
       "Padan-aram",
-      "Paddan"
+      "Paddan",
+      "Padan"
     ],
     "lat": 36.75,
     "lng": 39.15,
@@ -3741,7 +3797,9 @@
     "aliases": [
       "Philistia",
       "land of the Philistines",
-      "Philistines"
+      "Philistines",
+      "Palestine",
+      "Palestina"
     ],
     "lat": 31.6,
     "lng": 34.6,
@@ -3765,7 +3823,9 @@
       "Pisgah",
       "top of Pisgah",
       "slopes of Pisgah",
-      "Ashdoth-pisgah"
+      "Ashdoth-pisgah",
+      "Field of Zophim",
+      "Zophim"
     ],
     "lat": 31.758,
     "lng": 35.733,
@@ -3836,7 +3896,8 @@
     "aliases": [
       "Ramoth-gilead",
       "Ramoth Gilead",
-      "Ramoth in Gilead"
+      "Ramoth in Gilead",
+      "Ramoth"
     ],
     "lat": 32.53,
     "lng": 36.02,
@@ -3891,7 +3952,9 @@
     "id": "salecah",
     "name": "Salecah",
     "aliases": [
-      "Salecah"
+      "Salecah",
+      "Salcah",
+      "Salchah"
     ],
     "lat": 32.493,
     "lng": 36.711,
@@ -4170,7 +4233,10 @@
       "Valley of Hinnom",
       "Valley of the Son of Hinnom",
       "Valley of Ben-hinnom",
-      "Hinnom"
+      "Hinnom",
+      "Gehenna",
+      "Tophet",
+      "Topheth"
     ],
     "lat": 31.768,
     "lng": 35.229,
@@ -4219,7 +4285,8 @@
     "id": "wilderness_judah",
     "name": "Wilderness of Judah",
     "aliases": [
-      "Wilderness of Judah"
+      "Wilderness of Judah",
+      "Jeshimon"
     ],
     "lat": 31.55,
     "lng": 35.3,
@@ -4625,7 +4692,8 @@
     "id": "hormah",
     "name": "Hormah",
     "aliases": [
-      "Hormah"
+      "Hormah",
+      "Zephath"
     ],
     "lat": 31.24,
     "lng": 34.98,
@@ -4691,7 +4759,9 @@
     "name": "Baal-perazim",
     "aliases": [
       "Baal-perazim",
-      "Baal Perazim"
+      "Baal Perazim",
+      "Mount Perazim",
+      "Perazim"
     ],
     "lat": 31.78,
     "lng": 35.18,
@@ -4947,7 +5017,11 @@
     "id": "zarethan",
     "name": "Zarethan",
     "aliases": [
-      "Zarethan"
+      "Zarethan",
+      "Zaretan",
+      "Zarthan",
+      "Zeredathah",
+      "Zeredah (2 Chr 4:17)"
     ],
     "lat": 32.26,
     "lng": 35.57,
@@ -5048,7 +5122,8 @@
     "name": "Tarshish",
     "aliases": [
       "Tarshish",
-      "ships of Tarshish"
+      "ships of Tarshish",
+      "Tharshish"
     ],
     "lat": 37.26,
     "lng": -6.95,
@@ -5081,7 +5156,8 @@
     "id": "zeredah",
     "name": "Zeredah",
     "aliases": [
-      "Zeredah"
+      "Zeredah",
+      "Zereda"
     ],
     "lat": 32.04,
     "lng": 35.11,
@@ -5122,7 +5198,11 @@
     "aliases": [
       "Baal-shalishah",
       "Baal Shalishah",
-      "Shalishah"
+      "Shalishah",
+      "Baal-shalisha",
+      "Shalisha",
+      "Land of Shalisha",
+      "Land of Shalishah"
     ],
     "lat": 32.08,
     "lng": 35.05,
@@ -5455,7 +5535,9 @@
     "name": "Valley of Beracah",
     "aliases": [
       "Valley of Beracah",
-      "Beracah"
+      "Beracah",
+      "Berachah",
+      "Valley of Berachah"
     ],
     "lat": 31.63,
     "lng": 35.17,
@@ -5505,7 +5587,9 @@
     "name": "Debir",
     "aliases": [
       "Debir",
-      "Kiriath-sepher"
+      "Kiriath-sepher",
+      "Kirjath-sannah",
+      "Kiriath-sannah"
     ],
     "lat": 31.45,
     "lng": 35.04,
@@ -5665,7 +5749,9 @@
     "name": "Berothah",
     "aliases": [
       "Berothah",
-      "Berothai"
+      "Berothai",
+      "Chun",
+      "Cun"
     ],
     "lat": 33.87,
     "lng": 36.12,
@@ -6036,7 +6122,10 @@
     "name": "Kiriathaim",
     "aliases": [
       "Kiriathaim",
-      "Kirjathaim"
+      "Kirjathaim",
+      "Shaveh-Kiriathaim",
+      "Shaveh Kiriathaim",
+      "Plain of Kiriathaim"
     ],
     "lat": 31.62,
     "lng": 35.73,
@@ -6294,7 +6383,8 @@
     "id": "sibmah",
     "name": "Sibmah",
     "aliases": [
-      "Sibmah"
+      "Sibmah",
+      "Shibmah"
     ],
     "lat": 31.79,
     "lng": 35.77,
@@ -6315,7 +6405,8 @@
       "Pool of Siloam",
       "Shiloah",
       "Siloah",
-      "waters of Shiloah"
+      "waters of Shiloah",
+      "Pool of Siloah"
     ],
     "lat": 31.7706,
     "lng": 35.2353,
@@ -6331,7 +6422,8 @@
     "id": "sodom",
     "name": "Sodom",
     "aliases": [
-      "Sodom"
+      "Sodom",
+      "Sodoma"
     ],
     "lat": 31.05,
     "lng": 35.42,
@@ -6692,7 +6784,9 @@
     "name": "Arimathea",
     "aliases": [
       "Arimathea",
-      "Arimathaea"
+      "Arimathaea",
+      "Ramathaim-zophim",
+      "Ramathaim"
     ],
     "lat": 32.035,
     "lng": 35.023,
@@ -6921,7 +7015,8 @@
       "Ephraim (town)",
       "city called Ephraim",
       "town called Ephraim",
-      "village called Ephraim"
+      "village called Ephraim",
+      "Ephraim in the wilderness"
     ],
     "lat": 31.95,
     "lng": 35.3,
@@ -7384,7 +7479,8 @@
       "Phenicia",
       "Syrophoenician",
       "Syro-Phoenician",
-      "Syrophenician"
+      "Syrophenician",
+      "Phenice"
     ],
     "lat": 33.7,
     "lng": 35.45,
@@ -7625,7 +7721,9 @@
     "aliases": [
       "Three Taverns",
       "Three Inns",
-      "Tres Tabernae"
+      "Tres Tabernae",
+      "Taverns, The Three",
+      "The Three Taverns"
     ],
     "lat": 41.6,
     "lng": 12.83,
@@ -7663,6 +7761,1557 @@
     "eraNotes": "Part of Philip's tetrarchy (Luke 3:1).",
     "eras": [
       "gospels"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "abdon",
+    "name": "Abdon",
+    "aliases": [
+      "Abdon"
+    ],
+    "lat": 33.047,
+    "lng": 35.172,
+    "modernName": "Tel Avdon (Khirbet 'Abdeh), Western Galilee, Israel",
+    "eraNotes": "Levitical city in Asher (Josh 21:30; 1 Chr 6:74); = Ebron of Josh 19:28 in some MSS. Joshua 21:30; 1 Chronicles 6:74",
+    "eras": [
+      "conquest",
+      "judges"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "accad",
+    "name": "Accad",
+    "aliases": [
+      "Accad",
+      "Akkad"
+    ],
+    "lat": 33.1,
+    "lng": 44.1,
+    "modernName": "Central Iraq (Akkad, exact site unknown)",
+    "eraNotes": "Genesis 10:10; one of Nimrod's cities in Shinar. Approx. site: Capital of Sargon's Akkadian empire; site not found, usually sought near Sippar/Baghdad on the Tigris-Euphrates.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "achmetha",
+    "name": "Achmetha",
+    "aliases": [
+      "Achmetha",
+      "Ecbatana"
+    ],
+    "lat": 34.806,
+    "lng": 48.516,
+    "modernName": "Hamadan (Tepe Hegmataneh), Iran",
+    "eraNotes": "Ezra 6:2; Median capital where Cyrus's decree was found.",
+    "eras": [
+      "exile"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "achshaph",
+    "name": "Achshaph",
+    "aliases": [
+      "Achshaph"
+    ],
+    "lat": 32.869,
+    "lng": 35.148,
+    "modernName": "Tell Keisan, near Acre, Israel (proposed)",
+    "eraNotes": "Canaanite city allied with Jabin (Josh 11:1); king defeated (Josh 12:20); border of Asher (Josh 19:25). Joshua 11:1; Joshua 12:20; Joshua 19:25 Approx. site: Often identified with Tell Keisan; alternatives Khirbet el-Harbaj / Tell Regev.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "adummim",
+    "name": "Ascent of Adummim",
+    "aliases": [
+      "Ascent of Adummim",
+      "Adummim",
+      "going up to Adummim"
+    ],
+    "lat": 31.82,
+    "lng": 35.34,
+    "modernName": "Tal'at ed-Damm / Ma'ale Adummim pass on the Jerusalem-Jericho road",
+    "eraNotes": "Boundary between Judah and Benjamin (Josh 15:7; 18:17). Joshua 15:7; Joshua 18:17",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ahlab",
+    "name": "Ahlab",
+    "aliases": [
+      "Ahlab",
+      "Mahalab"
+    ],
+    "lat": 33.32,
+    "lng": 35.24,
+    "modernName": "Khirbet el-Mahalib, NE of Tyre, Lebanon (proposed)",
+    "eraNotes": "Canaanite town Asher failed to take (Judg 1:31); likely Mahalab of Josh 19:29. Judges 1:31; Joshua 19:29 Approx. site: Assyrian Mahalliba; usually placed at Khirbet el-Mahalib just north-east of Tyre.",
+    "eras": [
+      "judges"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "akrabbim",
+    "name": "Ascent of Akrabbim",
+    "aliases": [
+      "Ascent of Akrabbim",
+      "Akrabbim",
+      "Maaleh-acrabbim",
+      "Scorpion Pass"
+    ],
+    "lat": 30.96,
+    "lng": 35.1,
+    "modernName": "Ma'ale Akrabim (Scorpion Pass), northern Negev, Israel",
+    "eraNotes": "Southern border of Canaan/Judah (Num 34:4; Josh 15:3); Amorite border (Judg 1:36). Numbers 34:4; Joshua 15:3; Judges 1:36",
+    "eras": [
+      "exodus",
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "almon",
+    "name": "Almon",
+    "aliases": [
+      "Almon",
+      "Alemeth"
+    ],
+    "lat": 31.829,
+    "lng": 35.277,
+    "modernName": "Khirbet 'Almit, near Anata, West Bank",
+    "eraNotes": "Levitical city of Benjamin: Almon (Josh 21:18) = Alemeth (1 Chr 6:60). Joshua 21:18; 1 Chronicles 6:60",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "amana",
+    "name": "Amana",
+    "aliases": [
+      "Amana",
+      "Amanah",
+      "top of Amana"
+    ],
+    "lat": 33.72,
+    "lng": 36.08,
+    "modernName": "Anti-Lebanon range near Zabadani, Syria (proposed)",
+    "eraNotes": "Song 4:8 (peak paired with Senir and Hermon); Qere 'Amana' river of 2 Kgs 5:12 (Abana). Song of Solomon 4:8 Approx. site: Usually the Anti-Lebanon peak/area at the source of the Barada (Abana); some prefer the Amanus range.",
+    "eras": [
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "anab",
+    "name": "Anab",
+    "aliases": [
+      "Anab"
+    ],
+    "lat": 31.4,
+    "lng": 34.95,
+    "modernName": "Khirbet 'Anab es-Saghir, SW of Hebron, West Bank",
+    "eraNotes": "Anakim expelled from Anab (Josh 11:21); town of Judah's hill country (Josh 15:50). Joshua 11:21; Joshua 15:50",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "anim",
+    "name": "Anim",
+    "aliases": [
+      "Anim"
+    ],
+    "lat": 31.36,
+    "lng": 35.05,
+    "modernName": "Khirbet Ghuwein et-Tahta (Horvat Anim), S of Hebron hills",
+    "eraNotes": "Town in Judah's hill country (Josh 15:50). Joshua 15:50",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "aphek_asher",
+    "name": "Aphek (Asher)",
+    "aliases": [
+      "Aphek (Asher)",
+      "Aphik",
+      "Aphek of Asher"
+    ],
+    "lat": 32.848,
+    "lng": 35.112,
+    "modernName": "Tel Afek (Tell Kurdaneh), near Kiryat Bialik, Israel",
+    "eraNotes": "Asher town not conquered (Judg 1:31, 'Aphik'); in Asher's allotment (Josh 19:30). Judges 1:31; Joshua 19:30",
+    "eras": [
+      "conquest",
+      "judges"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ascent_of_akrabbim",
+    "name": "Ascent of Akrabbim",
+    "aliases": [
+      "Ascent of Akrabbim"
+    ],
+    "lat": 30.93,
+    "lng": 35.14,
+    "modernName": "Ma'ale Aqrabim (Naqb es-Safa), Negev",
+    "eraNotes": "Pass on the southern border of Canaan/Judah and the Amorite border. Num 34:4; Josh 15:3; Judg 1:36",
+    "eras": [
+      "exodus",
+      "conquest",
+      "judges"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "azmaveth",
+    "name": "Azmaveth",
+    "aliases": [
+      "Azmaveth",
+      "Beth-azmaveth"
+    ],
+    "lat": 31.833,
+    "lng": 35.262,
+    "modernName": "Hizma, NE of Jerusalem, West Bank",
+    "eraNotes": "Returning exiles from Azmaveth/Beth-azmaveth (Ezra 2:24; Neh 7:28); singers' villages (Neh 12:29).",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "beth_anoth",
+    "name": "Beth-anoth",
+    "aliases": [
+      "Beth-anoth",
+      "Bethanoth"
+    ],
+    "lat": 31.563,
+    "lng": 35.13,
+    "modernName": "Beit 'Einun, NE of Hebron, West Bank",
+    "eraNotes": "Town in Judah's hill country (Josh 15:59). Joshua 15:59",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "beth_arabah",
+    "name": "Beth-arabah",
+    "aliases": [
+      "Beth-arabah",
+      "Betharabah"
+    ],
+    "lat": 31.82,
+    "lng": 35.51,
+    "modernName": "'Ain el-Gharabeh, SE of Jericho (proposed)",
+    "eraNotes": "Boundary town between Judah and Benjamin (Josh 15:6, 61; 18:18, 22). Joshua 15:6; Joshua 15:61; Joshua 18:22 Approx. site: Generally placed at 'Ain el-Gharabeh in the lower Jordan valley near Jericho.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "beth_aram",
+    "name": "Beth-aram",
+    "aliases": [
+      "Beth-aram",
+      "Beth-haram",
+      "Beth-haran"
+    ],
+    "lat": 31.83,
+    "lng": 35.66,
+    "modernName": "Tell er-Rameh / Tell Iktanu, Jordan valley east of the Jordan",
+    "eraNotes": "Gadite town in the Jordan valley (Josh 13:27); fortified by Gad as Beth-haran (Num 32:36). Joshua 13:27; Numbers 32:36 Approx. site: Later Livias/Julias; candidates Tell er-Rameh and nearby Tell Iktanu.",
+    "eras": [
+      "exodus",
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "beth_eked",
+    "name": "Beth-eked",
+    "aliases": [
+      "Beth-eked",
+      "Shearing House",
+      "Shearing-house",
+      "Beth-eked of the Shepherds"
+    ],
+    "lat": 32.468,
+    "lng": 35.346,
+    "modernName": "Beit Qad, near Jenin (proposed)",
+    "eraNotes": "Where Jehu slaughtered Ahaziah's kinsmen (2 Kgs 10:12-14). Approx. site: Beit Qad east of Jenin, on the Jezreel-Samaria road.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "beth_tappuah",
+    "name": "Beth-tappuah",
+    "aliases": [
+      "Beth-tappuah",
+      "Beth Tappuah"
+    ],
+    "lat": 31.536,
+    "lng": 35.054,
+    "modernName": "Taffuh, W of Hebron, West Bank",
+    "eraNotes": "Town in Judah's hill country (Josh 15:53). Joshua 15:53",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "bethabara",
+    "name": "Bethabara",
+    "aliases": [
+      "Bethabara"
+    ],
+    "lat": 31.837,
+    "lng": 35.551,
+    "modernName": "Al-Maghtas (Baptism Site), east bank of the Jordan, Jordan",
+    "eraNotes": "John 1:28 (KJV 'Bethabara'; most MSS 'Bethany beyond the Jordan'), where John baptized.",
+    "eras": [
+      "gospels"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "bezer",
+    "name": "Bezer",
+    "aliases": [
+      "Bezer",
+      "Bezer in the wilderness"
+    ],
+    "lat": 31.75,
+    "lng": 35.92,
+    "modernName": "Medeba plateau east of Madaba, Jordan (Umm el-'Amad or Tell Jalul proposed)",
+    "eraNotes": "City of refuge of Reuben (Deut 4:43; Josh 20:8); Levitical city (Josh 21:36; 1 Chr 6:78). Deuteronomy 4:43; Joshua 20:8; Joshua 21:36 Approx. site: Mesha Stele 'Bosor'; candidates Umm el-'Amad and Tell Jalul, marker placed on the plateau be",
+    "eras": [
+      "exodus",
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "brook_kanah",
+    "name": "Brook Kanah",
+    "aliases": [
+      "Brook Kanah",
+      "river Kanah",
+      "Brook of Kanah",
+      "Wadi Kanah"
+    ],
+    "lat": 32.17,
+    "lng": 35.06,
+    "modernName": "Wadi Qana, west of Nablus",
+    "eraNotes": "Wadi forming the boundary between Ephraim and Manasseh. Josh 16:8; Josh 17:9",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "chaldea",
+    "name": "Chaldea",
+    "aliases": [
+      "Chaldea",
+      "Chaldaea",
+      "land of the Chaldeans"
+    ],
+    "lat": 31.3,
+    "lng": 46.0,
+    "modernName": "Southern Iraq (lower Euphrates/Tigris)",
+    "eraNotes": "Southern Babylonia; Neo-Babylonian ruling people (Jer 50:10; Ezek 11:24; 16:29; 23:15). Jeremiah 50:10; Ezekiel 11:24; Ezekiel 23:15",
+    "eras": [
+      "divided",
+      "exile"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "chesalon",
+    "name": "Chesalon",
+    "aliases": [
+      "Chesalon",
+      "Kesalon"
+    ],
+    "lat": 31.774,
+    "lng": 35.044,
+    "modernName": "Kesla (Kesalon), W of Jerusalem, Israel",
+    "eraNotes": "Northern border of Judah, on the shoulder of Mount Jearim (Josh 15:10). Joshua 15:10",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "chesulloth",
+    "name": "Chesulloth",
+    "aliases": [
+      "Chesulloth",
+      "Chisloth-tabor",
+      "Kesulloth",
+      "Kisloth-tabor"
+    ],
+    "lat": 32.682,
+    "lng": 35.323,
+    "modernName": "Iksal, near Nazareth, Israel",
+    "eraNotes": "Border town of Issachar (Josh 19:18) = Chisloth-tabor on Zebulun's border (Josh 19:12). Joshua 19:18; Joshua 19:12",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "crete",
+    "name": "Crete",
+    "aliases": [
+      "Crete",
+      "Cretans",
+      "Cretes"
+    ],
+    "lat": 35.24,
+    "lng": 24.81,
+    "modernName": "Crete, Greece",
+    "eraNotes": "Cretans at Pentecost (Acts 2:11); Paul sailed under Crete (Acts 27:7-21); Titus left in Crete (Titus 1:5).",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean"
+  },
+  {
+    "id": "ecbatana",
+    "name": "Ecbatana",
+    "aliases": [
+      "Ecbatana"
+    ],
+    "lat": 34.806,
+    "lng": 48.517,
+    "modernName": "Hamadan (Tepe Hegmataneh), Iran",
+    "eraNotes": "Median capital and Persian summer residence where Cyrus's decree was found (Ezra 6:2).",
+    "eras": [
+      "exile"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "eglon",
+    "name": "Eglon",
+    "aliases": [
+      "Eglon"
+    ],
+    "lat": 31.4683,
+    "lng": 34.9242,
+    "modernName": "Tel 'Eton (Tell 'Aitun), Israel",
+    "eraNotes": "Amorite city in the Shephelah whose king joined the southern coalition; later a town of Judah. Josh 10:3; Josh 10:34-35; Josh 12:12; Josh 15:39",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ellasar",
+    "name": "Ellasar",
+    "aliases": [
+      "Ellasar"
+    ],
+    "lat": 31.2858,
+    "lng": 45.8536,
+    "modernName": "Larsa (Tell es-Senkereh), Iraq",
+    "eraNotes": "Kingdom of Arioch, ally of Kedorlaomer in the campaign against the cities of the plain. Gen 14:1; Gen 14:9 Approx. site: Larsa is the common atlas identification; alternatives include Ilanzura (Upper Mesopotamia) and Telassar.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "en_eglaim",
+    "name": "En-eglaim",
+    "aliases": [
+      "En-eglaim",
+      "Eneglaim",
+      "En Eglaim"
+    ],
+    "lat": 31.7186,
+    "lng": 35.4597,
+    "modernName": "'Ein Feshkha (Einot Tzukim), Dead Sea",
+    "eraNotes": "Spring on the Dead Sea shore in Ezekiel's vision of the healed waters (fishermen from En-gedi to En-eglaim). Ezek 47:10 Approx. site: Most often equated with 'Ein Feshkha; 'Ain Hajlah near the Jordan mouth also proposed.",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "en_rimmon",
+    "name": "En-rimmon",
+    "aliases": [
+      "En-rimmon",
+      "Rimmon (Simeon)",
+      "Ain and Rimmon"
+    ],
+    "lat": 31.37,
+    "lng": 34.86,
+    "modernName": "Kh. Umm er-Ramamin / Tel Halif area (proposed)",
+    "eraNotes": "Southern town of Judah/Simeon, resettled after the exile (Josh 15:32; 19:7; Neh 11:29; Zech 14:10). Approx. site: Identification disputed between Kh. Umm er-Ramamin and nearby Tel Halif; both within a few km.",
+    "eras": [
+      "conquest",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "en_shemesh",
+    "name": "En-shemesh",
+    "aliases": [
+      "En-shemesh",
+      "Enshemesh",
+      "En Shemesh"
+    ],
+    "lat": 31.771,
+    "lng": 35.271,
+    "modernName": "'Ain el-Hod ('Spring of the Apostles'), east of al-Eizariya",
+    "eraNotes": "Spring on the Judah-Benjamin boundary on the descent from Jerusalem toward Jericho. Josh 15:7; Josh 18:17",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gath_rimmon",
+    "name": "Gath-rimmon",
+    "aliases": [
+      "Gath-rimmon",
+      "Gathrimmon",
+      "Gath Rimmon"
+    ],
+    "lat": 32.0917,
+    "lng": 34.8083,
+    "modernName": "Tel Gerisa (Tell Jerisheh), Ramat Gan/Tel Aviv",
+    "eraNotes": "Danite town assigned to the Kohathite Levites, on the Yarkon. Josh 19:45; Josh 21:24; 1 Chr 6:69 Approx. site: Tel Gerisa vs Tell Abu Zeitun both proposed. Josh 21:25 'Gath-rimmon' in Manasseh is likely a scribal slip for Ibleam/Bileam - no",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gedor",
+    "name": "Gedor",
+    "aliases": [
+      "Gedor"
+    ],
+    "lat": 31.633,
+    "lng": 35.098,
+    "modernName": "Khirbet Jedur, near Beit Ummar, West Bank",
+    "eraNotes": "Town in the hill country of Judah between Bethlehem and Hebron. Josh 15:58 Approx. site: Pin for Judahite Gedor only (Khirbet Jedur). Gedor of Benjamin (1 Chr 12:7) and of Simeon (1 Chr 4:39) are separate/unlocated; also a personal name.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gibeah_judah",
+    "name": "Gibeah (Judah)",
+    "aliases": [
+      "Gibeah (Judah)",
+      "Gibeah in Judah"
+    ],
+    "lat": 31.672,
+    "lng": 35.074,
+    "modernName": "Jab'a (Khirbet el-Jab'a), southwest of Bethlehem",
+    "eraNotes": "Town in the hill country of Judah listed with Kain and Timnah. Josh 15:57 Approx. site: Tentative identification with Jab'a. Bare 'Gibeah' already resolves to Gibeah of Saul (gibeah).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gibeah_phinehas",
+    "name": "Gibeah of Phinehas",
+    "aliases": [
+      "Gibeah of Phinehas",
+      "hill of Phinehas",
+      "hill that pertained to Phinehas"
+    ],
+    "lat": 32.1611,
+    "lng": 35.2861,
+    "modernName": "Awarta, southeast of Nablus (traditional tomb of Eleazar)",
+    "eraNotes": "Hill in the hill country of Ephraim where Eleazar son of Aaron was buried. Josh 24:33 Approx. site: Samaritan/Jewish tradition places Eleazar's tomb at Awarta; no archaeological confirmation.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gimzo",
+    "name": "Gimzo",
+    "aliases": [
+      "Gimzo"
+    ],
+    "lat": 31.926,
+    "lng": 34.943,
+    "modernName": "Jimzu ruins / Moshav Gimzo, Israel",
+    "eraNotes": "Shephelah town captured by the Philistines in the reign of Ahaz. 2 Chr 28:18",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "hadid",
+    "name": "Hadid",
+    "aliases": [
+      "Hadid",
+      "Adida"
+    ],
+    "lat": 31.969,
+    "lng": 34.937,
+    "modernName": "Tel Hadid, near Lod, Israel",
+    "eraNotes": "Town near Lod resettled by returning exiles. Ezra 2:33; Neh 7:37; Neh 11:34",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "hazarmaveth",
+    "name": "Hazarmaveth",
+    "aliases": [
+      "Hazarmaveth",
+      "Hazar-maveth",
+      "Hadramaut"
+    ],
+    "lat": 15.926,
+    "lng": 48.627,
+    "modernName": "Wadi Hadramawt (Shibam), Yemen",
+    "eraNotes": "Joktanite people/region of South Arabia in the Table of Nations. Gen 10:26; 1 Chr 1:20",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "arabia"
+  },
+  {
+    "id": "hazeroth",
+    "name": "Hazeroth",
+    "aliases": [
+      "Hazeroth"
+    ],
+    "lat": 28.875,
+    "lng": 34.42,
+    "modernName": "'Ain Hudra (Ein Khadra), Sinai, Egypt",
+    "eraNotes": "Wilderness camp after Kibroth-hattaavah where Miriam and Aaron opposed Moses. Num 11:35; Num 12:16; Num 33:17-18; Deut 1:1 Approx. site: Traditional identification assumes the southern-Sinai route; unknown under other route models.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "egypt"
+  },
+  {
+    "id": "hosah",
+    "name": "Hosah",
+    "aliases": [
+      "Hosah"
+    ],
+    "lat": 33.233,
+    "lng": 35.217,
+    "modernName": "Tell Rashidieh (mainland Tyre / Ushu), Lebanon",
+    "eraNotes": "Border point of Asher near Tyre. Josh 19:29 Approx. site: Equated with Assyrian Ushu (Palaetyrus) on the mainland opposite Tyre. 'Hosah' is also a Levite gatekeeper (1 Chr 16:38; 26:10).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "hukkok",
+    "name": "Hukkok",
+    "aliases": [
+      "Hukkok"
+    ],
+    "lat": 32.884,
+    "lng": 35.497,
+    "modernName": "Huqoq (Yaquq), northwest of the Sea of Galilee",
+    "eraNotes": "Border town of Naphtali. Josh 19:34",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "india",
+    "name": "India",
+    "aliases": [
+      "India",
+      "Hoddu"
+    ],
+    "lat": 26.5,
+    "lng": 68.5,
+    "modernName": "Indus valley (Sindh), Pakistan",
+    "eraNotes": "Eastern limit of the Persian empire of Ahasuerus (Persian satrapy Hindush). Esth 1:1; Esth 8:9",
+    "eras": [
+      "exile"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "jacobs_well",
+    "name": "Jacob's Well",
+    "aliases": [
+      "Jacob's Well",
+      "Jacob’s well"
+    ],
+    "lat": 32.2094,
+    "lng": 35.285,
+    "modernName": "Bir Ya'qub, Balata (Nablus), West Bank",
+    "eraNotes": "Well at Sychar where Jesus spoke with the Samaritan woman, on the parcel Jacob gave Joseph. John 4:5-6; Gen 33:19; Josh 24:32",
+    "eras": [
+      "patriarchs",
+      "gospels"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "juttah",
+    "name": "Juttah",
+    "aliases": [
+      "Juttah"
+    ],
+    "lat": 31.4496,
+    "lng": 35.092,
+    "modernName": "Yatta, south of Hebron, West Bank",
+    "eraNotes": "Hill-country town of Judah given to the Levites. Josh 15:55; Josh 21:16",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "kain",
+    "name": "Kain",
+    "aliases": [
+      "Kain"
+    ],
+    "lat": 31.508,
+    "lng": 35.155,
+    "modernName": "Khirbet Yaqin / Nebi Yaqin, near Bani Na'im, West Bank",
+    "eraNotes": "Town of Judah (Josh 15:57; KJV 'Cain'). Joshua 15:57 Approx. site: 'Cain' deliberately omitted as alias (collides with Adam's son); site at Nebi Yaqin SE of Hebron.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "kanah_asher",
+    "name": "Kanah (Asher)",
+    "aliases": [
+      "Kanah (Asher)",
+      "Kanah"
+    ],
+    "lat": 33.2094,
+    "lng": 35.2994,
+    "modernName": "Qana, southern Lebanon",
+    "eraNotes": "Town on the border of Asher, as far as Great Sidon. Josh 19:28",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "kinah",
+    "name": "Kinah",
+    "aliases": [
+      "Kinah"
+    ],
+    "lat": 31.22,
+    "lng": 35.16,
+    "modernName": "Horvat 'Uza (Kh. Ghazzeh), Wadi el-Qeini (proposed)",
+    "eraNotes": "Town of Judah's Negeb district near the Edomite border. Josh 15:22 Approx. site: Aharoni/Rainey link Kinah to Wadi el-Qeini and Horvat 'Uza east of Arad; site identification and coords approximate.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "kishion",
+    "name": "Kishion",
+    "aliases": [
+      "Kishion"
+    ],
+    "lat": 32.655,
+    "lng": 35.43,
+    "modernName": "Tel Qishyon, SE of Mount Tabor (proposed)",
+    "eraNotes": "Issachar town given to the Gershonite Levites (KJV 'Kishon' in Josh 21:28). Josh 19:20; Josh 21:28 Approx. site: Bare 'Kishon' deliberately not aliased (collides with brook Kishon). Coords approximate for Tel Qishyon.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "madon",
+    "name": "Madon",
+    "aliases": [
+      "Madon"
+    ],
+    "lat": 32.8,
+    "lng": 35.45,
+    "modernName": "Qarn Hattin (Horns of Hattin), Galilee (proposed)",
+    "eraNotes": "Canaanite city whose king Jobab joined Jabin's northern coalition. Josh 11:1; Josh 12:19 Approx. site: Usually placed at Tel Qarnei Hittin; LXX reads 'Maron' (possibly Merom), so identification is uncertain.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "makkedah",
+    "name": "Makkedah",
+    "aliases": [
+      "Makkedah"
+    ],
+    "lat": 31.53,
+    "lng": 34.96,
+    "modernName": "Khirbet el-Qom, Judean Shephelah (proposed)",
+    "eraNotes": "Cave where Joshua trapped the five Amorite kings; town of the Shephelah. Josh 10:10; Josh 10:16-28; Josh 12:16; Josh 15:41 Approx. site: Dorsey's Kh. el-Qom identification is widely followed; Tel Bornat and others also proposed.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "me_jarkon",
+    "name": "Me-jarkon",
+    "aliases": [
+      "Me-jarkon",
+      "Me Jarkon",
+      "Me-yarkon",
+      "waters of Jarkon"
+    ],
+    "lat": 32.1,
+    "lng": 34.85,
+    "modernName": "Yarkon River, Israel",
+    "eraNotes": "Boundary water of Dan's inheritance near Joppa. Josh 19:46",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "migdal_edar",
+    "name": "Migdal-eder",
+    "aliases": [
+      "Migdal-eder",
+      "Migdal-Edar",
+      "tower of Edar",
+      "tower of Eder"
+    ],
+    "lat": 31.7048,
+    "lng": 35.2266,
+    "modernName": "Beit Sahour (Shepherds' Field tradition), near Bethlehem",
+    "eraNotes": "Israel (Jacob) camped beyond it after Rachel's death; Micah's 'tower of the flock'. Gen 35:21; Mic 4:8 Approx. site: Located only by tradition between Bethlehem and Hebron/Jerusalem; pin at Beit Sahour tradition.",
+    "eras": [
+      "patriarchs",
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "migdal_eder",
+    "name": "Migdal Eder (Tower of Edar)",
+    "aliases": [
+      "Migdal Eder (Tower of Edar)",
+      "Migdal Eder",
+      "tower of the flock"
+    ],
+    "lat": 31.704,
+    "lng": 35.226,
+    "modernName": "Shepherds' Field area, Beit Sahour (traditional)",
+    "eraNotes": "Israel (Jacob) camped beyond the tower of Edar after Rachel's death near Bethlehem; Micah's 'tower of the flock'. Gen 35:21; Mic 4:8 Approx. site: Traditional (Jerome) location c. 1 Roman mile from Bethlehem; exact site unknown. Bare 'Eder'",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "misrephoth_maim",
+    "name": "Misrephoth-maim",
+    "aliases": [
+      "Misrephoth-maim",
+      "Misrephoth Maim"
+    ],
+    "lat": 33.085,
+    "lng": 35.11,
+    "modernName": "Khirbet el-Musheirefeh near Rosh HaNikra (proposed)",
+    "eraNotes": "Limit of Joshua's pursuit after Merom; northern border of unconquered land near Sidon. Josh 11:8; Josh 13:6 Approx. site: Coastal site below Rosh HaNikra commonly proposed; some identify with the Litani River.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "mount_hor",
+    "name": "Mount Hor",
+    "aliases": [
+      "Mount Hor"
+    ],
+    "lat": 30.317,
+    "lng": 35.407,
+    "modernName": "Jebel Harun near Petra, Jordan (traditional)",
+    "eraNotes": "Mountain on the border of Edom where Aaron died and was buried. Num 20:22-28; Num 21:4; Num 33:37-41; Deut 32:50 Approx. site: Traditional Jebel Harun; Jebel Madurah NE of Kadesh is the main alternative. The northern 'Mount Hor' of Num 34:7",
+    "eras": [
+      "exodus"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "mount_jearim",
+    "name": "Mount Jearim",
+    "aliases": [
+      "Mount Jearim"
+    ],
+    "lat": 31.775,
+    "lng": 35.045,
+    "modernName": "Kesla / Kesalon ridge, west of Jerusalem",
+    "eraNotes": "Ridge on Judah's northern border, 'which is Chesalon'. Josh 15:10 Approx. site: Chesalon = Kesla is standard; the pin marks the ridge at Chesalon. Distinct from Kiriath-jearim.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "mozah",
+    "name": "Mozah",
+    "aliases": [
+      "Mozah",
+      "Motza"
+    ],
+    "lat": 31.7928,
+    "lng": 35.1633,
+    "modernName": "Tel Moza (Motza), W of Jerusalem",
+    "eraNotes": "Benjamite town; Iron Age temple excavated at Tel Moza. Josh 18:26",
+    "eras": [
+      "conquest",
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "naarah",
+    "name": "Naarah",
+    "aliases": [
+      "Naarah",
+      "Naaran",
+      "Naarath"
+    ],
+    "lat": 31.88,
+    "lng": 35.43,
+    "modernName": "Tell el-Jisr near 'Ain Duk / Na'aran, N of Jericho (proposed)",
+    "eraNotes": "Town on Ephraim's eastern border near Jericho. Josh 16:7; 1 Chr 7:28 Approx. site: Roman-era Na'aran (synagogue at 'Ain Duk) preserves the name; Iron Age site uncertain.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "neballat",
+    "name": "Neballat",
+    "aliases": [
+      "Neballat"
+    ],
+    "lat": 31.981,
+    "lng": 34.954,
+    "modernName": "Beit Nabala (former village), NE of Lod",
+    "eraNotes": "Benjamite settlement of returning exiles near Lod and Ono. Neh 11:34",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "nephtoah",
+    "name": "Waters of Nephtoah",
+    "aliases": [
+      "Waters of Nephtoah",
+      "Nephtoah",
+      "fountain of the waters of Nephtoah"
+    ],
+    "lat": 31.7956,
+    "lng": 35.1972,
+    "modernName": "Lifta (Mei Neftoah), W edge of Jerusalem",
+    "eraNotes": "Spring on the Judah-Benjamin boundary. Josh 15:9; Josh 18:15",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "nezib",
+    "name": "Nezib",
+    "aliases": [
+      "Nezib"
+    ],
+    "lat": 31.57,
+    "lng": 35.03,
+    "modernName": "Khirbet Beit Nesib, NW of Hebron",
+    "eraNotes": "Town of the Judean Shephelah. Josh 15:43 Approx. site: Name preserved at Kh. Beit Nesib; coords approximate.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ophel",
+    "name": "Ophel",
+    "aliases": [
+      "Ophel",
+      "hill of Ophel",
+      "the Ophel"
+    ],
+    "lat": 31.7745,
+    "lng": 35.2362,
+    "modernName": "Ophel ridge, between City of David and Temple Mount, Jerusalem",
+    "eraNotes": "Fortified ridge of Jerusalem; walls built by Jotham and Manasseh; temple servants lived here. 2 Chr 27:3; 2 Chr 33:14; Neh 3:26-27; Neh 11:21; Isa 32:14; Mic 4:8",
+    "eras": [
+      "divided",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ophni",
+    "name": "Ophni",
+    "aliases": [
+      "Ophni"
+    ],
+    "lat": 31.963,
+    "lng": 35.213,
+    "modernName": "Jifna (Gophna), N of Ramallah (proposed)",
+    "eraNotes": "Town of Benjamin. Josh 18:24 Approx. site: Commonly equated with Roman Gophna (Jifna).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "parah",
+    "name": "Parah",
+    "aliases": [
+      "Parah"
+    ],
+    "lat": 31.831,
+    "lng": 35.3,
+    "modernName": "Khirbet el-Fara / Ein Prat, Wadi Qelt",
+    "eraNotes": "Town of Benjamin. Josh 18:23",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "pethor",
+    "name": "Pethor",
+    "aliases": [
+      "Pethor"
+    ],
+    "lat": 36.66,
+    "lng": 38.05,
+    "modernName": "Pitru, near Sajur-Euphrates confluence, N Syria (proposed)",
+    "eraNotes": "Hometown of Balaam 'by the river' in Aram-naharaim. Num 22:5; Deut 23:4 Approx. site: Assyrian Pitru south of Carchemish; exact tell uncertain.",
+    "eras": [
+      "exodus"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "pirathon",
+    "name": "Pirathon",
+    "aliases": [
+      "Pirathon",
+      "Pirathonite"
+    ],
+    "lat": 32.21,
+    "lng": 35.16,
+    "modernName": "Far'ata, W of Nablus (proposed)",
+    "eraNotes": "Home and burial place of judge Abdon; home of David's warrior Benaiah. Judg 12:13; Judg 12:15; 2 Sam 23:30; 1 Chr 11:31; 1 Chr 27:14 Approx. site: Far'ata preserves the name; coords approximate.",
+    "eras": [
+      "judges",
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "rehoboth_well",
+    "name": "Rehoboth (well)",
+    "aliases": [
+      "Rehoboth (well)",
+      "Rehoboth"
+    ],
+    "lat": 31.04,
+    "lng": 34.67,
+    "modernName": "Ruheibeh (Rehovot ba-Negev), Negev (proposed)",
+    "eraNotes": "Well dug by Isaac's servants near Gerar. Gen 26:22 Approx. site: Distinct from Rehoboth-Ir in Assyria (Gen 10:11) and 'Rehoboth by the river' (Gen 36:37); the bare alias may also match those.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "resen",
+    "name": "Resen",
+    "aliases": [
+      "Resen"
+    ],
+    "lat": 36.22,
+    "lng": 43.25,
+    "modernName": "Between Mosul (Nineveh) and Nimrud (unidentified)",
+    "eraNotes": "Assyrian city built by Nimrod's line between Nineveh and Calah (Gen 10:12). Approx. site: Unlocated; placed between Nineveh and Calah per the text. Selamiyeh near Nimrud has been proposed.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "mesopotamia"
+  },
+  {
+    "id": "rimmon_rock",
+    "name": "Rock of Rimmon",
+    "aliases": [
+      "Rock of Rimmon",
+      "Rimmon (Benjamin)"
+    ],
+    "lat": 31.932,
+    "lng": 35.296,
+    "modernName": "Rammun, West Bank",
+    "eraNotes": "Refuge of 600 Benjaminites after Gibeah (Judg 20:45-47; 21:13).",
+    "eras": [
+      "judges"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "rimmon_zebulun",
+    "name": "Rimmon (Zebulun)",
+    "aliases": [
+      "Rimmon (Zebulun)",
+      "Remmon-methoar",
+      "Rimmono"
+    ],
+    "lat": 32.785,
+    "lng": 35.295,
+    "modernName": "Rummana, N edge of the Beit Netofa Valley",
+    "eraNotes": "Border town of Zebulun; Levitical city. Josh 19:13; 1 Chr 6:77",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "rumah",
+    "name": "Rumah",
+    "aliases": [
+      "Rumah"
+    ],
+    "lat": 32.785,
+    "lng": 35.335,
+    "modernName": "Horvat Ruma, Israel",
+    "eraNotes": "Hometown of Zebudah, mother of King Jehoiakim (2 Kgs 23:36).",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "sansannah",
+    "name": "Sansannah",
+    "aliases": [
+      "Sansannah"
+    ],
+    "lat": 31.42,
+    "lng": 34.89,
+    "modernName": "Kh. esh-Shamsaniyat (proposed)",
+    "eraNotes": "Southern town of Judah; probably = Hazar-susah of Simeon (Josh 15:31). Approx. site: Proposed site NE of Beersheba basin; tentative.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "secacah",
+    "name": "Secacah",
+    "aliases": [
+      "Secacah"
+    ],
+    "lat": 31.755,
+    "lng": 35.4,
+    "modernName": "Kh. es-Samrah, Buqei'a valley (proposed)",
+    "eraNotes": "Wilderness town of Judah (Josh 15:61). Approx. site: One of six wilderness towns usually placed in the Buqei'a; Qumran also proposed (~8 km E).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "sela_hammahlekoth",
+    "name": "Sela-hammahlekoth",
+    "aliases": [
+      "Sela-hammahlekoth",
+      "Rock of Escape",
+      "Rock of Divisions"
+    ],
+    "lat": 31.45,
+    "lng": 35.17,
+    "modernName": "Wadi el-Malaqi, near Maon (proposed)",
+    "eraNotes": "Rock where Saul broke off pursuit of David (1 Sam 23:28). Approx. site: In the Wilderness of Maon; gorge identification tentative.",
+    "eras": [
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "seneh",
+    "name": "Seneh",
+    "aliases": [
+      "Seneh"
+    ],
+    "lat": 31.866,
+    "lng": 35.282,
+    "modernName": "Wadi Suweinit, south crag",
+    "eraNotes": "Rocky crag opposite Bozez in the pass of Michmash (1 Sam 14:4-5).",
+    "eras": [
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "sephar",
+    "name": "Sephar",
+    "aliases": [
+      "Sephar",
+      "Mount Sephar"
+    ],
+    "lat": 14.21,
+    "lng": 44.4,
+    "modernName": "Zafar, Yemen (proposed)",
+    "eraNotes": "Eastern limit of the Joktanite peoples (Gen 10:30). Approx. site: Traditionally Zafar, Himyarite capital; conjectural.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "arabia"
+  },
+  {
+    "id": "shaaraim",
+    "name": "Shaaraim",
+    "aliases": [
+      "Shaaraim",
+      "Sharaim"
+    ],
+    "lat": 31.696,
+    "lng": 34.957,
+    "modernName": "Khirbet Qeiyafa (proposed)",
+    "eraNotes": "Shephelah town of Judah on the road of the Philistine retreat after Goliath (Josh 15:36; 1 Sam 17:52).",
+    "eras": [
+      "conquest",
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "shalem",
+    "name": "Shalem",
+    "aliases": [
+      "Shalem"
+    ],
+    "lat": 32.208,
+    "lng": 35.334,
+    "modernName": "Salim, West Bank",
+    "eraNotes": "Jacob came to 'Shalem, a city of Shechem' (Gen 33:18 KJV). Approx. site: Many versions read 'safely to the city of Shechem'; Salim village 5 km E of Shechem keeps the name.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "shaphir",
+    "name": "Shaphir",
+    "aliases": [
+      "Shaphir",
+      "Saphir"
+    ],
+    "lat": 31.71,
+    "lng": 34.72,
+    "modernName": "es-Sawafir, near Ashdod (proposed)",
+    "eraNotes": "Town in Micah's lament over the Shephelah (Mic 1:11). Approx. site: Name echo at es-Sawafir; a site nearer Lachish/Moresheth is also proposed.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "sirah",
+    "name": "Well of Sirah",
+    "aliases": [
+      "Well of Sirah",
+      "Sirah",
+      "Cistern of Sirah"
+    ],
+    "lat": 31.548,
+    "lng": 35.103,
+    "modernName": "Ain Sarah, N of Hebron",
+    "eraNotes": "Where Joab's messengers recalled Abner before killing him (2 Sam 3:26).",
+    "eras": [
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "taanath_shiloh",
+    "name": "Taanath-shiloh",
+    "aliases": [
+      "Taanath-shiloh"
+    ],
+    "lat": 32.172,
+    "lng": 35.369,
+    "modernName": "Kh. Ta'na el-Foqa, West Bank",
+    "eraNotes": "Border point of Ephraim east of Michmethath (Josh 16:6).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "tappuah",
+    "name": "Tappuah",
+    "aliases": [
+      "Tappuah",
+      "En-tappuah"
+    ],
+    "lat": 32.124,
+    "lng": 35.236,
+    "modernName": "Tell Sheikh Abu Zarad, West Bank",
+    "eraNotes": "Border town between Ephraim and Manasseh; its king defeated by Joshua (Josh 12:17; 16:8; 17:7-8).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "thebez",
+    "name": "Thebez",
+    "aliases": [
+      "Thebez"
+    ],
+    "lat": 32.321,
+    "lng": 35.369,
+    "modernName": "Tubas, West Bank",
+    "eraNotes": "Abimelech killed by a millstone dropped from its tower (Judg 9:50-53; 2 Sam 11:21).",
+    "eras": [
+      "judges"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "tophel",
+    "name": "Tophel",
+    "aliases": [
+      "Tophel"
+    ],
+    "lat": 30.84,
+    "lng": 35.6,
+    "modernName": "Tafilah, Jordan",
+    "eraNotes": "Landmark where Moses spoke beyond the Jordan (Deut 1:1).",
+    "eras": [
+      "exodus"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "trogyllium",
+    "name": "Trogyllium",
+    "aliases": [
+      "Trogyllium",
+      "Trogylium"
+    ],
+    "lat": 37.67,
+    "lng": 27.1,
+    "modernName": "Dilek Peninsula (Cape Mycale), Turkey",
+    "eraNotes": "Paul's ship tarried here between Samos and Miletus (Acts 20:15, KJV/TR).",
+    "eras": [
+      "acts"
+    ],
+    "region": "anatolia"
+  },
+  {
+    "id": "uzzen_sheerah",
+    "name": "Uzzen-sheerah",
+    "aliases": [
+      "Uzzen-sheerah",
+      "Uzzen-sherah"
+    ],
+    "lat": 31.886,
+    "lng": 35.04,
+    "modernName": "Beit Sira, West Bank",
+    "eraNotes": "Town built by Sheerah, daughter of Ephraim, with the Beth-horons (1 Chr 7:24). Approx. site: Beit Sira just west of Lower Beth-horon; name similarity.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "valley_of_shaveh",
+    "name": "Valley of Shaveh",
+    "aliases": [
+      "Valley of Shaveh",
+      "Shaveh",
+      "King's Valley",
+      "King's Dale"
+    ],
+    "lat": 31.771,
+    "lng": 35.237,
+    "modernName": "Kidron valley near Jerusalem (traditional)",
+    "eraNotes": "Where Melchizedek met Abram; the King's Valley of Absalom's pillar (Gen 14:17; 2 Sam 18:18). Approx. site: Josephus puts Absalom's monument 2 stadia from Jerusalem; exact valley uncertain.",
+    "eras": [
+      "patriarchs",
+      "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "valley_of_siddim",
+    "name": "Valley of Siddim",
+    "aliases": [
+      "Valley of Siddim",
+      "Vale of Siddim",
+      "Siddim"
+    ],
+    "lat": 31.1,
+    "lng": 35.45,
+    "modernName": "Southern Dead Sea basin (traditional)",
+    "eraNotes": "Battle of the four kings against five; full of bitumen pits (Gen 14:3, 8, 10). Approx. site: Text equates it with the Salt Sea; placed in the shallow southern basin.",
+    "eras": [
+      "patriarchs"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "waters_of_merom",
+    "name": "Waters of Merom",
+    "aliases": [
+      "Waters of Merom",
+      "Merom"
+    ],
+    "lat": 32.98,
+    "lng": 35.44,
+    "modernName": "Meiron area, Upper Galilee (proposed)",
+    "eraNotes": "Joshua's defeat of Jabin's northern coalition. Josh 11:5; Josh 11:7 Approx. site: Older maps use Lake Huleh; many modern atlases prefer springs near Meiron. Site disputed.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zanoah",
+    "name": "Zanoah",
+    "aliases": [
+      "Zanoah"
+    ],
+    "lat": 31.719,
+    "lng": 34.998,
+    "modernName": "Kh. Zanu', near Beth Shemesh",
+    "eraNotes": "Shephelah town of Judah, resettled after the exile; its men repaired the Valley Gate (Josh 15:34; Neh 3:13; 11:30).",
+    "eras": [
+      "conquest",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zareth_shahar",
+    "name": "Zereth-shahar",
+    "aliases": [
+      "Zereth-shahar",
+      "Zareth-shahar"
+    ],
+    "lat": 31.595,
+    "lng": 35.567,
+    "modernName": "ez-Zarat (Callirrhoe), Jordan",
+    "eraNotes": "Reubenite town 'on the hill of the valley' (Josh 13:19). Approx. site: East shore of the Dead Sea near Machaerus; tentative.",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zephathah",
+    "name": "Valley of Zephathah",
+    "aliases": [
+      "Valley of Zephathah",
+      "Zephathah"
+    ],
+    "lat": 31.6,
+    "lng": 34.9,
+    "modernName": "Near Tel Maresha",
+    "eraNotes": "Asa defeated Zerah the Cushite 'in the valley of Zephathah at Mareshah' (2 Chr 14:10). Approx. site: Text ties it to Mareshah; valley itself not pinpointed.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zior",
+    "name": "Zior",
+    "aliases": [
+      "Zior"
+    ],
+    "lat": 31.58,
+    "lng": 35.15,
+    "modernName": "Sa'ir, West Bank",
+    "eraNotes": "Hill-country town of Judah (Josh 15:54).",
+    "eras": [
+      "conquest"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ziz",
+    "name": "Ascent of Ziz",
+    "aliases": [
+      "Ascent of Ziz",
+      "Ziz",
+      "Cliff of Ziz"
+    ],
+    "lat": 31.5,
+    "lng": 35.33,
+    "modernName": "Wadi Hasasa, NW of En-gedi (proposed)",
+    "eraNotes": "Pass by which Moab and Ammon came up against Jehoshaphat (2 Chr 20:16). Approx. site: Ascent from En-gedi toward Tekoa; usually Wadi Hasasa.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zoheleth",
+    "name": "Stone of Zoheleth",
+    "aliases": [
+      "Stone of Zoheleth",
+      "Zoheleth",
+      "Serpent's Stone"
+    ],
+    "lat": 31.772,
+    "lng": 35.235,
+    "modernName": "Zahweileh rock, Silwan, Jerusalem",
+    "eraNotes": "Where Adonijah held his feast by En-rogel (1 Kgs 1:9).",
+    "eras": [
+      "united"
     ],
     "region": "levant"
   }

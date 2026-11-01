@@ -899,18 +899,10 @@
       focusedPlaceId && findPlaceById(focusedPlaceId);
     if (focused && easeMapToPlace(focused, { animate: false })) {
       setPlacesMapsLink([focused]);
-      setMapHelp(
-        `${focused.name} — town view (zoom ${PLACE_FOCUS_ZOOM}).`,
-        false
-      );
+      setMapHelp("", false);
     } else {
       fitToChapter(map, preset, focusPts, pmtilesHeader);
-      setMapHelp(
-        `${preset?.title || "Map"} — offline MapLibre / OSM (${focusPts.length} place${
-          focusPts.length === 1 ? "" : "s"
-        } in this chapter).`,
-        false
-      );
+      setMapHelp("", false);
     }
     map.resize();
   }

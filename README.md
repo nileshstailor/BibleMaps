@@ -28,7 +28,7 @@ After pulling updates: **Reload** the extension on `chrome://extensions`.
 
 ## Offline tiles
 
-- Bundled archive: `media/tiles/bible-region.pmtiles` (~93 MB, maxzoom 10, bbox `12,28,43.2,43` — Rome → Nineveh, covering Paul/Greece/Italy + Levant; MapLibre overzooms for town focus)
+- Bundled archive: `media/tiles/bible-region.pmtiles` (~41 MB, maxzoom 9, bbox `12,28,43.2,43` — Rome → Nineveh). Sized to load safely in the Chrome side panel (a denser ~93 MB extract OOM-crashed the panel). MapLibre overzooms past z9 for town pin focus.
 - Style: `media/tiles/style.json` (Protomaps light layers without remote fonts)
 - Rebuild (optional): install the [go-pmtiles](https://github.com/protomaps/go-pmtiles/releases) CLI as `scripts/pmtiles`, then run `scripts/build-pmtiles.sh` (override with `PROTOMAPS_BBOX` / `PROTOMAPS_MAXZOOM`)
 
