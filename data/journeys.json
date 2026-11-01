@@ -115,7 +115,9 @@
     "name": "Paul’s First Missionary Journey",
     "aliases": [
       "first missionary journey",
-      "Paul and Barnabas"
+      "Paul and Barnabas",
+      "Cyprus",
+      "Barnabas"
     ],
     "scriptureRefs": [
       "Acts 13–14"
@@ -129,6 +131,10 @@
       {
         "placeId": "seleucia",
         "note": "Sail from the port of Antioch"
+      },
+      {
+        "placeId": "cyprus",
+        "note": "Land on the island (Acts 13:4)"
       },
       {
         "placeId": "cyprus_salamis",

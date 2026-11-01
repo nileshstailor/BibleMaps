@@ -3356,6 +3356,27 @@
     "region": "cyprus"
   },
   {
+    "id": "cyprus",
+    "name": "Cyprus",
+    "aliases": [
+      "Cyprus",
+      "island of Cyprus",
+      "Isle of Cyprus",
+      "the island of Cyprus"
+    ],
+    "lat": 35.1264,
+    "lng": 33.4299,
+    "modernName": "Cyprus",
+    "eraNotes": "Eastern Mediterranean island; Barnabas's home; Paul's first journey landfall (Salamis → Paphos).",
+    "eras": [
+      "acts",
+      "gospels",
+      "divided",
+      "united"
+    ],
+    "region": "cyprus"
+  },
+  {
     "id": "lachish",
     "name": "Lachish",
     "aliases": [
