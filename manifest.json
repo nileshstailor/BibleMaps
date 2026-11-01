@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.3.8",
+  "version": "1.3.9",
   "description": "Highlight biblical places and journeys on bible.com and open them on an offline MapLibre map.",
   "permissions": ["sidePanel", "storage", "activeTab", "tabs"],
   "host_permissions": [

@@ -270,6 +270,12 @@ body {
   border: 1px solid rgba(74, 103, 65, 0.28);
 }
 
+.text-btn.journey-map-btn.active-map {
+  background: rgba(166, 48, 36, 0.12);
+  color: var(--terra);
+  border-color: rgba(166, 48, 36, 0.35);
+}
+
 .map-dock {
   border: 1px solid var(--line);
   background: rgba(255, 250, 240, 0.92);

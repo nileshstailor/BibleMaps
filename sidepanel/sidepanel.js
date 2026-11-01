@@ -35,6 +35,7 @@
   let current = null;
   let activeJourney = null;
   let selectedJourneyId = null;
+  let journeyOnMap = false;
   let activeTab = "places";
   let activePlaceMarkers = [];
   let allPlaces = null;
@@ -320,7 +321,7 @@
               : ""
           }
           <div class="actions">
-            <button class="text-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
+            <button class="text-btn journey-map-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
               Show on map
             </button>
           </div>
@@ -332,12 +333,23 @@
         if (row.open) openJourneyIds.add(id);
         else openJourneyIds.delete(id);
       });
-      row.querySelector("button")?.addEventListener("click", (e) => {
+      row.querySelector("button.journey-map-btn")?.addEventListener("click", (e) => {
         e.preventDefault();
-        showJourneyOnMap(journey);
+        toggleJourneyOnMap(journey);
       });
       els.journeysPanel.appendChild(row);
     }
+    updateJourneyMapButtons();
+  }
+
+  function updateJourneyMapButtons() {
+    els.journeysPanel?.querySelectorAll("button.journey-map-btn").forEach((btn) => {
+      const id = btn.getAttribute("data-journey-id");
+      const shown = journeyOnMap && activeJourney?.id === id;
+      btn.textContent = shown ? "Hide on map" : "Show on map";
+      btn.classList.toggle("active-map", shown);
+      btn.setAttribute("aria-pressed", shown ? "true" : "false");
+    });
   }
 
   function hideStopList() {
@@ -366,6 +378,7 @@
   /** Keep the always-visible map chrome in sync with chapter places. */
   function syncPlacesMapChrome(places) {
     activeJourney = null;
+    journeyOnMap = false;
     activePlaceMarkers = places || [];
     const chap = chapterLabel(current);
     els.mapTitle.textContent = "Map";
@@ -374,21 +387,49 @@
     setPlacesMapsLink(places || []);
     // Place names live in the accordion above the map — don't duplicate under it.
     hideStopList();
+    updateJourneyMapButtons();
   }
 
   function showJourneyOnMap(journey) {
     if (!journey) return;
     activeJourney = journey;
     selectedJourneyId = journey.id || null;
+    journeyOnMap = true;
     activePlaceMarkers = current?.places || [];
     els.mapTitle.textContent = journey.name;
     els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
     setJourneyMapsLink(journey.stops || []);
     fillJourneyStopList(journey);
+    updateJourneyMapButtons();
     requestAnimationFrame(() => renderMap());
   }
 
+  function hideJourneyFromMap() {
+    journeyOnMap = false;
+    activeJourney = null;
+    // Keep chapter places on the map; clear the journey route/chrome.
+    const places = current?.places || [];
+    activePlaceMarkers = places;
+    const chap = chapterLabel(current);
+    els.mapTitle.textContent = "Map";
+    els.mapSubtitle.textContent = chap ? `Places in ${chap}` : "Places in this chapter";
+    setPlacesMapsLink(places);
+    hideStopList();
+    updateJourneyMapButtons();
+    requestAnimationFrame(() => renderMap());
+  }
+
+  function toggleJourneyOnMap(journey) {
+    if (!journey) return;
+    if (journeyOnMap && activeJourney?.id === journey.id) {
+      hideJourneyFromMap();
+      return;
+    }
+    showJourneyOnMap(journey);
+  }
+
   function pickJourneyForTab() {
+    if (!journeyOnMap) return null;
     const journeys = current?.journeys || [];
     if (!journeys.length) return null;
     if (selectedJourneyId) {
@@ -399,17 +440,22 @@
       const still = journeys.find((j) => j.id === activeJourney.id);
       if (still) return still;
     }
-    return journeys[0];
+    return null;
   }
 
   /** Keep the always-visible map aligned with Places vs Journeys tab. */
   function syncMapForActiveTab() {
     if (activeTab === "journeys") {
-      const journey = pickJourneyForTab();
-      if (journey) {
-        showJourneyOnMap(journey);
-        return;
+      if (journeyOnMap) {
+        const journey = pickJourneyForTab();
+        if (journey) {
+          showJourneyOnMap(journey);
+          return;
+        }
       }
+      // Journeys tab with nothing shown — chapter places until user hits Show on map.
+      hideJourneyFromMap();
+      return;
     }
     syncPlacesMapChrome(current?.places || []);
     requestAnimationFrame(() => renderMap());
@@ -1053,7 +1099,7 @@
     // Always-visible map: keep chrome + overlays in sync with the active tab.
     if (activeTab === "journeys") {
       const journey = pickJourneyForTab();
-      if (journey) {
+      if (journey && journeyOnMap) {
         const same =
           activeJourney?.id === journey.id &&
           mapFingerprint() === lastMapFingerprint &&
@@ -1063,12 +1109,20 @@
           activeJourney = journey;
           selectedJourneyId = journey.id || selectedJourneyId;
           fillJourneyStopList(journey);
+          updateJourneyMapButtons();
         }
       } else {
-        syncPlacesMapChrome(payload.places || []);
-        const fp = mapFingerprint();
-        if (fp !== lastMapFingerprint || !maplibreMap) {
-          requestAnimationFrame(() => renderMap());
+        // Nothing shown on map (or journey no longer in chapter) — chapter places only.
+        if (journeyOnMap) hideJourneyFromMap();
+        else {
+          activePlaceMarkers = payload.places || [];
+          const label = chap ? `Places in ${chap}` : "Places in this chapter";
+          if (els.mapSubtitle.textContent !== label) els.mapSubtitle.textContent = label;
+          updateJourneyMapButtons();
+          const fp = mapFingerprint();
+          if (fp !== lastMapFingerprint || !maplibreMap) {
+            requestAnimationFrame(() => renderMap());
+          }
         }
       }
       return;
@@ -1083,6 +1137,7 @@
       activePlaceMarkers = payload.places || [];
       const label = chap ? `Places in ${chap}` : "Places in this chapter";
       if (els.mapSubtitle.textContent !== label) els.mapSubtitle.textContent = label;
+      updateJourneyMapButtons();
     }
   }
 
