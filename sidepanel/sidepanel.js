@@ -1534,7 +1534,7 @@
         "aria-label",
         isNight ? "Switch to day mode" : "Switch to night mode"
       );
-      const icon = els.themeBtn.querySelector(".theme-btn-icon");
+      const icon = els.themeBtn.querySelector(".icon-btn-glyph");
       if (icon) icon.textContent = isNight ? "☀" : "☾";
     }
     if (!persist) return;
