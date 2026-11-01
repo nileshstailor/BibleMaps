@@ -48,6 +48,7 @@
   let markerObjs = [];
   let pmtilesReady = null;
   let pmtilesProtocol = null;
+  let pmtilesHeader = null;
   let mapMountGen = 0;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
@@ -525,11 +526,30 @@
     return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}`;
   }
 
-  function fitToChapter(map, preset, focusPts) {
+  function mapMaxZoom(header) {
+    // Town-level tiles (~z11); allow slight overzoom past the archive for pin focus.
+    const tileMax = Number(header?.maxZoom);
+    const base = Number.isFinite(tileMax) ? tileMax : 11;
+    return Math.min(14, Math.max(11, base + 2));
+  }
+
+  function fitMaxZoom(header) {
+    const tileMax = Number(header?.maxZoom);
+    return Number.isFinite(tileMax) ? tileMax : 11;
+  }
+
+  function fitToChapter(map, preset, focusPts, header) {
+    const maxZoom = fitMaxZoom(header);
     if (focusPts.length) {
       const bounds = new maplibregl.LngLatBounds();
       for (const p of focusPts) bounds.extend([p.lng, p.lat]);
-      map.fitBounds(bounds, { padding: 40, maxZoom: 8, duration: 0 });
+      // Single town → zoom in close; many stops → still allow town-level.
+      const oneStop = focusPts.length === 1 ? Math.min(13, maxZoom + 1) : maxZoom;
+      map.fitBounds(bounds, {
+        padding: focusPts.length === 1 ? 60 : 40,
+        maxZoom: oneStop,
+        duration: 0,
+      });
       return;
     }
     if (preset?.bounds?.length === 2) {
@@ -539,7 +559,7 @@
           [west, south],
           [east, north],
         ],
-        { padding: 28, maxZoom: 8, duration: 0 }
+        { padding: 28, maxZoom: Math.min(8, maxZoom), duration: 0 }
       );
     }
   }
@@ -617,7 +637,7 @@
     map.getSource("towns-focus")?.setData(placesToGeoJSON(focusPts, { dim: false }));
     clearMarkers();
     addDomMarkers(map, focusPts, { dim: false });
-    fitToChapter(map, preset, focusPts);
+    fitToChapter(map, preset, focusPts, pmtilesHeader);
     map.resize();
     setMapHelp(
       `${preset?.title || "Map"} — offline MapLibre / OSM (${focusPts.length} place${
@@ -686,6 +706,7 @@
       // Sanity-check: header must parse
       const header = await archive.getHeader();
       if (header.maxZoom == null) throw new Error("PMTiles header invalid");
+      pmtilesHeader = header;
       return header;
     })().catch((err) => {
       pmtilesReady = null;
@@ -704,7 +725,7 @@
         type: "vector",
         tiles: [`pmtiles://${PMTILES_KEY}/{z}/{x}/{y}`],
         minzoom: header?.minZoom ?? 0,
-        maxzoom: header?.maxZoom ?? 8,
+        maxzoom: header?.maxZoom ?? 11,
         attribution:
           '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       },
@@ -879,7 +900,7 @@
       style,
       center: [35.1, 31.7],
       zoom: 6.5,
-      maxZoom: header?.maxZoom ?? 8,
+      maxZoom: mapMaxZoom(header),
       attributionControl: true,
       failIfMajorPerformanceCaveat: false,
     });

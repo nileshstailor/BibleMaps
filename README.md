@@ -28,7 +28,7 @@ After pulling updates: **Reload** the extension on `chrome://extensions`.
 
 ## Offline tiles
 
-- Bundled archive: `media/tiles/bible-region.pmtiles` (~25 MB, maxzoom 8, Med + Near East)
+- Bundled archive: `media/tiles/bible-region.pmtiles` (~80 MB, maxzoom 11, Levant + Cyprus + S. Anatolia — town-level zoom)
 - Style: `media/tiles/style.json` (Protomaps light layers without remote fonts)
 - Rebuild (optional): install the [go-pmtiles](https://github.com/protomaps/go-pmtiles/releases) CLI as `scripts/pmtiles`, then run `scripts/build-pmtiles.sh`
 
