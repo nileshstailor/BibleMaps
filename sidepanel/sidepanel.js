@@ -315,8 +315,16 @@
       row.addEventListener("toggle", () => {
         const id = row.dataset.placeId;
         if (!id) return;
-        if (row.open) openPlaceIds.add(id);
-        else openPlaceIds.delete(id);
+        if (row.open) {
+          openPlaceIds.add(id);
+        } else {
+          openPlaceIds.delete(id);
+          // User closed it — don't let focus/poll force it back open.
+          if (focusedPlaceId === id) {
+            focusedPlaceId = null;
+            row.classList.remove("is-focused");
+          }
+        }
       });
       els.placesPanel.appendChild(row);
     }
@@ -1299,8 +1307,15 @@
     // Skip DOM rebuild when poll returns the same lists — rebuilding closes accordions.
     renderPlaces(payload.places || []);
     renderJourneys(payload.journeys || []);
-    // Keep the focused row open after list refresh, but never re-scroll.
-    if (focusedPlaceId) openPlaceAccordion(focusedPlaceId, { scroll: false });
+    // Restore focus styling only if the user still has that row open.
+    // Do not force-open — that fought manual collapse on every poll.
+    if (focusedPlaceId) {
+      const row = els.placesPanel?.querySelector(
+        `[data-place-id="${CSS.escape(focusedPlaceId)}"]`
+      );
+      if (row?.open) row.classList.add("is-focused");
+      else focusedPlaceId = null;
+    }
 
     const placeCount = payload.places?.length || 0;
     const journeyCount = payload.journeys?.length || 0;
