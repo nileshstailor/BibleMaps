@@ -129,6 +129,35 @@
     return escapeHtml(s).replace(/'/g, "&#39;");
   }
 
+  function shortKingdomName(props) {
+    const raw = props?.name || props?.id || "Kingdom";
+    return String(raw)
+      .replace(/^Kingdom of\s+/i, "")
+      .trim();
+  }
+
+  function renderKingdomLegend() {
+    if (!els.kingdomLegend) return;
+    const feats = kingdomsGeoJson?.features || [];
+    if (!feats.length) {
+      els.kingdomLegend.innerHTML = "";
+      return;
+    }
+    els.kingdomLegend.innerHTML = feats
+      .map((f) => {
+        const p = f.properties || {};
+        const color = p.color || "#888888";
+        const opacity = Number.isFinite(p.fillOpacity) ? p.fillOpacity : 0.3;
+        const bg = color.length === 7 ? `${color}${Math.round(opacity * 255)
+          .toString(16)
+          .padStart(2, "0")}` : color;
+        return `<span><i class="swatch" style="background:${bg}"></i> ${escapeHtml(
+          shortKingdomName(p)
+        )}</span>`;
+      })
+      .join("");
+  }
+
   function loadKingdoms() {
     if (kingdomsGeoJson) return Promise.resolve(kingdomsGeoJson);
     if (kingdomsLoadPromise) return kingdomsLoadPromise;
@@ -139,6 +168,7 @@
       })
       .then((data) => {
         kingdomsGeoJson = data;
+        renderKingdomLegend();
         return data;
       })
       .catch((err) => {
