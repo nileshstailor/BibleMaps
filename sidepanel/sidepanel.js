@@ -763,6 +763,10 @@
           id: "kingdoms-line",
           type: "line",
           source: "kingdoms",
+          layout: {
+            "line-join": "round",
+            "line-cap": "round",
+          },
           paint: {
             "line-color": ["coalesce", ["get", "color"], "#4a6741"],
             "line-width": 1.25,
