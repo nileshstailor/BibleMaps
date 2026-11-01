@@ -1756,14 +1756,15 @@
     "name": "Sheba",
     "aliases": [
       "Saba",
-      "queen of Sheba",
-      "Queen of Sheba",
-      "from Sheba"
+      "from Sheba",
+      "kings of Sheba",
+      "traders of Sheba",
+      "Sheba and Dedan"
     ],
     "lat": 15.4266,
     "lng": 45.336,
     "modernName": "Marib / Saba region, Yemen (traditional)",
-    "eraNotes": "Homeland of the Queen of Sheba (1 Kings 10). Exact locale debated (Arabia or Horn of Africa). Bare 'Sheba' is not matched — it is often a person in genealogies.",
+    "eraNotes": "Homeland of the Queen of Sheba (1 Kings 10). Exact locale debated (Arabia or Horn of Africa). Bare 'Sheba' and 'queen of Sheba' are not matched — those usually name a person; place hits use geographic phrases (from Sheba, Saba, traders of Sheba).",
     "eras": [
       "united"
     ],
