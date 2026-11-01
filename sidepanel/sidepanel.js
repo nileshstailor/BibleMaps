@@ -526,7 +526,7 @@
     return (allPlaces || []).find((p) => p.id === placeId) || null;
   }
 
-  function openPlaceAccordion(placeId) {
+  function openPlaceAccordion(placeId, { scroll = false } = {}) {
     if (!placeId || !els.placesPanel) return null;
     openPlaceIds.add(placeId);
     const row = els.placesPanel.querySelector(
@@ -538,10 +538,13 @@
       .querySelectorAll(".acc-row.is-focused")
       .forEach((el) => el.classList.remove("is-focused"));
     row.classList.add("is-focused");
-    try {
-      row.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    } catch {
-      /* ignore */
+    // Only scroll on the original bible-click focus — polling must not yank the panel back up.
+    if (scroll) {
+      try {
+        row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } catch {
+        /* ignore */
+      }
     }
     return row;
   }
@@ -565,13 +568,14 @@
     showPlacesTab();
     await loadAllPlaces();
 
-    let row = openPlaceAccordion(placeId);
+    let row = openPlaceAccordion(placeId, { scroll: true });
     if (!row) {
       // Places list may still be loading from detection.
       for (let i = 0; i < 8 && !row; i += 1) {
         await new Promise((r) => setTimeout(r, 150));
-        row = openPlaceAccordion(placeId);
+        row = openPlaceAccordion(placeId, { scroll: false });
       }
+      if (row) openPlaceAccordion(placeId, { scroll: true });
     }
 
     const place = findPlaceById(placeId);
@@ -1254,7 +1258,8 @@
     // Skip DOM rebuild when poll returns the same lists — rebuilding closes accordions.
     renderPlaces(payload.places || []);
     renderJourneys(payload.journeys || []);
-    if (focusedPlaceId) openPlaceAccordion(focusedPlaceId);
+    // Keep the focused row open after list refresh, but never re-scroll.
+    if (focusedPlaceId) openPlaceAccordion(focusedPlaceId, { scroll: false });
 
     const placeCount = payload.places?.length || 0;
     const journeyCount = payload.journeys?.length || 0;
