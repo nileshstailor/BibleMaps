@@ -105,15 +105,18 @@
 
   /**
    * Skip place hits that are kinship/genealogy formulas in ANY book/chapter
-   * (Genesis lists, Chronicles, Matt 1, Luke 3, Ezra–Nehemiah priests, Ruth 4, etc.).
+   * (Genesis lists, 1–2 Chronicles clan rolls, Matt 1, Luke 3, Ezra–Neh, Ruth 4, etc.).
    * Applies globally in findMatchesInText — not limited to one book.
    */
   function isGenealogyContext(source, start, end) {
-    const before = source.slice(Math.max(0, start - 160), start);
-    const after = source.slice(end, Math.min(source.length, end + 64));
+    const before = source.slice(Math.max(0, start - 200), start);
+    const after = source.slice(end, Math.min(source.length, end + 72));
+    const nameBit = "[\\w'’.\\-]+(?:\\s*\\([^)]*\\))?";
+    // "A, B, and " / "A and " / trailing "and "
+    const listTail = `(?:${nameBit}\\s*,\\s*)*(?:${nameBit}\\s+and\\s+|and\\s+)?`;
     // "... son(s)/daughter(s)/children/father/... of NAME"
     if (
-      /(?:\bsons?|\bdaughters?|\bchildren|\bchild|\bfathers?|\bmothers?|\bwives?|\bhusbands?|\bbrothers?|\bsisters?|\bdescendants?|\bancestors?|\bgrandsons?|\bgranddaughters?|\bclans?|\bfamilies?)\s+of\s+$/i.test(
+      /(?:\bsons?|\bdaughters?|\bchildren|\bchild|\bfathers?|\bmothers?|\bwives?|\bhusbands?|\bbrothers?|\bsisters?|\bdescendants?|\bancestors?|\bgrandsons?|\bgranddaughters?|\bclans?|\bfamilies?|\boffspring)\s+of\s+$/i.test(
         before
       )
     ) {
@@ -121,7 +124,7 @@
     }
     // "NAME, son of ..." / "NAME the son of ..." / "NAME, father of ..."
     if (
-      /^\s*,?\s*(?:the\s+)?(?:sons?|daughters?|children|child|fathers?|mothers?|wives?|husbands?|brothers?|sisters?|descendants?|ancestors?|grandsons?|granddaughters?|clans?|families?)\s+of\b/i.test(
+      /^\s*,?\s*(?:the\s+)?(?:sons?|daughters?|children|child|fathers?|mothers?|wives?|husbands?|brothers?|sisters?|descendants?|ancestors?|grandsons?|granddaughters?|clans?|families?|offspring)\s+of\b/i.test(
         after
       )
     ) {
@@ -138,6 +141,14 @@
     // "... begat/was the father of/gave birth to NAME"
     if (
       /\b(?:begat|begot|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|became the ancestor of|was the ancestor of|gave birth to)\s+$/i.test(
+        before
+      )
+    ) {
+      return true;
+    }
+    // "father of Ziph, and Mareshah" / "father of A, B, and C"
+    if (
+      /\b(?:begat|begot|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|the father of|the mother of|gave birth to)\s+[\w'’.\-]+(?:\s*,\s*[\w'’.\-]+)*\s*,\s*and\s+$/i.test(
         before
       )
     ) {
@@ -163,19 +174,32 @@
     if (/^\s+(?:sons?|daughters?|children|child)\s+of\b/i.test(after)) {
       return true;
     }
-    // Genealogy name-lists after "sons/daughters/children of X:" or "... were A, B, and C"
-    // Covers Gen 10 Table of Nations, 1 Chr clan rolls, etc. in every book.
+    // "the son of Shammai was Maon" (1 Chr style)
     if (
-      /(?:\bsons?|\bdaughters?|\bchildren)\s+of\s+[\w'’.\-]+(?:\s*\([^)]*\))?\s*[:;]\s*(?:[\w'’.\-]+(?:\s*\([^)]*\))?\s*,\s*)*(?:and\s+)?$/i.test(
+      /(?:\bsons?|\bdaughters?|\bchildren|\bchild|\bdescendants?)\s+of\s+[\w'’.\-]+(?:\s*\([^)]*\))?\s+was\s+$/i.test(
         before
       )
     ) {
       return true;
     }
+    // Genealogy name-lists:
+    // "sons/daughters/children/descendants of X: A, B, and C"
+    // "descendants of X were/included A, B, and C" (common in NLT 1 Chronicles)
     if (
-      /(?:\bsons?|\bdaughters?|\bchildren)\s+of\s+[\w'’.\-]+(?:\s*\([^)]*\))?\s+were\s+(?:[\w'’.\-]+(?:\s*\([^)]*\))?\s*,\s*)*(?:and\s+)?$/i.test(
-        before
-      )
+      new RegExp(
+        `(?:\\bsons?|\\bdaughters?|\\bchildren|\\bdescendants?|\\bancestors?|\\boffspring)\\s+of\\s+${nameBit}\\s*(?:were|included|are|[:;])\\s*${listTail}$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // "Japheth's / Javan's descendants were A, B, and C"
+    // "These were Judah's sons: A, B, and C"
+    if (
+      new RegExp(
+        `[\\w'’.\\-]+(?:['’]s)\\s+(?:sons?|daughters?|children|descendants?|ancestors?|offspring)\\s*(?:were|included|are|[:;])\\s*${listTail}$`,
+        "i"
+      ).test(before)
     ) {
       return true;
     }
