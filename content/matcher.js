@@ -16,6 +16,8 @@
     "PRE",
     "SVG",
     "MATH",
+    // Footnote callers / note chrome often land in SUP on bible.com
+    "SUP",
   ]);
 
   function escapeRegExp(s) {
@@ -438,11 +440,48 @@
     return matches;
   }
 
+  /**
+   * YouVersion / bible.com injects footnote & study-note chrome into verse HTML
+   * (CSS-module classes like `ChapterContent_note__cat7xG`, plus yv-n / footnote
+   * markers). Those nodes (1) leak place names from note bodies and (2) split
+   * "son of " / "Judah" so kinship context breaks. Skip them entirely.
+   */
+  function isNoteChrome(el) {
+    // nodeType 1 === ELEMENT_NODE (avoid Node global for node/test envs)
+    if (!el || el.nodeType !== 1) return false;
+    if (typeof el.hasAttribute === "function") {
+      if (
+        el.hasAttribute("data-verse-footnote") ||
+        el.hasAttribute("data-verse-footnote-content")
+      ) {
+        return true;
+      }
+      const testId = (el.getAttribute("data-testid") || "").toLowerCase();
+      if (testId.includes("footnote") || testId.includes("note")) return true;
+    }
+    const cls =
+      typeof el.className === "string"
+        ? el.className
+        : (typeof el.getAttribute === "function" && el.getAttribute("class")) ||
+          "";
+    if (!cls) return false;
+    // CSS modules: ChapterContent_note__cat7xG / ChapterContent_footnote__…
+    // also yv-n, Note, crossref chrome
+    return (
+      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?)(?:__|-|_|\s|$)/i.test(
+        cls
+      ) || /(?:^|\s)yv-n(?:\s|$)/i.test(cls)
+    );
+  }
+
   function shouldSkipNode(node) {
     if (!node) return true;
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      if (SKIP_TAGS.has(node.tagName)) return true;
-      if (node.isContentEditable) return true;
+    let el = node.nodeType === 1 ? node : node.parentElement;
+    while (el && el.nodeType === 1) {
+      if (SKIP_TAGS.has(el.tagName)) return true;
+      if (el.isContentEditable) return true;
+      if (isNoteChrome(el)) return true;
+      el = el.parentElement;
     }
     return false;
   }
@@ -675,6 +714,8 @@
     collectMatchRanges,
     locateInSegments,
     isGenealogyContext,
+    isNoteChrome,
+    shouldSkipNode,
     detectJourneys,
     normalizeQuotes,
   };

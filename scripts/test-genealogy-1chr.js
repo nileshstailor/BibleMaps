@@ -90,6 +90,28 @@ async function main() {
       console.log("OK concat skips split-node genealogy names");
     }
   }
+
+  // bible.com CSS-module note chrome (e.g. ChapterContent_note__cat7xG)
+  {
+    const samples = [
+      [true, "ChapterContent_note__cat7xG"],
+      [true, "ChapterContent_footnote__abc12"],
+      [true, "yv-n f"],
+      [true, "cat7xG_note"],
+      [false, "ChapterContent_p__dVKHb"],
+      [false, "ChapterContent_verse__xyz"],
+    ];
+    for (const [want, cls] of samples) {
+      const el = { nodeType: 1, className: cls, hasAttribute: () => false, getAttribute: () => null };
+      // Node.ELEMENT_NODE === 1
+      const got = M.isNoteChrome(el);
+      if (got !== want) {
+        console.error("FAIL isNoteChrome", cls, "got", got, "want", want);
+        failures += 1;
+      }
+    }
+    console.log("OK isNoteChrome detects ChapterContent_note__cat7xG chrome");
+  }
   const mustKeep = [
     ["They lived in Beersheba, Moladah, Hazar-shual", ["Beersheba", "Moladah"]],
     ["born in Hebron", ["Hebron"]],
