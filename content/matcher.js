@@ -174,12 +174,97 @@
     return hits;
   }
 
-  function detectJourneys(foundPlaceIds, journeys, pageText) {
+  /** Normalize book titles for scriptureRefs matching ("1 Kings", "1KI", "I Kings"). */
+  function normalizeBookKey(raw) {
+    let s = normalizeQuotes(raw)
+      .toLowerCase()
+      .replace(/\./g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    s = s
+      .replace(/^i\s+/, "1 ")
+      .replace(/^ii\s+/, "2 ")
+      .replace(/^iii\s+/, "3 ");
+    const usfm = {
+      gen: "genesis",
+      exo: "exodus",
+      "1ki": "1 kings",
+      "2ki": "2 kings",
+      "1sa": "1 samuel",
+      "2sa": "2 samuel",
+      "1ch": "1 chronicles",
+      "2ch": "2 chronicles",
+      mat: "matthew",
+      mrk: "mark",
+      luk: "luke",
+      jhn: "john",
+      act: "acts",
+      rom: "romans",
+      rev: "revelation",
+    };
+    if (usfm[s]) return usfm[s];
+    // "1kings" → "1 kings"
+    s = s.replace(/^([123])([a-z])/, "$1 $2");
+    return s;
+  }
+
+  /**
+   * Parse refs like "1 Kings 14:1–18", "Acts 13–14", "1 Kings 9:26–28".
+   * Returns list of { book, chapters: number[] }.
+   */
+  function parseScriptureRefs(refs) {
+    const out = [];
+    for (const ref of refs || []) {
+      const r = normalizeQuotes(ref).replace(/[–—]/g, "-");
+      const m = r.match(
+        /^((?:[123]\s+)?[A-Za-z]+)\s+(\d+)(?:\s*[-:]\s*(\d+))?/
+      );
+      if (!m) continue;
+      const book = normalizeBookKey(m[1]);
+      const a = Number(m[2]);
+      // "Acts 13–14" → chapter range; "1 Kings 14:1-18" → single chapter 14
+      let b = a;
+      if (m[3] && !r.includes(":")) b = Number(m[3]);
+      else if (m[3] && /:\d+\s*-\s*\d+/.test(r) && Number(m[3]) < 50 && !/:\d+\s*-\s*\d+:/.test(r)) {
+        // "Acts 13-14" style already handled; verse ranges keep chapter = a
+        b = a;
+      }
+      // Explicit chapter-chapter without verses: Book 13-14
+      const chRange = r.match(
+        /^((?:[123]\s+)?[A-Za-z]+)\s+(\d+)\s*-\s*(\d+)(?!\s*:)/
+      );
+      if (chRange) {
+        const start = Number(chRange[2]);
+        const end = Number(chRange[3]);
+        const chapters = [];
+        for (let c = start; c <= end; c++) chapters.push(c);
+        out.push({ book: normalizeBookKey(chRange[1]), chapters });
+        continue;
+      }
+      out.push({ book, chapters: [a] });
+    }
+    return out;
+  }
+
+  function journeyMatchesPassage(journey, passage) {
+    if (!passage?.book || !passage?.chapter) return true; // no context → keep old behavior
+    const parsed = parseScriptureRefs(journey.scriptureRefs || []);
+    if (!parsed.length) return true;
+    const book = normalizeBookKey(passage.book);
+    const chapter = Number(passage.chapter);
+    return parsed.some(
+      (p) => p.book === book && p.chapters.includes(chapter)
+    );
+  }
+
+  function detectJourneys(foundPlaceIds, journeys, pageText, passage) {
     const text = normalizeQuotes(pageText).toLowerCase();
     const found = new Set(foundPlaceIds);
     const results = [];
 
     for (const journey of journeys) {
+      if (!journeyMatchesPassage(journey, passage)) continue;
+
       const stopIds = journey.stops.map((s) => s.placeId);
       const uniqueStops = [...new Set(stopIds)];
       const hitStops = uniqueStops.filter((id) => found.has(id));

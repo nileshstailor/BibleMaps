@@ -2,129 +2,369 @@
   {
     "id": "abraham_travels",
     "name": "Abraham’s Travels",
-    "aliases": ["Abraham", "Abram"],
-    "scriptureRefs": ["Genesis 11:31–12:9", "Genesis 13", "Genesis 20", "Genesis 22"],
+    "aliases": [
+      "Abraham",
+      "Abram"
+    ],
+    "scriptureRefs": [
+      "Genesis 11:31–12:9",
+      "Genesis 13",
+      "Genesis 20",
+      "Genesis 22"
+    ],
     "summary": "Outline of Abraham’s migration from Mesopotamia into Canaan, with sojourns toward Egypt and key patriarchal sites.",
     "stops": [
-      { "placeId": "ur", "note": "Departure from Ur of the Chaldeans" },
-      { "placeId": "haran", "note": "Family sojourn in Haran" },
-      { "placeId": "shechem", "note": "First altar in Canaan" },
-      { "placeId": "bethel", "note": "Altar between Bethel and Ai" },
-      { "placeId": "egypt_land", "note": "Sojourn during famine" },
-      { "placeId": "hebron", "note": "Settles by the oaks of Mamre" },
-      { "placeId": "beersheba", "note": "Covenant and wells in the south" }
+      {
+        "placeId": "ur",
+        "note": "Departure from Ur of the Chaldeans"
+      },
+      {
+        "placeId": "haran",
+        "note": "Family sojourn in Haran"
+      },
+      {
+        "placeId": "shechem",
+        "note": "First altar in Canaan"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Altar between Bethel and Ai"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Sojourn during famine"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Settles by the oaks of Mamre"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Covenant and wells in the south"
+      }
     ],
     "pathHints": "Overland arc Ur → Haran → Canaan, with a temporary southward loop toward Egypt."
   },
   {
     "id": "exodus_outline",
     "name": "Exodus Outline",
-    "aliases": ["Exodus", "the Exodus"],
-    "scriptureRefs": ["Exodus 12–19", "Numbers 33", "Deuteronomy 1–2"],
+    "aliases": [
+      "Exodus",
+      "the Exodus"
+    ],
+    "scriptureRefs": [
+      "Exodus 12–19",
+      "Numbers 33",
+      "Deuteronomy 1–2"
+    ],
     "summary": "High-level wilderness itinerary from the Nile Delta to Sinai and on toward the Plains of Moab. Several stops are geographically debated.",
     "stops": [
-      { "placeId": "egypt_rameses", "note": "Departure from Rameses" },
-      { "placeId": "succoth", "note": "First encampment" },
-      { "placeId": "etham", "note": "Edge of the wilderness" },
-      { "placeId": "pi_hahiroth", "note": "Before the sea crossing" },
-      { "placeId": "marah", "note": "Bitter waters" },
-      { "placeId": "elim", "note": "Oasis with springs and palms" },
-      { "placeId": "rephidim", "note": "Water from the rock; Amalek" },
-      { "placeId": "sinai", "note": "Covenant at the mountain" },
-      { "placeId": "kadesh_barnea", "note": "Spies and long sojourn" },
-      { "placeId": "ezion_geber", "note": "Southern route marker" },
-      { "placeId": "moab_plains", "note": "Camp opposite Jericho" },
-      { "placeId": "jericho", "note": "Entry toward Canaan" }
+      {
+        "placeId": "egypt_rameses",
+        "note": "Departure from Rameses"
+      },
+      {
+        "placeId": "succoth",
+        "note": "First encampment"
+      },
+      {
+        "placeId": "etham",
+        "note": "Edge of the wilderness"
+      },
+      {
+        "placeId": "pi_hahiroth",
+        "note": "Before the sea crossing"
+      },
+      {
+        "placeId": "marah",
+        "note": "Bitter waters"
+      },
+      {
+        "placeId": "elim",
+        "note": "Oasis with springs and palms"
+      },
+      {
+        "placeId": "rephidim",
+        "note": "Water from the rock; Amalek"
+      },
+      {
+        "placeId": "sinai",
+        "note": "Covenant at the mountain"
+      },
+      {
+        "placeId": "kadesh_barnea",
+        "note": "Spies and long sojourn"
+      },
+      {
+        "placeId": "ezion_geber",
+        "note": "Southern route marker"
+      },
+      {
+        "placeId": "moab_plains",
+        "note": "Camp opposite Jericho"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Entry toward Canaan"
+      }
     ],
     "pathHints": "Delta → Isthmus/Sinai corridor → South Sinai tradition → Negev/Kadesh → Arabah → Moab."
   },
   {
     "id": "paul_first",
     "name": "Paul’s First Missionary Journey",
-    "aliases": ["first missionary journey", "Paul and Barnabas"],
-    "scriptureRefs": ["Acts 13–14"],
+    "aliases": [
+      "first missionary journey",
+      "Paul and Barnabas"
+    ],
+    "scriptureRefs": [
+      "Acts 13–14"
+    ],
     "summary": "Paul and Barnabas travel from Syrian Antioch through Cyprus into southern Asia Minor and return.",
     "stops": [
-      { "placeId": "antioch", "note": "Commissioned and sent out" },
-      { "placeId": "seleucia", "note": "Sail from the port of Antioch" },
-      { "placeId": "cyprus_salamis", "note": "Proclaim in the synagogues" },
-      { "placeId": "cyprus_paphos", "note": "Sergius Paulus" },
-      { "placeId": "perga", "note": "Landing in Pamphylia" },
-      { "placeId": "antioch_pisidia", "note": "Sabbath sermon in the synagogue" },
-      { "placeId": "iconium", "note": "Ministry amid opposition" },
-      { "placeId": "lystra", "note": "Healing and misunderstanding" },
-      { "placeId": "derbe", "note": "Make many disciples" },
-      { "placeId": "lystra", "note": "Return visit; strengthen disciples" },
-      { "placeId": "iconium", "note": "Return through the cities" },
-      { "placeId": "antioch_pisidia", "note": "Return through Pisidian Antioch" },
-      { "placeId": "perga", "note": "Speak the word in Perga" },
-      { "placeId": "attalia", "note": "Sail home" },
-      { "placeId": "antioch", "note": "Report to the church" }
+      {
+        "placeId": "antioch",
+        "note": "Commissioned and sent out"
+      },
+      {
+        "placeId": "seleucia",
+        "note": "Sail from the port of Antioch"
+      },
+      {
+        "placeId": "cyprus_salamis",
+        "note": "Proclaim in the synagogues"
+      },
+      {
+        "placeId": "cyprus_paphos",
+        "note": "Sergius Paulus"
+      },
+      {
+        "placeId": "perga",
+        "note": "Landing in Pamphylia"
+      },
+      {
+        "placeId": "antioch_pisidia",
+        "note": "Sabbath sermon in the synagogue"
+      },
+      {
+        "placeId": "iconium",
+        "note": "Ministry amid opposition"
+      },
+      {
+        "placeId": "lystra",
+        "note": "Healing and misunderstanding"
+      },
+      {
+        "placeId": "derbe",
+        "note": "Make many disciples"
+      },
+      {
+        "placeId": "lystra",
+        "note": "Return visit; strengthen disciples"
+      },
+      {
+        "placeId": "iconium",
+        "note": "Return through the cities"
+      },
+      {
+        "placeId": "antioch_pisidia",
+        "note": "Return through Pisidian Antioch"
+      },
+      {
+        "placeId": "perga",
+        "note": "Speak the word in Perga"
+      },
+      {
+        "placeId": "attalia",
+        "note": "Sail home"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Report to the church"
+      }
     ],
     "pathHints": "Syria → Cyprus (east to west) → Pamphylia → Pisidia/Lycaonia loop → return via Attalia."
   },
   {
     "id": "paul_second",
     "name": "Paul’s Second Missionary Journey",
-    "aliases": ["second missionary journey"],
-    "scriptureRefs": ["Acts 15:36–18:22"],
+    "aliases": [
+      "second missionary journey"
+    ],
+    "scriptureRefs": [
+      "Acts 15:36–18:22"
+    ],
     "summary": "Paul revisits Galatian churches, crosses into Macedonia and Achaia, then returns via Ephesus and Caesarea.",
     "stops": [
-      { "placeId": "antioch", "note": "Departure after the Jerusalem council season" },
-      { "placeId": "tarsus", "note": "Through Cilicia/Syria corridor (hometown region)" },
-      { "placeId": "derbe", "note": "Strengthen the churches" },
-      { "placeId": "lystra", "note": "Timothy joins" },
-      { "placeId": "iconium", "note": "Deliver the decrees" },
-      { "placeId": "troas", "note": "Macedonian call vision" },
-      { "placeId": "philippi", "note": "Lydia; prison and release" },
-      { "placeId": "thessalonica", "note": "Reasoning in the synagogue" },
-      { "placeId": "berea", "note": "Noble examination of the Scriptures" },
-      { "placeId": "athens", "note": "Areopagus address" },
-      { "placeId": "corinth", "note": "Extended ministry with Aquila and Priscilla" },
-      { "placeId": "cenchreae", "note": "Eastern harbor; haircut vow tradition" },
-      { "placeId": "ephesus", "note": "Brief visit; promise to return" },
-      { "placeId": "caesarea", "note": "Land in Judea" },
-      { "placeId": "jerusalem", "note": "Greet the church" },
-      { "placeId": "antioch", "note": "Return base" }
+      {
+        "placeId": "antioch",
+        "note": "Departure after the Jerusalem council season"
+      },
+      {
+        "placeId": "tarsus",
+        "note": "Through Cilicia/Syria corridor (hometown region)"
+      },
+      {
+        "placeId": "derbe",
+        "note": "Strengthen the churches"
+      },
+      {
+        "placeId": "lystra",
+        "note": "Timothy joins"
+      },
+      {
+        "placeId": "iconium",
+        "note": "Deliver the decrees"
+      },
+      {
+        "placeId": "troas",
+        "note": "Macedonian call vision"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Lydia; prison and release"
+      },
+      {
+        "placeId": "thessalonica",
+        "note": "Reasoning in the synagogue"
+      },
+      {
+        "placeId": "berea",
+        "note": "Noble examination of the Scriptures"
+      },
+      {
+        "placeId": "athens",
+        "note": "Areopagus address"
+      },
+      {
+        "placeId": "corinth",
+        "note": "Extended ministry with Aquila and Priscilla"
+      },
+      {
+        "placeId": "cenchreae",
+        "note": "Eastern harbor; haircut vow tradition"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Brief visit; promise to return"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Land in Judea"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Greet the church"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Return base"
+      }
     ],
     "pathHints": "Antioch → Asia Minor interior → Troas → Macedonia → Achaia → brief Ephesus → Caesarea/Jerusalem → Antioch."
   },
   {
     "id": "paul_third",
     "name": "Paul’s Third Missionary Journey",
-    "aliases": ["third missionary journey"],
-    "scriptureRefs": ["Acts 18:23–21:17"],
+    "aliases": [
+      "third missionary journey"
+    ],
+    "scriptureRefs": [
+      "Acts 18:23–21:17"
+    ],
     "summary": "Paul travels through Galatia and Phrygia, spends extended time in Ephesus, revisits Macedonia and Achaia, then returns toward Jerusalem.",
     "stops": [
-      { "placeId": "antioch", "note": "Set out again" },
-      { "placeId": "ephesus", "note": "Two-plus years of ministry" },
-      { "placeId": "troas", "note": "Travel corridor toward Macedonia" },
-      { "placeId": "philippi", "note": "Macedonia revisit" },
-      { "placeId": "thessalonica", "note": "Encourage the churches" },
-      { "placeId": "corinth", "note": "Three months in Greece" },
-      { "placeId": "philippi", "note": "Passover season departure" },
-      { "placeId": "troas", "note": "Eutychus; departure by land/sea" },
-      { "placeId": "ephesus", "note": "Miletus farewell nearby tradition (Ephesus region)" },
-      { "placeId": "tyre", "note": "Disciples warn Paul" },
-      { "placeId": "caesarea", "note": "Stay with Philip; Agabus" },
-      { "placeId": "jerusalem", "note": "Arrival and reception" }
+      {
+        "placeId": "antioch",
+        "note": "Set out again"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Two-plus years of ministry"
+      },
+      {
+        "placeId": "troas",
+        "note": "Travel corridor toward Macedonia"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Macedonia revisit"
+      },
+      {
+        "placeId": "thessalonica",
+        "note": "Encourage the churches"
+      },
+      {
+        "placeId": "corinth",
+        "note": "Three months in Greece"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Passover season departure"
+      },
+      {
+        "placeId": "troas",
+        "note": "Eutychus; departure by land/sea"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Miletus farewell nearby tradition (Ephesus region)"
+      },
+      {
+        "placeId": "tyre",
+        "note": "Disciples warn Paul"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Stay with Philip; Agabus"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Arrival and reception"
+      }
     ],
     "pathHints": "Focus on long Ephesian residence, then a western loop through Macedonia/Achaia before the coastal return to Judea."
   },
   {
     "id": "paul_rome",
     "name": "Paul’s Journey to Rome",
-    "aliases": ["voyage to Rome", "Paul to Rome"],
-    "scriptureRefs": ["Acts 27–28"],
+    "aliases": [
+      "voyage to Rome",
+      "Paul to Rome"
+    ],
+    "scriptureRefs": [
+      "Acts 27–28"
+    ],
     "summary": "Paul’s custody voyage from Caesarea to Rome, including shipwreck on Malta.",
     "stops": [
-      { "placeId": "caesarea", "note": "Embark under guard" },
-      { "placeId": "sidon", "note": "Humane stop" },
-      { "placeId": "myra", "note": "Transfer to an Alexandrian ship" },
-      { "placeId": "crete_fair_havens", "note": "Difficult sailing season" },
-      { "placeId": "malta", "note": "Shipwreck and wintering" },
-      { "placeId": "puteoli", "note": "Land in Italy" },
-      { "placeId": "rome", "note": "House arrest and witness" }
+      {
+        "placeId": "caesarea",
+        "note": "Embark under guard"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Humane stop"
+      },
+      {
+        "placeId": "myra",
+        "note": "Transfer to an Alexandrian ship"
+      },
+      {
+        "placeId": "crete_fair_havens",
+        "note": "Difficult sailing season"
+      },
+      {
+        "placeId": "malta",
+        "note": "Shipwreck and wintering"
+      },
+      {
+        "placeId": "puteoli",
+        "note": "Land in Italy"
+      },
+      {
+        "placeId": "rome",
+        "note": "House arrest and witness"
+      }
     ],
     "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Italian west coast → Rome."
   },
@@ -138,13 +378,284 @@
       "Ahijah",
       "Ahijah the prophet"
     ],
-    "scriptureRefs": ["1 Kings 14:1–18"],
+    "scriptureRefs": [
+      "1 Kings 14:1–18"
+    ],
     "summary": "Jeroboam’s wife travels from Tirzah to Shiloh to consult Ahijah about their sick son, then returns to Tirzah.",
     "stops": [
-      { "placeId": "tirzah", "note": "Departs from Jeroboam’s house in Tirzah" },
-      { "placeId": "shiloh", "note": "Meets Ahijah the prophet" },
-      { "placeId": "tirzah", "note": "Returns to Tirzah" }
+      {
+        "placeId": "tirzah",
+        "note": "Departs from Jeroboam’s house in Tirzah"
+      },
+      {
+        "placeId": "shiloh",
+        "note": "Meets Ahijah the prophet"
+      },
+      {
+        "placeId": "tirzah",
+        "note": "Returns to Tirzah"
+      }
     ],
     "pathHints": "Short highland round trip: Tirzah → Shiloh → Tirzah."
+  },
+  {
+    "id": "shishak_jerusalem",
+    "name": "Shishak Attacks Jerusalem",
+    "aliases": [
+      "Shishak",
+      "King Shishak",
+      "Shishak of Egypt"
+    ],
+    "scriptureRefs": [
+      "1 Kings 14:25–26",
+      "2 Chronicles 12:2–9"
+    ],
+    "summary": "In Rehoboam’s fifth year, Pharaoh Shishak of Egypt comes up and attacks Jerusalem, stripping the Temple and palace treasuries.",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Shishak sets out from Egypt"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Attacks Jerusalem; plunders Temple and palace"
+      }
+    ],
+    "pathHints": "Egypt northward into Judah to Jerusalem (coastal/Via Maris teaching arc)."
+  },
+  {
+    "id": "jeroboam_return_egypt",
+    "name": "Jeroboam Returns from Egypt",
+    "aliases": [
+      "Jeroboam",
+      "Jeroboam son of Nebat"
+    ],
+    "scriptureRefs": [
+      "1 Kings 11:40",
+      "1 Kings 12:1–3"
+    ],
+    "summary": "Jeroboam flees Solomon to Shishak in Egypt, then returns when Israel gathers at Shechem to make Rehoboam king.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Flees Solomon’s court"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Refuge with Shishak in Egypt"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Returns as Israel assembles at Shechem"
+      }
+    ],
+    "pathHints": "Jerusalem → Egypt → return to Shechem for the kingdom split."
+  },
+  {
+    "id": "rehoboam_shechem",
+    "name": "Rehoboam at Shechem",
+    "aliases": [
+      "Rehoboam"
+    ],
+    "scriptureRefs": [
+      "1 Kings 12:1–18"
+    ],
+    "summary": "Rehoboam goes to Shechem to be made king; after rejecting the people’s petition he flees back to Jerusalem as the northern tribes rebel.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Leaves Judah’s capital"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Assembly to make him king"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Flees by chariot to Jerusalem"
+      }
+    ],
+    "pathHints": "Jerusalem → Shechem → panicked return to Jerusalem."
+  },
+  {
+    "id": "man_of_god_bethel",
+    "name": "Man of God to Bethel",
+    "aliases": [
+      "man of God",
+      "man of God from Judah"
+    ],
+    "scriptureRefs": [
+      "1 Kings 13:1–32"
+    ],
+    "summary": "A man of God travels from Judah to Bethel to confront Jeroboam’s altar, then is diverted on the return and dies on the road.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Comes from Judah (Jerusalem region)"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Prophesies against Jeroboam’s altar"
+      }
+    ],
+    "pathHints": "Judah highland → Bethel; return by another road."
+  },
+  {
+    "id": "solomon_ophir_fleet",
+    "name": "Solomon’s Fleet to Ophir",
+    "aliases": [
+      "Ophir",
+      "ships of Solomon",
+      "Solomon’s fleet"
+    ],
+    "scriptureRefs": [
+      "1 Kings 9:26–28",
+      "1 Kings 10:11–12"
+    ],
+    "summary": "Solomon builds a fleet at Ezion-geber on the Red Sea; with Tyrian sailors the ships sail to Ophir for gold.",
+    "stops": [
+      {
+        "placeId": "ezion_geber",
+        "note": "Fleet built on the shore of the Red Sea"
+      },
+      {
+        "placeId": "ophir",
+        "note": "Sail for gold (and related cargo)"
+      }
+    ],
+    "pathHints": "Gulf of Aqaba south/east toward the Ophir trade (locale debated)."
+  },
+  {
+    "id": "queen_of_sheba",
+    "name": "Queen of Sheba to Jerusalem",
+    "aliases": [
+      "Queen of Sheba",
+      "queen of Sheba",
+      "Sheba"
+    ],
+    "scriptureRefs": [
+      "1 Kings 10:1–13"
+    ],
+    "summary": "The queen of Sheba comes to Jerusalem to test Solomon with hard questions, then returns to her own land.",
+    "stops": [
+      {
+        "placeId": "sheba",
+        "note": "Departs from Sheba"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Meets Solomon; royal exchange of gifts"
+      },
+      {
+        "placeId": "sheba",
+        "note": "Returns home"
+      }
+    ],
+    "pathHints": "Long-distance visit from Sheba (Arabia/Horn traditions) to Jerusalem and back."
+  },
+  {
+    "id": "elijah_to_zarephath",
+    "name": "Elijah to Zarephath",
+    "aliases": [
+      "Elijah",
+      "Elijah the Tishbite",
+      "Zarephath"
+    ],
+    "scriptureRefs": [
+      "1 Kings 17:1–24"
+    ],
+    "summary": "During the drought Elijah hides by the Brook Cherith, then goes to Zarephath of Sidon where God sustains a widow’s household.",
+    "stops": [
+      {
+        "placeId": "cherith",
+        "note": "Hides east of the Jordan; fed by ravens"
+      },
+      {
+        "placeId": "zarephath",
+        "note": "Stays with the widow; oil and meal; raises her son"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Zarephath belongs to Sidon"
+      }
+    ],
+    "pathHints": "Gilead/Cherith → Phoenician coast at Zarephath (Sidon region)."
+  },
+  {
+    "id": "elijah_carmel_jezreel",
+    "name": "Elijah: Carmel to Jezreel",
+    "aliases": [
+      "Elijah",
+      "Mount Carmel",
+      "prophets of Baal"
+    ],
+    "scriptureRefs": [
+      "1 Kings 18:16–46"
+    ],
+    "summary": "Elijah confronts the prophets of Baal on Mount Carmel; after the rain comes he runs ahead of Ahab to the entrance of Jezreel.",
+    "stops": [
+      {
+        "placeId": "mt_carmel",
+        "note": "Contest with the prophets of Baal; prayer for rain"
+      },
+      {
+        "placeId": "jezreel",
+        "note": "Runs before Ahab’s chariot to Jezreel"
+      }
+    ],
+    "pathHints": "Mount Carmel eastward into the Jezreel Valley."
+  },
+  {
+    "id": "elijah_flight_horeb",
+    "name": "Elijah Flees to Horeb",
+    "aliases": [
+      "Elijah",
+      "Horeb",
+      "Mount Horeb"
+    ],
+    "scriptureRefs": [
+      "1 Kings 19:1–18"
+    ],
+    "summary": "Threatened by Jezebel, Elijah flees to Beersheba, travels into the wilderness, and reaches Horeb, the mountain of God.",
+    "stops": [
+      {
+        "placeId": "jezreel",
+        "note": "Flees Jezebel’s threat after Carmel"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Leaves his servant in Judah"
+      },
+      {
+        "placeId": "sinai",
+        "note": "Forty days to Horeb; the still small voice"
+      }
+    ],
+    "pathHints": "Jezreel → Beersheba → south to Horeb/Sinai."
+  },
+  {
+    "id": "ahab_aphek",
+    "name": "Ahab and the Arameans at Aphek",
+    "aliases": [
+      "Ben-hadad",
+      "Ben Hadad",
+      "Arameans",
+      "Aphek"
+    ],
+    "scriptureRefs": [
+      "1 Kings 20:1–34"
+    ],
+    "summary": "Ben-hadad of Aram besieges Samaria; after Israel’s victory the remaining Arameans flee into Aphek.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Aramean siege of Samaria"
+      },
+      {
+        "placeId": "aphek_aram",
+        "note": "Aramean survivors flee into Aphek"
+      }
+    ],
+    "pathHints": "Samaria campaign culminating at Aphek (site identification debated)."
   }
 ]

@@ -307,6 +307,27 @@
       .trim();
   }
 
+  /** { book, chapter } for journey scriptureRefs filtering (e.g. 1KI.14 → 1 Kings / 14). */
+  function readPassageCoords() {
+    try {
+      const path = new URL(location.href).pathname;
+      const m = path.match(/\/(?:bible\/\d+\/)?([0-9]?[A-Za-z]{2,3})\.(\d+)/i);
+      if (m) {
+        const label = expandUsfmPassage(`${m[1]} ${m[2]}`);
+        const hm = label.match(/^(.+?)\s+(\d+)\b/);
+        if (hm) return { book: hm[1], chapter: Number(hm[2]) };
+      }
+    } catch {
+      /* ignore */
+    }
+    const label = readPassageLabel();
+    const hm = String(label || "").match(
+      /^((?:[123]\s+)?[A-Za-z][A-Za-z\s]*?)\s+(\d+)\b/
+    );
+    if (hm) return { book: hm[1].trim(), chapter: Number(hm[2]) };
+    return null;
+  }
+
   /** Human label like "1 Kings 14 NLT" from page chrome (not USFM from the URL). */
   function readPassageLabel() {
     const selectors = [
@@ -515,7 +536,8 @@
       const journeys = window.BibleMapsMatcher.detectJourneys(
         places.map((p) => p.id),
         STATE.journeys,
-        pageText
+        pageText,
+        readPassageCoords()
       );
 
       publish(places, journeys);

@@ -197,7 +197,22 @@
     if (jid === "paul_rome") return "paul_rome";
     if (jid === "abraham_travels") return "abraham";
     if (jid === "exodus_outline") return "exodus";
-    if (jid === "jeroboam_wife_shiloh") return "divided_kingdom";
+    if (
+      jid === "jeroboam_wife_shiloh" ||
+      jid === "shishak_jerusalem" ||
+      jid === "jeroboam_return_egypt" ||
+      jid === "rehoboam_shechem" ||
+      jid === "man_of_god_bethel" ||
+      jid === "elijah_to_zarephath" ||
+      jid === "elijah_carmel_jezreel" ||
+      jid === "elijah_flight_horeb" ||
+      jid === "ahab_aphek"
+    ) {
+      return "divided_kingdom";
+    }
+    if (jid === "solomon_ophir_fleet" || jid === "queen_of_sheba") {
+      return "kingdom_david";
+    }
     const places = activePlaceMarkers || [];
     const gospelHits = places.filter((p) => (p.eras || []).includes("gospels")).length;
     if (gospelHits >= 2 && gospelHits >= places.length / 2) return "jesus";

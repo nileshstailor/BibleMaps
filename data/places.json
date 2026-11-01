@@ -1262,7 +1262,8 @@
     "modernName": "Jebel Musa tradition, South Sinai, Egypt",
     "eraNotes": "Traditional mountain of the covenant; alternative Horeb/Sinai proposals exist.",
     "eras": [
-      "exodus"
+      "exodus",
+      "divided"
     ],
     "region": "egypt"
   },
@@ -1366,7 +1367,8 @@
     "eraNotes": "Nile civilization; patriarchal sojourns and Exodus setting. Map pin uses Cairo-region coordinates.",
     "eras": [
       "patriarchs",
-      "exodus"
+      "exodus",
+      "divided"
     ],
     "region": "egypt"
   },
@@ -1619,6 +1621,137 @@
     "eraNotes": "Village near Bethany on the approach to Jerusalem.",
     "eras": [
       "gospels"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zarephath",
+    "name": "Zarephath",
+    "aliases": [
+      "Zarephath",
+      "Sarepta"
+    ],
+    "lat": 33.436,
+    "lng": 35.292,
+    "modernName": "Sarafand area, Lebanon",
+    "eraNotes": "Phoenician coastal town between Tyre and Sidon; Elijah and the widow (1 Kings 17).",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "mt_carmel",
+    "name": "Mount Carmel",
+    "aliases": [
+      "Mount Carmel",
+      "Carmel",
+      "Mt. Carmel"
+    ],
+    "lat": 32.74,
+    "lng": 35.05,
+    "modernName": "Mount Carmel range, Israel",
+    "eraNotes": "Coastal ridge; Elijah’s contest with the prophets of Baal (1 Kings 18).",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "jezreel",
+    "name": "Jezreel",
+    "aliases": [
+      "Jezreel",
+      "Jezreel Valley"
+    ],
+    "lat": 32.558,
+    "lng": 35.327,
+    "modernName": "Tel Jezreel, Israel",
+    "eraNotes": "Royal city in the Jezreel Valley; Ahab/Jezebel and Elijah narratives.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "cherith",
+    "name": "Brook Cherith",
+    "aliases": [
+      "Cherith",
+      "Brook Cherith",
+      "Kerith",
+      "brook Kerith"
+    ],
+    "lat": 32.2,
+    "lng": 35.62,
+    "modernName": "East of the Jordan (site debated)",
+    "eraNotes": "Wadi east of the Jordan where Elijah hid and was fed by ravens (1 Kings 17). Exact site uncertain.",
+    "eras": [
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ophir",
+    "name": "Ophir",
+    "aliases": [
+      "Ophir"
+    ],
+    "lat": 15.43,
+    "lng": 45.34,
+    "modernName": "Location debated (often South Arabia / Horn of Africa traditions)",
+    "eraNotes": "Source of gold for Solomon’s fleet (1 Kings 9). Pin uses a Sabaean/South Arabian teaching location.",
+    "eras": [
+      "united"
+    ],
+    "region": "arabia"
+  },
+  {
+    "id": "sheba",
+    "name": "Sheba",
+    "aliases": [
+      "Sheba",
+      "Saba",
+      "queen of Sheba"
+    ],
+    "lat": 15.4266,
+    "lng": 45.336,
+    "modernName": "Marib / Saba region, Yemen (traditional)",
+    "eraNotes": "Homeland of the Queen of Sheba (1 Kings 10). Exact locale debated (Arabia or Horn of Africa).",
+    "eras": [
+      "united"
+    ],
+    "region": "arabia"
+  },
+  {
+    "id": "penuel",
+    "name": "Penuel",
+    "aliases": [
+      "Penuel",
+      "Peniel"
+    ],
+    "lat": 32.19,
+    "lng": 35.66,
+    "modernName": "Tell ed-Dhahab area, Jordan (debated)",
+    "eraNotes": "Jacob’s Peniel tradition; later fortified by Jeroboam (1 Kings 12).",
+    "eras": [
+      "patriarchs",
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "aphek_aram",
+    "name": "Aphek",
+    "aliases": [
+      "Aphek"
+    ],
+    "lat": 32.78,
+    "lng": 35.7,
+    "modernName": "Fiq / Aphek region, Golan (1 Kings 20 tradition)",
+    "eraNotes": "Town where Aramean forces fled after battle with Ahab (1 Kings 20). Several biblical Apheks exist.",
+    "eras": [
+      "divided"
     ],
     "region": "levant"
   }
