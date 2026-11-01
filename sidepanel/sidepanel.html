@@ -57,10 +57,8 @@
         <div class="kingdom-legend" id="kingdomLegend" hidden></div>
       </div>
 
-      <div id="teachingMap" class="teaching-map" aria-label="Offline map"></div>
-      <p class="muted small" id="mapHelp">
-        Offline MapLibre basemap (OSM / Protomaps). No live tile servers.
-      </p>
+      <div id="teachingMap" class="teaching-map" aria-label="Map"></div>
+      <p class="muted small" id="mapHelp" hidden></p>
 
       <a id="mapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
         >Open in Google Maps</a
@@ -77,10 +75,6 @@
         <p class="muted small" id="referencePlateNote"></p>
       </details>
     </section>
-
-    <footer class="app-footer">
-      Curated gazetteer · MapLibre offline · © OpenStreetMap · v1.4.14
-    </footer>
 
     <script src="../lib/maplibre/maplibre-gl-csp.js"></script>
     <script src="../lib/maplibre/pmtiles.js"></script>

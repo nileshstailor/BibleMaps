@@ -510,11 +510,6 @@ body {
   margin-top: 4px;
 }
 
-.app-footer {
-  color: var(--muted);
-  font-size: 0.72rem;
-  text-align: center;
-}
 
 .badge {
   display: inline-block;

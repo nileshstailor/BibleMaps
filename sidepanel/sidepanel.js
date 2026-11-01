@@ -118,8 +118,16 @@
 
   function setMapHelp(text, isError) {
     if (!els.mapHelp) return;
-    els.mapHelp.textContent = text;
-    els.mapHelp.style.color = isError ? "#a63024" : "";
+    // Only surface errors in the UI — skip MapLibre/OSM status chrome.
+    if (!isError) {
+      els.mapHelp.hidden = true;
+      els.mapHelp.textContent = "";
+      els.mapHelp.style.color = "";
+      return;
+    }
+    els.mapHelp.hidden = false;
+    els.mapHelp.textContent = text || "";
+    els.mapHelp.style.color = "#a63024";
   }
 
   function escapeHtml(s) {
@@ -698,10 +706,7 @@
       clearMarkers();
       addDomMarkers(maplibreMap, focusPts, { dim: false });
       setPlacesMapsLink([place]);
-      setMapHelp(
-        `${place.name} — town view (zoom ${PLACE_FOCUS_ZOOM}).`,
-        false
-      );
+      setMapHelp("", false);
     };
     if (typeof maplibreMap.isStyleLoaded === "function" && !maplibreMap.isStyleLoaded()) {
       maplibreMap.once("idle", fly);
@@ -773,15 +778,15 @@
   }
 
   function mapMaxZoom(header) {
-    // Native tiles maxzoom 10 (wide biblical world); allow overzoom for pin focus.
+    // Native tiles maxzoom 9 (wide biblical world, small archive); overzoom for pin focus.
     const tileMax = Number(header?.maxZoom);
-    const base = Number.isFinite(tileMax) ? tileMax : 10;
-    return Math.min(14, Math.max(12, base + 2));
+    const base = Number.isFinite(tileMax) ? tileMax : 9;
+    return Math.min(14, Math.max(12, base + 3));
   }
 
   function fitMaxZoom(header) {
     const tileMax = Number(header?.maxZoom);
-    return Number.isFinite(tileMax) ? tileMax : 10;
+    return Number.isFinite(tileMax) ? tileMax : 9;
   }
 
   function fitToChapter(map, preset, focusPts, header) {
@@ -944,13 +949,31 @@
       );
 
       // Load full archive into memory (extension URLs often lack HTTP Range).
+      // Keep the archive modest (~40 MB): larger extracts have OOM'd the side panel.
       const tileUrl = chrome.runtime.getURL(`media/tiles/${PMTILES_KEY}`);
-      const ab = await fetch(tileUrl).then((r) => {
+      let ab;
+      try {
+        const r = await fetch(tileUrl);
         if (!r.ok) throw new Error(`PMTiles HTTP ${r.status}`);
-        return r.arrayBuffer();
-      });
+        ab = await r.arrayBuffer();
+      } catch (err) {
+        const msg = err?.message || String(err);
+        if (/arraybuffer|memory|allocation|oom/i.test(msg)) {
+          throw new Error(
+            "PMTiles archive too large for the side panel — rebuild with a smaller maxzoom"
+          );
+        }
+        throw err;
+      }
       if (!ab || ab.byteLength < 1000) {
         throw new Error("PMTiles archive missing or empty");
+      }
+      if (ab.byteLength > 85 * 1024 * 1024) {
+        console.warn(
+          "Bible Maps: PMTiles archive is",
+          Math.round(ab.byteLength / 1e6),
+          "MB — side panel may crash; prefer ≤80 MB"
+        );
       }
 
       try {
@@ -988,7 +1011,7 @@
         type: "vector",
         tiles: [`pmtiles://${PMTILES_KEY}/{z}/{x}/{y}`],
         minzoom: header?.minZoom ?? 0,
-        maxzoom: header?.maxZoom ?? 10,
+        maxzoom: header?.maxZoom ?? 9,
         attribution:
           '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       },
