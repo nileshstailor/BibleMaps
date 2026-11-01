@@ -161,9 +161,9 @@
 
     return entries.map((entry) => {
       const pattern = escapeRegExp(entry.alias).replace(/\\ /g, "[\\s\\u00A0]+");
-      // Treat hyphen/apostrophe as word chars so "Tubal" does not hit inside "Tubal-cain".
+      // Don't match inside hyphen compounds (Tubal-cain), but allow "Dan—" punctuation.
       const re = new RegExp(
-        `(?<![A-Za-z0-9'\\-\\u2010-\\u2014])(${pattern})(?![A-Za-z0-9'\\-\\u2010-\\u2014])`,
+        `(?<![A-Za-z0-9'])(?<![\\-\\u2010-\\u2014])(${pattern})(?![A-Za-z0-9'])(?![\\-\\u2010-\\u2014][A-Za-z0-9])`,
         "giu"
       );
       return { ...entry, re };
