@@ -378,7 +378,7 @@
   /** Keep the always-visible map chrome in sync with chapter places. */
   function syncPlacesMapChrome(places) {
     activeJourney = null;
-    journeyOnMap = false;
+    // Do not clear journeyOnMap — Hide on map owns that; tab switches can restore.
     activePlaceMarkers = places || [];
     const chap = chapterLabel(current);
     els.mapTitle.textContent = "Map";
