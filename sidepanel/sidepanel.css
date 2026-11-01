@@ -105,11 +105,14 @@ body {
 .theme-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  min-width: 32px;
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .theme-btn-icon {
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1;
 }
 

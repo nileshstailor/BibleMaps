@@ -1535,9 +1535,7 @@
         isNight ? "Switch to day mode" : "Switch to night mode"
       );
       const icon = els.themeBtn.querySelector(".theme-btn-icon");
-      const label = els.themeBtn.querySelector(".theme-btn-label");
       if (icon) icon.textContent = isNight ? "☀" : "☾";
-      if (label) label.textContent = isNight ? "Day" : "Night";
     }
     if (!persist) return;
     try {
