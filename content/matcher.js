@@ -67,6 +67,25 @@
     "tubal",
     "uz",
     "zebulun",
+    // People ethnonyms / gentilics — match the place via the base toponym
+    // or a "land of …" alias instead (1 Chr genealogies list these as persons).
+    "arvadites",
+    "pathrusim",
+    "caphtorim",
+    "philistines",
+    "amalekites",
+    "amalekite",
+    "netophathites",
+    "netophathite",
+    "cushite",
+    "cushites",
+    "elamites",
+    "midianites",
+    "midianite",
+    // Person names that are also Bethlehem/Judah aliases (1 Chr 2:19 Caleb's wife)
+    "ephrath",
+    "ephratah",
+    "ephrathah",
   ]);
 
   // Bare person/place collisions that are OK only in town-list geography
@@ -109,11 +128,17 @@
    * Applies globally in findMatchesInText — not limited to one book.
    */
   function isGenealogyContext(source, start, end) {
-    const before = source.slice(Math.max(0, start - 200), start);
-    const after = source.slice(end, Math.min(source.length, end + 72));
-    const nameBit = "[\\w'’.\\-]+(?:\\s*\\([^)]*\\))?";
-    // "A, B, and " / "A and " / trailing "and "
-    const listTail = `(?:${nameBit}\\s*,\\s*)*(?:${nameBit}\\s+and\\s+|and\\s+)?`;
+    const before = source.slice(Math.max(0, start - 240), start);
+    // Long 1 Chr name-lists need a wide after-window ("…, A, B, and C were the sons of")
+    const after = source.slice(end, Math.min(source.length, end + 180));
+    // Exclude and/or so list tails don't swallow the conjunction as a "name"
+    const nameBit = "(?:(?![Aa]nd\\b|[Oo]r\\b)[\\w'’.\\-]+)(?:\\s*\\([^)]*\\))?";
+    // commas or semicolons between names (ESV sometimes uses ;)
+    const nameSep = "[,;]\\s*";
+    // "A, B, and C, " / "A and " / "A, then B, " (NLT/ESV 1 Chr) — allow mid-list "and"
+    const listTail = `(?:(?:then\\s+)?${nameBit}\\s*${nameSep}|and\\s+${nameBit}\\s*${nameSep})*(?:(?:then\\s+)?${nameBit}\\s+and\\s+|and\\s+|then\\s+)?`;
+    const begetVerb =
+      "begat|begot|begotten|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|became the ancestor of|was the ancestor of|was also the ancestor of|gave birth to";
     // "... son(s)/daughter(s)/children/father/... of NAME"
     if (
       /(?:\bsons?|\bdaughters?|\bchildren|\bchild|\bfathers?|\bmothers?|\bwives?|\bhusbands?|\bbrothers?|\bsisters?|\bdescendants?|\bancestors?|\bgrandsons?|\bgranddaughters?|\bclans?|\bfamilies?|\boffspring)\s+of\s+$/i.test(
@@ -122,43 +147,89 @@
     ) {
       return true;
     }
-    // "NAME, son of ..." / "NAME the son of ..." / "NAME, father of ..."
+    // "NAME, son of ..." / "NAME (the father of ..." / "NAME the wife of ..."
     if (
-      /^\s*,?\s*(?:the\s+)?(?:sons?|daughters?|children|child|fathers?|mothers?|wives?|husbands?|brothers?|sisters?|descendants?|ancestors?|grandsons?|granddaughters?|clans?|families?|offspring)\s+of\b/i.test(
+      /^\s*[,()]?\s*(?:the\s+)?(?:sons?|daughters?|children|child|fathers?|mothers?|wives?|wife|husbands?|husband|brothers?|brother|sisters?|sister|descendants?|ancestors?|grandsons?|granddaughters?|clans?|families?|offspring)\s+of\b/i.test(
         after
       )
     ) {
       return true;
     }
-    // "NAME was/became the father of ..." / "NAME begat/fathered/bore ..."
+    // "Eshtemoa the Maacathite" (gentilic epithet on a person)
+    if (/^\s+the\s+[\w'’.\-]+(?:ites?|ians?|ean|ene)\b/i.test(after)) {
+      return true;
+    }
+    // "NAME fathered/was the ancestor of/had … sons" (optional comma after NAME)
     if (
-      /^\s*(?:begat|begot|begotten|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|became the ancestor of|was the ancestor of|had a son|had a daughter|gave birth to)\b/i.test(
+      new RegExp(
+        `^\\s*,?\\s*(?:${begetVerb}|had\\s+(?:\\w+\\s+){0,3}(?:sons?|daughters?|children|twins?))\\b`,
+        "i"
+      ).test(after)
+    ) {
+      return true;
+    }
+    // "Mareshah his firstborn, who fathered Ziph"
+    if (/^\s+his\s+firstborn\b/i.test(after)) {
+      return true;
+    }
+    // "Maacah, Caleb's concubine, bore …" / "Tamar also bore"
+    if (
+      /^\s*,\s*[\w'’.\-]+(?:['’]s)?\s+(?:concubine|wife|husband|daughter-in-law|son-in-law)\b/i.test(
         after
-      )
+      ) ||
+      /^\s+also\s+(?:bore|bare|fathered|begat|gave birth)\b/i.test(after)
     ) {
       return true;
     }
-    // "... begat/was the father of/gave birth to NAME"
+    // "… Abdon, Zicri, … were the sons of Shashak"
     if (
-      /\b(?:begat|begot|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|became the ancestor of|was the ancestor of|gave birth to)\s+$/i.test(
+      new RegExp(
+        `^(?:\\s*${nameSep}\\s*${nameBit}){0,12}\\s*(?:\\s*${nameSep}\\s*and\\s+${nameBit})?\\s+were\\s+(?:the\\s+)?(?:sons?|daughters?|children|descendants?)\\s+of\\b`,
+        "i"
+      ).test(after)
+    ) {
+      return true;
+    }
+    // "sons from Tamar, his … daughter-in-law" / "daughter-in-law Tamar"
+    if (
+      /^\s*,\s*(?:his|her)\s+(?:widowed\s+)?(?:daughter-in-law|son-in-law|wife|husband|concubine)\b/i.test(
+        after
+      ) ||
+      /\b(?:daughter-in-law|son-in-law|concubine)\s+$/i.test(before)
+    ) {
+      return true;
+    }
+    // "... fathered/was the father of/gave birth to NAME"
+    if (new RegExp(`\\b(?:${begetVerb})\\s+$`, "i").test(before)) {
+      return true;
+    }
+    // "married Ephrathah" / "concubines, Maacah"
+    if (/\b(?:married|marries|wed)\s+$/i.test(before)) {
+      return true;
+    }
+    if (
+      /\b(?:wife|wives|husband|husbands|concubine|concubines|daughter-in-law|son-in-law)\s*,\s*$/i.test(
         before
       )
     ) {
       return true;
     }
-    // "father of Ziph, and Mareshah" / "father of A, B, and C"
+    // "fathered A, B, C, and D" / continuing comma/semicolon lists after a beget verb
     if (
-      /\b(?:begat|begot|fathered|mothered|bore|bare|became the father of|was the father of|became the mother of|was the mother of|the father of|the mother of|gave birth to)\s+[\w'’.\-]+(?:\s*,\s*[\w'’.\-]+)*\s*,\s*and\s+$/i.test(
-        before
-      )
+      new RegExp(
+        `\\b(?:${begetVerb}|the father of|the mother of)\\s+${nameBit}(?:\\s*${nameSep}${nameBit})*\\s*${nameSep}(?:and\\s+)?$`,
+        "i"
+      ).test(before)
     ) {
       return true;
     }
-    // "named/called his/her son NAME" / "called his name NAME"
+    // "named/called his/her son NAME" / "was named NAME" / "named Helah and Naarah"
     if (
       /\b(?:named|called)\s+(?:his|her|their)\s+(?:son|daughter|child|name)\s+$/i.test(
         before
-      )
+      ) ||
+      /\b(?:was\s+)?named\s+$/i.test(before) ||
+      new RegExp(`\\bnamed\\s+${nameBit}\\s+and\\s+$`, "i").test(before)
     ) {
       return true;
     }
@@ -182,22 +253,91 @@
     ) {
       return true;
     }
-    // Genealogy name-lists:
-    // "sons/daughters/children/descendants of X: A, B, and C"
-    // "descendants of X were/included A, B, and C" (common in NLT 1 Chronicles)
+    // "Their sister was named Tamar" / "His wife’s name was Maacah" / "Tamar was their sister"
+    if (
+      /\b(?:sister|brother|wife|husband|mother|father|daughter|son|concubine)(?:['’]s\s+name)?\s+was\s+(?:named\s+)?$/i.test(
+        before
+      ) ||
+      /^\s+was\s+their\s+(?:sister|brother)\b/i.test(after)
+    ) {
+      return true;
+    }
+    // "two wives, Helah and Naarah" / "wives Helah and Naarah"
     if (
       new RegExp(
-        `(?:\\bsons?|\\bdaughters?|\\bchildren|\\bdescendants?|\\bancestors?|\\boffspring)\\s+of\\s+${nameBit}\\s*(?:were|included|are|[:;])\\s*${listTail}$`,
+        `\\b(?:wives?|husbands?|sons?|daughters?)\\s*,?\\s*${nameBit}\\s+and\\s+$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // Genealogy name-lists (NLT/ESV 1 Chronicles especially):
+    // "sons/descendants of X were/included/: A, B, and C"
+    // allow short words: "sons of Shemer his brother: …" / appositive before were
+    if (
+      new RegExp(
+        `(?:\\bsons?|\\bdaughters?|\\bchildren|\\bdescendants?|\\bancestors?|\\boffspring)\\s+of\\s+${nameBit}(?:\\s+${nameBit}){0,3}(?:,[^.]{0,50})?\\s*(?:were|included|are|[:;])\\s*${listTail}$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // ESV verse break continues a sons-of list: "The sons of Zophah: A, B. C, D, and E"
+    if (
+      new RegExp(
+        `(?:\\bsons?|\\bdaughters?|\\bchildren|\\bdescendants?)\\s+of\\s+${nameBit}(?:\\s+${nameBit}){0,3}\\s*:\\s*[^.]{0,160}\\.\\s*$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // ESV: "The sons of Ishmael, Nebaioth, and Kedar, …" / "firstborn of Ishmael, Nebaioth, and Kedar"
+    if (
+      new RegExp(
+        `(?:\\bsons?|\\bdaughters?|\\bchildren|\\bdescendants?|\\bancestors?|\\boffspring|\\bfirstborn)\\s+of\\s+${nameBit}\\s*,\\s*${listTail}$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // "and of Timna, Amalek" (descendant named after "of PARENT,")
+    if (new RegExp(`\\band\\s+of\\s+${nameBit}\\s*,\\s*$`, "i").test(before)) {
+      return true;
+    }
+    // "his/other sons were A, B, Gedor" / "These were their descendants: A, B"
+    if (
+      new RegExp(
+        `(?:\\b(?:his|her|their|other|these)\\s+)?(?:sons?|daughters?|children|descendants?|ancestors?|offspring)\\s*(?:were|included|are|[:;])\\s*${listTail}$`,
         "i"
       ).test(before)
     ) {
       return true;
     }
     // "Japheth's / Javan's descendants were A, B, and C"
-    // "These were Judah's sons: A, B, and C"
     if (
       new RegExp(
         `[\\w'’.\\-]+(?:['’]s)\\s+(?:sons?|daughters?|children|descendants?|ancestors?|offspring)\\s*(?:were|included|are|[:;])\\s*${listTail}$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // "clan leaders/chiefs of Edom" (Edom itself) and "… were Timna, … Teman"
+    if (/\b(?:clan\s+)?(?:leaders?|chiefs?)\s+of\s+$/i.test(before)) {
+      return true;
+    }
+    if (
+      new RegExp(
+        `\\b(?:clan\\s+)?(?:leaders?|chiefs?)\\s+of\\s+${nameBit}\\s+were\\s*:?\\s*(?:(?:leaders?|chiefs?)\\s+)?${listTail}$`,
+        "i"
+      ).test(before)
+    ) {
+      return true;
+    }
+    // "His firstborn son: Abdon, then Zur…" / "his firstborn son Abdon, then Zur…"
+    if (
+      new RegExp(
+        `\\b(?:firstborn\\s+son|oldest\\s+son)\\s*:?\\s*${listTail}$`,
         "i"
       ).test(before)
     ) {
