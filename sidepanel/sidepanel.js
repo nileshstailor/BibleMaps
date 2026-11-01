@@ -56,8 +56,11 @@
   let lastJourneysFingerprint = "";
   let openPlaceIds = new Set();
   let openJourneyIds = new Set();
+  let focusedPlaceId = null;
   let styleCache = null;
   const PMTILES_KEY = "bible-region.pmtiles";
+  /** Town context on click — closer than chapter overview, not street-level. */
+  const PLACE_FOCUS_ZOOM = 10;
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -479,6 +482,107 @@
     markerObjs = [];
   }
 
+  function showPlacesTab() {
+    const tab = document.querySelector('.tab[data-tab="places"]');
+    if (!tab) return;
+    if (activeTab === "places" && !els.placesPanel.hidden) return;
+    tab.click();
+  }
+
+  function findPlaceById(placeId) {
+    if (!placeId) return null;
+    const fromChapter = (current?.places || []).find((p) => p.id === placeId);
+    if (fromChapter) return fromChapter;
+    return (allPlaces || []).find((p) => p.id === placeId) || null;
+  }
+
+  function openPlaceAccordion(placeId) {
+    if (!placeId || !els.placesPanel) return null;
+    openPlaceIds.add(placeId);
+    const row = els.placesPanel.querySelector(
+      `[data-place-id="${CSS.escape(placeId)}"]`
+    );
+    if (!row) return null;
+    row.open = true;
+    els.placesPanel
+      .querySelectorAll(".acc-row.is-focused")
+      .forEach((el) => el.classList.remove("is-focused"));
+    row.classList.add("is-focused");
+    try {
+      row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } catch {
+      /* ignore */
+    }
+    return row;
+  }
+
+  function easeMapToPlace(place, { animate = true } = {}) {
+    if (!maplibreMap || !place) return false;
+    if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return false;
+    const camera = {
+      center: [place.lng, place.lat],
+      zoom: PLACE_FOCUS_ZOOM,
+      duration: animate ? 750 : 0,
+    };
+    if (animate) maplibreMap.easeTo(camera);
+    else maplibreMap.jumpTo({ center: camera.center, zoom: camera.zoom });
+    return true;
+  }
+
+  async function focusPlaceFromClick(placeId) {
+    if (!placeId) return;
+    focusedPlaceId = placeId;
+    showPlacesTab();
+    await loadAllPlaces();
+
+    let row = openPlaceAccordion(placeId);
+    if (!row) {
+      // Places list may still be loading from detection.
+      for (let i = 0; i < 8 && !row; i += 1) {
+        await new Promise((r) => setTimeout(r, 150));
+        row = openPlaceAccordion(placeId);
+      }
+    }
+
+    const place = findPlaceById(placeId);
+    if (!place) return;
+
+    await renderMap();
+    if (!maplibreMap) return;
+
+    const fly = () => {
+      easeMapToPlace(place, { animate: true });
+      // Refresh markers so the focused pin gets the highlight class.
+      const { focusPts } = chapterFocusPoints();
+      clearMarkers();
+      addDomMarkers(maplibreMap, focusPts, { dim: false });
+      setPlacesMapsLink([place]);
+      setMapHelp(
+        `${place.name} — town view (zoom ${PLACE_FOCUS_ZOOM}).`,
+        false
+      );
+    };
+    if (typeof maplibreMap.isStyleLoaded === "function" && !maplibreMap.isStyleLoaded()) {
+      maplibreMap.once("idle", fly);
+    } else {
+      requestAnimationFrame(fly);
+    }
+  }
+
+  async function consumePendingFocus() {
+    try {
+      if (!chrome.storage?.session?.get) return;
+      const stored = await chrome.storage.session.get("pendingFocusPlace");
+      const pending = stored?.pendingFocusPlace;
+      if (!pending?.placeId) return;
+      await chrome.storage.session.remove("pendingFocusPlace");
+      if (Date.now() - (pending.at || 0) > 30000) return;
+      await focusPlaceFromClick(pending.placeId);
+    } catch {
+      /* ignore */
+    }
+  }
+
   function destroyMap() {
     clearMarkers();
     if (maplibreMap) {
@@ -635,14 +739,24 @@
     }
     clearMarkers();
     addDomMarkers(map, focusPts, { dim: false });
-    fitToChapter(map, preset, focusPts, pmtilesHeader);
+    const focused =
+      focusedPlaceId && findPlaceById(focusedPlaceId);
+    if (focused && easeMapToPlace(focused, { animate: false })) {
+      setPlacesMapsLink([focused]);
+      setMapHelp(
+        `${focused.name} — town view (zoom ${PLACE_FOCUS_ZOOM}).`,
+        false
+      );
+    } else {
+      fitToChapter(map, preset, focusPts, pmtilesHeader);
+      setMapHelp(
+        `${preset?.title || "Map"} — offline MapLibre / OSM (${focusPts.length} place${
+          focusPts.length === 1 ? "" : "s"
+        } in this chapter).`,
+        false
+      );
+    }
     map.resize();
-    setMapHelp(
-      `${preset?.title || "Map"} — offline MapLibre / OSM (${focusPts.length} place${
-        focusPts.length === 1 ? "" : "s"
-      } in this chapter).`,
-      false
-    );
   }
 
   async function waitForMapSize(el) {
@@ -809,7 +923,14 @@
     for (const p of points || []) {
       if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
       const el = document.createElement("div");
-      el.className = dim ? "bm-marker bm-marker-dim" : "bm-marker";
+      const id = p.id || p.placeId;
+      const focused = Boolean(focusedPlaceId && id === focusedPlaceId);
+      el.className = [
+        dim ? "bm-marker bm-marker-dim" : "bm-marker",
+        focused ? "bm-marker-focus" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
       el.innerHTML = `<span class="bm-marker-dot"></span><span class="bm-marker-label">${escapeHtml(
         p.name || "Place"
       )}</span>`;
@@ -1079,6 +1200,7 @@
   }
 
   function applyPayload(payload) {
+    const prevUrl = current?.url;
     current = payload;
     if (!payload) {
       setStatus("Open a bible.com passage, then click Refresh.");
@@ -1086,6 +1208,7 @@
       lastJourneysFingerprint = "";
       openPlaceIds.clear();
       openJourneyIds.clear();
+      focusedPlaceId = null;
       renderPlaces([], { force: true });
       renderJourneys([], { force: true });
       syncPlacesMapChrome([]);
@@ -1093,10 +1216,15 @@
       return;
     }
 
+    if (payload.url && payload.url !== prevUrl) {
+      focusedPlaceId = null;
+    }
+
     activePlaceMarkers = payload.places || [];
     // Skip DOM rebuild when poll returns the same lists — rebuilding closes accordions.
     renderPlaces(payload.places || []);
     renderJourneys(payload.journeys || []);
+    if (focusedPlaceId) openPlaceAccordion(focusedPlaceId);
 
     const placeCount = payload.places?.length || 0;
     const journeyCount = payload.journeys?.length || 0;
@@ -1230,6 +1358,9 @@
     if (message?.type === "BIBLE_MAPS_DETECTION_UPDATED") {
       applyPayload(message.payload);
     }
+    if (message?.type === "BIBLE_MAPS_FOCUS_PLACE" && message.placeId) {
+      focusPlaceFromClick(message.placeId);
+    }
   });
 
   loadKingdoms();
@@ -1238,7 +1369,7 @@
   // Mount the always-visible map immediately (pins update when detection arrives).
   syncPlacesMapChrome([]);
   requestAnimationFrame(() => renderMap());
-  refreshFromBackground({ forceRescan: true });
+  refreshFromBackground({ forceRescan: true }).then(() => consumePendingFocus());
   setTimeout(() => refreshFromBackground({ forceRescan: true }), 500);
   setTimeout(() => refreshFromBackground({ forceRescan: true }), 1500);
   // Keep panel aligned if the tab SPA-navigates while the panel is open.

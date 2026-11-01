@@ -239,7 +239,7 @@
     const chip = host._bmShadow.querySelector(".hover-chip");
     chip._bmHit = hit;
     const name = hit.place?.name || "Place";
-    chip.innerHTML = `<span>${name}</span><small>Open side panel</small>`;
+    chip.innerHTML = `<span>${name}</span><small>Show on map</small>`;
     chip.style.left = `${Math.min(window.innerWidth - 20, Math.max(20, clientX))}px`;
     chip.style.top = `${Math.max(28, clientY)}px`;
     chip.classList.add("show");

@@ -119,6 +119,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       sendResponse({ ok: false, error: "Side panel unavailable" });
       return false;
     }
+    const placeId = message.placeId || null;
+    // Persist focus so a freshly opened panel can pick it up after load.
+    if (placeId) {
+      chrome.storage.session
+        ?.set?.({
+          pendingFocusPlace: { placeId, tabId, at: Date.now() },
+        })
+        .catch?.(() => {});
+    }
     const openPromise = chrome.sidePanel.open({ tabId });
     // setOptions can follow; must not precede open()
     try {
@@ -131,7 +140,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       /* ignore */
     }
     openPromise
-      .then(() => sendResponse({ ok: true }))
+      .then(() => {
+        if (placeId) {
+          chrome.runtime
+            .sendMessage({ type: "BIBLE_MAPS_FOCUS_PLACE", placeId })
+            .catch(() => {});
+        }
+        sendResponse({ ok: true });
+      })
       .catch((err) => sendResponse({ ok: false, error: String(err) }));
     return true;
   }
