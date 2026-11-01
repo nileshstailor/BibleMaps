@@ -773,15 +773,15 @@
   }
 
   function mapMaxZoom(header) {
-    // Town-level tiles (~z11); allow slight overzoom past the archive for pin focus.
+    // Native tiles maxzoom 10 (wide biblical world); allow overzoom for pin focus.
     const tileMax = Number(header?.maxZoom);
-    const base = Number.isFinite(tileMax) ? tileMax : 11;
-    return Math.min(14, Math.max(11, base + 2));
+    const base = Number.isFinite(tileMax) ? tileMax : 10;
+    return Math.min(14, Math.max(12, base + 2));
   }
 
   function fitMaxZoom(header) {
     const tileMax = Number(header?.maxZoom);
-    return Number.isFinite(tileMax) ? tileMax : 11;
+    return Number.isFinite(tileMax) ? tileMax : 10;
   }
 
   function fitToChapter(map, preset, focusPts, header) {
@@ -988,7 +988,7 @@
         type: "vector",
         tiles: [`pmtiles://${PMTILES_KEY}/{z}/{x}/{y}`],
         minzoom: header?.minZoom ?? 0,
-        maxzoom: header?.maxZoom ?? 11,
+        maxzoom: header?.maxZoom ?? 10,
         attribution:
           '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       },

@@ -4,10 +4,12 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PMTILES="${ROOT}/scripts/pmtiles"
 OUT="${ROOT}/media/tiles/bible-region.pmtiles"
 BUILD_URL="${PROTOMAPS_BUILD_URL:-https://build.protomaps.com/20251027.pmtiles}"
-# Town-level extract: Levant + Cyprus + S. Anatolia, maxzoom 11 (~80MB)
-# Covers OT/Gospel teaching maps and early Pauline Asia Minor; under GitHub 100MB limit.
-BBOX="${PROTOMAPS_BBOX:-28,29,40,42}"
-MAXZOOM="${PROTOMAPS_MAXZOOM:-11}"
+# Biblical Mediterranean + Levant + W. Mesopotamia (Rome → Nineveh).
+# maxzoom 10 keeps the archive under GitHub's 100MB limit while covering
+# Paul/Greece/Italy towns added in the gazetteer expansion. Overzoom in
+# MapLibre still allows town focus past z10.
+BBOX="${PROTOMAPS_BBOX:-12,28,43.2,43}"
+MAXZOOM="${PROTOMAPS_MAXZOOM:-10}"
 
 if [[ ! -x "$PMTILES" ]]; then
   echo "Missing scripts/pmtiles CLI. Download from https://github.com/protomaps/go-pmtiles/releases" >&2
