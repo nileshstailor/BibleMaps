@@ -70,9 +70,11 @@
   const PMTILES_KEY = "bible-region.pmtiles";
   /** Town context on click — closer than chapter overview, not street-level. */
   const PLACE_FOCUS_ZOOM = 10;
-  /** Carto light/dark raster — OSM-based world coverage when online. */
+  /** Esri public canvas raster — world coverage when online; no API key. */
   const ONLINE_RASTER_SOURCE = "online-raster";
   const ONLINE_RASTER_LAYER = "online-basemap";
+  const ONLINE_RASTER_ATTR =
+    'Tiles © <a href="https://www.esri.com/">Esri</a> — Esri, TomTom, Garmin, FAO, NOAA, USGS';
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -789,9 +791,12 @@
   }
 
   function onlineRasterTilesUrl(theme = currentTheme()) {
-    const variant = theme === "night" ? "dark_all" : "light_all";
-    // Carto CDN; OSM data. Used only as a fill under/outside the offline extract.
-    return `https://basemaps.cartocdn.com/${variant}/{z}/{x}/{y}.png`;
+    // Esri ArcGIS Online public canvas (no key). Note {z}/{y}/{x} order.
+    const service =
+      theme === "night"
+        ? "Canvas/World_Dark_Gray_Base"
+        : "Canvas/World_Light_Gray_Base";
+    return `https://server.arcgisonline.com/ArcGIS/rest/services/${service}/MapServer/tile/{z}/{y}/{x}`;
   }
 
   function mapMaxZoom(header) {
@@ -1098,9 +1103,8 @@
         type: "raster",
         tiles: [onlineRasterTilesUrl()],
         tileSize: 256,
-        maxzoom: 18,
-        attribution:
-          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+        maxzoom: 16,
+        attribution: ONLINE_RASTER_ATTR,
       };
       const layers = Array.isArray(style.layers) ? style.layers : [];
       const bgIdx = layers.findIndex((l) => l.id === "background");
@@ -1180,9 +1184,8 @@
           type: "raster",
           tiles,
           tileSize: 256,
-          maxzoom: 18,
-          attribution:
-            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+          maxzoom: 16,
+          attribution: ONLINE_RASTER_ATTR,
         });
       } catch (err) {
         console.warn("Bible Maps: could not add online raster source", err);
@@ -1197,9 +1200,8 @@
           type: "raster",
           tiles,
           tileSize: 256,
-          maxzoom: 18,
-          attribution:
-            '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/attributions">CARTO</a>',
+          maxzoom: 16,
+          attribution: ONLINE_RASTER_ATTR,
         });
       } catch (err) {
         console.warn("Bible Maps: could not refresh online raster source", err);
@@ -1447,6 +1449,8 @@
 
     updateMapOverlays(map, preset, showKingdoms);
     syncOnlineRasterLayer(map);
+    map.on("moveend", () => updateOnlineRasterVisibility(map));
+    map.on("zoomend", () => updateOnlineRasterVisibility(map));
     lastMapFingerprint = fp;
     lastMapPresetId = presetId;
 

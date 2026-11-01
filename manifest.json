@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.4.39",
+  "version": "1.4.40",
   "description": "Highlight biblical places and journeys on bible.com and open them on an offline MapLibre map, with online fill when needed.",
   "permissions": [
     "sidePanel",
@@ -15,14 +15,15 @@
     "https://*.google.com/*",
     "https://*.googleapis.com/*",
     "https://*.gstatic.com/*",
-    "https://*.basemaps.cartocdn.com/*",
-    "https://basemaps.cartocdn.com/*"
+    "https://*.arcgisonline.com/*",
+    "https://server.arcgisonline.com/*",
+    "https://services.arcgisonline.com/*"
   ],
   "background": {
     "service_worker": "background/service-worker.js"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'; img-src 'self' data: blob: https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.basemaps.cartocdn.com https://basemaps.cartocdn.com; frame-src 'none'"
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'; img-src 'self' data: blob: https://*.arcgisonline.com; style-src 'self' 'unsafe-inline'; connect-src 'self' https://*.arcgisonline.com; frame-src 'none'"
   },
   "action": {
     "default_title": "Bible Maps",
