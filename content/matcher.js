@@ -199,6 +199,18 @@
     ) {
       return true;
     }
+    // Matt 1: "Judah the father of Perez and Zerah by Tamar"
+    if (
+      /\b(?:father of|mother of)\s+[\w'’.\-]+(?:\s+and\s+[\w'’.\-]+)?\s+by\s+$/i.test(
+        before
+      )
+    ) {
+      return true;
+    }
+    // "Nahor’s brother Haran" / "his brother Philip"
+    if (/\b(?:brother|sister|son|daughter|uncle|aunt|nephew|niece)\s+$/i.test(before)) {
+      return true;
+    }
     // "... fathered/was the father of/gave birth to NAME"
     if (new RegExp(`\\b(?:${begetVerb})\\s+$`, "i").test(before)) {
       return true;
@@ -241,8 +253,12 @@
     if (/\b(?:bore|bare)\s+(?:him|her|them)\s+$/i.test(before)) {
       return true;
     }
-    // "NAME son/daughter of" without comma (some translations drop "the")
-    if (/^\s+(?:sons?|daughters?|children|child)\s+of\b/i.test(after)) {
+    // "NAME son/daughter of" / "NAME was the son of" (Luke 3 verse splits)
+    if (
+      /^\s+(?:(?:was|is|became)\s+(?:the\s+)?)?(?:sons?|daughters?|children|child|fathers?|mothers?)\s+of\b/i.test(
+        after
+      )
+    ) {
       return true;
     }
     // "the son of Shammai was Maon" (1 Chr style)
@@ -454,27 +470,64 @@
   }
 
   /**
+   * Map a character offset in a concatenated text-node string back to a node + local offset.
+   * `pos` may be an exclusive end (== total length).
+   */
+  function locateInSegments(segments, pos) {
+    if (!segments.length) return null;
+    for (let i = 0; i < segments.length; i += 1) {
+      const seg = segments[i];
+      const segEnd = seg.startInFull + seg.length;
+      if (pos < segEnd) {
+        return { node: seg.node, offset: pos - seg.startInFull };
+      }
+      if (pos === segEnd) {
+        // Prefer end of this node; exclusive ends often land on the boundary.
+        return { node: seg.node, offset: seg.length };
+      }
+    }
+    const last = segments[segments.length - 1];
+    return { node: last.node, offset: last.length };
+  }
+
+  /**
    * Build non-mutating Range hits for CSS Custom Highlight API.
+   *
+   * IMPORTANT: match against the concatenated chapter text, not each text node
+   * alone. bible.com splits phrases across spans ("son of " | "Judah"), and
+   * per-node matching loses kinship context — which is why genealogies still
+   * highlighted person/place names in the live page.
    */
   function collectMatchRanges(root, placeMatchers) {
     const hits = [];
     const textNodes = collectTextNodes(root);
+    if (!textNodes.length) return hits;
+
+    let full = "";
+    const segments = [];
     for (const node of textNodes) {
-      const matches = findMatchesInText(node.nodeValue || "", placeMatchers);
-      for (const match of matches) {
-        try {
-          const range = document.createRange();
-          range.setStart(node, match.start);
-          range.setEnd(node, match.end);
-          hits.push({
-            range,
-            placeId: match.placeId,
-            place: match.place,
-            text: match.text,
-          });
-        } catch {
-          /* node may have changed mid-scan */
-        }
+      const value = node.nodeValue || "";
+      segments.push({ node, startInFull: full.length, length: value.length });
+      full += value;
+    }
+
+    const matches = findMatchesInText(full, placeMatchers);
+    for (const match of matches) {
+      const startLoc = locateInSegments(segments, match.start);
+      const endLoc = locateInSegments(segments, match.end);
+      if (!startLoc || !endLoc) continue;
+      try {
+        const range = document.createRange();
+        range.setStart(startLoc.node, startLoc.offset);
+        range.setEnd(endLoc.node, endLoc.offset);
+        hits.push({
+          range,
+          placeId: match.placeId,
+          place: match.place,
+          text: match.text,
+        });
+      } catch {
+        /* node may have changed mid-scan */
       }
     }
     return hits;
@@ -620,6 +673,8 @@
     findMatchesInText,
     collectTextNodes,
     collectMatchRanges,
+    locateInSegments,
+    isGenealogyContext,
     detectJourneys,
     normalizeQuotes,
   };

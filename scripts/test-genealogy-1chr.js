@@ -58,7 +58,38 @@ async function main() {
     "the firstborn of Ishmael, Nebaioth, and Kedar, Adbeel, Mibsam, Mishma, Dumah, Massa, Hadad, Tema, Jetur, Naphish, and Kedemah.",
     "Caleb married Ephrathah, and they had a son named Hur.",
     "Later Judah had twin sons from Tamar, his widowed daughter-in-law.",
+    // bible.com splits "son of" / name across spans — concat must still skip
+    "Simeon was the son of Judah.Judah was the son of Joseph.Joseph was the son of Jonam.",
+    "Judah the father of Perez and Zerah by Tamar, and Perez the father of Hezron",
+    "daughters of Nahor’s brother Haran.",
   ];
+
+  // Per-node matching (old bug) vs concatenated chapter text (fixed collectMatchRanges)
+  {
+    const parts = [
+      "Simeon was the son of ",
+      "Judah",
+      ".",
+      "Judah",
+      " was the son of Joseph.",
+    ];
+    const perNode = parts.flatMap((p) =>
+      M.findMatchesInText(p, matchers).map((h) => h.place?.name)
+    );
+    const concat = M.findMatchesInText(parts.join(""), matchers);
+    if (!perNode.includes("Judah")) {
+      console.error("FAIL expected per-node Judah leak to demonstrate the bug");
+      failures += 1;
+    } else {
+      console.log("OK demonstrated per-node Judah leak:", perNode);
+    }
+    if (concat.length) {
+      console.error("FAIL concat still hits", concat.map((h) => h.place?.name));
+      failures += 1;
+    } else {
+      console.log("OK concat skips split-node genealogy names");
+    }
+  }
   const mustKeep = [
     ["They lived in Beersheba, Moladah, Hazar-shual", ["Beersheba", "Moladah"]],
     ["born in Hebron", ["Hebron"]],
