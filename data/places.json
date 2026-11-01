@@ -163,7 +163,9 @@
     "aliases": [
       "Hebron",
       "Kiriath Arba",
-      "Kirjath-arba"
+      "Kirjath-arba",
+      "Kiriath-arba",
+      "Kirjatharba"
     ],
     "lat": 31.5326,
     "lng": 35.0998,
@@ -520,13 +522,12 @@
     "name": "Bethany",
     "aliases": [
       "Bethany",
-      "Bethany beyond the Jordan",
-      "Ananiah"
+      "Bethany beyond the Jordan"
     ],
     "lat": 31.7717,
     "lng": 35.2553,
     "modernName": "al-Eizariya / Bethany area, West Bank",
-    "eraNotes": "Village near Jerusalem; Lazarus tradition. Distinct from Bethany-beyond-Jordan debates.",
+    "eraNotes": "Village near Jerusalem; Lazarus tradition. Distinct from Bethany-beyond-Jordan debates. Neh 11 Ananiah is a separate Benjamin village.",
     "eras": [
       "gospels"
     ],
@@ -4513,7 +4514,8 @@
     "aliases": [
       "Michmash",
       "Michmas",
-      "Mikmash"
+      "Mikmash",
+      "Micmash"
     ],
     "lat": 31.873,
     "lng": 35.279,
@@ -9330,6 +9332,228 @@
     "eraNotes": "Where Adonijah held his feast by En-rogel (1 Kgs 1:9).",
     "eras": [
       "united"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ananiah",
+    "name": "Ananiah",
+    "aliases": [
+      "Ananiah"
+    ],
+    "lat": 31.833,
+    "lng": 35.217,
+    "modernName": "Beit Hanina area, north of Jerusalem (proposed)",
+    "eraNotes": "Benjamin village resettled after the exile (Neh 11:32). Not the Gospel Bethany.",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "aija",
+    "name": "Aija",
+    "aliases": [
+      "Aija",
+      "Aiath",
+      "Aija of Benjamin"
+    ],
+    "lat": 31.905,
+    "lng": 35.26,
+    "modernName": "Near Ai / Michmash, West Bank (Aiath)",
+    "eraNotes": "Benjamin town with Michmash and Bethel (Neh 11:31); = Aiath on the Assyrian approach (Isa 10:28).",
+    "eras": [
+      "exile",
+      "divided"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "gittaim",
+    "name": "Gittaim",
+    "aliases": [
+      "Gittaim"
+    ],
+    "lat": 31.93,
+    "lng": 34.95,
+    "modernName": "Near Lod / Ramah region (site uncertain)",
+    "eraNotes": "Benjamin town (Neh 11:33); Beerothites fled there (2 Sam 4:3). Exact tell disputed.",
+    "eras": [
+      "united",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "zeboim_benjamin",
+    "name": "Zeboim",
+    "aliases": [
+      "Zeboim",
+      "Zeboiim"
+    ],
+    "lat": 31.875,
+    "lng": 35.24,
+    "modernName": "Benjamin hills near Michmash / Jericho road (approx.)",
+    "eraNotes": "Benjamin town (Neh 11:34). Distinct from the unlocated Cities of the Plain; also a valley near Michmash (1 Sam 13:18).",
+    "eras": [
+      "united",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "ge_harashim",
+    "name": "Valley of Craftsmen",
+    "aliases": [
+      "Valley of Craftsmen",
+      "valley of craftsmen",
+      "Ge-harashim",
+      "Ge Harashim",
+      "Charashim",
+      "Valley of the Craftsmen"
+    ],
+    "lat": 31.95,
+    "lng": 34.9,
+    "modernName": "Craftsmen district near Lod and Ono, Israel",
+    "eraNotes": "Resettled with Lod and Ono (Neh 11:35; cf. 1 Chr 4:14).",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "moladah",
+    "name": "Moladah",
+    "aliases": [
+      "Moladah"
+    ],
+    "lat": 31.22,
+    "lng": 35.02,
+    "modernName": "Tel Malhata / Negeb area (proposed)",
+    "eraNotes": "Negeb town of Judah/Simeon (Josh 15:26; 19:2; Neh 11:26). Site identification tentative.",
+    "eras": [
+      "conquest",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "beth_pelet",
+    "name": "Beth-pelet",
+    "aliases": [
+      "Beth-pelet",
+      "Bethpelet",
+      "Beth-phelet",
+      "Beth Phelet"
+    ],
+    "lat": 31.18,
+    "lng": 34.98,
+    "modernName": "Negeb south of Beersheba (proposed)",
+    "eraNotes": "Judah Negeb town (Josh 15:27; Neh 11:26).",
+    "eras": [
+      "conquest",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "hazar_shual",
+    "name": "Hazar-shual",
+    "aliases": [
+      "Hazar-shual",
+      "Hazarshual",
+      "Hazar Shual"
+    ],
+    "lat": 31.2,
+    "lng": 34.88,
+    "modernName": "Negeb near Beersheba (proposed)",
+    "eraNotes": "Simeon/Judah Negeb town (Josh 15:28; 19:3; Neh 11:27).",
+    "eras": [
+      "conquest",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "meconah",
+    "name": "Meconah",
+    "aliases": [
+      "Meconah",
+      "Mekonah"
+    ],
+    "lat": 31.35,
+    "lng": 34.78,
+    "modernName": "Near Ziklag in the western Negeb (approx.)",
+    "eraNotes": "Judah settlement with Ziklag after the exile (Neh 11:28).",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "jeshua_negeb",
+    "name": "Jeshua",
+    "aliases": [
+      "Jeshua"
+    ],
+    "lat": 31.25,
+    "lng": 34.92,
+    "modernName": "Negeb town between Beersheba and Moladah (approx.)",
+    "eraNotes": "Judah Negeb town (Neh 11:26). Bare name also belongs to the high priest Jeshua — genealogy/kinship contexts are skipped by the matcher.",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "jekabzeel",
+    "name": "Jekabzeel",
+    "aliases": [
+      "Jekabzeel",
+      "Kabzeel"
+    ],
+    "lat": 31.15,
+    "lng": 35.05,
+    "modernName": "Negeb SE of Beersheba (Kabzeel; site uncertain)",
+    "eraNotes": "Judah Negeb town (Neh 11:25); = Kabzeel (Josh 15:21; 2 Sam 23:20).",
+    "eras": [
+      "conquest",
+      "united",
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "dibon_judah",
+    "name": "Dibon (Judah)",
+    "aliases": [
+      "Dibon with its settlements",
+      "Dibon and its settlements",
+      "Dibon, and in the villages",
+      "at Dibon, and in the villages"
+    ],
+    "lat": 31.25,
+    "lng": 35.08,
+    "modernName": "Judah Negeb town (possibly = Dimonah); not Moabite Dibon",
+    "eraNotes": "Neh 11:25 lists a Judean Dibon with Kiriath-arba; likely not Dhiban in Moab. Often linked to Dimonah (Josh 15:22).",
+    "eras": [
+      "exile"
+    ],
+    "region": "levant"
+  },
+  {
+    "id": "dimonah",
+    "name": "Dimonah",
+    "aliases": [
+      "Dimonah"
+    ],
+    "lat": 31.23,
+    "lng": 35.1,
+    "modernName": "Negeb of Judah (Josh 15:22); candidate for Neh 11 Dibon",
+    "eraNotes": "Josh 15:22. Sometimes equated with the Judean Dibon of Neh 11:25.",
+    "eras": [
+      "conquest",
+      "exile"
     ],
     "region": "levant"
   }

@@ -87,6 +87,44 @@
     return m ? m[1].toLowerCase() : "";
   }
 
+  /**
+   * Skip place hits that are clearly kinship/genealogy formulas
+   * ("son of Judah", "Jeshua the son of", "Abraham begat Isaac"), not locations.
+   */
+  function isGenealogyContext(source, start, end) {
+    const before = source.slice(Math.max(0, start - 48), start);
+    const after = source.slice(end, Math.min(source.length, end + 48));
+    if (
+      /(?:\bsons?|\bdaughters?|\bfathers?|\bmothers?|\bwives?|\bhusbands?|\bdescendants?|\bbegetters?)\s+of\s+$/i.test(
+        before
+      )
+    ) {
+      return true;
+    }
+    if (
+      /^\s*,?\s*(?:the\s+)?(?:sons?|daughters?|fathers?|mothers?|descendants?)\s+of\b/i.test(
+        after
+      )
+    ) {
+      return true;
+    }
+    if (
+      /^\s*(?:begat|begot|begotten|fathered|became the father of|was the father of)\b/i.test(
+        after
+      )
+    ) {
+      return true;
+    }
+    if (
+      /\b(?:begat|begot|fathered|became the father of|was the father of)\s+$/i.test(
+        before
+      )
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   function buildPlaceMatchers(places) {
     const entries = [];
     for (const place of places) {
@@ -129,6 +167,9 @@
         const end = start + m[0].length;
         const blockedFollow = BLOCKED_FOLLOW_WORDS.get(matcher.alias.toLowerCase());
         if (blockedFollow && blockedFollow.has(followingWord(source, end))) {
+          continue;
+        }
+        if (isGenealogyContext(source, start, end)) {
           continue;
         }
         let overlaps = false;
