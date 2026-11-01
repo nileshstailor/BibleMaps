@@ -464,10 +464,12 @@
       shutdown("extension context invalidated");
       return;
     }
+    const passage = readPassageCoords();
     const payload = {
       url: location.href,
       title: document.title,
       passageLabel: readPassageLabel(),
+      passage: passage || null,
       places: places.map((p) => ({
         id: p.id,
         name: p.name,
@@ -475,6 +477,8 @@
         lat: p.lat,
         lng: p.lng,
         eraNotes: p.eraNotes,
+        eras: p.eras || [],
+        region: p.region || "",
         aliases: p.aliases || [],
       })),
       journeys: journeys.map((j) => {

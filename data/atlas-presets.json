@@ -10,6 +10,7 @@
         "united"
       ],
       "showKingdoms": true,
+      "overlay": "kingdoms.json",
       "referencePlate": "divided-kingdom.jpg",
       "bounds": [
         [
@@ -31,7 +32,8 @@
         "united",
         "judges"
       ],
-      "showKingdoms": false,
+      "showKingdoms": true,
+      "overlay": "overlays/kingdom-david.json",
       "referencePlate": "kingdom-david.jpg",
       "bounds": [
         [
@@ -52,7 +54,8 @@
       "placeEras": [
         "gospels"
       ],
-      "showKingdoms": false,
+      "showKingdoms": true,
+      "overlay": "overlays/israel-jesus.json",
       "referencePlate": "israel-jesus.jpg",
       "bounds": [
         [

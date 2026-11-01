@@ -42,8 +42,12 @@
   let placesLoadPromise = null;
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
+  let kingdomsLoadedPath = null;
+  let overlayCache = new Map();
   let presetsCatalog = null;
   let presetsLoadPromise = null;
+  let eraMap = null;
+  let eraMapLoadPromise = null;
   let maplibreMap = null;
   let markerObjs = [];
   let kingdomLabelMarkers = [];
@@ -159,25 +163,79 @@
       .join("");
   }
 
-  function loadKingdoms() {
-    if (kingdomsGeoJson) return Promise.resolve(kingdomsGeoJson);
-    if (kingdomsLoadPromise) return kingdomsLoadPromise;
-    kingdomsLoadPromise = fetch(chrome.runtime.getURL("data/kingdoms.json"))
+  function overlayPathForPreset(preset) {
+    const rel = preset?.overlay || (preset?.showKingdoms ? "kingdoms.json" : null);
+    return rel || null;
+  }
+
+  function loadOverlay(relPath) {
+    if (!relPath) {
+      kingdomsGeoJson = null;
+      kingdomsLoadedPath = null;
+      renderKingdomLegend();
+      return Promise.resolve(null);
+    }
+    if (overlayCache.has(relPath)) {
+      kingdomsGeoJson = overlayCache.get(relPath);
+      kingdomsLoadedPath = relPath;
+      renderKingdomLegend();
+      return Promise.resolve(kingdomsGeoJson);
+    }
+    return fetch(chrome.runtime.getURL(`data/${relPath}`))
       .then((r) => {
-        if (!r.ok) throw new Error(`kingdoms.json HTTP ${r.status}`);
+        if (!r.ok) throw new Error(`${relPath} HTTP ${r.status}`);
         return r.json();
       })
       .then((data) => {
+        overlayCache.set(relPath, data);
         kingdomsGeoJson = data;
+        kingdomsLoadedPath = relPath;
         renderKingdomLegend();
         return data;
       })
       .catch((err) => {
-        console.warn("Bible Maps: kingdoms failed to load", err);
-        kingdomsLoadPromise = null;
+        console.warn("Bible Maps: overlay failed to load", relPath, err);
         return null;
       });
-    return kingdomsLoadPromise;
+  }
+
+  function loadKingdoms() {
+    // Default divided-kingdom overlay; mountTeachingMap swaps per preset.
+    return loadOverlay("kingdoms.json");
+  }
+
+  function loadEraMap() {
+    if (eraMap) return Promise.resolve(eraMap);
+    if (eraMapLoadPromise) return eraMapLoadPromise;
+    eraMapLoadPromise = fetch(chrome.runtime.getURL("data/era-map.json"))
+      .then((r) => {
+        if (!r.ok) throw new Error(`era-map.json HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        eraMap = data;
+        return data;
+      })
+      .catch((err) => {
+        console.warn("Bible Maps: era-map failed", err);
+        eraMapLoadPromise = null;
+        return null;
+      });
+    return eraMapLoadPromise;
+  }
+
+  function presetFromPassage(passage) {
+    if (!eraMap?.rules || !passage?.book) return null;
+    const book = String(passage.book).trim();
+    const chapter = Number(passage.chapter);
+    for (const rule of eraMap.rules) {
+      if (!(rule.books || []).includes(book)) continue;
+      if (Array.isArray(rule.chapters) && rule.chapters.length) {
+        if (!Number.isFinite(chapter) || !rule.chapters.includes(chapter)) continue;
+      }
+      return rule.preset;
+    }
+    return eraMap.defaultPreset || null;
   }
 
   function loadAllPlaces() {
@@ -224,7 +282,7 @@
     return presetsCatalog?.presets?.find((p) => p.id === id) || null;
   }
 
-  /** Silent era framing from the active journey / chapter places. */
+  /** Silent era framing: active journey → book/chapter era-map → place eras → default. */
   function suggestPresetId() {
     const jid = activeJourney?.id || "";
     if (jid === "paul_first") return "paul_first";
@@ -249,14 +307,20 @@
     if (jid === "solomon_ophir_fleet" || jid === "queen_of_sheba") {
       return "kingdom_david";
     }
+
+    const fromPassage = presetFromPassage(current?.passage);
+    if (fromPassage) return fromPassage;
+
     const places = activePlaceMarkers || [];
     const gospelHits = places.filter((p) => (p.eras || []).includes("gospels")).length;
-    if (gospelHits >= 2 && gospelHits >= places.length / 2) return "jesus";
-    return "divided_kingdom";
+    if (places.length && gospelHits >= 2 && gospelHits >= places.length / 2) return "jesus";
+    const unitedHits = places.filter((p) => (p.eras || []).includes("united")).length;
+    if (places.length && unitedHits >= 2 && unitedHits >= places.length / 2) return "kingdom_david";
+    return eraMap?.defaultPreset || "levant_general";
   }
 
   function resolvePreset() {
-    return getPreset(suggestPresetId()) || getPreset("divided_kingdom");
+    return getPreset(suggestPresetId()) || getPreset("levant_general") || getPreset("divided_kingdom");
   }
 
   function placesFingerprint(places) {
@@ -1034,8 +1098,9 @@
     if (!els.teachingMap) throw new Error("Map container missing");
 
     const gen = ++mapMountGen;
-    const [, , header] = await Promise.all([
+    const [, , , header] = await Promise.all([
       loadPresets(),
+      loadEraMap(),
       loadKingdoms(),
       ensurePmtiles(),
     ]);
@@ -1044,8 +1109,16 @@
     if (gen !== mapMountGen) return;
 
     const preset = resolvePreset();
+    const overlayRel = overlayPathForPreset(preset);
+    if (overlayRel !== kingdomsLoadedPath) {
+      await loadOverlay(overlayRel);
+      if (gen !== mapMountGen) return;
+    }
     const basemapName = preset?.basemap || "levant";
-    const allowKingdoms = Boolean(preset?.showKingdoms) && basemapName === "levant";
+    const allowKingdoms =
+      Boolean(preset?.showKingdoms) &&
+      basemapName === "levant" &&
+      Boolean(kingdomsGeoJson?.features?.length);
 
     if (els.kingdomsToggleWrap) {
       els.kingdomsToggleWrap.hidden = !allowKingdoms;
@@ -1460,6 +1533,7 @@
 
   loadKingdoms();
   loadPresets();
+  loadEraMap();
   loadAllPlaces();
   // Mount the always-visible map immediately (pins update when detection arrives).
   syncPlacesMapChrome([]);

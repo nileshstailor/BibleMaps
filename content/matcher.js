@@ -209,29 +209,29 @@
   }
 
   /**
-   * Parse refs like "1 Kings 14:1–18", "Acts 13–14", "1 Kings 9:26–28".
+   * Parse refs like "1 Kings 14:1–18", "Acts 13–14", "Acts 15:36–18:22".
    * Returns list of { book, chapters: number[] }.
    */
   function parseScriptureRefs(refs) {
     const out = [];
     for (const ref of refs || []) {
       const r = normalizeQuotes(ref).replace(/[–—]/g, "-");
-      const m = r.match(
-        /^((?:[123]\s+)?[A-Za-z]+)\s+(\d+)(?:\s*[-:]\s*(\d+))?/
+      const bookRe = "((?:[123]\\s+)?[A-Za-z]+)";
+      // Cross-chapter with verses: "Acts 15:36-18:22" or "Genesis 11:31-12:9"
+      const cross = r.match(
+        new RegExp(`^${bookRe}\\s+(\\d+):(\\d+)\\s*-\\s*(\\d+):(\\d+)`)
       );
-      if (!m) continue;
-      const book = normalizeBookKey(m[1]);
-      const a = Number(m[2]);
-      // "Acts 13–14" → chapter range; "1 Kings 14:1-18" → single chapter 14
-      let b = a;
-      if (m[3] && !r.includes(":")) b = Number(m[3]);
-      else if (m[3] && /:\d+\s*-\s*\d+/.test(r) && Number(m[3]) < 50 && !/:\d+\s*-\s*\d+:/.test(r)) {
-        // "Acts 13-14" style already handled; verse ranges keep chapter = a
-        b = a;
+      if (cross) {
+        const start = Number(cross[2]);
+        const end = Number(cross[4]);
+        const chapters = [];
+        for (let c = start; c <= end; c++) chapters.push(c);
+        out.push({ book: normalizeBookKey(cross[1]), chapters });
+        continue;
       }
-      // Explicit chapter-chapter without verses: Book 13-14
+      // Chapter range without verses: "Acts 13-14"
       const chRange = r.match(
-        /^((?:[123]\s+)?[A-Za-z]+)\s+(\d+)\s*-\s*(\d+)(?!\s*:)/
+        new RegExp(`^${bookRe}\\s+(\\d+)\\s*-\\s*(\\d+)(?!\\s*:)`)
       );
       if (chRange) {
         const start = Number(chRange[2]);
@@ -241,7 +241,13 @@
         out.push({ book: normalizeBookKey(chRange[1]), chapters });
         continue;
       }
-      out.push({ book, chapters: [a] });
+      // Single chapter (optional verse range): "1 Kings 14:1-18", "Genesis 13"
+      const single = r.match(new RegExp(`^${bookRe}\\s+(\\d+)`));
+      if (!single) continue;
+      out.push({
+        book: normalizeBookKey(single[1]),
+        chapters: [Number(single[2])],
+      });
     }
     return out;
   }

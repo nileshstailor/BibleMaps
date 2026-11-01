@@ -4,7 +4,8 @@
       "id": "divided_kingdom",
       "title": "The Divided Kingdom",
       "file": "divided-kingdom.jpg",
-      "era": "1 Kings 12 \u2013 2 Kings 17"
+      "era": "1 Kings 12 \u2013 2 Kings 17",
+      "overlay": "kingdoms.json"
     },
     {
       "id": "israel_base",
@@ -16,13 +17,15 @@
       "id": "kingdom_david",
       "title": "The Kingdom of David",
       "file": "kingdom-david.jpg",
-      "era": "United monarchy"
+      "era": "United monarchy",
+      "overlay": "overlays/kingdom-david.json"
     },
     {
       "id": "jesus",
       "title": "Israel in the Time of Jesus",
       "file": "israel-jesus.jpg",
-      "era": "Gospels"
+      "era": "Gospels",
+      "overlay": "overlays/israel-jesus.json"
     },
     {
       "id": "paul_first",
