@@ -459,6 +459,14 @@
       ) {
         return true;
       }
+      // Faithlife Biblia footnote popups embed HTML in data-content.
+      const rel = (el.getAttribute("rel") || "").toLowerCase();
+      if (rel === "popup" || (rel.includes("popup") && el.hasAttribute("data-content"))) {
+        return true;
+      }
+      if (rel === "milestone" && !(el.textContent || "").trim()) {
+        return true;
+      }
       const testId = (el.getAttribute("data-testid") || "").toLowerCase();
       if (testId.includes("footnote") || testId.includes("note")) return true;
     }
@@ -469,9 +477,9 @@
           "";
     if (!cls) return false;
     // CSS modules: ChapterContent_note__cat7xG / ChapterContent_footnote__…
-    // also yv-n, Note, crossref chrome; BG footnotes/crossrefs resources
+    // also yv-n, Note, crossref chrome; BG footnotes/crossrefs; Biblia markers
     return (
-      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?|crossreference|resources-section|publisher-info|footnote-text|fnverse|reftext|copyBox|toolsHover)(?:__|-|_|\s|$)/i.test(
+      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?|crossreference|resources-section|publisher-info|footnote-text|fnverse|reftext|copyBox|toolsHover|offset-marker)(?:__|-|_|\s|$)/i.test(
         cls
       ) || /(?:^|\s)(?:yv-n|fn|cross)(?:\s|$)/i.test(cls)
     );

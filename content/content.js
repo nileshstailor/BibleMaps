@@ -91,7 +91,7 @@
     const scan = pickScanRoot();
     return (
       scan?.closest?.(
-        ".passage-box, .passage-resources, .passage-text, #bibleTable, .bibleTable, .bible-verses, #leftbox, main"
+        ".passage-box, .passage-resources, .passage-text, #bibleTable, .bibleTable, .bible-verses, #leftbox, .resource-content, #content-container, .content-pane, main"
       ) ||
       scan ||
       document.body

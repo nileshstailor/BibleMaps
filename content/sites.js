@@ -10,7 +10,7 @@
     return String(s || "")
       .replace(/\s+/g, " ")
       .replace(
-        /\s*[|·•\-–—]\s*(YouVersion|Bible\.com|Bible Gateway|Blue Letter Bible|Bible Hub|Bible Study Tools|Bible).*$/i,
+        /\s*[|·•\-–—]\s*(YouVersion|Bible\.com|Bible Gateway|Blue Letter Bible|Bible Hub|Bible Study Tools|Biblia\.com|Biblia|Faithlife|Bible).*$/i,
         ""
       )
       .replace(/\s+/g, " ")
@@ -315,6 +315,17 @@
 
   function hrefOf(doc, href) {
     return href || doc.defaultView?.location?.href || "";
+  }
+
+  function pathOfHref(href) {
+    const s = String(href || "");
+    try {
+      if (typeof URL !== "undefined") return new URL(s).pathname;
+    } catch {
+      /* fall through */
+    }
+    const m = s.match(/^https?:\/\/[^/?#]+(\/[^?#]*)/i);
+    return m ? m[1] : s;
   }
 
   const bibleCom = {
@@ -769,12 +780,360 @@
     },
   };
 
+  /** Faithlife Biblia URL codes (Ge12, 1Ki18, Ac13, …). */
+  const BIBLIA_BOOKS = {
+    Ge: "Genesis",
+    Ex: "Exodus",
+    Lev: "Leviticus",
+    Nu: "Numbers",
+    Num: "Numbers",
+    Dt: "Deuteronomy",
+    Deu: "Deuteronomy",
+    Jos: "Joshua",
+    Jdg: "Judges",
+    Ru: "Ruth",
+    "1Sa": "1 Samuel",
+    "2Sa": "2 Samuel",
+    "1Ki": "1 Kings",
+    "2Ki": "2 Kings",
+    "1Ch": "1 Chronicles",
+    "2Ch": "2 Chronicles",
+    Ezr: "Ezra",
+    Ne: "Nehemiah",
+    Neh: "Nehemiah",
+    Es: "Esther",
+    Est: "Esther",
+    Job: "Job",
+    Ps: "Psalms",
+    Pr: "Proverbs",
+    Pro: "Proverbs",
+    Ec: "Ecclesiastes",
+    Ecc: "Ecclesiastes",
+    So: "Song of Songs",
+    Sos: "Song of Songs",
+    Is: "Isaiah",
+    Isa: "Isaiah",
+    Je: "Jeremiah",
+    Jer: "Jeremiah",
+    La: "Lamentations",
+    Lam: "Lamentations",
+    Eze: "Ezekiel",
+    Ezk: "Ezekiel",
+    Da: "Daniel",
+    Dan: "Daniel",
+    Ho: "Hosea",
+    Hos: "Hosea",
+    Joe: "Joel",
+    Am: "Amos",
+    Ob: "Obadiah",
+    Jon: "Jonah",
+    Mic: "Micah",
+    Na: "Nahum",
+    Nah: "Nahum",
+    Hab: "Habakkuk",
+    Zep: "Zephaniah",
+    Hag: "Haggai",
+    Zec: "Zechariah",
+    Mal: "Malachi",
+    Mt: "Matthew",
+    Matt: "Matthew",
+    Mk: "Mark",
+    Mrk: "Mark",
+    Lk: "Luke",
+    Luk: "Luke",
+    Jn: "John",
+    Jhn: "John",
+    Ac: "Acts",
+    Act: "Acts",
+    Ro: "Romans",
+    Rom: "Romans",
+    "1Co": "1 Corinthians",
+    "2Co": "2 Corinthians",
+    Gal: "Galatians",
+    Eph: "Ephesians",
+    Php: "Philippians",
+    Col: "Colossians",
+    "1Th": "1 Thessalonians",
+    "2Th": "2 Thessalonians",
+    "1Ti": "1 Timothy",
+    "2Ti": "2 Timothy",
+    Tit: "Titus",
+    Phm: "Philemon",
+    Heb: "Hebrews",
+    Jas: "James",
+    "1Pe": "1 Peter",
+    "2Pe": "2 Peter",
+    "1Jn": "1 John",
+    "2Jn": "2 John",
+    "3Jn": "3 John",
+    Jud: "Jude",
+    Re: "Revelation",
+    Rev: "Revelation",
+  };
+
+  function parseBibliaArticle(doc) {
+    const el =
+      doc.querySelector(".content-chunk[data-article]") ||
+      doc.querySelector("[data-article]");
+    if (!el) return null;
+    const raw = el.getAttribute("data-article") || "";
+    if (!raw) return null;
+    try {
+      return JSON.parse(raw);
+    } catch {
+      try {
+        // Attribute may still contain HTML entities in some snapshots.
+        const decoded = raw
+          .replace(/&quot;/g, '"')
+          .replace(/&amp;/g, "&")
+          .replace(/&#39;/g, "'");
+        return JSON.parse(decoded);
+      } catch {
+        return null;
+      }
+    }
+  }
+
+  function coordsFromBibliaRef(code) {
+    const s = String(code || "").trim();
+    // Ge12 / Ge12.1-20 / 1Ki18 / Genesis 12:1–20
+    const compact = s.match(/^([1-3]?[A-Za-z]+?)(\d+)\b/);
+    if (compact) {
+      const bookCode = compact[1];
+      const book =
+        BIBLIA_BOOKS[bookCode] ||
+        BIBLIA_BOOKS[bookCode.replace(/^([123])/, "$1")] ||
+        OSIS_BOOKS[bookCode] ||
+        BLB_BOOKS[bookCode.toLowerCase()];
+      const coords = coordsFromBookChapter(book, compact[2]);
+      if (coords) return coords;
+    }
+    return coordsFromSearchString(s.replace(/[–—]/g, "-").replace(/:.*$/, ""));
+  }
+
+  const biblia = {
+    id: "biblia",
+    label: "Biblia",
+    matchesHost(hostname) {
+      const h = String(hostname || "").toLowerCase();
+      return h === "biblia.com" || h.endsWith(".biblia.com");
+    },
+    /**
+     * Faithlife Biblia renders chapter HTML in `.resourcetext` inside
+     * `.content-chunk`. Footnote popups use <a rel="popup" data-content=…>
+     * (attribute payload — skipped in matcher).
+     */
+    pickScanRoot(doc) {
+      const root = firstMatching(doc, [
+        ".resource-content .resourcetext",
+        ".content-chunk .resourcetext",
+        ".resourcetext",
+        ".content-chunk",
+        ".scrolling-content",
+        ".resource-content",
+      ]);
+      if (root) return root;
+      return doc.body;
+    },
+    pickObserveRoot(doc) {
+      return (
+        doc.querySelector(".resource-content") ||
+        doc.querySelector("#content-container") ||
+        doc.querySelector("#content-pane-full") ||
+        doc.querySelector(".content-pane") ||
+        this.pickScanRoot(doc)
+      );
+    },
+    readPassageCoords(doc, href) {
+      const article = parseBibliaArticle(doc);
+      if (article) {
+        const fromRequested = coordsFromSearchString(
+          String(article.requestedReference || "")
+            .replace(/[–—]/g, "-")
+            .replace(/:.*$/, "")
+        );
+        if (fromRequested) return fromRequested;
+        const fromUrlRef = coordsFromBibliaRef(article.urlReference || "");
+        if (fromUrlRef) return fromUrlRef;
+        // articleId like BOOK.1.12 (Genesis = 1)
+        const am = String(article.articleId || "").match(
+          /^BOOK\.(\d+)\.(\d+)/i
+        );
+        if (am) {
+          const book = BIBLIA_BOOK_NUM[Number(am[1])];
+          const coords = coordsFromBookChapter(book, am[2]);
+          if (coords) return coords;
+        }
+      }
+
+      try {
+        const path = new URL(hrefOf(doc, href)).pathname;
+        // /books/niv2011/Ge12 or /bible/niv2011/Ge12.1-20
+        let m = path.match(
+          /\/(?:books|bible)\/[^/]+\/([1-3]?[A-Za-z]+)(\d+)/i
+        );
+        if (m) {
+          const coords = coordsFromBibliaRef(`${m[1]}${m[2]}`);
+          if (coords) return coords;
+        }
+        // /bible/niv/Genesis/12
+        m = path.match(/\/bible\/[^/]+\/([^/]+)\/(\d+)/i);
+        if (m) {
+          const book = titleCaseBook(decodeURIComponent(m[1]).replace(/_/g, " "));
+          const coords = coordsFromBookChapter(book, m[2]);
+          if (coords) return coords;
+        }
+      } catch {
+        /* ignore */
+      }
+
+      // First verse milestone
+      const refEl = doc.querySelector(
+        ".resourcetext [data-reference], a[data-reference][rel='milestone']"
+      );
+      const ref = refEl?.getAttribute("data-reference") || "";
+      const fromMilestone = coordsFromSearchString(
+        ref.replace(/[–—]/g, "-").replace(/:.*$/, "")
+      );
+      if (fromMilestone) return fromMilestone;
+
+      return coordsFromLabel(this.readPassageLabel(doc, href));
+    },
+    readPassageLabel(doc, href) {
+      const article = parseBibliaArticle(doc);
+      if (article?.requestedReference) {
+        const base = cleanPassageText(
+          String(article.requestedReference).replace(/[–—]/g, "-")
+        ).replace(/:\d.*$/, "");
+        const version = cleanPassageText(
+          doc.querySelector(".resource-title")?.textContent || ""
+        );
+        // Prefer short version token from URL resource name when title is long.
+        let verShort = "";
+        try {
+          const path = pathOfHref(hrefOf(doc, href));
+          const resourceMatch = path.match(
+            /\/(?:books|bible)\/([^/]+)(?:\/|$)/i
+          );
+          if (resourceMatch) {
+            verShort = resourceMatch[1]
+              .toUpperCase()
+              .replace(/(\d{4})$/, "")
+              .replace(/[_-]+$/g, "");
+          }
+        } catch {
+          /* ignore */
+        }
+        if (verShort && verShort.length >= 2 && verShort.length < 12) {
+          return `${base} ${verShort}`;
+        }
+        if (version && version.length < 40) return `${base} (${version})`;
+        return base;
+      }
+
+      const fromChrome = labelFromSelectors(doc, [
+        ".resource-title",
+        "h1",
+        "[class*='reference']",
+      ]);
+      if (fromChrome && /\d/.test(fromChrome)) return fromChrome;
+
+      try {
+        const path = new URL(hrefOf(doc, href)).pathname;
+        const m = path.match(
+          /\/(?:books|bible)\/([^/]+)\/([1-3]?[A-Za-z]+)(\d+)/i
+        );
+        if (m) {
+          const coords = coordsFromBibliaRef(`${m[2]}${m[3]}`);
+          if (coords) {
+            return `${coords.book} ${coords.chapter} ${m[1].toUpperCase()}`;
+          }
+        }
+      } catch {
+        /* ignore */
+      }
+
+      return cleanPassageText(doc.title) || "";
+    },
+  };
+
+  /** Biblia articleId BOOK.N.chapter — Protestant order. */
+  const BIBLIA_BOOK_NUM = {
+    1: "Genesis",
+    2: "Exodus",
+    3: "Leviticus",
+    4: "Numbers",
+    5: "Deuteronomy",
+    6: "Joshua",
+    7: "Judges",
+    8: "Ruth",
+    9: "1 Samuel",
+    10: "2 Samuel",
+    11: "1 Kings",
+    12: "2 Kings",
+    13: "1 Chronicles",
+    14: "2 Chronicles",
+    15: "Ezra",
+    16: "Nehemiah",
+    17: "Esther",
+    18: "Job",
+    19: "Psalms",
+    20: "Proverbs",
+    21: "Ecclesiastes",
+    22: "Song of Songs",
+    23: "Isaiah",
+    24: "Jeremiah",
+    25: "Lamentations",
+    26: "Ezekiel",
+    27: "Daniel",
+    28: "Hosea",
+    29: "Joel",
+    30: "Amos",
+    31: "Obadiah",
+    32: "Jonah",
+    33: "Micah",
+    34: "Nahum",
+    35: "Habakkuk",
+    36: "Zephaniah",
+    37: "Haggai",
+    38: "Zechariah",
+    39: "Malachi",
+    40: "Matthew",
+    41: "Mark",
+    42: "Luke",
+    43: "John",
+    44: "Acts",
+    45: "Romans",
+    46: "1 Corinthians",
+    47: "2 Corinthians",
+    48: "Galatians",
+    49: "Ephesians",
+    50: "Philippians",
+    51: "Colossians",
+    52: "1 Thessalonians",
+    53: "2 Thessalonians",
+    54: "1 Timothy",
+    55: "2 Timothy",
+    56: "Titus",
+    57: "Philemon",
+    58: "Hebrews",
+    59: "James",
+    60: "1 Peter",
+    61: "2 Peter",
+    62: "1 John",
+    63: "2 John",
+    64: "3 John",
+    65: "Jude",
+    66: "Revelation",
+  };
+
   const ADAPTERS = [
     bibleCom,
     bibleGateway,
     blueLetterBible,
     bibleHub,
     bibleStudyTools,
+    biblia,
   ];
 
   function resolveAdapter(hostname) {

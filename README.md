@@ -1,6 +1,6 @@
 # Bible Maps
 
-Manifest V3 Chrome extension for [bible.com](https://www.bible.com) (YouVersion), [Bible Gateway](https://www.biblegateway.com/), [Blue Letter Bible](https://www.blueletterbible.org/), [Bible Hub](https://biblehub.com/), and [Bible Study Tools](https://www.biblestudytools.com/). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
+Manifest V3 Chrome extension for [bible.com](https://www.bible.com) (YouVersion), [Bible Gateway](https://www.biblegateway.com/), [Biblia](https://biblia.com/) (Faithlife), [Blue Letter Bible](https://www.blueletterbible.org/), [Bible Hub](https://biblehub.com/), and [Bible Study Tools](https://www.biblestudytools.com/). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 
 - **Places** → Offline **MapLibre** map (always visible) with period towns; per-place Google Maps links for modern streets
 - **Journeys** → Same offline map (era preset + route) + optional walking directions link in Google Maps
@@ -37,10 +37,19 @@ No build step is required for day-to-day use. MapLibre and PMTiles are vendored 
 3. Confirm highlights in the passage body (not footnotes / cross-references)
 4. Prev/next chapter and version changes should refresh the side panel
 
+### Biblia (Faithlife)
+
+1. Open e.g. [Genesis 12 NIV2011](https://biblia.com/books/niv2011/Ge12) or [Acts 13](https://biblia.com/books/niv2011/Ac13)
+2. Confirm highlights in `.resourcetext` (not footnote popup chrome)
+3. Chapter changes via Biblia’s reader should refresh the side panel (observer on `.resource-content`)
+
+Also works with `/bible/{resource}/{ref}` URLs (e.g. `Ge12.1-20`) when the chapter HTML is present.
+
 ### Other readers
 
 | Site | Why included | Sample URL |
 |------|----------------|------------|
+| **Biblia** | Faithlife reader; `.resourcetext` + `data-article` coords | [Genesis 12](https://biblia.com/books/niv2011/Ge12) |
 | **Blue Letter Bible** | Stable `#bibleTable` / `.scriptureText` verse rows; high traffic | [Acts 13 NIV](https://www.blueletterbible.org/niv/act/13/1/) |
 | **Bible Hub** | Simple `.chap` / `.reg` chapter HTML; version + interlinear URLs | [Acts 13 NIV](https://biblehub.com/niv/acts/13.htm) |
 | **Bible Study Tools** | Clear `.bible-verses` / `.bible-text` rows | [Acts 13](https://www.biblestudytools.com/acts/13.html) |
