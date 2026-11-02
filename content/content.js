@@ -82,6 +82,22 @@
     return SITE.pickScanRoot(document);
   }
 
+  /** Stable ancestor for MutationObserver — scan roots are often replaced on nav. */
+  function pickObserveRoot() {
+    if (typeof SITE.pickObserveRoot === "function") {
+      const el = SITE.pickObserveRoot(document);
+      if (el) return el;
+    }
+    const scan = pickScanRoot();
+    return (
+      scan?.closest?.(
+        ".passage-box, .passage-resources, .passage-text, #bibleTable, .bibleTable, .bible-verses, #leftbox, main"
+      ) ||
+      scan ||
+      document.body
+    );
+  }
+
   function readPassageCoords() {
     return SITE.readPassageCoords(document, location.href);
   }
@@ -490,7 +506,7 @@
       });
       if (relevant) scheduleScan(500);
     });
-    const root = pickScanRoot();
+    const root = pickObserveRoot();
     STATE.observer.observe(root === document.body ? document.body : root, {
       childList: true,
       subtree: true,

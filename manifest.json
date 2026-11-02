@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.4.42",
-  "description": "Highlight biblical places and journeys on bible.com and Bible Gateway and open them on an offline MapLibre map, with online fill when needed.",
+  "version": "1.4.43",
+  "description": "Highlight biblical places and journeys on bible.com, Bible Gateway, Blue Letter Bible, Bible Hub, and Bible Study Tools; open them on an offline MapLibre map with online fill when needed.",
   "permissions": [
     "sidePanel",
     "storage",
@@ -14,6 +14,12 @@
     "https://bible.com/*",
     "https://*.biblegateway.com/*",
     "https://biblegateway.com/*",
+    "https://*.blueletterbible.org/*",
+    "https://blueletterbible.org/*",
+    "https://*.biblehub.com/*",
+    "https://biblehub.com/*",
+    "https://*.biblestudytools.com/*",
+    "https://biblestudytools.com/*",
     "https://*.google.com/*",
     "https://*.googleapis.com/*",
     "https://*.gstatic.com/*",
@@ -49,7 +55,13 @@
         "https://*.bible.com/*",
         "https://bible.com/*",
         "https://*.biblegateway.com/*",
-        "https://biblegateway.com/*"
+        "https://biblegateway.com/*",
+        "https://*.blueletterbible.org/*",
+        "https://blueletterbible.org/*",
+        "https://*.biblehub.com/*",
+        "https://biblehub.com/*",
+        "https://*.biblestudytools.com/*",
+        "https://biblestudytools.com/*"
       ],
       "js": [
         "content/matcher.js",
@@ -72,7 +84,13 @@
         "https://*.bible.com/*",
         "https://bible.com/*",
         "https://*.biblegateway.com/*",
-        "https://biblegateway.com/*"
+        "https://biblegateway.com/*",
+        "https://*.blueletterbible.org/*",
+        "https://blueletterbible.org/*",
+        "https://*.biblehub.com/*",
+        "https://biblehub.com/*",
+        "https://*.biblestudytools.com/*",
+        "https://biblestudytools.com/*"
       ]
     }
   ]

@@ -1600,7 +1600,7 @@
     const prevUrl = current?.url;
     current = payload;
     if (!payload) {
-      setStatus("Open a bible.com or Bible Gateway passage, then click Refresh.");
+      setStatus("Open a supported Bible passage, then click Refresh.");
       lastPlacesFingerprint = "";
       lastJourneysFingerprint = "";
       openPlaceIds.clear();

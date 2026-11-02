@@ -471,9 +471,9 @@
     // CSS modules: ChapterContent_note__cat7xG / ChapterContent_footnote__…
     // also yv-n, Note, crossref chrome; BG footnotes/crossrefs resources
     return (
-      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?|crossreference|resources-section|publisher-info|footnote-text)(?:__|-|_|\s|$)/i.test(
+      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?|crossreference|resources-section|publisher-info|footnote-text|fnverse|reftext|copyBox|toolsHover)(?:__|-|_|\s|$)/i.test(
         cls
-      ) || /(?:^|\s)yv-n(?:\s|$)/i.test(cls)
+      ) || /(?:^|\s)(?:yv-n|fn|cross)(?:\s|$)/i.test(cls)
     );
   }
 
