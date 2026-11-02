@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.4.41",
+  "version": "1.4.42",
   "description": "Highlight biblical places and journeys on bible.com and Bible Gateway and open them on an offline MapLibre map, with online fill when needed.",
   "permissions": [
     "sidePanel",

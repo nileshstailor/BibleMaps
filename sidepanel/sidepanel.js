@@ -800,17 +800,17 @@
   }
 
   function mapMaxZoom(header) {
-    // Native tiles maxzoom 9 (wide biblical world, small archive); overzoom for pin focus.
-    // When online, allow deeper zoom via the world raster underlay.
+    // Native tiles: shell z7 Spain→India + core z11 Levant/Egypt (+ meso z10).
+    // Overzoom past native max for pin focus; online raster allows deeper zoom.
     const tileMax = Number(header?.maxZoom);
-    const base = Number.isFinite(tileMax) ? tileMax : 9;
-    const offlineCap = Math.min(14, Math.max(12, base + 3));
+    const base = Number.isFinite(tileMax) ? tileMax : 11;
+    const offlineCap = Math.min(14, Math.max(12, base + 2));
     return isOnline() ? Math.max(offlineCap, 16) : offlineCap;
   }
 
   function fitMaxZoom(header) {
     const tileMax = Number(header?.maxZoom);
-    return Number.isFinite(tileMax) ? tileMax : 9;
+    return Number.isFinite(tileMax) ? tileMax : 11;
   }
 
   function fitToChapter(map, preset, focusPts, header) {
@@ -1027,7 +1027,8 @@
       );
 
       // Load full archive into memory (extension URLs often lack HTTP Range).
-      // Keep the archive modest (~40 MB): larger extracts have OOM'd the side panel.
+      // Keep ≤~70 MB: a uniform z10 of the old bbox was ~93 MB and OOM'd the panel.
+      // Coverage uses a merged shell+core+east extract (see scripts/build-pmtiles.sh).
       const tileUrl = chrome.runtime.getURL(`media/tiles/${PMTILES_KEY}`);
       let ab;
       try {
@@ -1089,7 +1090,7 @@
         type: "vector",
         tiles: [`pmtiles://${PMTILES_KEY}/{z}/{x}/{y}`],
         minzoom: header?.minZoom ?? 0,
-        maxzoom: header?.maxZoom ?? 9,
+        maxzoom: header?.maxZoom ?? 11,
         attribution:
           '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       },

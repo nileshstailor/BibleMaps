@@ -36,10 +36,14 @@ After pulling updates: **Reload** the extension on `chrome://extensions`.
 
 ## Offline tiles (+ online fill)
 
-- Bundled archive: `media/tiles/bible-region.pmtiles` (~41 MB, maxzoom 9, bbox `12,28,43.2,43` — Rome → Nineveh). Sized to load safely in the Chrome side panel (a denser ~93 MB extract OOM-crashed the panel). MapLibre overzooms past z9 for town pin focus.
+- Bundled archive: `media/tiles/bible-region.pmtiles` (~62 MB, maxzoom 11). Merged **biblical corridor** extract (not world coverage):
+  - **Shell** z0–7, bbox `-10,12,78,45` — tip of Spain → India (overview / pan)
+  - **Core** z9–11, bbox `29,24,42,36` — Levant + Egypt town detail (incl. Thebes)
+  - **East** z9–10, bbox `42.2,27,55,38` — Mesopotamia → Susa
+- Sized for in-memory load in the Chrome side panel (extension URLs lack reliable Range). A uniform z10 of the old Rome→Nineveh bbox was ~93 MB and OOM-crashed the panel; this merge stays ~62 MB by putting high zoom only where biblical narrative is dense. No high-detail tiles for the Americas or east of India.
 - Style: `media/tiles/style.json` (Protomaps light layers without remote fonts)
-- **Online fill:** if `navigator.onLine` and the view leaves the extract bbox, Esri public canvas tiles (light/dark, **no API key**) fill the gap. No remote requests when offline or fully inside the extract.
-- Rebuild (optional): install the [go-pmtiles](https://github.com/protomaps/go-pmtiles/releases) CLI as `scripts/pmtiles`, then run `scripts/build-pmtiles.sh` (override with `PROTOMAPS_BBOX` / `PROTOMAPS_MAXZOOM`)
+- **Online fill:** if `navigator.onLine` and the view leaves the extract bbox, Esri public canvas tiles (light/dark, **no API key**) fill the gap. Inside the shell but past core/east maxzoom, MapLibre overzooms coarser tiles; zoomed-in quality is best in Levant/Egypt.
+- Rebuild: `scripts/pmtiles` CLI + `scripts/build-pmtiles.sh` (override `PROTOMAPS_SHELL_BBOX`, `PROTOMAPS_CORE_BBOX`, `PROTOMAPS_EAST_BBOX`, zoom caps)
 
 Attribution on the map: Protomaps + © OpenStreetMap (+ Esri when the online underlay is active).
 
