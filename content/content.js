@@ -1,6 +1,7 @@
 /**
- * Bible Maps content script — detect places on bible.com with ZERO DOM
- * mutation of verse content (CSS Custom Highlight API only).
+ * Bible Maps content script — detect places on supported Bible sites with
+ * ZERO DOM mutation of verse content (CSS Custom Highlight API only).
+ * Site-specific scanning lives in content/sites.js adapters.
  */
 (() => {
   let DATA_URLS;
@@ -13,6 +14,14 @@
     console.warn("[Bible Maps] Extension context unavailable at boot", err);
     return;
   }
+
+  const Sites = window.BibleMapsSites;
+  if (!Sites) {
+    console.error("[Bible Maps] sites.js missing — content script abort");
+    return;
+  }
+
+  const SITE = Sites.resolveAdapter(location.hostname);
 
   const STATE = {
     places: [],
@@ -32,15 +41,6 @@
     warnedLegacy: false,
     warnedDead: false,
   };
-
-  // Prefer chapter verse content only — avoid chrome/nav/related that leak other places.
-  const VERSE_SELECTORS = [
-    "[class*='ChapterContent_chapter']",
-    "[class*='ChapterContent']",
-    "[data-usfm]",
-    "[class*='ChapterContent_verse']",
-    "[data-verse-id]",
-  ];
 
   function isContextValid() {
     try {
@@ -79,14 +79,15 @@
   }
 
   function pickScanRoot() {
-    for (const sel of VERSE_SELECTORS) {
-      const el = document.querySelector(sel);
-      if (el && (el.innerText || "").trim().length > 40) return el;
-    }
-    // Last resort only — prefer chapter containers above to avoid site chrome.
-    const main = document.querySelector("main");
-    if (main && (main.innerText || "").trim().length > 40) return main;
-    return document.body;
+    return SITE.pickScanRoot(document);
+  }
+
+  function readPassageCoords() {
+    return SITE.readPassageCoords(document, location.href);
+  }
+
+  function readPassageLabel() {
+    return SITE.readPassageLabel(document, location.href);
   }
 
   async function loadData() {
@@ -299,166 +300,6 @@
     }
   }
 
-  function cleanPassageText(s) {
-    return String(s || "")
-      .replace(/\s+/g, " ")
-      .replace(/\s*[|·•\-–—]\s*(YouVersion|Bible\.com|Bible).*$/i, "")
-      .replace(/\s+/g, " ")
-      .trim();
-  }
-
-  /** { book, chapter } for journey scriptureRefs filtering (e.g. 1KI.14 → 1 Kings / 14). */
-  function readPassageCoords() {
-    try {
-      const path = new URL(location.href).pathname;
-      const m = path.match(/\/(?:bible\/\d+\/)?([0-9]?[A-Za-z]{2,3})\.(\d+)/i);
-      if (m) {
-        const label = expandUsfmPassage(`${m[1]} ${m[2]}`);
-        const hm = label.match(/^(.+?)\s+(\d+)\b/);
-        if (hm) return { book: hm[1], chapter: Number(hm[2]) };
-      }
-    } catch {
-      /* ignore */
-    }
-    const label = readPassageLabel();
-    const hm = String(label || "").match(
-      /^((?:[123]\s+)?[A-Za-z][A-Za-z\s]*?)\s+(\d+)\b/
-    );
-    if (hm) return { book: hm[1].trim(), chapter: Number(hm[2]) };
-    return null;
-  }
-
-  /** Human label like "1 Kings 14 NLT" from page chrome (not USFM from the URL). */
-  function readPassageLabel() {
-    const selectors = [
-      "h1",
-      "[class*='ChapterTitle']",
-      "[class*='chapter-title']",
-      "[class*='ReaderHeader'] h1",
-      "[class*='ReaderHeader'] h2",
-      "[data-testid*='chapter']",
-      "header h1",
-      "main h1",
-    ];
-    for (const sel of selectors) {
-      const el = document.querySelector(sel);
-      const text = cleanPassageText(el?.textContent || "");
-      // Prefer headings that look like Book Chapter Version
-      if (
-        text &&
-        text.length < 80 &&
-        /\d/.test(text) &&
-        /[A-Za-z]{2,}/.test(text) &&
-        !/^menu$/i.test(text)
-      ) {
-        return text;
-      }
-    }
-
-    const title = cleanPassageText(document.title);
-    if (title && !/^[0-9A-Z]{2,4}\s+\d+/i.test(title)) {
-      // Already human-readable (e.g. "1 Kings 14 NLT")
-      return title;
-    }
-    if (title) {
-      // Expand common USFM-ish titles if that's all we have
-      const expanded = expandUsfmPassage(title);
-      if (expanded) return expanded;
-    }
-
-    try {
-      const path = new URL(location.href).pathname;
-      const m = path.match(/\/bible\/\d+\/([^/.]+)\.(\d+)\.([^/]+)/i);
-      if (m) {
-        const expanded = expandUsfmPassage(`${m[1]} ${m[2]} ${m[3]}`);
-        if (expanded) return expanded;
-      }
-    } catch {
-      /* ignore */
-    }
-    return title || "";
-  }
-
-  function expandUsfmPassage(raw) {
-    const BOOK_NAMES = {
-      GEN: "Genesis",
-      EXO: "Exodus",
-      LEV: "Leviticus",
-      NUM: "Numbers",
-      DEU: "Deuteronomy",
-      JOS: "Joshua",
-      JDG: "Judges",
-      RUT: "Ruth",
-      "1SA": "1 Samuel",
-      "2SA": "2 Samuel",
-      "1KI": "1 Kings",
-      "2KI": "2 Kings",
-      "1CH": "1 Chronicles",
-      "2CH": "2 Chronicles",
-      EZR: "Ezra",
-      NEH: "Nehemiah",
-      EST: "Esther",
-      JOB: "Job",
-      PSA: "Psalms",
-      PRO: "Proverbs",
-      ECC: "Ecclesiastes",
-      SNG: "Song of Songs",
-      ISA: "Isaiah",
-      JER: "Jeremiah",
-      LAM: "Lamentations",
-      EZK: "Ezekiel",
-      DAN: "Daniel",
-      HOS: "Hosea",
-      JOL: "Joel",
-      AMO: "Amos",
-      OBA: "Obadiah",
-      JON: "Jonah",
-      MIC: "Micah",
-      NAM: "Nahum",
-      HAB: "Habakkuk",
-      ZEP: "Zephaniah",
-      HAG: "Haggai",
-      ZEC: "Zechariah",
-      MAL: "Malachi",
-      MAT: "Matthew",
-      MRK: "Mark",
-      LUK: "Luke",
-      JHN: "John",
-      ACT: "Acts",
-      ROM: "Romans",
-      "1CO": "1 Corinthians",
-      "2CO": "2 Corinthians",
-      GAL: "Galatians",
-      EPH: "Ephesians",
-      PHP: "Philippians",
-      COL: "Colossians",
-      "1TH": "1 Thessalonians",
-      "2TH": "2 Thessalonians",
-      "1TI": "1 Timothy",
-      "2TI": "2 Timothy",
-      TIT: "Titus",
-      PHM: "Philemon",
-      HEB: "Hebrews",
-      JAS: "James",
-      "1PE": "1 Peter",
-      "2PE": "2 Peter",
-      "1JN": "1 John",
-      "2JN": "2 John",
-      "3JN": "3 John",
-      JUD: "Jude",
-      REV: "Revelation",
-    };
-    const s = cleanPassageText(raw).replace(/\./g, " ");
-    const m = s.match(/^([0-9A-Za-z]+)\s+(\d+)\s*([A-Za-z0-9]+)?/);
-    if (!m) return "";
-    const code = m[1].toUpperCase();
-    const book = BOOK_NAMES[code] || BOOK_NAMES[code.replace(/^([12])/, "$1")] || null;
-    if (!book) return "";
-    const chapter = m[2];
-    const version = (m[3] || "").toUpperCase();
-    return version ? `${book} ${chapter} ${version}` : `${book} ${chapter}`;
-  }
-
   function publish(places, journeys) {
     if (!isContextValid()) {
       shutdown("extension context invalidated");
@@ -468,6 +309,7 @@
     const payload = {
       url: location.href,
       title: document.title,
+      site: SITE.id,
       passageLabel: readPassageLabel(),
       passage: passage || null,
       places: places.map((p) => ({
@@ -671,7 +513,7 @@
           observeDom();
           scheduleScan(350);
         }, 250);
-        // SPA verse HTML often arrives late — second pass.
+        // SPA / delayed verse HTML often arrives late — second pass.
         setTimeout(() => {
           if (STATE.dead) return;
           observeDom();
@@ -690,6 +532,8 @@
     wrap("pushState");
     wrap("replaceState");
     window.addEventListener("popstate", notify);
+    // Bible Gateway uses full page loads for prev/next; bible.com is SPA.
+    // Polling covers both without site-specific wiring.
     STATE.navTimer = setInterval(notify, 1000);
   }
 

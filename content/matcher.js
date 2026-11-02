@@ -16,7 +16,7 @@
     "PRE",
     "SVG",
     "MATH",
-    // Footnote callers / note chrome often land in SUP on bible.com
+    // Footnote / crossref callers land in SUP on bible.com and Bible Gateway
     "SUP",
   ]);
 
@@ -441,10 +441,11 @@
   }
 
   /**
-   * YouVersion / bible.com injects footnote & study-note chrome into verse HTML
-   * (CSS-module classes like `ChapterContent_note__cat7xG`, plus yv-n / footnote
-   * markers). Those nodes (1) leak place names from note bodies and (2) split
-   * "son of " / "Judah" so kinship context breaks. Skip them entirely.
+   * bible.com and Bible Gateway inject footnote / study-note / crossref chrome
+   * into or beside verse HTML (YouVersion CSS modules like
+   * `ChapterContent_note__cat7xG`; BG `.footnotes` / `.crossrefs` sections and
+   * `sup.footnote` / `sup.crossreference`). Those nodes (1) leak place names
+   * from note bodies and (2) can split kinship phrases. Skip them entirely.
    */
   function isNoteChrome(el) {
     // nodeType 1 === ELEMENT_NODE (avoid Node global for node/test envs)
@@ -452,7 +453,9 @@
     if (typeof el.hasAttribute === "function") {
       if (
         el.hasAttribute("data-verse-footnote") ||
-        el.hasAttribute("data-verse-footnote-content")
+        el.hasAttribute("data-verse-footnote-content") ||
+        el.hasAttribute("data-fn") ||
+        el.hasAttribute("data-cr")
       ) {
         return true;
       }
@@ -466,9 +469,9 @@
           "";
     if (!cls) return false;
     // CSS modules: ChapterContent_note__cat7xG / ChapterContent_footnote__…
-    // also yv-n, Note, crossref chrome
+    // also yv-n, Note, crossref chrome; BG footnotes/crossrefs resources
     return (
-      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?)(?:__|-|_|\s|$)/i.test(
+      /(?:^|\s|_)(?:notes?|footnotes?|crossrefs?|cross-?references?|crossreference|resources-section|publisher-info|footnote-text)(?:__|-|_|\s|$)/i.test(
         cls
       ) || /(?:^|\s)yv-n(?:\s|$)/i.test(cls)
     );
