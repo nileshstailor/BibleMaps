@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1
+
+- Trim Chrome Web Store `manifest.json` description to ≤132 characters
+
 ## 1.0.0 — Chrome Web Store release
 
 First public **1.0.0** store build.

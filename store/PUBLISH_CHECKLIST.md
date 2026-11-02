@@ -1,10 +1,11 @@
-# Publish checklist — Bible Maps 1.0.0
+# Publish checklist — Bible Maps 1.0.1
 
 ## Before upload
 
-- [ ] `manifest.json` version is **1.0.0**
+- [ ] `manifest.json` version is **1.0.1**
+- [ ] `description` ≤ 132 characters (Chrome Web Store hard limit)
 - [ ] Smoke: bible.com Acts 13 + Bible Gateway Genesis 12 + side panel map renders
-- [ ] Build clean ZIP via `scripts/package-chrome-store.sh` (or use `store/dist/bible-maps-1.0.0.zip`)
+- [ ] Build clean ZIP via `scripts/package-chrome-store.sh` (or use `store/dist/bible-maps-1.0.1.zip`)
 - [ ] Confirm ZIP has **no** `.git`, `store/`, `scripts/`, `node_modules`, or test-only junk
 - [ ] Host `store/listing/privacy.md` (or equivalent) at a public HTTPS URL
 
@@ -29,7 +30,7 @@
 
 | Asset | Path |
 |-------|------|
-| Clean ZIP | `store/dist/bible-maps-1.0.0.zip` |
+| Clean ZIP | `store/dist/bible-maps-1.0.1.zip` |
 | Screenshots | `store/screenshots/screenshot-1280x800-*.jpg` |
 | Small promo | `store/promo/small-promo-440x280.jpg` |
 | Marquee | `store/promo/marquee-1400x560.jpg` |

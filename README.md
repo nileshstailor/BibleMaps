@@ -1,6 +1,6 @@
 # Bible Maps
 
-**Version 1.0.0** (Chrome Web Store release). Earlier engineering builds used a **1.4.x** manifest line — treat those as pre-1.0 / 0.x-era development, not a separate major product. See `CHANGELOG.md`. Store packaging lives under [`store/`](store/PUBLISH_CHECKLIST.md).
+**Version 1.0.1** (Chrome Web Store). Earlier engineering builds used a **1.4.x** manifest line — treat those as pre-1.0 / 0.x-era development, not a separate major product. See `CHANGELOG.md`. Store packaging lives under [`store/`](store/PUBLISH_CHECKLIST.md).
 
 Manifest V3 Chrome extension for [bible.com](https://www.bible.com) (YouVersion), [Bible Gateway](https://www.biblegateway.com/), [Biblia](https://biblia.com/) (Faithlife), [Blue Letter Bible](https://www.blueletterbible.org/), [Bible Hub](https://biblehub.com/), and [Bible Study Tools](https://www.biblestudytools.com/). It detects curated biblical **places** and **journeys** in the verse text, highlights them on the page, and opens a **side panel** with:
 

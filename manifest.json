@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.0.0",
-  "description": "Highlight biblical places and journeys on bible.com, Bible Gateway, Biblia, Blue Letter Bible, Bible Hub, and Bible Study Tools; open them on an offline MapLibre map with online fill when needed.",
+  "version": "1.0.1",
+  "description": "Highlight biblical places and journeys on major Bible sites; open them on an offline map with online fill.",
   "permissions": [
     "sidePanel",
     "storage",
