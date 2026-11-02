@@ -75,5 +75,6 @@ The extension can access page content only on the Bible reader sites listed in i
 
 When you are online and pan the map outside the bundled offline region, the map may request publicly available Esri canvas tiles. Optional Google Maps links open in your browser using Google’s services under Google’s terms.
 
-No analytics SDK is bundled for the purpose of tracking reading habits. Contact: [your email].
+No analytics SDK is bundled for the purpose of tracking reading habits. Contact: nst@meritssllc.com.
+Hosted privacy policy: https://www.meritssllc.com/bible-maps-pp/
 ```

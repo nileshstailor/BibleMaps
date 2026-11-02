@@ -2,7 +2,8 @@
 
 **Product:** Bible Maps Chrome extension (v1.0.0)  
 **Effective:** 2026-11-02  
-**Contact:** [add publisher email before publishing]
+**Contact:** nst@meritssllc.com
+**Public URL:** https://www.meritssllc.com/bible-maps-pp/
 
 ## Summary
 
