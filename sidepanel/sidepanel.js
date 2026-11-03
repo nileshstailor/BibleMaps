@@ -899,43 +899,15 @@
         },
       });
       ensureRouteArrowImage(map);
-      map.addLayer({
-        id: "route-arrows",
-        type: "symbol",
-        source: "route",
-        layout: {
-          "symbol-placement": "line",
-          "symbol-spacing": 72,
-          "icon-image": "route-arrow",
-          "icon-size": 0.32,
-          "icon-allow-overlap": true,
-          "icon-ignore-placement": true,
-          "icon-rotation-alignment": "map",
-          "icon-pitch-alignment": "map",
-        },
-      });
+      map.addLayer(routeArrowLayerSpec());
     } else if (!map.getLayer("route-arrows")) {
       ensureRouteArrowImage(map);
-      map.addLayer({
-        id: "route-arrows",
-        type: "symbol",
-        source: "route",
-        layout: {
-          "symbol-placement": "line",
-          "symbol-spacing": 72,
-          "icon-image": "route-arrow",
-          "icon-size": 0.32,
-          "icon-allow-overlap": true,
-          "icon-ignore-placement": true,
-          "icon-rotation-alignment": "map",
-          "icon-pitch-alignment": "map",
-        },
-      });
+      map.addLayer(routeArrowLayerSpec());
     } else {
-      // Keep arrow styling in sync when the side panel reloads overlays.
+      ensureRouteArrowImage(map);
       try {
-        map.setLayoutProperty("route-arrows", "icon-size", 0.32);
-        map.setLayoutProperty("route-arrows", "symbol-spacing", 72);
+        map.setLayoutProperty("route-arrows", "symbol-placement", "line-center");
+        map.setLayoutProperty("route-arrows", "icon-size", 0.42);
       } catch {
         /* ignore */
       }
@@ -943,17 +915,27 @@
     // Place pins are DOM markers only (dot + label) — no second circle layer.
   }
 
+  function routeArrowLayerSpec() {
+    return {
+      id: "route-arrows",
+      type: "symbol",
+      source: "route",
+      layout: {
+        // One tip per arc segment — line spacing skipped short hops entirely.
+        "symbol-placement": "line-center",
+        "icon-image": "route-arrow",
+        "icon-size": 0.42,
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+        "icon-rotation-alignment": "map",
+        "icon-pitch-alignment": "map",
+      },
+    };
+  }
+
   function ensureRouteArrowImage(map) {
     if (!map) return;
-    // Recreate so style tweaks apply even if an older fat arrow was cached.
-    if (map.hasImage("route-arrow")) {
-      try {
-        map.removeImage("route-arrow");
-      } catch {
-        /* ignore */
-      }
-    }
-    const size = 128;
+    const size = 96;
     const canvas = document.createElement("canvas");
     canvas.width = size;
     canvas.height = size;
@@ -962,16 +944,29 @@
     ctx.clearRect(0, 0, size, size);
     ctx.fillStyle = "#a63024";
     ctx.beginPath();
-    // Slim chevron tip along +x so MapLibre line bearing aims forward.
-    ctx.moveTo(size * 0.28, size * 0.38);
-    ctx.lineTo(size * 0.78, size * 0.5);
-    ctx.lineTo(size * 0.28, size * 0.62);
-    ctx.lineTo(size * 0.34, size * 0.5);
+    // Slim chevron along +x (MapLibre rotates it to the line bearing).
+    ctx.moveTo(size * 0.22, size * 0.34);
+    ctx.lineTo(size * 0.82, size * 0.5);
+    ctx.lineTo(size * 0.22, size * 0.66);
+    ctx.lineTo(size * 0.32, size * 0.5);
     ctx.closePath();
     ctx.fill();
-    map.addImage("route-arrow", ctx.getImageData(0, 0, size, size), {
-      pixelRatio: 2,
-    });
+    const imageData = ctx.getImageData(0, 0, size, size);
+    const opts = { pixelRatio: 2 };
+    try {
+      if (map.hasImage("route-arrow") && typeof map.updateImage === "function") {
+        map.updateImage("route-arrow", imageData);
+      } else if (!map.hasImage("route-arrow")) {
+        map.addImage("route-arrow", imageData, opts);
+      }
+    } catch {
+      try {
+        if (map.hasImage("route-arrow")) map.removeImage("route-arrow");
+        map.addImage("route-arrow", imageData, opts);
+      } catch {
+        /* ignore */
+      }
+    }
   }
 
   function updateMapOverlays(map, preset, showKingdoms) {
