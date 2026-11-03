@@ -285,6 +285,23 @@ body {
   color: var(--ink);
 }
 
+.acc-body .why-pin {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.acc-body .why-pin-label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .card {
   background: var(--panel);
   border: 1px solid var(--line);

@@ -20,7 +20,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Holy city of Judah; frequent setting for temple, passion, and early church narratives."
   },
   {
     "id": "bethlehem",
@@ -41,7 +42,8 @@
       "united",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judahite town south of Jerusalem; birthplace of David and, in the Gospels, of Jesus."
   },
   {
     "id": "nazareth",
@@ -56,7 +58,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Galilean town where Jesus was raised."
   },
   {
     "id": "capernaum",
@@ -72,7 +75,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Lakeside town on the Sea of Galilee; a center of Jesus’ Galilean ministry."
   },
   {
     "id": "galilee_sea",
@@ -97,7 +101,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Freshwater lake in northern Israel; setting for many Gospel scenes."
   },
   {
     "id": "jordan_river",
@@ -117,7 +122,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "River forming much of the eastern edge of the biblical land; baptism of Jesus associated with its lower reaches."
   },
   {
     "id": "euphrates",
@@ -137,7 +143,8 @@
       "patriarchs",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Major Mesopotamian river; often marks the ideal northeastern reach of the promised land and appears in patriarchal and prophetic texts."
   },
   {
     "id": "jericho",
@@ -155,7 +162,8 @@
       "conquest",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Oasis city in the Jordan Valley; associated with Joshua’s conquest and NT visits."
   },
   {
     "id": "hebron",
@@ -176,7 +184,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Patriarchal city; burial tradition at Machpelah."
   },
   {
     "id": "beersheba",
@@ -195,7 +204,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern landmark of Israelite territory; patriarchal wells tradition."
   },
   {
     "id": "shechem",
@@ -214,7 +224,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Central hill-country city; Jacob and Joseph traditions; nearby Sychar in John."
   },
   {
     "id": "bethel",
@@ -234,7 +245,8 @@
       "patriarchs",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Important sanctuary site in patriarchal and Israelite narratives."
   },
   {
     "id": "ai",
@@ -250,7 +262,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town associated with Joshua’s campaigns east of Bethel."
   },
   {
     "id": "shiloh",
@@ -267,7 +280,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Early Israelite cult center; Tabernacle tradition before Jerusalem."
   },
   {
     "id": "tirzah",
@@ -283,7 +297,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Early capital of the northern kingdom (Jeroboam and successors) before Samaria."
   },
   {
     "id": "megiddo",
@@ -300,7 +315,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Strategic Jezreel Valley fortress; later apocalyptic association."
   },
   {
     "id": "hazor",
@@ -316,7 +332,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Major Canaanite/Israelite city in Upper Galilee."
   },
   {
     "id": "dan",
@@ -343,7 +360,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern city (ex-Laish) and boundary marker."
   },
   {
     "id": "caesarea",
@@ -361,7 +379,8 @@
       "acts",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Herodian port on the Judean coast; Paul’s departure point for Rome (Acts 27:1–2)."
   },
   {
     "id": "caesarea_philippi",
@@ -378,7 +397,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern city at Hermon springs; Peter’s confession setting."
   },
   {
     "id": "joppa",
@@ -396,7 +416,8 @@
       "united",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Mediterranean port; Jonah and Peter traditions."
   },
   {
     "id": "ashkelon",
@@ -414,7 +435,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine coastal city."
   },
   {
     "id": "gaza",
@@ -433,7 +455,8 @@
       "divided",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine city; Samson and Acts road traditions."
   },
   {
     "id": "ashdod",
@@ -451,7 +474,8 @@
       "divided",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine city; Azotus in Acts."
   },
   {
     "id": "gath",
@@ -468,7 +492,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine city associated with Goliath."
   },
   {
     "id": "ekron",
@@ -484,7 +509,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine city; Ark narrative."
   },
   {
     "id": "samaria_city",
@@ -501,7 +527,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Capital of the northern kingdom; later Sebaste."
   },
   {
     "id": "emmaus",
@@ -516,7 +543,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Village associated with the post-resurrection road story; location debated."
   },
   {
     "id": "bethany",
@@ -532,7 +560,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Village near Jerusalem; Lazarus tradition."
   },
   {
     "id": "bethsaida",
@@ -547,7 +576,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Fishing town near the Sea of Galilee; exact site debated."
   },
   {
     "id": "chorazin",
@@ -563,7 +593,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Galilean town rebuked with Bethsaida and Capernaum."
   },
   {
     "id": "cana",
@@ -579,7 +610,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wedding at Cana tradition; site identification debated."
   },
   {
     "id": "nain",
@@ -594,7 +626,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Village south of Nazareth; raising of the widow’s son."
   },
   {
     "id": "sidon",
@@ -613,7 +646,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Phoenician port north of Tyre; the first harbor call on Paul’s voyage toward Rome (Acts 27:3)."
   },
   {
     "id": "tyre",
@@ -631,7 +665,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Phoenician coastal city south of Sidon; frequent biblical port and oracle subject."
   },
   {
     "id": "damascus",
@@ -647,7 +682,8 @@
       "divided",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Aramean city northeast of Galilee; site of Paul’s call in Acts 9."
   },
   {
     "id": "antioch",
@@ -664,7 +700,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Syrian city on the Orontes; base of the Gentile mission in Acts."
   },
   {
     "id": "antioch_pisidia",
@@ -680,7 +717,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Roman colony visited on Paul’s first missionary journey."
   },
   {
     "id": "tarsus",
@@ -695,7 +733,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Cilician city; Paul’s hometown."
   },
   {
     "id": "iconium",
@@ -710,7 +749,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "City on Paul’s first missionary journey."
   },
   {
     "id": "lystra",
@@ -725,7 +765,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Lycaonian town; Timothy’s home region."
   },
   {
     "id": "derbe",
@@ -740,7 +781,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Lycaonian town on Paul’s first journey."
   },
   {
     "id": "perga",
@@ -756,7 +798,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Pamphylian city visited early on Paul’s journeys."
   },
   {
     "id": "attalia",
@@ -772,7 +815,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Pamphylian port; return harbor after first journey."
   },
   {
     "id": "seleucia",
@@ -788,7 +832,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Port of Antioch from which Paul and Barnabas sailed."
   },
   {
     "id": "cyprus_salamis",
@@ -803,7 +848,8 @@
     "eras": [
       "acts"
     ],
-    "region": "cyprus"
+    "region": "cyprus",
+    "pinBlurb": "Eastern Cypriot city; first stop after sailing from Seleucia."
   },
   {
     "id": "cyprus_paphos",
@@ -818,7 +864,8 @@
     "eras": [
       "acts"
     ],
-    "region": "cyprus"
+    "region": "cyprus",
+    "pinBlurb": "Western Cypriot city; encounter with Sergius Paulus."
   },
   {
     "id": "ephesus",
@@ -834,7 +881,8 @@
       "acts",
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Major city of Roman Asia; long Ephesian ministry in Acts 19."
   },
   {
     "id": "smyrna",
@@ -849,7 +897,8 @@
     "eras": [
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Asian coastal city; one of the seven churches of Revelation."
   },
   {
     "id": "pergammum",
@@ -866,7 +915,8 @@
     "eras": [
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Asian city; one of the seven churches of Revelation."
   },
   {
     "id": "thyatira",
@@ -882,7 +932,8 @@
       "acts",
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Lydian city; Lydia of Thyatira in Acts; Revelation church."
   },
   {
     "id": "sardis",
@@ -898,7 +949,8 @@
     "eras": [
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Former Lydian capital; Revelation church."
   },
   {
     "id": "philadelphia_asia",
@@ -913,7 +965,8 @@
     "eras": [
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Asian city; one of the seven churches of Revelation."
   },
   {
     "id": "laodicea",
@@ -929,7 +982,8 @@
     "eras": [
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Wealthy Lycus Valley city; Revelation church."
   },
   {
     "id": "colossae",
@@ -945,7 +999,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Phrygian town; letter to the Colossians."
   },
   {
     "id": "troas",
@@ -961,7 +1016,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Aegean port; Macedonian call vision."
   },
   {
     "id": "philippi",
@@ -976,7 +1032,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Macedonian colony; first European church plant in Acts 16."
   },
   {
     "id": "thessalonica",
@@ -992,7 +1049,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Macedonian city visited on the second missionary journey."
   },
   {
     "id": "berea",
@@ -1008,7 +1066,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Macedonian city praised for examining the Scriptures."
   },
   {
     "id": "athens",
@@ -1023,7 +1082,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Greek capital; Paul’s address at the Areopagus (Acts 17)."
   },
   {
     "id": "corinth",
@@ -1038,7 +1098,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Achaian port city; Paul’s extended ministry and correspondence."
   },
   {
     "id": "cenchreae",
@@ -1054,7 +1115,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Eastern port of Corinth; Phoebe’s church."
   },
   {
     "id": "rome",
@@ -1069,7 +1131,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Capital of the empire; destination of Paul’s custody journey (Acts 28:14–16)."
   },
   {
     "id": "puteoli",
@@ -1084,7 +1147,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Bay of Naples harbor where Paul came ashore in Italy (Acts 28:13–14)."
   },
   {
     "id": "malta",
@@ -1100,7 +1164,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Island of the shipwreck after the storm; the company wintered here (Acts 27:39–28:1)."
   },
   {
     "id": "crete_fair_havens",
@@ -1117,7 +1182,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Harbor on Crete’s south coast where the ship stopped before the storm (Acts 27:8)."
   },
   {
     "id": "myra",
@@ -1132,7 +1198,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Lycian harbor where Paul’s company transferred to an Alexandrian grain ship bound for Italy (Acts 27:5–6)."
   },
   {
     "id": "egypt_memphis",
@@ -1150,7 +1217,8 @@
       "exodus",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Ancient Egyptian capital region referenced in prophetic literature."
   },
   {
     "id": "egypt_thebes",
@@ -1168,7 +1236,8 @@
       "exodus",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Upper Egyptian capital; prophetic oracles against No-Amon."
   },
   {
     "id": "egypt_rameses",
@@ -1185,7 +1254,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Store-city and traditional Exodus departure region."
   },
   {
     "id": "succoth",
@@ -1201,7 +1271,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "First Exodus encampment after leaving Rameses; exact site debated."
   },
   {
     "id": "etham",
@@ -1216,7 +1287,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Exodus staging point before the sea crossing traditions."
   },
   {
     "id": "pi_hahiroth",
@@ -1232,7 +1304,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Campsite before the sea crossing; geography debated."
   },
   {
     "id": "marah",
@@ -1247,7 +1320,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "First wilderness water crisis after the sea."
   },
   {
     "id": "elim",
@@ -1262,7 +1336,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Oasis with springs and palms in Exodus itinerary."
   },
   {
     "id": "rephidim",
@@ -1279,7 +1354,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Site of water from the rock and Amalek conflict traditions."
   },
   {
     "id": "sinai",
@@ -1298,7 +1374,8 @@
       "exodus",
       "divided"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Traditional mountain of the covenant; alternative Horeb/Sinai proposals exist."
   },
   {
     "id": "kadesh_barnea",
@@ -1319,7 +1396,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Major wilderness staging area; spy narrative and long sojourn traditions."
   },
   {
     "id": "ezion_geber",
@@ -1337,7 +1415,8 @@
       "exodus",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Red Sea port region associated with wilderness itinerary and later trade."
   },
   {
     "id": "moab_plains",
@@ -1354,7 +1433,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Final wilderness camp before crossing into Canaan."
   },
   {
     "id": "ur",
@@ -1371,7 +1451,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Traditional starting point of Abraham’s migration."
   },
   {
     "id": "haran",
@@ -1388,7 +1469,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Upper Mesopotamian city; Abraham’s family sojourn."
   },
   {
     "id": "egypt_land",
@@ -1408,7 +1490,8 @@
       "exodus",
       "divided"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Nile civilization; patriarchal sojourns and Exodus setting."
   },
   {
     "id": "canaan",
@@ -1426,7 +1509,8 @@
       "patriarchs",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Promised land region in patriarchal and conquest narratives."
   },
   {
     "id": "babylon",
@@ -1443,7 +1527,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Mesopotamian capital associated with exile and empire in the Prophets and historical books."
   },
   {
     "id": "nineveh",
@@ -1459,7 +1544,8 @@
       "exile",
       "divided"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Assyrian capital on the Tigris; focus of Jonah and the fall recounted by Nahum."
   },
   {
     "id": "susa",
@@ -1475,7 +1561,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Persian royal city; Esther and Nehemiah settings."
   },
   {
     "id": "persepolis_region",
@@ -1492,7 +1579,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Imperial setting for later OT narratives; marker near Persepolis."
   },
   {
     "id": "patmos",
@@ -1507,7 +1595,8 @@
     "eras": [
       "revelation"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Aegean island of John’s exile in Revelation."
   },
   {
     "id": "gilgal",
@@ -1524,7 +1613,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Early Israelite camp after crossing the Jordan."
   },
   {
     "id": "mizpah",
@@ -1542,7 +1632,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjaminite assembly site; multiple Mizpahs exist in the text."
   },
   {
     "id": "gibeah",
@@ -1559,7 +1650,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjaminite town associated with Saul."
   },
   {
     "id": "ramah",
@@ -1578,7 +1670,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjaminite town; Samuel and exile-road traditions."
   },
   {
     "id": "en_gedi",
@@ -1595,7 +1688,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Oasis on the western Dead Sea; David’s wilderness refuge."
   },
   {
     "id": "dead_sea",
@@ -1616,7 +1710,8 @@
       "divided",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hypersaline lake; biblical Salt Sea."
   },
   {
     "id": "mount_of_olives",
@@ -1636,7 +1731,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Ridge east of Jerusalem; key Gospel settings."
   },
   {
     "id": "golgotha",
@@ -1656,7 +1752,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Traditional crucifixion site; exact spot debated within Jerusalem."
   },
   {
     "id": "bethphage",
@@ -1671,7 +1768,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Village near Bethany on the approach to Jerusalem."
   },
   {
     "id": "zarephath",
@@ -1687,7 +1785,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Phoenician coastal town between Tyre and Sidon; Elijah and the widow (1 Kings 17)."
   },
   {
     "id": "mt_carmel",
@@ -1704,7 +1803,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Coastal ridge; Elijah’s contest with the prophets of Baal (1 Kings 18)."
   },
   {
     "id": "jezreel",
@@ -1720,7 +1820,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Royal city in the Jezreel Valley; Ahab/Jezebel and Elijah narratives."
   },
   {
     "id": "cherith",
@@ -1738,7 +1839,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wadi east of the Jordan where Elijah hid and was fed by ravens (1 Kings 17)."
   },
   {
     "id": "ophir",
@@ -1753,7 +1855,8 @@
     "eras": [
       "united"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Source of gold for Solomon’s fleet (1 Kings 9)."
   },
   {
     "id": "sheba",
@@ -1772,7 +1875,8 @@
     "eras": [
       "united"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Homeland of the Queen of Sheba (1 Kings 10)."
   },
   {
     "id": "penuel",
@@ -1789,7 +1893,8 @@
       "patriarchs",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jacob’s Peniel tradition; later fortified by Jeroboam (1 Kings 12)."
   },
   {
     "id": "aphek_aram",
@@ -1804,7 +1909,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town where Aramean forces fled after battle with Ahab (1 Kings 20)."
   },
   {
     "id": "kidron",
@@ -1831,7 +1937,8 @@
       "divided",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Valley east of Jerusalem between the Temple Mount and Mount of Olives; Asa burned Maacah’s Asherah pole here (1 Kings 15)."
   },
   {
     "id": "aram",
@@ -1849,7 +1956,8 @@
       "divided",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Aramean kingdom north of Israel; Ben-hadad’s realm in 1 Kings 15."
   },
   {
     "id": "ijon",
@@ -1864,7 +1972,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern Israelite town taken by Ben-hadad for Asa (1 Kings 15:20)."
   },
   {
     "id": "abel_beth_maacah",
@@ -1884,7 +1993,8 @@
       "divided",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern border town near Dan; captured by Ben-hadad (1 Kings 15:20)."
   },
   {
     "id": "naphtali",
@@ -1903,7 +2013,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern tribal territory; Ben-hadad struck “all the land of Naphtali” (1 Kings 15:20)."
   },
   {
     "id": "geba",
@@ -1921,7 +2032,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjaminite town fortified by Asa with stones from Ramah (1 Kings 15:22)."
   },
   {
     "id": "gibbethon",
@@ -1936,7 +2048,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine town Nadab was besieging when Baasha killed him (1 Kings 15:27)."
   },
   {
     "id": "tishbe",
@@ -1953,7 +2066,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hometown of Elijah the Tishbite (1 Kings 17:1)."
   },
   {
     "id": "gilead",
@@ -1971,7 +2085,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Transjordan region where Elijah was from (Tishbe in Gilead)."
   },
   {
     "id": "abarim",
@@ -1989,7 +2104,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Camp before Nebo (Num 33:47); Moses' viewing range (Num 27:12; Deut 32:49)."
   },
   {
     "id": "acco",
@@ -2007,7 +2123,8 @@
       "judges",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Asher fails to expel (Judg 1:31)."
   },
   {
     "id": "achzib_asher",
@@ -2023,7 +2140,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Asher (Josh 19:29; Judg 1:31)."
   },
   {
     "id": "adam_city",
@@ -2041,7 +2159,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jordan waters heap up (Josh 3:16)."
   },
   {
     "id": "adullam",
@@ -2061,7 +2180,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah's friend Hirah (Gen 38:1); Canaanite king (Josh 12:15); later David's cave."
   },
   {
     "id": "aijalon",
@@ -2081,7 +2201,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moon stands still (Josh 10:12); Danite/Levitical (Josh 19:42; 21:24); Judg 1:35."
   },
   {
     "id": "ammon",
@@ -2106,7 +2227,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Lot's descendants (Gen 19:38); border on the Jabbok (Deut 2:19,37); Jephthah (Judg 10-11)."
   },
   {
     "id": "anathoth",
@@ -2125,7 +2247,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Levitical city (Josh 21:18)."
   },
   {
     "id": "arabah",
@@ -2147,7 +2270,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rift valley south (and north) of the Dead Sea (Deut 1:1,7; 2:8; Josh 11:2; 12:1)."
   },
   {
     "id": "arad",
@@ -2164,7 +2288,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "King of Arad attacks Israel (Num 21:1); defeated (Josh 12:14); Kenites settle nearby (Judg 1:16)."
   },
   {
     "id": "aram_naharaim",
@@ -2183,7 +2308,8 @@
       "judges",
       "united"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Region of Nahor's city (Gen 24:10, ESV 'Mesopotamia'); Balaam's home (Deut 23:4); Cushan-rishathaim (Judg 3:8)."
   },
   {
     "id": "ararat",
@@ -2206,7 +2332,8 @@
       "divided",
       "exile"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Ark comes to rest (Gen 8:4)."
   },
   {
     "id": "arnon",
@@ -2232,7 +2359,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moab/Amorite border (Num 21:13; Deut 2:24; Judg 11:18)."
   },
   {
     "id": "aroer_arnon",
@@ -2253,7 +2381,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "On the rim of the Arnon (Deut 2:36; Josh 12:2; 13:9; Judg 11:26)."
   },
   {
     "id": "ashteroth_karnaim",
@@ -2273,7 +2402,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rephaim defeated (Gen 14:5); Og's capital (Deut 1:4; Josh 12:4)."
   },
   {
     "id": "assyria",
@@ -2295,7 +2425,8 @@
       "divided",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Pinned at Ashur, the old Assyrian capital."
   },
   {
     "id": "ataroth_moab",
@@ -2310,7 +2441,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Built by Gad (Num 32:3,34)."
   },
   {
     "id": "azekah",
@@ -2328,7 +2460,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Pursuit ends (Josh 10:10-11); Judah town (Josh 15:35)."
   },
   {
     "id": "baal_meon",
@@ -2346,7 +2479,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Num 32:38; Josh 13:17."
   },
   {
     "id": "bashan",
@@ -2368,7 +2502,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Og's kingdom (Num 21:33; Deut 3); given to half-Manasseh (Josh 13:30)."
   },
   {
     "id": "beth_horon",
@@ -2388,7 +2523,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Pass of the rout (Josh 10:10-11); Ephraim border (Josh 16:3,5); Levitical (Josh 21:22)."
   },
   {
     "id": "beth_jeshimoth",
@@ -2407,7 +2543,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern end of the Moab camp (Num 33:49; Josh 12:3; 13:20)."
   },
   {
     "id": "beth_nimrah",
@@ -2424,7 +2561,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Num 32:3,36; Josh 13:27."
   },
   {
     "id": "beth_shean",
@@ -2444,7 +2582,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Manasseh fails to expel (Josh 17:11,16; Judg 1:27)."
   },
   {
     "id": "beth_shemesh",
@@ -2465,7 +2604,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah border/Levitical (Josh 15:10; 21:16); Danite Ir-shemesh (Josh 19:41); Judg 1:33 Beth-shemesh is in Naphtali."
   },
   {
     "id": "beth_zur",
@@ -2483,7 +2623,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:58."
   },
   {
     "id": "bezek",
@@ -2499,7 +2640,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Adoni-bezek defeated (Judg 1:4-5; possibly a different Judahite site)."
   },
   {
     "id": "bozrah",
@@ -2516,7 +2658,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Edomite royal city (Gen 36:33)."
   },
   {
     "id": "brook_of_egypt",
@@ -2540,7 +2683,8 @@
       "divided",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "SW border of the promised land (Num 34:5; Josh 15:4)."
   },
   {
     "id": "cabul",
@@ -2557,7 +2701,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Asher (Josh 19:27)."
   },
   {
     "id": "calah",
@@ -2573,7 +2718,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Built by Nimrod/Asshur (Gen 10:11-12)."
   },
   {
     "id": "caphtor",
@@ -2589,7 +2735,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Origin of the Caphtorim/Philistines (Deut 2:23)."
   },
   {
     "id": "chephirah",
@@ -2604,7 +2751,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Gibeonite city (Josh 9:17; 18:26)."
   },
   {
     "id": "daberath",
@@ -2619,7 +2767,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 19:12; Levitical (Josh 21:28)."
   },
   {
     "id": "dibon",
@@ -2639,7 +2788,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Num 21:30; 32:34; 33:45 (Dibon-gad)."
   },
   {
     "id": "dor",
@@ -2659,7 +2809,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 11:2; 12:23; 17:11; Judg 1:27."
   },
   {
     "id": "dothan",
@@ -2676,7 +2827,8 @@
       "patriarchs",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Joseph sold by his brothers (Gen 37:17)."
   },
   {
     "id": "ebal",
@@ -2693,7 +2845,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Curses and altar (Deut 11:29; 27:4,13; Josh 8:30)."
   },
   {
     "id": "edom",
@@ -2717,7 +2870,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Esau's nation (Gen 36); refuses Israel passage (Num 20:14-21)."
   },
   {
     "id": "edrei",
@@ -2733,7 +2887,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Og defeated (Num 21:33; Deut 3:1)."
   },
   {
     "id": "elam",
@@ -2751,7 +2906,8 @@
       "exile",
       "acts"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Kedorlaomer's kingdom (Gen 14)."
   },
   {
     "id": "elath",
@@ -2770,7 +2926,8 @@
       "divided",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Passed on the Arabah road (Deut 2:8)."
   },
   {
     "id": "elealeh",
@@ -2788,7 +2945,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Num 32:3,37."
   },
   {
     "id": "en_gannim",
@@ -2805,7 +2963,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Issachar/Levitical (Josh 19:21; 21:29)."
   },
   {
     "id": "en_rogel",
@@ -2822,7 +2981,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Boundary marker (Josh 15:7; 18:16)."
   },
   {
     "id": "endor",
@@ -2840,7 +3000,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Manasseh in Issachar (Josh 17:11)."
   },
   {
     "id": "erech",
@@ -2856,7 +3017,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "City of Nimrod's kingdom (Gen 10:10)."
   },
   {
     "id": "eshtaol",
@@ -2872,7 +3034,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Samson's region (Judg 13:25; 16:31; 18:2); Josh 15:33; 19:41."
   },
   {
     "id": "eshtemoa",
@@ -2889,7 +3052,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:50; Levitical (Josh 21:14)."
   },
   {
     "id": "gath_hepher",
@@ -2907,7 +3071,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Zebulun (Josh 19:13)."
   },
   {
     "id": "gebal",
@@ -2928,7 +3093,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "'Land of the Gebalites' (Josh 13:5)."
   },
   {
     "id": "gerar",
@@ -2945,7 +3111,8 @@
       "patriarchs",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Abimelech's city (Gen 20; 26)."
   },
   {
     "id": "gerizim",
@@ -2964,7 +3131,8 @@
       "judges",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Blessings (Deut 11:29; 27:12; Josh 8:33); Jotham's fable (Judg 9:7)."
   },
   {
     "id": "gezer",
@@ -2982,7 +3150,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "King Horam defeated (Josh 10:33); Canaanites remain (Josh 16:10; Judg 1:29)."
   },
   {
     "id": "gibeon",
@@ -3003,7 +3172,8 @@
       "exile",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Gibeonite treaty (Josh 9); sun stands still (Josh 10:12); Levitical (Josh 21:17)."
   },
   {
     "id": "goshen",
@@ -3020,7 +3190,8 @@
       "patriarchs",
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Israel's settlement in Egypt (Gen 45:10; 47; Exod 8:22; 9:26)."
   },
   {
     "id": "great_sea",
@@ -3040,7 +3211,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Western boundary (Exod 23:31; Num 34:6; Josh 1:4; 15:12)."
   },
   {
     "id": "halhul",
@@ -3055,7 +3227,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:58."
   },
   {
     "id": "hammath",
@@ -3071,7 +3244,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Naphtali (Josh 19:35; 21:32)."
   },
   {
     "id": "harod",
@@ -3088,7 +3262,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Gideon tests the 300 (Judg 7:1)."
   },
   {
     "id": "hermon",
@@ -3116,7 +3291,8 @@
       "gospels",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern limit of conquest (Deut 3:8-9; Josh 11:17; 12:1; 13:5; Judg 3:3)."
   },
   {
     "id": "heshbon",
@@ -3136,7 +3312,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Sihon's capital (Num 21:26); Reuben/Gad (Num 32:37); Levitical (Josh 21:39)."
   },
   {
     "id": "hill_country_ephraim",
@@ -3155,7 +3332,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Joshua's burial (Josh 24:30); Deborah (Judg 4:5); Micah (Judg 17:1); the Levite (Judg 19:1)."
   },
   {
     "id": "hill_of_moreh",
@@ -3170,7 +3348,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Midianite camp (Judg 7:1)."
   },
   {
     "id": "ibleam",
@@ -3189,7 +3368,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 17:11; Judg 1:27."
   },
   {
     "id": "jabbok",
@@ -3210,7 +3390,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jacob wrestles (Gen 32:22); Ammonite/Amorite border (Num 21:24; Deut 3:16)."
   },
   {
     "id": "jabneel_judah",
@@ -3228,7 +3409,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah's NW border (Josh 15:11)."
   },
   {
     "id": "japhia",
@@ -3243,7 +3425,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Zebulun border (Josh 19:12)."
   },
   {
     "id": "jarmuth",
@@ -3258,7 +3441,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Amorite king Piram (Josh 10:3)."
   },
   {
     "id": "jattir",
@@ -3274,7 +3458,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:48; Levitical (Josh 21:14)."
   },
   {
     "id": "jogbehah",
@@ -3290,7 +3475,8 @@
       "exodus",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Built by Gad (Num 32:35); Gideon's route (Judg 8:11)."
   },
   {
     "id": "jokneam",
@@ -3307,7 +3493,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 12:22; 19:11; 21:34."
   },
   {
     "id": "kedesh",
@@ -3327,7 +3514,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Canaanite king (Josh 12:22); city of refuge (Josh 20:7); Barak's home (Judg 4:6)."
   },
   {
     "id": "keilah",
@@ -3343,7 +3531,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:44."
   },
   {
     "id": "kenath",
@@ -3358,7 +3547,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Taken by Nobah and renamed (Num 32:42)."
   },
   {
     "id": "kiriath_jearim",
@@ -3385,7 +3575,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Gibeonite city (Josh 9:17); Judah/Benjamin border (Josh 15:9; 18:14); Danite camp (Judg 18:12)."
   },
   {
     "id": "kishon",
@@ -3405,7 +3596,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Sisera's army swept away (Judg 4:7,13; 5:21)."
   },
   {
     "id": "kittim",
@@ -3421,7 +3613,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "cyprus"
+    "region": "cyprus",
+    "pinBlurb": "Ships from Kittim (Num 24:24)."
   },
   {
     "id": "cyprus",
@@ -3442,7 +3635,8 @@
       "divided",
       "united"
     ],
-    "region": "cyprus"
+    "region": "cyprus",
+    "pinBlurb": "Eastern Mediterranean island; Acts 27 notes sailing under its lee because of contrary winds."
   },
   {
     "id": "lachish",
@@ -3459,7 +3653,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Taken by Joshua (Josh 10:31-32)."
   },
   {
     "id": "lebanon",
@@ -3481,7 +3676,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern horizon of the promise (Deut 1:7; 3:25; Josh 1:4; 13:5; Judg 3:3)."
   },
   {
     "id": "lebo_hamath",
@@ -3506,7 +3702,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern limit of the spies (Num 13:21) and of the land (Num 34:8; Josh 13:5; Judg 3:3)."
   },
   {
     "id": "lebonah",
@@ -3521,7 +3718,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Locates Shiloh (Judg 21:19)."
   },
   {
     "id": "machpelah",
@@ -3538,7 +3736,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Purchased by Abraham (Gen 23); patriarchal tomb (Gen 25, 49, 50)."
   },
   {
     "id": "mahanaim",
@@ -3556,7 +3755,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jacob meets angels (Gen 32:2); Levitical city of Gad (Josh 21:38)."
   },
   {
     "id": "mamre",
@@ -3573,7 +3773,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Abraham's camp (Gen 13:18; 18:1)."
   },
   {
     "id": "maon",
@@ -3590,7 +3791,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:55."
   },
   {
     "id": "mareshah",
@@ -3608,7 +3810,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:44."
   },
   {
     "id": "medeba",
@@ -3628,7 +3831,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Num 21:30; Josh 13:9,16."
   },
   {
     "id": "midian",
@@ -3650,7 +3854,8 @@
       "exile",
       "acts"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Moses' refuge (Exod 2:15); Balaam/Peor (Num 25; 31); Gideon (Judg 6-8)."
   },
   {
     "id": "moriah",
@@ -3670,7 +3875,8 @@
       "patriarchs",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Binding of Isaac (Gen 22:2); equated with the Temple Mount in 2 Chr 3:1."
   },
   {
     "id": "nebo",
@@ -3689,7 +3895,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moses dies (Deut 32:49; 34:1)."
   },
   {
     "id": "negeb",
@@ -3710,7 +3917,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern dry country; Abraham's route (Gen 12:9; 13:1); spies (Num 13)."
   },
   {
     "id": "nile",
@@ -3732,7 +3940,8 @@
       "divided",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Moses in the basket (Exod 2:3); first plague (Exod 7)."
   },
   {
     "id": "on_heliopolis",
@@ -3749,7 +3958,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Asenath's father Potiphera 'priest of On' (Gen 41:45,50; 46:20)."
   },
   {
     "id": "ophrah_benjamin",
@@ -3765,7 +3975,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamite town (Josh 18:23)."
   },
   {
     "id": "paddan_aram",
@@ -3784,7 +3995,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Laban's homeland around Haran (Gen 25:20; 28:2; 31:18; 48:7)."
   },
   {
     "id": "paran",
@@ -3804,7 +4016,8 @@
       "exodus",
       "united"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Ishmael's home (Gen 21:21); camp after Sinai (Num 10:12; 12:16)."
   },
   {
     "id": "philistia",
@@ -3829,7 +4042,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "'Way of the land of the Philistines' (Exod 13:17); Gerar's Philistines (Gen 21; 26); five lords (Josh 13:3); Samson (Judg 13-16)."
   },
   {
     "id": "pisgah",
@@ -3849,7 +4063,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Balaam's second oracle (Num 23:14); Moses views the land (Deut 3:27; 34:1)."
   },
   {
     "id": "pithom",
@@ -3864,7 +4079,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Store city built by Israel (Exod 1:11)."
   },
   {
     "id": "punon",
@@ -3879,7 +4095,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wilderness camp (Num 33:42-43)."
   },
   {
     "id": "rabbah",
@@ -3903,7 +4120,8 @@
       "exile",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Og's iron bed kept here (Deut 3:11); Gad's border (Josh 13:25)."
   },
   {
     "id": "ramoth_gilead",
@@ -3924,7 +4142,8 @@
       "divided",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "City of refuge (Deut 4:43; Josh 20:8; 21:38); Ahab's death (1 Kgs 22)."
   },
   {
     "id": "red_sea",
@@ -3943,7 +4162,8 @@
       "united",
       "acts"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Locusts driven into it (Exod 10:19); sea crossing (Exod 13:18; 15:4)."
   },
   {
     "id": "riblah",
@@ -3961,7 +4181,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "NE border marker (Num 34:11; reading debated)."
   },
   {
     "id": "salecah",
@@ -3979,7 +4200,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Eastern edge of Bashan (Deut 3:10; Josh 12:5; 13:11)."
   },
   {
     "id": "seir",
@@ -3999,7 +4221,8 @@
       "exodus",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Esau's territory (Gen 32:3; 36:8); Israel skirts it (Deut 2)."
   },
   {
     "id": "shaalbim",
@@ -4017,7 +4240,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 19:42; Judg 1:35."
   },
   {
     "id": "shephelah",
@@ -4036,7 +4260,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Lowland district (Josh 10:40; 15:33)."
   },
   {
     "id": "shimron",
@@ -4052,7 +4277,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Joined Jabin's coalition (Josh 11:1; 12:20)."
   },
   {
     "id": "shinar",
@@ -4069,7 +4295,8 @@
       "patriarchs",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Plain of Babel (Gen 11:2); Amraphel's kingdom (Gen 14); Achan's cloak (Josh 7:21)."
   },
   {
     "id": "shittim",
@@ -4088,7 +4315,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Peor apostasy (Num 25:1); spies sent from here (Josh 2:1; 3:1)."
   },
   {
     "id": "shunem",
@@ -4106,7 +4334,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Issachar (Josh 19:18)."
   },
   {
     "id": "shur",
@@ -4125,7 +4354,8 @@
       "exodus",
       "united"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Desert east of Egypt (Gen 16:7; 20:1; 25:18; Exod 15:22)."
   },
   {
     "id": "socoh",
@@ -4146,7 +4376,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Shephelah town (Josh 15:35); a second Socoh in the hill country (Josh 15:48)."
   },
   {
     "id": "taanach",
@@ -4163,7 +4394,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 12:21; 17:11; Judg 1:27; 5:19."
   },
   {
     "id": "tabor",
@@ -4182,7 +4414,8 @@
       "gospels",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border (Josh 19:22); Barak's muster (Judg 4:6,12,14); Judg 8:18."
   },
   {
     "id": "tigris",
@@ -4200,7 +4433,8 @@
       "patriarchs",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Third river of Eden (Gen 2:14); Daniel 10:4."
   },
   {
     "id": "timnah",
@@ -4220,7 +4454,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Samson's wife (Judg 14); Dan/Judah border (Josh 15:10; 19:43)."
   },
   {
     "id": "timnath_serah",
@@ -4239,7 +4474,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Joshua's inheritance and burial (Josh 19:50; 24:30; Judg 2:9)."
   },
   {
     "id": "valley_of_hinnom",
@@ -4261,7 +4497,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah/Benjamin boundary (Josh 15:8; 18:16)."
   },
   {
     "id": "valley_of_rephaim",
@@ -4278,7 +4515,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Boundary (Josh 15:8; 18:16)."
   },
   {
     "id": "valley_of_sorek",
@@ -4294,7 +4532,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Delilah's home (Judg 16:4)."
   },
   {
     "id": "wilderness_judah",
@@ -4312,7 +4551,8 @@
       "united",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Kenites settle (Judg 1:16)."
   },
   {
     "id": "wilderness_sin",
@@ -4328,7 +4568,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Manna and quail (Exod 16:1)."
   },
   {
     "id": "wilderness_zin",
@@ -4345,7 +4586,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Kadesh lies in Zin (Num 20:1; 33:36); southern border (Num 34:3; Josh 15:1)."
   },
   {
     "id": "zered",
@@ -4363,7 +4605,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Edom/Moab border crossed (Num 21:12; Deut 2:13-14)."
   },
   {
     "id": "ziph",
@@ -4382,7 +4625,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:55 (also a Negeb Ziph, 15:24)."
   },
   {
     "id": "zoan",
@@ -4401,7 +4645,8 @@
       "divided",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Built seven years after Hebron (Num 13:22)."
   },
   {
     "id": "zoar",
@@ -4419,7 +4664,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Lot's refuge (Gen 19)."
   },
   {
     "id": "zorah",
@@ -4437,7 +4683,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Samson's birthplace (Judg 13:2); Danite scouts (Judg 18:2)."
   },
   {
     "id": "ebenezer",
@@ -4454,7 +4701,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Israel's camp when the ark was captured (1 Sam 4); later Samuel's memorial stone (1 Sam 7:12, likely a different spot)."
   },
   {
     "id": "aphek_sharon",
@@ -4474,7 +4722,8 @@
       "united",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine muster point at the Yarkon springs (1 Sam 4:1; 29:1); later Herodian Antipatris (Acts 23:31)."
   },
   {
     "id": "rachels_tomb",
@@ -4491,7 +4740,8 @@
       "patriarchs",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Sign to Saul at Zelzah on the border of Benjamin (1 Sam 10:2)."
   },
   {
     "id": "jabesh_gilead",
@@ -4509,7 +4759,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rescued by Saul from Nahash (1 Sam 11); its men recover Saul's body from Beth-shan (1 Sam 31)."
   },
   {
     "id": "michmash",
@@ -4529,7 +4780,8 @@
       "exile",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Philistine camp opposite Geba; Jonathan's cliff assault (1 Sam 13-14)."
   },
   {
     "id": "beth_aven",
@@ -4547,7 +4799,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Battle line passes Beth-aven (1 Sam 13:5; 14:23); Hosea's slur for Bethel."
   },
   {
     "id": "carmel_judah",
@@ -4563,7 +4816,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Saul's victory monument (1 Sam 15:12); Nabal's estate (1 Sam 25)."
   },
   {
     "id": "amalek",
@@ -4582,7 +4836,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Nomadic foe of the Negev/Sinai; Saul's campaign (1 Sam 15); David's raids and pursuit (1 Sam 27, 30)."
   },
   {
     "id": "cush",
@@ -4606,7 +4861,8 @@
       "patriarchs",
       "acts"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Nubian kingdom: Zerah (2 Chr 14), Tirhakah (2 Kgs 19:9)."
   },
   {
     "id": "valley_of_elah",
@@ -4623,7 +4879,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "David kills Goliath (1 Sam 17)."
   },
   {
     "id": "nob",
@@ -4639,7 +4896,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "City of priests; Ahimelech gives David bread and Goliath's sword; massacred by Doeg (1 Sam 21-22)."
   },
   {
     "id": "ziklag",
@@ -4654,7 +4912,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Given to David by Achish; burned by Amalekites (1 Sam 27; 30)."
   },
   {
     "id": "gilboa",
@@ -4670,7 +4929,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Saul and Jonathan die (1 Sam 31; 2 Sam 1; 1 Chr 10)."
   },
   {
     "id": "besor",
@@ -4686,7 +4946,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "200 exhausted men stay behind in the Amalekite pursuit (1 Sam 30:9-10)."
   },
   {
     "id": "aroer_negeb",
@@ -4702,7 +4963,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "One of the towns receiving David's spoil (1 Sam 30:28)."
   },
   {
     "id": "hormah",
@@ -4720,7 +4982,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Receives David's spoil (1 Sam 30:30); Simeonite town (1 Chr 4:30)."
   },
   {
     "id": "bahurim",
@@ -4735,7 +4998,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Shimei curses David; spies hide in a well (2 Sam 16-17)."
   },
   {
     "id": "beeroth",
@@ -4752,7 +5016,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Home of Ish-bosheth's assassins (2 Sam 4:2)."
   },
   {
     "id": "geshur",
@@ -4768,7 +5033,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Aramean kingdom of Talmai, Absalom's grandfather; Absalom's exile (2 Sam 13-15)."
   },
   {
     "id": "baal_perazim",
@@ -4786,7 +5052,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "David's breakthrough over the Philistines (2 Sam 5:20)."
   },
   {
     "id": "zobah",
@@ -4803,7 +5070,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hadadezer's Aramean kingdom defeated by David (2 Sam 8; 10); Rezon's origin (1 Kgs 11:23)."
   },
   {
     "id": "hamath",
@@ -4822,7 +5090,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Toi's tribute to David; Jeroboam II; deportees to Samaria; Riblah 'in the land of Hamath'."
   },
   {
     "id": "valley_of_salt",
@@ -4838,7 +5107,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Edomites defeated by David/Abishai (2 Sam 8:13; 1 Chr 18:12) and by Amaziah (2 Kgs 14:7)."
   },
   {
     "id": "lo_debar",
@@ -4856,7 +5126,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Mephibosheth's home (2 Sam 9:4); Machir supplies David (2 Sam 17:27)."
   },
   {
     "id": "maacah",
@@ -4874,7 +5145,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Aramean kingdom hired by Ammon (2 Sam 10:6; 1 Chr 19:6-7)."
   },
   {
     "id": "tob",
@@ -4892,7 +5164,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Mercenaries hired by Ammon (2 Sam 10:6)."
   },
   {
     "id": "helam",
@@ -4907,7 +5180,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "David defeats Hadadezer's coalition (2 Sam 10:16-17)."
   },
   {
     "id": "baal_hazor",
@@ -4923,7 +5197,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Absalom kills Amnon at the sheep-shearing (2 Sam 13:23)."
   },
   {
     "id": "tekoa",
@@ -4942,7 +5217,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wise woman (2 Sam 14); Rehoboam fort; Jehoshaphat's army marches out (2 Chr 20:20); Amos's home."
   },
   {
     "id": "gihon",
@@ -4959,7 +5235,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Solomon anointed (1 Kgs 1:33-45); Hezekiah's tunnel source (2 Chr 32:30)."
   },
   {
     "id": "forest_of_ephraim",
@@ -4974,7 +5251,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Absalom's army defeated; Absalom killed (2 Sam 18:6-17)."
   },
   {
     "id": "rogelim",
@@ -4989,7 +5267,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Home of Barzillai the Gileadite (2 Sam 17:27; 19:31)."
   },
   {
     "id": "netophah",
@@ -5007,7 +5286,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Home of David's mighty men Maharai and Heleb; Levite villages (1 Chr 9:16)."
   },
   {
     "id": "jazer",
@@ -5027,7 +5307,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Census route (2 Sam 24:5); Levitical city in Gilead (1 Chr 6:81; 26:31)."
   },
   {
     "id": "zarethan",
@@ -5047,7 +5328,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Temple bronzes cast in the clay ground nearby (1 Kgs 7:46; 'Zeredah' in 2 Chr 4:17)."
   },
   {
     "id": "succoth_jordan",
@@ -5065,7 +5347,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Bronze-casting ground for Solomon's temple (1 Kgs 7:46; 2 Chr 4:17)."
   },
   {
     "id": "abel_meholah",
@@ -5083,7 +5366,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Solomon's district (1 Kgs 4:12); Elisha's home where Elijah calls him (1 Kgs 19:16-19)."
   },
   {
     "id": "baalath",
@@ -5099,7 +5383,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Store city built by Solomon (1 Kgs 9:18; 2 Chr 8:6)."
   },
   {
     "id": "tamar_wilderness",
@@ -5115,7 +5400,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Solomon's fortress in the Judean wilderness/Arabah (1 Kgs 9:18)."
   },
   {
     "id": "tadmor",
@@ -5131,7 +5417,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Desert city built by Solomon (2 Chr 8:4)."
   },
   {
     "id": "tarshish",
@@ -5150,7 +5437,8 @@
       "divided",
       "exile"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Distant western port; 'ships of Tarshish' (1 Kgs 10:22; 22:48; 2 Chr 9:21; 20:36)."
   },
   {
     "id": "kue",
@@ -5167,7 +5455,8 @@
     "eras": [
       "united"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Cilician horse market for Solomon (1 Kgs 10:28; 2 Chr 1:16)."
   },
   {
     "id": "zeredah",
@@ -5183,7 +5472,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jeroboam's hometown in Ephraim (1 Kgs 11:26)."
   },
   {
     "id": "kir_hareseth",
@@ -5207,7 +5497,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Mesha's last stand; sacrifice of his son (2 Kgs 3:25-27)."
   },
   {
     "id": "baal_shalishah",
@@ -5229,7 +5520,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Firstfruits bread brought to Elisha (2 Kgs 4:42); Saul's donkey search (1 Sam 9:4)."
   },
   {
     "id": "abana",
@@ -5246,7 +5538,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Naaman's boast about Damascus rivers (2 Kgs 5:12)."
   },
   {
     "id": "pharpar",
@@ -5262,7 +5555,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Second river of Damascus (2 Kgs 5:12)."
   },
   {
     "id": "libnah",
@@ -5278,7 +5572,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Revolts under Joram (2 Kgs 8:22); Sennacherib besieges it (2 Kgs 19:8); Hamutal's town."
   },
   {
     "id": "sela",
@@ -5295,7 +5590,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Edomite rock-fortress taken by Amaziah (2 Kgs 14:7; 2 Chr 25:12)."
   },
   {
     "id": "tiphsah",
@@ -5312,7 +5608,8 @@
       "united",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Euphrates crossing marking Solomon's NE limit (1 Kgs 4:24)."
   },
   {
     "id": "galilee",
@@ -5334,7 +5631,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern region of Israel around the Sea of Galilee; setting of much of Jesus’ ministry."
   },
   {
     "id": "kir",
@@ -5349,7 +5647,8 @@
     "eras": [
       "divided"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Where Damascenes were deported (2 Kgs 16:9)."
   },
   {
     "id": "halah",
@@ -5365,7 +5664,8 @@
       "divided",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Israelite exiles settled (2 Kgs 17:6; 18:11; 1 Chr 5:26)."
   },
   {
     "id": "gozan",
@@ -5384,7 +5684,8 @@
       "divided",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Israelite exiles on the Habor (2 Kgs 17:6); Assyrian conquest boast (2 Kgs 19:12)."
   },
   {
     "id": "media",
@@ -5404,7 +5705,8 @@
       "exile",
       "acts"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Israelite exiles in the cities of the Medes (2 Kgs 17:6; 18:11)."
   },
   {
     "id": "cuthah",
@@ -5420,7 +5722,8 @@
     "eras": [
       "divided"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Settlers brought to Samaria (2 Kgs 17:24, 30)."
   },
   {
     "id": "sepharvaim",
@@ -5435,7 +5738,8 @@
     "eras": [
       "divided"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Settlers to Samaria; Rabshakeh's boast (2 Kgs 17:24; 18:34)."
   },
   {
     "id": "arpad",
@@ -5451,7 +5755,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Conquered city in Rabshakeh's boast (2 Kgs 18:34; 19:13)."
   },
   {
     "id": "rezeph",
@@ -5466,7 +5771,8 @@
     "eras": [
       "divided"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "In Sennacherib's list of conquests (2 Kgs 19:12)."
   },
   {
     "id": "carchemish",
@@ -5483,7 +5789,8 @@
       "divided",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Neco's objective on the Euphrates (2 Chr 35:20)."
   },
   {
     "id": "etam",
@@ -5499,7 +5806,8 @@
       "judges",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rehoboam fort (2 Chr 11:6); Judahite clan town (1 Chr 4:3)."
   },
   {
     "id": "adoraim",
@@ -5514,7 +5822,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rehoboam fort (2 Chr 11:9)."
   },
   {
     "id": "zemaraim",
@@ -5530,7 +5839,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Abijah's speech before battle with Jeroboam (2 Chr 13:4)."
   },
   {
     "id": "jeshanah",
@@ -5545,7 +5855,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Taken by Abijah with Bethel and Ephron (2 Chr 13:19)."
   },
   {
     "id": "beracah",
@@ -5563,7 +5874,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jehoshaphat's thanksgiving after the coalition self-destructs (2 Chr 20:26)."
   },
   {
     "id": "golan",
@@ -5580,7 +5892,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Levitical city of refuge in Bashan (1 Chr 6:71)."
   },
   {
     "id": "ashtaroth",
@@ -5597,7 +5910,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Levitical city in Bashan (1 Chr 6:71)."
   },
   {
     "id": "debir",
@@ -5616,7 +5930,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Levitical city of Judah (1 Chr 6:58)."
   },
   {
     "id": "ono",
@@ -5632,7 +5947,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Built by Benjamite Shemed with Lod (1 Chr 8:12)."
   },
   {
     "id": "lod",
@@ -5650,7 +5966,8 @@
       "exile",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Built by Benjamite Shemed (1 Chr 8:12); Peter heals Aeneas (Acts 9)."
   },
   {
     "id": "sharon",
@@ -5668,7 +5985,8 @@
       "acts",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Gadite pasturelands (1 Chr 5:16); David's herds (1 Chr 27:29)."
   },
   {
     "id": "achor",
@@ -5685,7 +6003,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "'Door of hope' (Hos 2:15; Isa 65:10; Josh 7:24–26)."
   },
   {
     "id": "alexandria",
@@ -5702,7 +6021,8 @@
     "eras": [
       "acts"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Synagogue of Alexandrians (Acts 6:9); Apollos (Acts 18:24); grain ships (Acts 27:6, 28:11)."
   },
   {
     "id": "arabia",
@@ -5721,7 +6041,8 @@
       "exile",
       "acts"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Arab lands (Isa 21:13; Jer 25:24; Ezek 27:21)."
   },
   {
     "id": "arvad",
@@ -5739,7 +6060,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Phoenician island city (Ezek 27:8, 11)."
   },
   {
     "id": "benjamin",
@@ -5759,7 +6081,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Tribal territory (Anathoth, Gibeah, Ramah, Mizpah); Jer 1:1, 17:26, 32:8, 32:44, 33:13, 37:12."
   },
   {
     "id": "berothah",
@@ -5778,7 +6101,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern border point (Ezek 47:16)."
   },
   {
     "id": "beth_eden",
@@ -5798,7 +6122,8 @@
       "divided",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Aramean state Bit-Adini (Amos 1:5; 'children of Eden', Isa 37:12; Ezek 27:23)."
   },
   {
     "id": "beth_gamul",
@@ -5816,7 +6141,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite town (Jer 48:23)."
   },
   {
     "id": "beth_haccherem",
@@ -5835,7 +6161,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Signal-fire station south of Jerusalem (Jer 6:1)."
   },
   {
     "id": "bubastis",
@@ -5854,7 +6181,8 @@
     "eras": [
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Delta city (Ezek 30:17)."
   },
   {
     "id": "calno",
@@ -5872,7 +6200,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Kullania, conquered by Tiglath-pileser III (Isa 10:9; Amos 6:2)."
   },
   {
     "id": "chebar",
@@ -5895,7 +6224,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Judean exile settlement where Ezekiel saw his visions (Ezek 1:1, 3, 3:15, 23, 10:15, 43:3)."
   },
   {
     "id": "dedan",
@@ -5912,7 +6242,8 @@
       "divided",
       "exile"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Caravan oasis (Isa 21:13; Jer 25:23, 49:8; Ezek 25:13, 27:15, 38:13)."
   },
   {
     "id": "dumah",
@@ -5928,7 +6259,8 @@
       "divided",
       "exile"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Oasis named in the oracle Isa 21:11."
   },
   {
     "id": "dura",
@@ -5944,7 +6276,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Site of Nebuchadnezzar's golden image (Dan 3:1)."
   },
   {
     "id": "gomorrah",
@@ -5963,7 +6296,8 @@
       "exile",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Paired with Sodom as a byword for judgement."
   },
   {
     "id": "greece",
@@ -5982,7 +6316,8 @@
       "exile",
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "'Javan' (Isa 66:19; Ezek 27:13; Zech 9:13) = Ionian Greeks; Dan 8:21, 10:20, 11:2; Acts 20:2."
   },
   {
     "id": "hadrach",
@@ -5998,7 +6333,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Assyrian Hatarikka (Zech 9:1)."
   },
   {
     "id": "hanes",
@@ -6013,7 +6349,8 @@
     "eras": [
       "divided"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Egyptian city receiving Judah's envoys (Isa 30:4)."
   },
   {
     "id": "hauran",
@@ -6028,7 +6365,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Region east of the Jordan (Ezek 47:16, 18)."
   },
   {
     "id": "helbon",
@@ -6043,7 +6381,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wine town trading with Tyre (Ezek 27:18)."
   },
   {
     "id": "horonaim",
@@ -6059,7 +6398,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite town on a descent (Isa 15:5; Jer 48:3, 5, 34)."
   },
   {
     "id": "jahaz",
@@ -6080,7 +6420,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite town on the steppe edge (Isa 15:4; Jer 48:21, 34)."
   },
   {
     "id": "judah",
@@ -6103,7 +6444,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern kingdom (capital Jerusalem); matches kingdoms.json feature 'judah'."
   },
   {
     "id": "kedar",
@@ -6119,7 +6461,8 @@
       "divided",
       "exile"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Qedarite Arab tribal confederation (Isa 21:16, 42:11, 60:7; Jer 2:10, 49:28; Ezek 27:21)."
   },
   {
     "id": "kerioth",
@@ -6135,7 +6478,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite city (Jer 48:24, 41; Amos 2:2)."
   },
   {
     "id": "kiriathaim",
@@ -6156,7 +6500,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite town (Jer 48:1, 23; Ezek 25:9)."
   },
   {
     "id": "libya",
@@ -6178,7 +6523,8 @@
       "exile",
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Put/Libya (Jer 46:9; Ezek 27:10, 30:5, 38:5; Nah 3:9; Acts 2:10)."
   },
   {
     "id": "lud",
@@ -6194,7 +6540,8 @@
     "eras": [
       "exile"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Usually Lydia (Isa 66:19; Jer 46:9; Ezek 27:10, 30:5)."
   },
   {
     "id": "magog",
@@ -6212,7 +6559,8 @@
       "exile",
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Land of Gog (Ezek 38:2, 39:6); symbolic in Rev 20:8."
   },
   {
     "id": "mephaath",
@@ -6229,7 +6577,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite plateau town (Jer 48:21)."
   },
   {
     "id": "meshech",
@@ -6246,7 +6595,8 @@
     "eras": [
       "exile"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Anatolian people paired with Tubal (Ezek 27:13, 32:26, 38:2–3, 39:1)."
   },
   {
     "id": "migdol_egypt",
@@ -6263,7 +6613,8 @@
       "exodus",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Frontier fort with a Judean colony (Jer 44:1, 46:14; Ezek 29:10, 30:6)."
   },
   {
     "id": "minni",
@@ -6280,7 +6631,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Mannean kingdom summoned against Babylon (Jer 51:27)."
   },
   {
     "id": "moresheth_gath",
@@ -6300,7 +6652,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Micah's hometown (Mic 1:1, 14; Jer 26:18)."
   },
   {
     "id": "nimrim",
@@ -6317,7 +6670,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Moabite oasis (Isa 15:6; Jer 48:34)."
   },
   {
     "id": "pathros",
@@ -6333,7 +6687,8 @@
     "eras": [
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Upper Egypt (Isa 11:11; Jer 44:1, 15; Ezek 29:14, 30:14)."
   },
   {
     "id": "pelusium",
@@ -6348,7 +6703,8 @@
     "eras": [
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "'Sin, the stronghold of Egypt' (Ezek 30:15–16); 'Sin' cannot be aliased."
   },
   {
     "id": "peor",
@@ -6369,7 +6725,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Site of the Baal-peor apostasy (Num 25; Hos 9:10)."
   },
   {
     "id": "raamah",
@@ -6384,7 +6741,8 @@
     "eras": [
       "exile"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Arabian trading people (Ezek 27:22)."
   },
   {
     "id": "seba",
@@ -6399,7 +6757,8 @@
     "eras": [
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Paired with Cush/Egypt (Isa 43:3, 45:14)."
   },
   {
     "id": "sibmah",
@@ -6417,7 +6776,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Vineyard town (Isa 16:8–9; Jer 48:32)."
   },
   {
     "id": "siloam",
@@ -6438,7 +6798,8 @@
       "divided",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hezekiah-tunnel pool (Isa 8:6, 22:9–11); tower (Luke 13:4); healing of the blind man (John 9:7)."
   },
   {
     "id": "sodom",
@@ -6457,7 +6818,8 @@
       "exile",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Cities of the plain; proverbial for judgement (Isa 1:9–10; Jer 23:14; Ezek 16; Matt 10:15; Rom 9:29; 2 Pet 2:6; Jude 7)."
   },
   {
     "id": "syene",
@@ -6476,7 +6838,8 @@
     "eras": [
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Egypt's southern frontier (Ezek 29:10, 30:6)."
   },
   {
     "id": "tahpanhes",
@@ -6495,7 +6858,8 @@
       "divided",
       "exile"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Border fortress where Jeremiah was taken (Jer 2:16, 43:7–9, 44:1, 46:14; Ezek 30:18)."
   },
   {
     "id": "tamar",
@@ -6512,7 +6876,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "South-eastern border point (Ezek 47:19, 48:28)."
   },
   {
     "id": "tema",
@@ -6528,7 +6893,8 @@
       "divided",
       "exile"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "North-Arabian oasis (Isa 21:14; Jer 25:23); Nabonidus resided there."
   },
   {
     "id": "teman",
@@ -6544,7 +6910,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Edomite district (Jer 49:7, 20; Ezek 25:13; Amos 1:12; Obad 9; Hab 3:3)."
   },
   {
     "id": "togarmah",
@@ -6562,7 +6929,8 @@
     "eras": [
       "exile"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Horse-trading people 'in the uttermost parts of the north' (Ezek 27:14, 38:6)."
   },
   {
     "id": "tubal",
@@ -6578,7 +6946,8 @@
     "eras": [
       "exile"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Anatolian people/land paired with Meshech (Isa 66:19; Ezek 27:13, 32:26, 38–39)."
   },
   {
     "id": "ulai",
@@ -6596,7 +6965,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Setting of Daniel's ram-and-goat vision (Dan 8:2, 16)."
   },
   {
     "id": "uz",
@@ -6612,7 +6982,8 @@
     "eras": [
       "exile"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Job's homeland; associated with Edom (Lam 4:21; Jer 25:20)."
   },
   {
     "id": "zebulun",
@@ -6631,7 +7002,8 @@
       "divided",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Tribal territory of Lower Galilee; 'land of Zebulun and land of Naphtali' (Isa 9:1; Matt 4:13–15)."
   },
   {
     "id": "zedad",
@@ -6647,7 +7019,8 @@
       "exodus",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern border point (Ezek 47:15; Num 34:8)."
   },
   {
     "id": "abilene",
@@ -6662,7 +7035,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Tetrarchy of Lysanias (Luke 3:1)."
   },
   {
     "id": "achaia",
@@ -6678,7 +7052,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Roman province governed from Corinth (Acts 18:12, 27; Rom 15:26; 2 Cor 1:1, 9:2; 1 Thess 1:7–8)."
   },
   {
     "id": "adramyttium",
@@ -6694,7 +7069,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Home port of Paul's first ship (Acts 27:2)."
   },
   {
     "id": "adriatic",
@@ -6712,7 +7088,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Ancient name for the central Mediterranean between Crete, Sicily and Greece (Acts 27:27)."
   },
   {
     "id": "aenon",
@@ -6730,7 +7107,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "John baptizing 'because there was much water there' (John 3:23)."
   },
   {
     "id": "akeldama",
@@ -6751,7 +7129,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Field bought with Judas's silver (Matt 27:7–10; Acts 1:19)."
   },
   {
     "id": "amphipolis",
@@ -6766,7 +7145,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "On the Via Egnatia (Acts 17:1)."
   },
   {
     "id": "apollonia",
@@ -6781,7 +7161,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "On the Via Egnatia (Acts 17:1)."
   },
   {
     "id": "areopagus",
@@ -6800,7 +7181,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Paul's address (Acts 17:19–34)."
   },
   {
     "id": "arimathea",
@@ -6818,7 +7200,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hometown of Joseph who buried Jesus (Matt 27:57; Mark 15:43; Luke 23:51; John 19:38)."
   },
   {
     "id": "asia_province",
@@ -6836,7 +7219,8 @@
       "acts",
       "revelation"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Roman province governed from Ephesus (Acts 2:9, 16:6, 19:10, 20:16; 1 Cor 16:19; 2 Cor 1:8; 2 Tim 1:15; 1 Pet 1:1; Rev 1:4)."
   },
   {
     "id": "assos",
@@ -6852,7 +7236,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Paul walked from Troas to Assos (Acts 20:13–14)."
   },
   {
     "id": "bethesda",
@@ -6869,7 +7254,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Healing at the pool (John 5:2)."
   },
   {
     "id": "bithynia",
@@ -6884,7 +7270,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Province Paul was prevented from entering (Acts 16:7; 1 Pet 1:1)."
   },
   {
     "id": "cappadocia",
@@ -6899,7 +7286,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Acts 2:9; 1 Pet 1:1."
   },
   {
     "id": "cauda",
@@ -6923,7 +7311,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Small island southwest of Crete (Gavdos); they passed under its lee and secured the ship’s boat (Acts 27:16)."
   },
   {
     "id": "chios",
@@ -6938,7 +7327,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Acts 20:15."
   },
   {
     "id": "cilicia",
@@ -6953,7 +7343,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Paul's home province around Tarsus (Acts 6:9, 15:23, 41, 21:39, 22:3, 23:34, 27:5; Gal 1:21)."
   },
   {
     "id": "cnidus",
@@ -6969,7 +7360,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Headland of southwest Asia Minor; the ship reached it with difficulty before turning under Crete (Acts 27:7)."
   },
   {
     "id": "cos",
@@ -6986,7 +7378,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Acts 21:1."
   },
   {
     "id": "cyrene",
@@ -7004,7 +7397,8 @@
       "gospels",
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Home of Simon who carried the cross (Matt 27:32) and of early evangelists (Acts 11:20, 13:1)."
   },
   {
     "id": "dalmatia",
@@ -7019,7 +7413,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Titus went there (2 Tim 4:10)."
   },
   {
     "id": "decapolis",
@@ -7035,7 +7430,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "League of Hellenistic cities east of the Jordan (Matt 4:25; Mark 5:20, 7:31)."
   },
   {
     "id": "ephraim_town",
@@ -7054,7 +7450,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town near the wilderness where Jesus withdrew (John 11:54)."
   },
   {
     "id": "forum_appii",
@@ -7072,7 +7469,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Roman believers met Paul here (Acts 28:15)."
   },
   {
     "id": "gadara",
@@ -7089,7 +7487,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Decapolis city whose territory reached the lake (Matt 8:28; Mark 5:1; Luke 8:26 variants)."
   },
   {
     "id": "galatia",
@@ -7106,7 +7505,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Roman province (Acts 16:6, 18:23; 1 Cor 16:1; Gal 1:2; 2 Tim 4:10; 1 Pet 1:1)."
   },
   {
     "id": "gennesaret",
@@ -7123,7 +7523,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Fertile plain (Matt 14:34; Mark 6:53)."
   },
   {
     "id": "gergesa",
@@ -7143,7 +7544,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Lakeside site of the demoniac healing (Matt 8:28–34; Mark 5:1–20; Luke 8:26–39)."
   },
   {
     "id": "gethsemane",
@@ -7159,7 +7561,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Garden of the arrest (Matt 26:36; Mark 14:32; John 18:1)."
   },
   {
     "id": "hierapolis",
@@ -7174,7 +7577,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Lycus valley church (Col 4:13)."
   },
   {
     "id": "idumea",
@@ -7190,7 +7594,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hellenistic–Roman Idumea south of Judea (Mark 3:8)."
   },
   {
     "id": "illyricum",
@@ -7205,7 +7610,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Limit of Paul's preaching (Rom 15:19)."
   },
   {
     "id": "italy",
@@ -7220,7 +7626,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Acts 18:2, 27:1, 6; Heb 13:24."
   },
   {
     "id": "iturea",
@@ -7236,7 +7643,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Part of Philip's tetrarchy (Luke 3:1)."
   },
   {
     "id": "judea",
@@ -7256,7 +7664,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Roman district around Jerusalem (Gospels, Acts)."
   },
   {
     "id": "judean_wilderness",
@@ -7277,7 +7686,8 @@
       "united",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "John the Baptist's preaching ground (Matt 3:1); traditional temptation setting."
   },
   {
     "id": "lasea",
@@ -7293,7 +7703,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Town near Fair Havens on Crete’s south coast (Acts 27:8)."
   },
   {
     "id": "lycaonia",
@@ -7308,7 +7719,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "District of Lystra and Derbe (Acts 14:6, 11)."
   },
   {
     "id": "lycia",
@@ -7323,7 +7735,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "District of Myra and Patara (Acts 27:5)."
   },
   {
     "id": "macedonia",
@@ -7338,7 +7751,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Roman province (Philippi, Thessalonica, Berea); Acts 16:9–12, 19:21, 20:1–3; Rom 15:26; 2 Cor 7–9; Phil 4:15."
   },
   {
     "id": "magdala",
@@ -7355,7 +7769,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Fishing town (Matt 15:39)."
   },
   {
     "id": "miletus",
@@ -7371,7 +7786,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Farewell to the Ephesian elders (Acts 20:15–38); 2 Tim 4:20."
   },
   {
     "id": "mitylene",
@@ -7387,7 +7803,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Acts 20:14."
   },
   {
     "id": "mysia",
@@ -7402,7 +7819,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Region passed through to Troas (Acts 16:7–8)."
   },
   {
     "id": "neapolis",
@@ -7417,7 +7835,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Port of Philippi (Acts 16:11)."
   },
   {
     "id": "nicopolis",
@@ -7432,7 +7851,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Paul planned to winter there (Titus 3:12)."
   },
   {
     "id": "pamphylia",
@@ -7447,7 +7867,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Coastal district of Perga and Attalia (Acts 2:10, 13:13, 14:24, 15:38, 27:5)."
   },
   {
     "id": "parthia",
@@ -7463,7 +7884,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Parthian empire (Acts 2:9)."
   },
   {
     "id": "patara",
@@ -7478,7 +7900,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Change of ship for Phoenicia (Acts 21:1–2)."
   },
   {
     "id": "perea",
@@ -7498,7 +7921,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Herod Antipas's Transjordan district (Matt 19:1; Mark 10:1); 'beyond the Jordan' (Isa 9:1; Matt 4:15, 25; Mark 3:8)."
   },
   {
     "id": "phoenicia",
@@ -7521,7 +7945,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Coastal city-states of Tyre, Sidon, Byblos and Arvad; matches kingdoms.json feature 'phoenicia'."
   },
   {
     "id": "phoenix_crete",
@@ -7537,7 +7962,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Intended winter harbour (Acts 27:12)."
   },
   {
     "id": "phrygia",
@@ -7552,7 +7978,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Region crossed on the 2nd and 3rd journeys (Acts 2:10, 16:6, 18:23)."
   },
   {
     "id": "pisidia",
@@ -7567,7 +7994,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Mountain district (Acts 13:14, 14:24)."
   },
   {
     "id": "pontus",
@@ -7582,7 +8010,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Home of Aquila (Acts 18:2); Acts 2:9; 1 Pet 1:1."
   },
   {
     "id": "rhegium",
@@ -7597,7 +8026,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Italian landfall at the toe of the peninsula after Syracuse (Acts 28:13)."
   },
   {
     "id": "rhodes",
@@ -7612,7 +8042,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Acts 21:1."
   },
   {
     "id": "salmone",
@@ -7629,7 +8060,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Eastern cape of Crete; they sailed under the island’s lee off this point (Acts 27:7)."
   },
   {
     "id": "samaria_region",
@@ -7649,7 +8081,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Region between Judea and Galilee (Luke 17:11; John 4; Acts 1:8, 8:1, 9:31, 15:3)."
   },
   {
     "id": "samos",
@@ -7664,7 +8097,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Acts 20:15."
   },
   {
     "id": "samothrace",
@@ -7680,7 +8114,8 @@
     "eras": [
       "acts"
     ],
-    "region": "greece"
+    "region": "greece",
+    "pinBlurb": "Overnight anchorage (Acts 16:11)."
   },
   {
     "id": "spain",
@@ -7696,7 +8131,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Paul's planned mission (Rom 15:24, 28)."
   },
   {
     "id": "syracuse",
@@ -7711,7 +8147,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Sicilian port visited for three days after leaving Malta (Acts 28:12)."
   },
   {
     "id": "syria_province",
@@ -7729,7 +8166,8 @@
       "gospels",
       "acts"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Roman province governed from Antioch (Matt 4:24; Luke 2:2; Acts 15:23, 41, 18:18, 20:3, 21:3; Gal 1:21)."
   },
   {
     "id": "syrtis",
@@ -7744,7 +8182,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Shoals the sailors feared (Acts 27:17)."
   },
   {
     "id": "three_taverns",
@@ -7763,7 +8202,8 @@
     "eras": [
       "acts"
     ],
-    "region": "italy"
+    "region": "italy",
+    "pinBlurb": "Second welcoming party (Acts 28:15)."
   },
   {
     "id": "tiberias",
@@ -7778,7 +8218,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Herod Antipas's capital (John 6:23)."
   },
   {
     "id": "trachonitis",
@@ -7793,7 +8234,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Part of Philip's tetrarchy (Luke 3:1)."
   },
   {
     "id": "abdon",
@@ -7809,7 +8251,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Levitical city in Asher (Josh 21:30; 1 Chr 6:74); = Ebron of Josh 19:28 in some MSS."
   },
   {
     "id": "accad",
@@ -7825,7 +8268,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Genesis 10:10; one of Nimrod's cities in Shinar."
   },
   {
     "id": "achmetha",
@@ -7841,7 +8285,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Ezra 6:2; Median capital where Cyrus's decree was found."
   },
   {
     "id": "achshaph",
@@ -7856,7 +8301,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Canaanite city allied with Jabin (Josh 11:1); king defeated (Josh 12:20); border of Asher (Josh 19:25)."
   },
   {
     "id": "adummim",
@@ -7873,7 +8319,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Boundary between Judah and Benjamin (Josh 15:7; 18:17)."
   },
   {
     "id": "ahlab",
@@ -7889,7 +8336,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Canaanite town Asher failed to take (Judg 1:31); likely Mahalab of Josh 19:29."
   },
   {
     "id": "akrabbim",
@@ -7908,7 +8356,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern border of Canaan/Judah (Num 34:4; Josh 15:3); Amorite border (Judg 1:36)."
   },
   {
     "id": "almon",
@@ -7924,7 +8373,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Levitical city of Benjamin: Almon (Josh 21:18) = Alemeth (1 Chr 6:60)."
   },
   {
     "id": "amana",
@@ -7941,7 +8391,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Song 4:8 (peak paired with Senir and Hermon); Qere 'Amana' river of 2 Kgs 5:12 (Abana)."
   },
   {
     "id": "anab",
@@ -7956,7 +8407,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Anakim expelled from Anab (Josh 11:21); town of Judah's hill country (Josh 15:50)."
   },
   {
     "id": "anim",
@@ -7971,7 +8423,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town in Judah's hill country (Josh 15:50)."
   },
   {
     "id": "aphek_asher",
@@ -7989,7 +8442,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Asher town not conquered (Judg 1:31, 'Aphik'); in Asher's allotment (Josh 19:30)."
   },
   {
     "id": "ascent_of_akrabbim",
@@ -8006,7 +8460,8 @@
       "conquest",
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Pass on the southern border of Canaan/Judah and the Amorite border."
   },
   {
     "id": "azmaveth",
@@ -8022,7 +8477,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Returning exiles from Azmaveth/Beth-azmaveth (Ezra 2:24; Neh 7:28); singers' villages (Neh 12:29)."
   },
   {
     "id": "beth_anoth",
@@ -8038,7 +8494,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town in Judah's hill country (Josh 15:59)."
   },
   {
     "id": "beth_arabah",
@@ -8054,7 +8511,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Boundary town between Judah and Benjamin (Josh 15:6, 61; 18:18, 22)."
   },
   {
     "id": "beth_aram",
@@ -8072,7 +8530,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Gadite town in the Jordan valley (Josh 13:27); fortified by Gad as Beth-haran (Num 32:36)."
   },
   {
     "id": "beth_eked",
@@ -8090,7 +8549,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Where Jehu slaughtered Ahaziah's kinsmen (2 Kgs 10:12-14)."
   },
   {
     "id": "beth_tappuah",
@@ -8106,7 +8566,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town in Judah's hill country (Josh 15:53)."
   },
   {
     "id": "bethabara",
@@ -8121,7 +8582,8 @@
     "eras": [
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "John 1:28 (KJV 'Bethabara'; most MSS 'Bethany beyond the Jordan'), where John baptized."
   },
   {
     "id": "bezer",
@@ -8138,7 +8600,8 @@
       "exodus",
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "City of refuge of Reuben (Deut 4:43; Josh 20:8); Levitical city (Josh 21:36; 1 Chr 6:78)."
   },
   {
     "id": "brook_kanah",
@@ -8156,7 +8619,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wadi forming the boundary between Ephraim and Manasseh."
   },
   {
     "id": "chaldea",
@@ -8174,7 +8638,8 @@
       "divided",
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Southern Babylonia; Neo-Babylonian ruling people (Jer 50:10; Ezek 11:24; 16:29; 23:15)."
   },
   {
     "id": "chesalon",
@@ -8190,7 +8655,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Northern border of Judah, on the shoulder of Mount Jearim (Josh 15:10)."
   },
   {
     "id": "chesulloth",
@@ -8208,7 +8674,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border town of Issachar (Josh 19:18) = Chisloth-tabor on Zebulun's border (Josh 19:12)."
   },
   {
     "id": "crete",
@@ -8225,7 +8692,8 @@
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "pinBlurb": "Large island south of the Aegean; Acts 27 traces the voyage under its lee and along the south coast."
   },
   {
     "id": "ecbatana",
@@ -8240,7 +8708,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Median capital and Persian summer residence where Cyrus's decree was found (Ezra 6:2)."
   },
   {
     "id": "eglon",
@@ -8255,7 +8724,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Amorite city in the Shephelah whose king joined the southern coalition; later a town of Judah."
   },
   {
     "id": "ellasar",
@@ -8270,7 +8740,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Kingdom of Arioch, ally of Kedorlaomer in the campaign against the cities of the plain."
   },
   {
     "id": "en_eglaim",
@@ -8287,7 +8758,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Spring on the Dead Sea shore in Ezekiel's vision of the healed waters (fishermen from En-gedi to En-eglaim)."
   },
   {
     "id": "en_rimmon",
@@ -8305,7 +8777,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern town of Judah/Simeon, resettled after the exile (Josh 15:32; 19:7; Neh 11:29; Zech 14:10)."
   },
   {
     "id": "en_shemesh",
@@ -8322,7 +8795,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Spring on the Judah-Benjamin boundary on the descent from Jerusalem toward Jericho."
   },
   {
     "id": "gath_rimmon",
@@ -8339,7 +8813,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Danite town assigned to the Kohathite Levites, on the Yarkon."
   },
   {
     "id": "gedor",
@@ -8354,7 +8829,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town in the hill country of Judah between Bethlehem and Hebron."
   },
   {
     "id": "gibeah_judah",
@@ -8370,7 +8846,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town in the hill country of Judah listed with Kain and Timnah."
   },
   {
     "id": "gibeah_phinehas",
@@ -8387,7 +8864,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hill in the hill country of Ephraim where Eleazar son of Aaron was buried."
   },
   {
     "id": "gimzo",
@@ -8402,7 +8880,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Shephelah town captured by the Philistines in the reign of Ahaz."
   },
   {
     "id": "hadid",
@@ -8418,7 +8897,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town near Lod resettled by returning exiles."
   },
   {
     "id": "hazarmaveth",
@@ -8435,7 +8915,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Joktanite people/region of South Arabia in the Table of Nations."
   },
   {
     "id": "hazeroth",
@@ -8450,7 +8931,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "egypt"
+    "region": "egypt",
+    "pinBlurb": "Wilderness camp after Kibroth-hattaavah where Miriam and Aaron opposed Moses."
   },
   {
     "id": "hosah",
@@ -8465,7 +8947,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border point of Asher near Tyre."
   },
   {
     "id": "hukkok",
@@ -8480,7 +8963,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border town of Naphtali."
   },
   {
     "id": "india",
@@ -8496,7 +8980,8 @@
     "eras": [
       "exile"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Eastern limit of the Persian empire of Ahasuerus (Persian satrapy Hindush)."
   },
   {
     "id": "jacobs_well",
@@ -8513,7 +8998,8 @@
       "patriarchs",
       "gospels"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Well at Sychar where Jesus spoke with the Samaritan woman, on the parcel Jacob gave Joseph."
   },
   {
     "id": "juttah",
@@ -8528,7 +9014,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hill-country town of Judah given to the Levites."
   },
   {
     "id": "kain",
@@ -8543,7 +9030,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town of Judah (Josh 15:57; KJV 'Cain')."
   },
   {
     "id": "kanah_asher",
@@ -8559,7 +9047,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town on the border of Asher, as far as Great Sidon."
   },
   {
     "id": "kinah",
@@ -8574,7 +9063,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town of Judah's Negeb district near the Edomite border."
   },
   {
     "id": "kishion",
@@ -8589,7 +9079,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Issachar town given to the Gershonite Levites (KJV 'Kishon' in Josh 21:28)."
   },
   {
     "id": "madon",
@@ -8604,7 +9095,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Canaanite city whose king Jobab joined Jabin's northern coalition."
   },
   {
     "id": "makkedah",
@@ -8619,7 +9111,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Cave where Joshua trapped the five Amorite kings; town of the Shephelah."
   },
   {
     "id": "me_jarkon",
@@ -8637,7 +9130,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Boundary water of Dan's inheritance near Joppa."
   },
   {
     "id": "migdal_edar",
@@ -8656,7 +9150,8 @@
       "patriarchs",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Israel (Jacob) camped beyond it after Rachel's death; Micah's 'tower of the flock'."
   },
   {
     "id": "migdal_eder",
@@ -8673,7 +9168,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Israel (Jacob) camped beyond the tower of Edar after Rachel's death near Bethlehem; Micah's 'tower of the flock'."
   },
   {
     "id": "misrephoth_maim",
@@ -8689,7 +9185,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Limit of Joshua's pursuit after Merom; northern border of unconquered land near Sidon."
   },
   {
     "id": "mount_hor",
@@ -8704,7 +9201,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "28; Num 21:4; Num 33:37-41; Deut 32:50 Approx. site: Traditional Jebel Harun; Jebel Madurah NE of Kadesh is the main alternative. The northern 'Mount Hor' of Num 34:7 (Mountain on the border of Edom where Aaron died and was buried. Num 20:22)."
   },
   {
     "id": "mount_jearim",
@@ -8719,7 +9217,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Ridge on Judah's northern border, 'which is Chesalon'."
   },
   {
     "id": "mozah",
@@ -8736,7 +9235,8 @@
       "conquest",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamite town; Iron Age temple excavated at Tel Moza."
   },
   {
     "id": "naarah",
@@ -8753,7 +9253,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town on Ephraim's eastern border near Jericho."
   },
   {
     "id": "neballat",
@@ -8768,7 +9269,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamite settlement of returning exiles near Lod and Ono."
   },
   {
     "id": "nephtoah",
@@ -8785,7 +9287,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Spring on the Judah-Benjamin boundary."
   },
   {
     "id": "nezib",
@@ -8800,7 +9303,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town of the Judean Shephelah."
   },
   {
     "id": "ophel",
@@ -8818,7 +9322,8 @@
       "divided",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Fortified ridge of Jerusalem; walls built by Jotham and Manasseh; temple servants lived here."
   },
   {
     "id": "ophni",
@@ -8833,7 +9338,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town of Benjamin."
   },
   {
     "id": "parah",
@@ -8848,7 +9354,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town of Benjamin."
   },
   {
     "id": "pethor",
@@ -8863,7 +9370,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Hometown of Balaam 'by the river' in Aram-naharaim."
   },
   {
     "id": "pirathon",
@@ -8880,7 +9388,8 @@
       "judges",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Home and burial place of judge Abdon; home of David's warrior Benaiah."
   },
   {
     "id": "rehoboth_well",
@@ -8896,7 +9405,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Well dug by Isaac's servants near Gerar."
   },
   {
     "id": "resen",
@@ -8911,7 +9421,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "mesopotamia"
+    "region": "mesopotamia",
+    "pinBlurb": "Assyrian city built by Nimrod's line between Nineveh and Calah (Gen 10:12)."
   },
   {
     "id": "rimmon_rock",
@@ -8927,7 +9438,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Refuge of 600 Benjaminites after Gibeah (Judg 20:45-47; 21:13)."
   },
   {
     "id": "rimmon_zebulun",
@@ -8944,7 +9456,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border town of Zebulun; Levitical city."
   },
   {
     "id": "rumah",
@@ -8959,7 +9472,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hometown of Zebudah, mother of King Jehoiakim (2 Kgs 23:36)."
   },
   {
     "id": "sansannah",
@@ -8974,7 +9488,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Southern town of Judah; probably = Hazar-susah of Simeon (Josh 15:31)."
   },
   {
     "id": "secacah",
@@ -8989,7 +9504,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Wilderness town of Judah (Josh 15:61)."
   },
   {
     "id": "sela_hammahlekoth",
@@ -9006,7 +9522,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rock where Saul broke off pursuit of David (1 Sam 23:28)."
   },
   {
     "id": "seneh",
@@ -9021,7 +9538,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Rocky crag opposite Bozez in the pass of Michmash (1 Sam 14:4-5)."
   },
   {
     "id": "sephar",
@@ -9037,7 +9555,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "arabia"
+    "region": "arabia",
+    "pinBlurb": "Eastern limit of the Joktanite peoples (Gen 10:30)."
   },
   {
     "id": "shaaraim",
@@ -9054,7 +9573,8 @@
       "conquest",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Shephelah town of Judah on the road of the Philistine retreat after Goliath (Josh 15:36; 1 Sam 17:52)."
   },
   {
     "id": "shalem",
@@ -9069,7 +9589,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Jacob came to 'Shalem, a city of Shechem' (Gen 33:18 KJV)."
   },
   {
     "id": "shaphir",
@@ -9085,7 +9606,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town in Micah's lament over the Shephelah (Mic 1:11)."
   },
   {
     "id": "sirah",
@@ -9102,7 +9624,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Where Joab's messengers recalled Abner before killing him (2 Sam 3:26)."
   },
   {
     "id": "taanath_shiloh",
@@ -9117,7 +9640,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border point of Ephraim east of Michmethath (Josh 16:6)."
   },
   {
     "id": "tappuah",
@@ -9133,7 +9657,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Border town between Ephraim and Manasseh; its king defeated by Joshua (Josh 12:17; 16:8; 17:7-8)."
   },
   {
     "id": "thebez",
@@ -9148,7 +9673,8 @@
     "eras": [
       "judges"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Abimelech killed by a millstone dropped from its tower (Judg 9:50-53; 2 Sam 11:21)."
   },
   {
     "id": "tophel",
@@ -9163,7 +9689,8 @@
     "eras": [
       "exodus"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Landmark where Moses spoke beyond the Jordan (Deut 1:1)."
   },
   {
     "id": "trogyllium",
@@ -9179,7 +9706,8 @@
     "eras": [
       "acts"
     ],
-    "region": "anatolia"
+    "region": "anatolia",
+    "pinBlurb": "Paul's ship tarried here between Samos and Miletus (Acts 20:15, KJV/TR)."
   },
   {
     "id": "uzzen_sheerah",
@@ -9195,7 +9723,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Town built by Sheerah, daughter of Ephraim, with the Beth-horons (1 Chr 7:24)."
   },
   {
     "id": "valley_of_shaveh",
@@ -9214,7 +9743,8 @@
       "patriarchs",
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Where Melchizedek met Abram; the King's Valley of Absalom's pillar (Gen 14:17; 2 Sam 18:18)."
   },
   {
     "id": "valley_of_siddim",
@@ -9231,7 +9761,8 @@
     "eras": [
       "patriarchs"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Battle of the four kings against five; full of bitumen pits (Gen 14:3, 8, 10)."
   },
   {
     "id": "waters_of_merom",
@@ -9247,7 +9778,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Joshua's defeat of Jabin's northern coalition."
   },
   {
     "id": "zanoah",
@@ -9263,7 +9795,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Shephelah town of Judah, resettled after the exile; its men repaired the Valley Gate (Josh 15:34; Neh 3:13; 11:30)."
   },
   {
     "id": "zareth_shahar",
@@ -9279,7 +9812,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Reubenite town 'on the hill of the valley' (Josh 13:19)."
   },
   {
     "id": "zephathah",
@@ -9295,7 +9829,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Asa defeated Zerah the Cushite 'in the valley of Zephathah at Mareshah' (2 Chr 14:10)."
   },
   {
     "id": "zior",
@@ -9310,7 +9845,8 @@
     "eras": [
       "conquest"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Hill-country town of Judah (Josh 15:54)."
   },
   {
     "id": "ziz",
@@ -9327,7 +9863,8 @@
     "eras": [
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Pass by which Moab and Ammon came up against Jehoshaphat (2 Chr 20:16)."
   },
   {
     "id": "zoheleth",
@@ -9344,7 +9881,8 @@
     "eras": [
       "united"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Where Adonijah held his feast by En-rogel (1 Kgs 1:9)."
   },
   {
     "id": "ananiah",
@@ -9359,7 +9897,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamin village resettled after the exile (Neh 11:32)."
   },
   {
     "id": "aija",
@@ -9377,7 +9916,8 @@
       "exile",
       "divided"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamin town with Michmash and Bethel (Neh 11:31); = Aiath on the Assyrian approach (Isa 10:28)."
   },
   {
     "id": "gittaim",
@@ -9393,7 +9933,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamin town (Neh 11:33); Beerothites fled there (2 Sam 4:3)."
   },
   {
     "id": "zeboim_benjamin",
@@ -9410,7 +9951,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Benjamin town (Neh 11:34)."
   },
   {
     "id": "ge_harashim",
@@ -9430,7 +9972,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Resettled with Lod and Ono (Neh 11:35; cf."
   },
   {
     "id": "moladah",
@@ -9446,7 +9989,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Negeb town of Judah/Simeon (Josh 15:26; 19:2; Neh 11:26)."
   },
   {
     "id": "beth_pelet",
@@ -9465,7 +10009,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah Negeb town (Josh 15:27; Neh 11:26)."
   },
   {
     "id": "hazar_shual",
@@ -9483,7 +10028,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Simeon/Judah Negeb town (Josh 15:28; 19:3; Neh 11:27)."
   },
   {
     "id": "meconah",
@@ -9499,7 +10045,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah settlement with Ziklag after the exile (Neh 11:28)."
   },
   {
     "id": "jeshua_negeb",
@@ -9514,7 +10061,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah Negeb town (Neh 11:26)."
   },
   {
     "id": "jekabzeel",
@@ -9532,7 +10080,8 @@
       "united",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Judah Negeb town (Neh 11:25); = Kabzeel (Josh 15:21; 2 Sam 23:20)."
   },
   {
     "id": "dibon_judah",
@@ -9550,7 +10099,8 @@
     "eras": [
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Neh 11:25 lists a Judean Dibon with Kiriath-arba; likely not Dhiban in Moab."
   },
   {
     "id": "dimonah",
@@ -9566,7 +10116,8 @@
       "conquest",
       "exile"
     ],
-    "region": "levant"
+    "region": "levant",
+    "pinBlurb": "Josh 15:22."
   },
   {
     "id": "cyprus_lee_north",

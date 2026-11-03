@@ -256,7 +256,22 @@
     const chip = host._bmShadow.querySelector(".hover-chip");
     chip._bmHit = hit;
     const name = hit.place?.name || "Place";
-    chip.innerHTML = `<span>${name}</span><small>Show on map</small>`;
+    const blurb = String(hit.place?.pinBlurb || hit.place?.eraNotes || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    const tip =
+      blurb.length > 110
+        ? `${blurb.slice(0, 107).replace(/\s+\S*$/, "")}…`
+        : blurb;
+    const esc = (s) =>
+      String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/"/g, "&quot;");
+    chip.innerHTML = tip
+      ? `<span>${esc(name)}</span><small>Why this pin</small>`
+      : `<span>${esc(name)}</span><small>Show on map</small>`;
+    chip.title = tip || "Show on map";
     chip.style.left = `${Math.min(window.innerWidth - 20, Math.max(20, clientX))}px`;
     chip.style.top = `${Math.max(28, clientY)}px`;
     chip.classList.add("show");
@@ -334,6 +349,7 @@
         modernName: p.modernName,
         lat: p.lat,
         lng: p.lng,
+        pinBlurb: p.pinBlurb || "",
         eraNotes: p.eraNotes,
         eras: p.eras || [],
         region: p.region || "",

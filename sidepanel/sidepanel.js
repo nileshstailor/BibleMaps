@@ -390,8 +390,46 @@
 
   function placesFingerprint(places) {
     return (places || [])
-      .map((p) => `${p.id}:${p.name}:${p.modernName || ""}:${p.eraNotes || ""}`)
+      .map(
+        (p) =>
+          `${p.id}:${p.name}:${p.modernName || ""}:${p.pinBlurb || ""}:${p.eraNotes || ""}`
+      )
       .join("|");
+  }
+
+  /** Prefer journey stop note, then curated pinBlurb, then eraNotes. */
+  function whyThisPinText(place) {
+    if (!place) return "";
+    const id = place.id || place.placeId;
+    if (id) {
+      for (const j of current?.journeys || []) {
+        const stop = (j.stops || []).find(
+          (s) => s.placeId === id && s.note && !s.hidden
+        );
+        if (stop?.note) return formatWhyThisPin(stop.note);
+      }
+    }
+    return formatWhyThisPin(place.pinBlurb || place.eraNotes || place.note || "");
+  }
+
+  /** Turn "Acts 27:8 — Harbor…" into "Harbor… (Acts 27:8)." Cap length. */
+  function formatWhyThisPin(raw) {
+    let s = String(raw || "")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (!s) return "";
+    const citeFirst = s.match(
+      /^((?:[123]\s+)?[A-Za-z][A-Za-z0-9 .]*?\s+\d+(?::\d+(?:[–\-]\d+)?)?(?:\s*[–\-]\s*\d+(?::\d+)?)?)\s*[—–\-]\s*(.+)$/
+    );
+    if (citeFirst) {
+      const cite = citeFirst[1].trim();
+      let body = citeFirst[2].trim().replace(/[.\s]+$/, "");
+      if (!/\([A-Za-z].*\d+.*\)$/.test(body)) body = `${body} (${cite})`;
+      s = body;
+    }
+    if (!/[.!?]$/.test(s)) s += ".";
+    if (s.length > 180) s = `${s.slice(0, 177).replace(/\s+\S*$/, "")}…`;
+    return s;
   }
 
   function journeysFingerprint(journeys) {
@@ -423,6 +461,7 @@
       row.dataset.placeId = place.id || place.name;
       if (openPlaceIds.has(row.dataset.placeId)) row.open = true;
       const modern = place.modernName ? ` · ${place.modernName}` : "";
+      const why = whyThisPinText(place);
       row.innerHTML = `
         <summary>
           <span class="acc-title">${escapeHtml(place.name)}</span>
@@ -430,8 +469,8 @@
         </summary>
         <div class="acc-body">
           ${
-            place.eraNotes
-              ? `<p class="notes">${escapeHtml(place.eraNotes)}</p>`
+            why
+              ? `<p class="why-pin"><span class="why-pin-label">Why this pin</span>${escapeHtml(why)}</p>`
               : ""
           }
           <div class="actions">
@@ -1611,7 +1650,8 @@
       el.innerHTML = `<span class="bm-marker-dot"></span><span class="bm-marker-label">${escapeHtml(
         p.name || "Place"
       )}</span>`;
-      el.title = p.modernName || p.note || p.name || "";
+      const why = whyThisPinText(p);
+      el.title = why || p.modernName || p.note || p.name || "";
       const marker = new maplibregl.Marker({ element: el, anchor: "bottom" })
         .setLngLat([p.lng, p.lat])
         .addTo(map);
