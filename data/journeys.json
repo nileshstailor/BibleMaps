@@ -395,8 +395,8 @@
         "hidden": true
       },
       {
-        "placeId": "rhodes_south_water",
-        "note": "West in open water south of Rhodes",
+        "placeId": "rhodes_north_water",
+        "note": "West in the channel north of Rhodes",
         "hidden": true
       },
       {
@@ -481,7 +481,7 @@
         "note": "House arrest and witness"
       }
     ],
-    "pathHints": "Sidon → north of Cyprus (Karpaz / north coast) → Myra → Cnidus → Cape Salmone → south Crete → Fair Havens → Cauda/Gavdos → Malta → Italy → Rome."
+    "pathHints": "Sidon → north of Cyprus → Myra → north of Rhodes → off Cnidus → Cape Salmone → south Crete → Fair Havens → Cauda/Gavdos → Malta → Italy → Rome."
   },
   {
     "id": "paul_jerusalem_caesarea_transfer",

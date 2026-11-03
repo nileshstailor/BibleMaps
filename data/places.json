@@ -9689,8 +9689,8 @@
     "aliases": [
       "Sea off Myra"
     ],
-    "lat": 35.85,
-    "lng": 29.55,
+    "lat": 36.05,
+    "lng": 29.45,
     "modernName": "Open water south of Myra/Demre",
     "eraNotes": "Routing via only: leave Myra south into open water before working west.",
     "eras": [
@@ -9708,7 +9708,7 @@
     "lat": 35.7,
     "lng": 27.95,
     "modernName": "Open water south of Rhodes",
-    "eraNotes": "Routing via only (Acts 27:7 track): westbound in open water south of Rhodes toward Cnidus.",
+    "eraNotes": "Routing via only (Acts 27:7 track): westbound in open water south of Rhodes toward Cnidus. Superseded by rhodes_north_water for Acts 27 teaching track.",
     "eras": [
       "acts"
     ],
@@ -9721,8 +9721,8 @@
     "aliases": [
       "Sea off Cnidus"
     ],
-    "lat": 36.3,
-    "lng": 27.05,
+    "lat": 36.55,
+    "lng": 27.15,
     "modernName": "Open water south-west of Knidos",
     "eraNotes": "Routing via only (Acts 27:7): they arrived with difficulty off Cnidus — pass-by in open water, not a landing.",
     "eras": [
@@ -9737,8 +9737,8 @@
     "aliases": [
       "Sea NE of Crete"
     ],
-    "lat": 35.4,
-    "lng": 26.85,
+    "lat": 35.55,
+    "lng": 26.9,
     "modernName": "Open water north-east of Cape Salmone",
     "eraNotes": "Routing via only: approach Crete in open water before rounding Salmone under the lee.",
     "eras": [
@@ -9749,14 +9749,30 @@
   },
   {
     "id": "cnidus_approach_water",
-    "name": "Sea SW toward Cnidus",
+    "name": "Sea east of Cnidus",
     "aliases": [
       "Sea SW toward Cnidus"
     ],
-    "lat": 35.95,
-    "lng": 27.45,
-    "modernName": "Open water south of the Cnidus peninsula",
-    "eraNotes": "Routing via only: stay in open water south of Datça/Knidos.",
+    "lat": 36.45,
+    "lng": 27.55,
+    "modernName": "Open water east/southeast of Knidos",
+    "eraNotes": "Routing via only: continue west north of Rhodes, then toward the water off Cnidus.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "rhodes_north_water",
+    "name": "Sea north of Rhodes",
+    "aliases": [
+      "Sea north of Rhodes"
+    ],
+    "lat": 36.55,
+    "lng": 28.05,
+    "modernName": "Channel north of Rhodes toward Anatolia",
+    "eraNotes": "Routing via only (Acts 27:7): westbound under Asia Minor, north of Rhodes, toward Cnidus.",
     "eras": [
       "acts"
     ],
