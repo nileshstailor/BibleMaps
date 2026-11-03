@@ -352,6 +352,7 @@
               lat: place?.lat,
               lng: place?.lng,
               modernName: place?.modernName || "",
+              hidden: Boolean(s.hidden),
             };
           }),
         };

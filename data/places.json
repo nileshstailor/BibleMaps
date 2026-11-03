@@ -9580,7 +9580,8 @@
     "eras": [
       "acts"
     ],
-    "region": "cyprus"
+    "region": "cyprus",
+    "routingOnly": true
   },
   {
     "id": "crete_south_coast",
@@ -9593,11 +9594,12 @@
     "lat": 34.98,
     "lng": 25.45,
     "modernName": "South-central Crete coast",
-    "eraNotes": "Acts 27:7–8 — after rounding Cape Salmone they worked along the southern coast of Crete toward Fair Havens.",
+    "eraNotes": "Acts 27:7–8 — after rounding Cape Salmone they worked along the southern coast of Crete toward Fair Havens. (superseded by offshore water vias.)",
     "eras": [
       "acts"
     ],
-    "region": "mediterranean"
+    "region": "mediterranean",
+    "routingOnly": true
   },
   {
     "id": "cyprus_karpaz_lee",
@@ -9614,6 +9616,71 @@
     "eras": [
       "acts"
     ],
-    "region": "cyprus"
+    "region": "cyprus",
+    "routingOnly": true
+  },
+  {
+    "id": "crete_water_se",
+    "name": "Off SE Crete",
+    "aliases": [
+      "Off SE Crete"
+    ],
+    "lat": 34.78,
+    "lng": 26.12,
+    "modernName": "Sea south-east of Cape Salmone",
+    "eraNotes": "Routing via only (Acts 27:7–8): clears Cape Salmone into open water south of Crete.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "crete_water_south",
+    "name": "Off south Crete",
+    "aliases": [
+      "Off south Crete"
+    ],
+    "lat": 34.7,
+    "lng": 25.35,
+    "modernName": "Sea south of central Crete",
+    "eraNotes": "Routing via only (Acts 27:8): keeps the Fair Havens approach in open water along Crete’s south.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "crete_water_sw",
+    "name": "Off SW Crete",
+    "aliases": [
+      "Off SW Crete"
+    ],
+    "lat": 34.76,
+    "lng": 24.95,
+    "modernName": "Sea south of Fair Havens approach",
+    "eraNotes": "Routing via only: final water approach into Fair Havens from the south.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "crete_water_to_cauda",
+    "name": "Sea toward Cauda",
+    "aliases": [
+      "Sea toward Cauda"
+    ],
+    "lat": 34.78,
+    "lng": 24.4,
+    "modernName": "Open water between Fair Havens and Gavdos",
+    "eraNotes": "Routing via only (Acts 27:13–16): leave Fair Havens south into open water before Cauda/Gavdos.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
   }
 ]

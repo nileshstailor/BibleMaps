@@ -517,10 +517,14 @@
     if (els.stopList) els.stopList.innerHTML = "";
   }
 
+  function visibleJourneyStops(journey) {
+    return (journey?.stops || []).filter((s) => !s?.hidden);
+  }
+
   function fillJourneyStopList(journey) {
     if (!els.stopList || !els.stopListWrap) return;
     els.stopList.innerHTML = "";
-    const stops = journey?.stops || [];
+    const stops = visibleJourneyStops(journey);
     if (!stops.length) {
       els.stopListWrap.hidden = true;
       return;
@@ -558,7 +562,7 @@
     activePlaceMarkers = current?.places || [];
     els.mapTitle.textContent = journey.name;
     els.mapSubtitle.textContent = (journey.scriptureRefs || []).join(" · ");
-    setJourneyMapsLink(journey.stops || []);
+    setJourneyMapsLink(visibleJourneyStops(journey));
     fillJourneyStopList(journey);
     updateJourneyMapButtons();
     requestAnimationFrame(() => renderMap());
@@ -622,6 +626,7 @@
   }
 
   function collectRoutePoints() {
+    // Include hidden routing vias so arcs/overlays stay geographically correct.
     const stops = activeJourney?.stops || [];
     if (stops.some((s) => Number.isFinite(s.lat))) return stops;
     return [];
@@ -806,6 +811,7 @@
     const seen = new Set();
     for (const f of routeOverlayGeoJson?.features || []) {
       if (f?.geometry?.type !== "Point") continue;
+      if (f.properties?.hidden) continue;
       const [lng, lat] = f.geometry.coordinates || [];
       const id = f.properties?.id;
       if (!id || seen.has(id)) continue;
@@ -835,6 +841,7 @@
       focusPts.push(p);
     }
     for (const s of routePts) {
+      if (s?.hidden) continue; // routing vias shape the line only
       const id = s.placeId || s.id || s.name;
       if (!id || seen.has(id)) continue;
       if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
@@ -984,7 +991,11 @@
         id: "era-route-stops",
         type: "circle",
         source: "era-route",
-        filter: ["==", ["geometry-type"], "Point"],
+        filter: [
+          "all",
+          ["==", ["geometry-type"], "Point"],
+          ["!=", ["get", "hidden"], true],
+        ],
         paint: {
           "circle-radius": 4.5,
           "circle-color": "#a63024",
@@ -996,7 +1007,11 @@
         id: "era-route-labels",
         type: "symbol",
         source: "era-route",
-        filter: ["==", ["geometry-type"], "Point"],
+        filter: [
+          "all",
+          ["==", ["geometry-type"], "Point"],
+          ["!=", ["get", "hidden"], true],
+        ],
         layout: {
           "text-field": ["get", "name"],
           "text-size": 11,

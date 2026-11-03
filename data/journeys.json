@@ -377,11 +377,13 @@
       },
       {
         "placeId": "cyprus_karpaz_lee",
-        "note": "Acts 27:4 — under the lee of Cyprus, NE approach (north of the island)"
+        "note": "Under the lee of Cyprus (NE)",
+        "hidden": true
       },
       {
         "placeId": "cyprus_lee_north",
-        "note": "Acts 27:4 — along the north coast, then across toward Asia Minor"
+        "note": "North coast of Cyprus",
+        "hidden": true
       },
       {
         "placeId": "myra",
@@ -393,15 +395,31 @@
       },
       {
         "placeId": "salmone",
-        "note": "Acts 27:7 — under the lee of Crete off Cape Salmone"
+        "note": "Acts 27:7 — Cape Salmone, eastern Crete"
       },
       {
-        "placeId": "crete_south_coast",
-        "note": "Acts 27:8 — along the southern coast of Crete"
+        "placeId": "crete_water_se",
+        "note": "Clear Salmone into open water",
+        "hidden": true
+      },
+      {
+        "placeId": "crete_water_south",
+        "note": "South of Crete in open water",
+        "hidden": true
+      },
+      {
+        "placeId": "crete_water_sw",
+        "note": "Water approach to Fair Havens",
+        "hidden": true
       },
       {
         "placeId": "crete_fair_havens",
         "note": "Acts 27:8 — Fair Havens near Lasea"
+      },
+      {
+        "placeId": "crete_water_to_cauda",
+        "note": "South into open water toward Cauda",
+        "hidden": true
       },
       {
         "placeId": "cauda",
