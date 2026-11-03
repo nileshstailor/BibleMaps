@@ -367,6 +367,8 @@
   function buildPlaceMatchers(places) {
     const entries = [];
     for (const place of places) {
+      // Routing-only vias shape journey geometry; never green-highlight or list them.
+      if (place?.routingOnly) continue;
       const aliases = Array.from(
         new Set([place.name, ...(place.aliases || [])].filter(Boolean))
       );
@@ -680,7 +682,10 @@
     for (const journey of journeys) {
       if (!journeyMatchesPassage(journey, passage)) continue;
 
-      const stopIds = journey.stops.map((s) => s.placeId);
+      // Hidden routing vias are geometry-only — omit from hit/stop badges.
+      const stopIds = journey.stops
+        .filter((s) => !s?.hidden)
+        .map((s) => s.placeId);
       const uniqueStops = [...new Set(stopIds)];
       const hitStops = uniqueStops.filter((id) => found.has(id));
       const aliasHit = (journey.aliases || [])

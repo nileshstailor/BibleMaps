@@ -77,6 +77,18 @@
   const ONLINE_RASTER_LAYER = "online-basemap";
   const ONLINE_RASTER_ATTR =
     'Tiles © <a href="https://www.esri.com/">Esri</a> — Esri, TomTom, Garmin, FAO, NOAA, USGS';
+  // Bundled PMTiles detail pockets (must stay in sync with scripts/build-pmtiles.sh).
+  // Outside these, only shell z0–7 exists — overzoom looks soft for Acts 27 etc.
+  const OFFLINE_DETAIL = {
+    shellMaxZoom: 7,
+    pockets: [
+      { name: "core", west: 29, south: 24, east: 42, north: 36, maxZoom: 11 },
+      { name: "east", west: 42.2, south: 27, east: 55, north: 38, maxZoom: 10 },
+      // Acts 27–28 sea corridor (Malta, Crete, Cauda, Rhodes). Tight on purpose.
+      // east < core.west (29) so pocket tests match the disjoint PMTiles merge.
+      { name: "med", west: 14, south: 34, east: 28.82, north: 37.2, maxZoom: 10 },
+    ],
+  };
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -537,7 +549,9 @@
     stops.forEach((stop) => {
       const li = document.createElement("li");
       li.textContent = `${stop.name}${stop.note ? ` — ${stop.note}` : ""}`;
-      if (journey.hitPlaceIds?.includes(stop.placeId)) li.style.fontWeight = "600";
+      if (journey.hitPlaceIds?.includes(stop.placeId)) {
+        li.classList.add("stop-hit");
+      }
       li.title = stop.modernName || "";
       els.stopList.appendChild(li);
     });
@@ -1338,19 +1352,45 @@
     return { west, south, east, north };
   }
 
-  /** True when the viewport sticks out past the bundled PMTiles bbox. */
+  function offlineDetailMaxZoomAt(lng, lat) {
+    for (const p of OFFLINE_DETAIL.pockets) {
+      if (
+        lng >= p.west &&
+        lng <= p.east &&
+        lat >= p.south &&
+        lat <= p.north
+      ) {
+        return p.maxZoom;
+      }
+    }
+    return OFFLINE_DETAIL.shellMaxZoom;
+  }
+
+  /**
+   * True when the viewport sticks out past the bundled PMTiles bbox, or when
+   * the user has zoomed past native detail for this pocket (e.g. Crete/Cauda
+   * before the med extract lands, or Italy past z10).
+   */
   function viewNeedsOnlineFill(map, header = pmtilesHeader) {
     if (!isOnline() || !map || typeof map.getBounds !== "function") return false;
     const box = offlineExtractBounds(header);
     if (!box) return isOnline();
     const b = map.getBounds();
     const pad = 0.15; // small pad so edge pans still get fill
-    return (
+    if (
       b.getWest() < box.west - pad ||
       b.getEast() > box.east + pad ||
       b.getSouth() < box.south - pad ||
       b.getNorth() > box.north + pad
-    );
+    ) {
+      return true;
+    }
+    const z = map.getZoom?.() ?? 0;
+    const c = map.getCenter?.();
+    if (!c || !Number.isFinite(c.lng) || !Number.isFinite(c.lat)) return false;
+    const native = offlineDetailMaxZoomAt(c.lng, c.lat);
+    // Slight hysteresis so brief zooms don't flicker the raster underlay.
+    return z > native + 0.35;
   }
 
   function updateOnlineRasterVisibility(map = maplibreMap) {
@@ -1552,13 +1592,18 @@
   }
 
   function addDomMarkers(map, points, { dim }) {
+    const matchedIds = new Set(
+      (activePlaceMarkers || []).map((p) => p.id).filter(Boolean)
+    );
     for (const p of points || []) {
       if (!Number.isFinite(p.lat) || !Number.isFinite(p.lng)) continue;
       const el = document.createElement("div");
       const id = p.id || p.placeId;
       const focused = Boolean(focusedPlaceId && id === focusedPlaceId);
+      const fromPassage = Boolean(id && matchedIds.has(id));
       el.className = [
         dim ? "bm-marker bm-marker-dim" : "bm-marker",
+        fromPassage ? "bm-marker-place" : "bm-marker-journey",
         focused ? "bm-marker-focus" : "",
       ]
         .filter(Boolean)

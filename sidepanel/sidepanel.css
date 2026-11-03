@@ -481,6 +481,21 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
+/* Gazetteer hits from the passage → olive; journey-only waypoints stay terra. */
+.bm-marker-place .bm-marker-dot {
+  background: var(--olive);
+  border-color: rgba(44, 36, 22, 0.55);
+}
+
+.bm-marker-place.bm-marker-focus .bm-marker-dot {
+  background: var(--olive);
+  box-shadow: 0 0 0 3px rgba(74, 103, 65, 0.28);
+}
+
+.bm-marker-place.bm-marker-focus .bm-marker-label {
+  border-color: rgba(74, 103, 65, 0.55);
+}
+
 .bm-marker-dim .bm-marker-dot {
   width: 7px;
   height: 7px;
@@ -577,6 +592,11 @@ body {
 
 .stop-list li + li {
   margin-top: 4px;
+}
+
+.stop-list li.stop-hit {
+  color: var(--olive);
+  font-weight: 600;
 }
 
 

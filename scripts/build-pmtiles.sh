@@ -2,13 +2,16 @@
 # Build a memory-safe biblical-corridor PMTiles archive for the side panel.
 #
 # Strategy (avoids BM-46 OOM from one huge uniform extract):
-#   1) Wide shell z0–7 across Spain → India (overview / pan context)
-#   2) High-detail z9–11 for Levant + Egypt (town-ish zoom)
-#   3) Medium-detail z9–10 for Mesopotamia → Susa
-# Then merge into media/tiles/bible-region.pmtiles (~60 MB).
+#   1) Wide shell z0-7 across Spain to India (overview / pan context)
+#   2) High-detail z9-11 for Levant + Egypt (town-ish zoom)
+#   3) Medium-detail z9-10 for Mesopotamia to Susa
+#   4) Medium-detail z9-10 for Mediterranean Paul-Rome corridor
+#      (Rhodes, Crete, Cauda/Gavdos, Malta, Sicily to Rome)
+# Then merge into media/tiles/bible-region.pmtiles (~60-80 MB).
 #
 # Do NOT spend high-zoom tiles on the Americas or east of India.
 # Outside this corridor, online Esri fill covers gaps when online.
+# Keep OFFLINE_DETAIL in sidepanel/sidepanel.js in sync with these bboxes.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 PMTILES="${ROOT}/scripts/pmtiles"
@@ -18,7 +21,7 @@ TMP="${TMPDIR:-/tmp}/biblemaps-pmtiles-$$"
 mkdir -p "$TMP"
 trap 'rm -rf "$TMP"' EXIT
 
-# Tip of Spain → India; Red Sea / Arabia south; Black Sea north.
+# Tip of Spain to India; Red Sea / Arabia south; Black Sea north.
 SHELL_BBOX="${PROTOMAPS_SHELL_BBOX:--10,12,78,45}"
 SHELL_MAXZOOM="${PROTOMAPS_SHELL_MAXZOOM:-7}"
 
@@ -27,30 +30,42 @@ CORE_BBOX="${PROTOMAPS_CORE_BBOX:-29,24,42,36}"
 CORE_MINZOOM="${PROTOMAPS_CORE_MINZOOM:-9}"
 CORE_MAXZOOM="${PROTOMAPS_CORE_MAXZOOM:-11}"
 
-# Mesopotamia → Susa / SW Persia (east of core, disjoint lon).
+# Mesopotamia to Susa / SW Persia (east of core, disjoint lon).
 EAST_BBOX="${PROTOMAPS_EAST_BBOX:-42.2,27,55,38}"
 EAST_MINZOOM="${PROTOMAPS_EAST_MINZOOM:-9}"
 EAST_MAXZOOM="${PROTOMAPS_EAST_MAXZOOM:-10}"
+
+# Acts 27-28 sea corridor only (Malta / Sicily tip / Crete / Cauda / Rhodes).
+# Keep this tight: a Spain-to-Rome z10 pocket balloons past the side-panel
+# memory budget (BM-46). Italy/Rome beyond this use online Esri fill when zoomed.
+# East edge must stay west of core (29E) and of z9 tile 297 (~28.83-29.53).
+MED_BBOX="${PROTOMAPS_MED_BBOX:-14,34,28.82,37.2}"
+MED_MINZOOM="${PROTOMAPS_MED_MINZOOM:-9}"
+MED_MAXZOOM="${PROTOMAPS_MED_MAXZOOM:-10}"
 
 if [[ ! -x "$PMTILES" ]]; then
   echo "Missing scripts/pmtiles CLI. Download from https://github.com/protomaps/go-pmtiles/releases" >&2
   exit 1
 fi
 
-echo "1/3 shell z0-${SHELL_MAXZOOM} bbox=${SHELL_BBOX}"
+echo "1/4 shell z0-${SHELL_MAXZOOM} bbox=${SHELL_BBOX}"
 "$PMTILES" extract "$BUILD_URL" "$TMP/shell.pmtiles" \
   --bbox="$SHELL_BBOX" --maxzoom="$SHELL_MAXZOOM" --overfetch=0
 
-echo "2/3 core z${CORE_MINZOOM}-${CORE_MAXZOOM} bbox=${CORE_BBOX}"
+echo "2/4 core z${CORE_MINZOOM}-${CORE_MAXZOOM} bbox=${CORE_BBOX}"
 "$PMTILES" extract "$BUILD_URL" "$TMP/core.pmtiles" \
   --bbox="$CORE_BBOX" --minzoom="$CORE_MINZOOM" --maxzoom="$CORE_MAXZOOM" --overfetch=0
 
-echo "3/3 east z${EAST_MINZOOM}-${EAST_MAXZOOM} bbox=${EAST_BBOX}"
+echo "3/4 east z${EAST_MINZOOM}-${EAST_MAXZOOM} bbox=${EAST_BBOX}"
 "$PMTILES" extract "$BUILD_URL" "$TMP/east.pmtiles" \
   --bbox="$EAST_BBOX" --minzoom="$EAST_MINZOOM" --maxzoom="$EAST_MAXZOOM" --overfetch=0
 
-echo "Merging → $OUT"
-"$PMTILES" merge "$TMP/shell.pmtiles" "$TMP/core.pmtiles" "$TMP/east.pmtiles" "$OUT"
+echo "4/4 med z${MED_MINZOOM}-${MED_MAXZOOM} bbox=${MED_BBOX}"
+"$PMTILES" extract "$BUILD_URL" "$TMP/med.pmtiles" \
+  --bbox="$MED_BBOX" --minzoom="$MED_MINZOOM" --maxzoom="$MED_MAXZOOM" --overfetch=0
+
+echo "Merging -> $OUT"
+"$PMTILES" merge "$TMP/shell.pmtiles" "$TMP/core.pmtiles" "$TMP/east.pmtiles" "$TMP/med.pmtiles" "$OUT"
 ls -lh "$OUT"
 "$PMTILES" show "$OUT"
 "$PMTILES" verify "$OUT"

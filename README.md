@@ -62,14 +62,15 @@ After pulling updates: **Reload** the extension on `chrome://extensions`. Smoke:
 
 ## Offline tiles (+ online fill)
 
-- Bundled archive: `media/tiles/bible-region.pmtiles` (~62 MB, maxzoom 11). Merged **biblical corridor** extract (not world coverage):
+- Bundled archive: `media/tiles/bible-region.pmtiles` (~62–80 MB, maxzoom 11). Merged **biblical corridor** extract (not world coverage):
   - **Shell** z0–7, bbox `-10,12,78,45` — tip of Spain → India (overview / pan)
   - **Core** z9–11, bbox `29,24,42,36` — Levant + Egypt town detail (incl. Thebes)
   - **East** z9–10, bbox `42.2,27,55,38` — Mesopotamia → Susa
-- Sized for in-memory load in the Chrome side panel (extension URLs lack reliable Range). A uniform z10 of the old Rome→Nineveh bbox was ~93 MB and OOM-crashed the panel; this merge stays ~62 MB by putting high zoom only where biblical narrative is dense. No high-detail tiles for the Americas or east of India.
+  - **Med** z9–10, bbox `14,34,28.82,37.2` — Acts 27–28 sea corridor (Malta, Crete, Cauda, Rhodes; Italy/Rome use online fill when zoomed)
+- Sized for in-memory load in the Chrome side panel (extension URLs lack reliable Range). A uniform z10 of the old Rome→Nineveh bbox was ~93 MB and OOM-crashed the panel; this merge keeps high zoom only where biblical narrative is dense. No high-detail tiles for the Americas or east of India.
 - Style: `media/tiles/style.json` (Protomaps light layers without remote fonts)
-- **Online fill:** if `navigator.onLine` and the view leaves the extract bbox, Esri public canvas tiles (light/dark, **no API key**) fill the gap. Inside the shell but past core/east maxzoom, MapLibre overzooms coarser tiles; zoomed-in quality is best in Levant/Egypt.
-- Rebuild: `scripts/pmtiles` CLI + `scripts/build-pmtiles.sh` (override `PROTOMAPS_SHELL_BBOX`, `PROTOMAPS_CORE_BBOX`, `PROTOMAPS_EAST_BBOX`, zoom caps)
+- **Online fill:** if `navigator.onLine` and the view leaves the extract bbox **or** zooms past the native detail for that pocket, Esri public canvas tiles (light/dark, **no API key**) fill the gap.
+- Rebuild: `scripts/pmtiles` CLI + `scripts/build-pmtiles.sh` (override `PROTOMAPS_SHELL_BBOX`, `PROTOMAPS_CORE_BBOX`, `PROTOMAPS_EAST_BBOX`, `PROTOMAPS_MED_BBOX`, zoom caps)
 
 Attribution on the map: Protomaps + © OpenStreetMap (+ Esri when the online underlay is active).
 

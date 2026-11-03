@@ -6903,19 +6903,23 @@
   },
   {
     "id": "cauda",
-    "name": "Cauda (Gavdos)",
+    "name": "Cauda",
     "aliases": [
       "Cauda (Gavdos)",
       "Cauda",
       "Clauda",
       "Gavdos",
       "island of Cauda",
-      "island called Cauda"
+      "island called Cauda",
+      "island named Cauda",
+      "small island called Cauda",
+      "small island named Cauda",
+      "island which is called Clauda"
     ],
     "lat": 34.848,
     "lng": 24.077,
     "modernName": "Gavdos island, Greece (Acts 27:16)",
-    "eraNotes": "Acts 27:16 — small island south-west of Crete (Gavdos) under whose lee they secured the ship’s boat in the storm.",
+    "eraNotes": "Acts 27:16 — passed under the lee of Cauda/Gavdos (not an overnight port); there they secured the ship’s boat in the storm before being driven toward Malta.",
     "eras": [
       "acts"
     ],
@@ -9673,8 +9677,8 @@
     "aliases": [
       "Sea toward Cauda"
     ],
-    "lat": 34.72,
-    "lng": 24.3,
+    "lat": 34.7,
+    "lng": 24.25,
     "modernName": "Open water between Fair Havens and Gavdos",
     "eraNotes": "Routing via only (Acts 27:13–16): leave Fair Havens south into open water before Cauda/Gavdos.",
     "eras": [
@@ -9773,6 +9777,22 @@
     "lng": 28.05,
     "modernName": "Channel north of Rhodes toward Anatolia",
     "eraNotes": "Routing via only (Acts 27:7): westbound under Asia Minor, north of Rhodes, toward Cnidus.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "cauda_lee_water",
+    "name": "Lee of Cauda",
+    "aliases": [
+      "Lee of Cauda"
+    ],
+    "lat": 34.78,
+    "lng": 23.95,
+    "modernName": "Open water under the lee (SW) of Gavdos",
+    "eraNotes": "Routing via only (Acts 27:16): sail under the lee of Cauda — pass-by, not a landing.",
     "eras": [
       "acts"
     ],

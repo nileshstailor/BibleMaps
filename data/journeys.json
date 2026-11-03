@@ -365,7 +365,7 @@
     "scriptureRefs": [
       "Acts 27–28"
     ],
-    "summary": "Paul’s custody voyage from Caesarea to Rome: under the lee of Cyprus (north), Myra, past Cnidus in open water, under Crete off Salmone along the south coast to Fair Havens, then storm via Cauda (Gavdos) to shipwreck on Malta.",
+    "summary": "Paul’s custody voyage from Caesarea to Rome: under the lee of Cyprus (north), Myra, past Cnidus in open water, under Crete off Salmone along the south coast to Fair Havens, then storm under the lee of Cauda (Gavdos) to shipwreck on Malta.",
     "stops": [
       {
         "placeId": "caesarea",
@@ -449,8 +449,14 @@
         "hidden": true
       },
       {
+        "placeId": "cauda_lee_water",
+        "note": "Under the lee of Cauda (pass-by)",
+        "hidden": true
+      },
+      {
         "placeId": "cauda",
-        "note": "Acts 27:16 — Cauda/Gavdos; secured the boat under its lee"
+        "note": "Acts 27:16 — under the lee of Cauda; secured the boat (pass-by, not a stay)",
+        "markerOnly": true
       },
       {
         "placeId": "malta",
@@ -481,7 +487,7 @@
         "note": "House arrest and witness"
       }
     ],
-    "pathHints": "Sidon → north of Cyprus → Myra → north of Rhodes → off Cnidus → Cape Salmone → south Crete → Fair Havens → Cauda/Gavdos → Malta → Italy → Rome."
+    "pathHints": "Sidon → north of Cyprus → Myra → north of Rhodes → off Cnidus → Cape Salmone → south Crete → Fair Havens → under lee of Cauda → Malta → Italy → Rome."
   },
   {
     "id": "paul_jerusalem_caesarea_transfer",
