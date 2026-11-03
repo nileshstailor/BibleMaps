@@ -907,7 +907,7 @@
       ensureRouteArrowImage(map);
       try {
         map.setLayoutProperty("route-arrows", "symbol-placement", "line-center");
-        map.setLayoutProperty("route-arrows", "icon-size", 0.42);
+        map.setLayoutProperty("route-arrows", "icon-size", 0.7);
       } catch {
         /* ignore */
       }
@@ -924,7 +924,7 @@
         // One tip per arc segment — line spacing skipped short hops entirely.
         "symbol-placement": "line-center",
         "icon-image": "route-arrow",
-        "icon-size": 0.42,
+        "icon-size": 0.7,
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
         "icon-rotation-alignment": "map",
@@ -935,20 +935,29 @@
 
   function ensureRouteArrowImage(map) {
     if (!map) return;
-    const size = 96;
+    const size = 128;
     const canvas = document.createElement("canvas");
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     ctx.clearRect(0, 0, size, size);
+    // Soft halo so the tip stays readable on dark basemap tiles.
+    ctx.fillStyle = "rgba(255, 248, 239, 0.92)";
+    ctx.beginPath();
+    ctx.moveTo(size * 0.16, size * 0.28);
+    ctx.lineTo(size * 0.9, size * 0.5);
+    ctx.lineTo(size * 0.16, size * 0.72);
+    ctx.lineTo(size * 0.28, size * 0.5);
+    ctx.closePath();
+    ctx.fill();
     ctx.fillStyle = "#a63024";
     ctx.beginPath();
-    // Slim chevron along +x (MapLibre rotates it to the line bearing).
-    ctx.moveTo(size * 0.22, size * 0.34);
-    ctx.lineTo(size * 0.82, size * 0.5);
-    ctx.lineTo(size * 0.22, size * 0.66);
-    ctx.lineTo(size * 0.32, size * 0.5);
+    // Sleek but readable chevron along +x (MapLibre rotates to line bearing).
+    ctx.moveTo(size * 0.2, size * 0.32);
+    ctx.lineTo(size * 0.86, size * 0.5);
+    ctx.lineTo(size * 0.2, size * 0.68);
+    ctx.lineTo(size * 0.3, size * 0.5);
     ctx.closePath();
     ctx.fill();
     const imageData = ctx.getImageData(0, 0, size, size);
@@ -957,6 +966,9 @@
       if (map.hasImage("route-arrow") && typeof map.updateImage === "function") {
         map.updateImage("route-arrow", imageData);
       } else if (!map.hasImage("route-arrow")) {
+        map.addImage("route-arrow", imageData, opts);
+      } else {
+        map.removeImage("route-arrow");
         map.addImage("route-arrow", imageData, opts);
       }
     } catch {
