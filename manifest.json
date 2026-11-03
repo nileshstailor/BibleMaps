@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Highlight biblical places and journeys on major Bible sites; open them on an offline map with online fill.",
   "permissions": [
     "sidePanel",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Resubmit Chrome Web Store listing without a keyword-style site brand list in the detailed description (Yellow Argon)
+
 ## 1.0.1
 
 - Trim Chrome Web Store `manifest.json` description to ≤132 characters
