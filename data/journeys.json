@@ -375,6 +375,35 @@
     "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Italian west coast → Rome."
   },
   {
+    "id": "paul_jerusalem_caesarea_transfer",
+    "name": "Paul Taken to Caesarea",
+    "aliases": [
+      "Antipatris",
+      "Claudius Lysias",
+      "bring him safely to Felix",
+      "soldiers to go to Caesarea"
+    ],
+    "scriptureRefs": [
+      "Acts 23:23–35"
+    ],
+    "summary": "After a plot against Paul in Jerusalem, the Roman commander sends him by night under heavy guard to Antipatris, then on to Governor Felix in Caesarea.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Barracks; plot and night departure"
+      },
+      {
+        "placeId": "aphek_sharon",
+        "note": "Antipatris — overnight stop with the infantry"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Delivered to Felix with Lysias’s letter"
+      }
+    ],
+    "pathHints": "Jerusalem hill country west to Antipatris (Aphek/Sharon), then north along the coastal road to Caesarea Maritima."
+  },
+  {
     "id": "jeroboam_wife_shiloh",
     "name": "Jeroboam’s Wife to Shiloh",
     "aliases": [
