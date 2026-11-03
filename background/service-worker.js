@@ -2,9 +2,9 @@
  * Message router for Bible Maps.
  * No remote APIs required in v1.
  *
- * Side panel is enabled only on supported Bible reading sites. On other tabs
- * it is disabled so Chrome closes it and the map does not linger with stale
- * detections from the previous chapter.
+ * Side panel is tab-specific and only enabled on supported Bible reading sites.
+ * Global default is disabled so the panel cannot linger as a window-level panel
+ * after navigating away (Chrome will otherwise keep a globally-enabled panel open).
  */
 
 const PANEL_PATH = "sidepanel/sidepanel.html";
@@ -22,6 +22,26 @@ function isSupportedBibleUrl(url) {
   }
 }
 
+async function closePanelForTab(tabId) {
+  if (!chrome.sidePanel?.close || typeof tabId !== "number") return;
+  // Prefer tab-specific close; fall back to window close for a global panel
+  // that was opened before we switched to tab-only enablement.
+  try {
+    await chrome.sidePanel.close({ tabId });
+    return;
+  } catch {
+    /* not a tab-specific panel, or already closed */
+  }
+  try {
+    const tab = await chrome.tabs.get(tabId);
+    if (typeof tab?.windowId === "number") {
+      await chrome.sidePanel.close({ windowId: tab.windowId });
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
 async function setPanelForTab(tabId, url) {
   if (typeof tabId !== "number" || !chrome.sidePanel?.setOptions) return;
   const enabled = isSupportedBibleUrl(url);
@@ -34,6 +54,7 @@ async function setPanelForTab(tabId, url) {
       });
     } else {
       await chrome.sidePanel.setOptions({ tabId, enabled: false });
+      await closePanelForTab(tabId);
     }
   } catch (err) {
     // Tab may have closed, or URL is chrome:// / restricted.
@@ -55,9 +76,9 @@ chrome.runtime.onInstalled.addListener(async () => {
     if (chrome.sidePanel?.setPanelBehavior) {
       await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
     }
-    // Global default path; per-tab enabled flag gates visibility.
+    // Global default OFF — only tab-specific enable on Bible hosts may open.
     if (chrome.sidePanel?.setOptions) {
-      await chrome.sidePanel.setOptions({ path: PANEL_PATH, enabled: true });
+      await chrome.sidePanel.setOptions({ path: PANEL_PATH, enabled: false });
     }
   } catch (err) {
     console.warn("Bible Maps: sidePanel setup unavailable", err);
@@ -66,18 +87,21 @@ chrome.runtime.onInstalled.addListener(async () => {
 });
 
 chrome.runtime.onStartup?.addListener?.(() => {
-  syncPanelForActiveTabs();
+  (async () => {
+    try {
+      await chrome.sidePanel?.setOptions?.({ path: PANEL_PATH, enabled: false });
+    } catch {
+      /* ignore */
+    }
+    await syncPanelForActiveTabs();
+  })();
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
   if (!tab?.id) return;
-  // Only open on supported Bible sites; elsewhere the panel is disabled.
+  // With openPanelOnActionClick this often does not fire; keep as fallback.
   if (!isSupportedBibleUrl(tab.url || "")) {
-    try {
-      await chrome.sidePanel.setOptions?.({ tabId: tab.id, enabled: false });
-    } catch {
-      /* ignore */
-    }
+    await setPanelForTab(tab.id, tab.url || "");
     return;
   }
   try {
@@ -109,11 +133,12 @@ chrome.tabs.onActivated.addListener(async ({ tabId }) => {
   }
 });
 
-// URL changes: gate the panel, and on supported SPA navigations clear stale detection.
+// URL / load updates: gate the panel, and on supported SPA navigations clear stale detection.
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   const url = changeInfo.url || tab?.url || "";
-  if (changeInfo.status === "loading" || changeInfo.url) {
-    setPanelForTab(tabId, url);
+  // Gate whenever the URL is known (url change or finished load).
+  if (changeInfo.url || changeInfo.status === "loading" || changeInfo.status === "complete") {
+    if (url) setPanelForTab(tabId, url);
   }
   if (!changeInfo.url) return;
   if (!isSupportedBibleUrl(changeInfo.url)) {
@@ -164,7 +189,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       chrome.runtime
         .sendMessage({ type: "BIBLE_MAPS_DETECTION_UPDATED", payload })
         .catch(() => {});
-      // Ensure panel stays enabled while detections stream in.
       setPanelForTab(tabId, payload.url);
     }
     sendResponse({ ok: true });
@@ -210,7 +234,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return false;
     }
     const placeId = message.placeId || null;
-    // Persist focus so a freshly opened panel can pick it up after load.
     if (placeId) {
       chrome.storage.session
         ?.set?.({
