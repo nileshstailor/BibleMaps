@@ -227,8 +227,20 @@
         "note": "Macedonian call vision"
       },
       {
+        "placeId": "neapolis",
+        "note": "Seaport for Philippi"
+      },
+      {
         "placeId": "philippi",
         "note": "Lydia; prison and release"
+      },
+      {
+        "placeId": "amphipolis",
+        "note": "Via Egnatia pass-through"
+      },
+      {
+        "placeId": "apollonia",
+        "note": "Via Egnatia pass-through"
       },
       {
         "placeId": "thessalonica",
@@ -313,12 +325,16 @@
         "note": "Eutychus; departure by land/sea"
       },
       {
-        "placeId": "ephesus",
-        "note": "Miletus farewell nearby tradition (Ephesus region)"
+        "placeId": "miletus",
+        "note": "Farewell to Ephesian elders"
       },
       {
         "placeId": "tyre",
         "note": "Disciples warn Paul"
+      },
+      {
+        "placeId": "acco",
+        "note": "Ptolemais — one-day stop with believers"
       },
       {
         "placeId": "caesarea",
@@ -364,15 +380,31 @@
         "note": "Shipwreck and wintering"
       },
       {
+        "placeId": "syracuse",
+        "note": "Three days"
+      },
+      {
+        "placeId": "rhegium",
+        "note": "South Italian landfall"
+      },
+      {
         "placeId": "puteoli",
-        "note": "Land in Italy"
+        "note": "Land in Italy; believers welcome Paul"
+      },
+      {
+        "placeId": "forum_appii",
+        "note": "Believers from Rome meet Paul"
+      },
+      {
+        "placeId": "three_taverns",
+        "note": "Further Roman believers meet Paul"
       },
       {
         "placeId": "rome",
         "note": "House arrest and witness"
       }
     ],
-    "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Italian west coast → Rome."
+    "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Syracuse/Rhegium → Puteoli → Appian Way (Forum of Appius, Three Taverns) → Rome."
   },
   {
     "id": "paul_jerusalem_caesarea_transfer",
@@ -402,6 +434,177 @@
       }
     ],
     "pathHints": "Jerusalem hill country west to Antipatris (Aphek/Sharon), then north along the coastal road to Caesarea Maritima."
+  },
+  {
+    "id": "peter_lydda_joppa_caesarea",
+    "name": "Peter: Lydda, Joppa and Cornelius in Caesarea",
+    "aliases": [
+      "Cornelius",
+      "Simon the tanner",
+      "Aeneas",
+      "Tabitha",
+      "Dorcas",
+      "Italian Regiment"
+    ],
+    "scriptureRefs": [
+      "Acts 9:32–10:48",
+      "Acts 11:1–18"
+    ],
+    "summary": "Peter heals Aeneas in Lydda, raises Tabitha in Joppa, then goes to Caesarea at Cornelius’s invitation and later explains the visit in Jerusalem.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Peter traveling about"
+      },
+      {
+        "placeId": "lod",
+        "note": "Lydda — Aeneas healed"
+      },
+      {
+        "placeId": "joppa",
+        "note": "Tabitha; vision at Simon the tanner’s house"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Cornelius and the Gentile household"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Report to the circumcised believers"
+      }
+    ],
+    "pathHints": "Judean hills to the coastal plain (Lydda/Joppa), north to Caesarea Maritima, then back inland to Jerusalem."
+  },
+  {
+    "id": "paul_festus_agrippa",
+    "name": "Festus, Agrippa and the Appeal to Caesar",
+    "aliases": [
+      "Festus",
+      "King Agrippa",
+      "Bernice",
+      "appeal to Caesar",
+      "I appeal to Caesar"
+    ],
+    "scriptureRefs": [
+      "Acts 25–26"
+    ],
+    "summary": "Festus visits Jerusalem, returns to hear Paul in Caesarea; Paul appeals to Caesar, then defends himself before Agrippa and Bernice still in Caesarea.",
+    "stops": [
+      {
+        "placeId": "caesarea",
+        "note": "Paul in custody under Felix/Festus"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Festus confers with the chief priests"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Hearing; appeal to Caesar; Agrippa’s audience"
+      }
+    ],
+    "pathHints": "Short round trip for Festus between Caesarea and Jerusalem; Paul’s location remains Caesarea."
+  },
+  {
+    "id": "cana_to_capernaum",
+    "name": "From Cana to Capernaum",
+    "aliases": [
+      "wedding at Cana",
+      "water into wine"
+    ],
+    "scriptureRefs": [
+      "John 2:1–12"
+    ],
+    "summary": "After the wedding at Cana in Galilee, Jesus, his mother, brothers and disciples go down to Capernaum for a few days.",
+    "stops": [
+      {
+        "placeId": "cana",
+        "note": "Wedding; first sign"
+      },
+      {
+        "placeId": "capernaum",
+        "note": "Brief stay with the family and disciples"
+      }
+    ],
+    "pathHints": "Short descent within Galilee from Cana to the lakeside town of Capernaum."
+  },
+  {
+    "id": "feast_of_tabernacles",
+    "name": "Up to Jerusalem for the Feast of Tabernacles",
+    "aliases": [
+      "Feast of Tabernacles",
+      "Festival of Shelters",
+      "Sukkot"
+    ],
+    "scriptureRefs": [
+      "John 7"
+    ],
+    "summary": "Jesus remains in Galilee while his brothers go up to the feast, then goes up to Jerusalem later and teaches in the temple.",
+    "stops": [
+      {
+        "placeId": "galilee",
+        "note": "Stays for a time"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Teaches mid-feast in the temple courts"
+      }
+    ],
+    "pathHints": "Galilee south to Jerusalem for Tabernacles."
+  },
+  {
+    "id": "lazarus_bethany_ephraim",
+    "name": "Lazarus, Bethany and Withdrawal to Ephraim",
+    "aliases": [
+      "Lazarus",
+      "Martha",
+      "Mary of Bethany",
+      "four days",
+      "town called Ephraim"
+    ],
+    "scriptureRefs": [
+      "John 11"
+    ],
+    "summary": "Jesus goes to Bethany and raises Lazarus, then withdraws with the disciples to the town of Ephraim near the wilderness until Passover draws near.",
+    "stops": [
+      {
+        "placeId": "perea",
+        "note": "Beyond the Jordan when news arrives"
+      },
+      {
+        "placeId": "bethany",
+        "note": "Lazarus raised"
+      },
+      {
+        "placeId": "ephraim_town",
+        "note": "Withdrawal with the disciples"
+      }
+    ],
+    "pathHints": "East of the Jordan to Bethany near Jerusalem, then north into the Judean hill country toward Ephraim."
+  },
+  {
+    "id": "widow_of_nain",
+    "name": "Raising the Widow’s Son at Nain",
+    "aliases": [
+      "Nain",
+      "widow’s son",
+      "young man"
+    ],
+    "scriptureRefs": [
+      "Luke 7:11–17"
+    ],
+    "summary": "Jesus travels from Capernaum’s region to the village of Nain and raises a widow’s only son at the town gate.",
+    "stops": [
+      {
+        "placeId": "capernaum",
+        "note": "Prior healings (centurion)"
+      },
+      {
+        "placeId": "nain",
+        "note": "Widow’s son raised"
+      }
+    ],
+    "pathHints": "West/southwest from the Sea of Galilee toward Nain in the hills above the Jezreel Valley."
   },
   {
     "id": "jeroboam_wife_shiloh",

@@ -3,7 +3,7 @@
     {
       "id": "divided_kingdom",
       "title": "Divided Kingdom",
-      "era": "1 Kings \u2013 2 Kings",
+      "era": "1 Kings – 2 Kings",
       "basemap": "levant",
       "placeEras": [
         "divided",
@@ -26,7 +26,7 @@
     {
       "id": "kingdom_david",
       "title": "United Monarchy",
-      "era": "Saul\u2013David\u2013Solomon",
+      "era": "Saul–David–Solomon",
       "basemap": "levant",
       "placeEras": [
         "united",
@@ -95,7 +95,7 @@
     },
     {
       "id": "abraham",
-      "title": "Abraham\u2019s World",
+      "title": "Abraham’s World",
       "era": "Patriarchs",
       "basemap": "near-east",
       "placeEras": [
@@ -138,8 +138,8 @@
     },
     {
       "id": "paul_first",
-      "title": "Paul\u2019s First Journey",
-      "era": "Acts 13\u201314",
+      "title": "Paul’s First Journey",
+      "era": "Acts 13–14",
       "basemap": "mediterranean",
       "placeEras": [
         "acts"
@@ -156,12 +156,13 @@
           38.0
         ]
       ],
-      "journeyId": "paul_first"
+      "journeyId": "paul_first",
+      "routeOverlay": "overlays/paul-first-route.json"
     },
     {
       "id": "paul_second",
-      "title": "Paul\u2019s Second Journey",
-      "era": "Acts 15\u201318",
+      "title": "Paul’s Second Journey",
+      "era": "Acts 15–18",
       "basemap": "mediterranean",
       "placeEras": [
         "acts"
@@ -178,12 +179,13 @@
           40.0
         ]
       ],
-      "journeyId": "paul_second"
+      "journeyId": "paul_second",
+      "routeOverlay": "overlays/paul-second-route.json"
     },
     {
       "id": "paul_third",
-      "title": "Paul\u2019s Third Journey",
-      "era": "Acts 18\u201321",
+      "title": "Paul’s Third Journey",
+      "era": "Acts 18–21",
       "basemap": "mediterranean",
       "placeEras": [
         "acts"
@@ -200,12 +202,13 @@
           40.0
         ]
       ],
-      "journeyId": "paul_third"
+      "journeyId": "paul_third",
+      "routeOverlay": "overlays/paul-third-route.json"
     },
     {
       "id": "paul_rome",
-      "title": "Paul\u2019s Journey to Rome",
-      "era": "Acts 27\u201328",
+      "title": "Paul’s Journey to Rome",
+      "era": "Acts 27–28",
       "basemap": "mediterranean",
       "placeEras": [
         "acts"
@@ -222,7 +225,8 @@
           40.0
         ]
       ],
-      "journeyId": "paul_rome"
+      "journeyId": "paul_rome",
+      "routeOverlay": "overlays/paul-rome-route.json"
     }
   ]
 }

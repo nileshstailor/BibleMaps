@@ -47,6 +47,8 @@
   let kingdomsGeoJson = null;
   let kingdomsLoadPromise = null;
   let kingdomsLoadedPath = null;
+  let routeOverlayGeoJson = null;
+  let routeOverlayLoadedPath = null;
   let overlayCache = new Map();
   let presetsCatalog = null;
   let presetsLoadPromise = null;
@@ -185,6 +187,10 @@
     return rel || null;
   }
 
+  function routeOverlayPathForPreset(preset) {
+    return preset?.routeOverlay || null;
+  }
+
   function loadOverlay(relPath) {
     if (!relPath) {
       kingdomsGeoJson = null;
@@ -212,6 +218,36 @@
       })
       .catch((err) => {
         console.warn("Bible Maps: overlay failed to load", relPath, err);
+        return null;
+      });
+  }
+
+  function loadRouteOverlay(relPath) {
+    if (!relPath) {
+      routeOverlayGeoJson = null;
+      routeOverlayLoadedPath = null;
+      return Promise.resolve(null);
+    }
+    if (overlayCache.has(relPath)) {
+      routeOverlayGeoJson = overlayCache.get(relPath);
+      routeOverlayLoadedPath = relPath;
+      return Promise.resolve(routeOverlayGeoJson);
+    }
+    return fetch(chrome.runtime.getURL(`data/${relPath}`))
+      .then((r) => {
+        if (!r.ok) throw new Error(`${relPath} HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        overlayCache.set(relPath, data);
+        routeOverlayGeoJson = data;
+        routeOverlayLoadedPath = relPath;
+        return data;
+      })
+      .catch((err) => {
+        console.warn("Bible Maps: route overlay failed to load", relPath, err);
+        routeOverlayGeoJson = null;
+        routeOverlayLoadedPath = null;
         return null;
       });
   }
@@ -783,7 +819,9 @@
     const url = current?.url || "";
     const kingdoms = Boolean(els.kingdomsToggle?.checked);
     const preset = suggestPresetId();
-    return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}`;
+    const eraRoute = routeOverlayLoadedPath || "";
+    const onMap = journeyOnMap ? "1" : "0";
+    return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}|er:${eraRoute}|jm:${onMap}`;
   }
 
   function isOnline() {
@@ -880,6 +918,29 @@
         map.setLayoutProperty("kingdoms-fill", "visibility", "none");
         map.setLayoutProperty("kingdoms-line", "visibility", "none");
       }
+    }
+
+    if (!map.getSource("era-route")) {
+      map.addSource("era-route", {
+        type: "geojson",
+        data: { type: "FeatureCollection", features: [] },
+      });
+      map.addLayer({
+        id: "era-route-line",
+        type: "line",
+        source: "era-route",
+        filter: ["==", ["geometry-type"], "LineString"],
+        layout: {
+          "line-join": "round",
+          "line-cap": "round",
+        },
+        paint: {
+          "line-color": "#a63024",
+          "line-width": 2.5,
+          "line-opacity": 0.55,
+          "line-dasharray": [1.2, 1.4],
+        },
+      });
     }
 
     if (!map.getSource("route")) {
@@ -984,6 +1045,13 @@
   function updateMapOverlays(map, preset, showKingdoms) {
     const { focusPts, routePts } = chapterFocusPoints();
     ensureOverlayLayers(map, showKingdoms);
+    // Era route overlay (Paul Mediterranean traces). Hide when the user has
+    // explicitly shown the same/another journey so lines don't double up.
+    const eraRoute =
+      !journeyOnMap && routeOverlayGeoJson?.features?.length
+        ? routeOverlayGeoJson
+        : { type: "FeatureCollection", features: [] };
+    map.getSource("era-route")?.setData(eraRoute);
     map.getSource("route")?.setData(routeToGeoJSON(routePts));
     // Drop legacy circle layer if an older panel session still has it.
     if (map.getLayer("towns-focus-circle")) {
@@ -1409,6 +1477,11 @@
     const overlayRel = overlayPathForPreset(preset);
     if (overlayRel !== kingdomsLoadedPath) {
       await loadOverlay(overlayRel);
+      if (gen !== mapMountGen) return;
+    }
+    const routeOverlayRel = routeOverlayPathForPreset(preset);
+    if (routeOverlayRel !== routeOverlayLoadedPath) {
+      await loadRouteOverlay(routeOverlayRel);
       if (gen !== mapMountGen) return;
     }
     const basemapName = preset?.basemap || "levant";
