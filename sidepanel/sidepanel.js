@@ -199,8 +199,32 @@
     return rel || null;
   }
 
+  /** Base (e.g. Roman Empire) then local kingdom overlay paths. */
+  function overlayPathsForPreset(preset) {
+    const paths = [];
+    if (preset?.baseOverlay) paths.push(preset.baseOverlay);
+    const rel = overlayPathForPreset(preset);
+    if (rel) paths.push(rel);
+    return paths;
+  }
+
   function routeOverlayPathForPreset(preset) {
     return preset?.routeOverlay || null;
+  }
+
+  function fetchOverlayJson(relPath) {
+    if (overlayCache.has(relPath)) {
+      return Promise.resolve(overlayCache.get(relPath));
+    }
+    return fetch(chrome.runtime.getURL(`data/${relPath}`))
+      .then((r) => {
+        if (!r.ok) throw new Error(`${relPath} HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        overlayCache.set(relPath, data);
+        return data;
+      });
   }
 
   function loadOverlay(relPath) {
@@ -210,19 +234,8 @@
       renderKingdomLegend();
       return Promise.resolve(null);
     }
-    if (overlayCache.has(relPath)) {
-      kingdomsGeoJson = overlayCache.get(relPath);
-      kingdomsLoadedPath = relPath;
-      renderKingdomLegend();
-      return Promise.resolve(kingdomsGeoJson);
-    }
-    return fetch(chrome.runtime.getURL(`data/${relPath}`))
-      .then((r) => {
-        if (!r.ok) throw new Error(`${relPath} HTTP ${r.status}`);
-        return r.json();
-      })
+    return fetchOverlayJson(relPath)
       .then((data) => {
-        overlayCache.set(relPath, data);
         kingdomsGeoJson = data;
         kingdomsLoadedPath = relPath;
         renderKingdomLegend();
@@ -230,6 +243,40 @@
       })
       .catch((err) => {
         console.warn("Bible Maps: overlay failed to load", relPath, err);
+        return null;
+      });
+  }
+
+  /** Load + merge baseOverlay + overlay for the active era preset. */
+  function loadOverlaysForPreset(preset) {
+    const paths = overlayPathsForPreset(preset);
+    if (!paths.length) {
+      kingdomsGeoJson = null;
+      kingdomsLoadedPath = null;
+      renderKingdomLegend();
+      return Promise.resolve(null);
+    }
+    const key = paths.join("|");
+    if (overlayCache.has(key)) {
+      kingdomsGeoJson = overlayCache.get(key);
+      kingdomsLoadedPath = key;
+      renderKingdomLegend();
+      return Promise.resolve(kingdomsGeoJson);
+    }
+    return Promise.all(paths.map((p) => fetchOverlayJson(p)))
+      .then((parts) => {
+        const merged = {
+          type: "FeatureCollection",
+          features: parts.flatMap((p) => (p && p.features) || []),
+        };
+        overlayCache.set(key, merged);
+        kingdomsGeoJson = merged;
+        kingdomsLoadedPath = key;
+        renderKingdomLegend();
+        return merged;
+      })
+      .catch((err) => {
+        console.warn("Bible Maps: overlays failed to load", paths, err);
         return null;
       });
   }
@@ -1675,9 +1722,9 @@
     if (gen !== mapMountGen) return;
 
     const preset = resolvePreset();
-    const overlayRel = overlayPathForPreset(preset);
-    if (overlayRel !== kingdomsLoadedPath) {
-      await loadOverlay(overlayRel);
+    const overlayKey = overlayPathsForPreset(preset).join("|") || null;
+    if (overlayKey !== kingdomsLoadedPath) {
+      await loadOverlaysForPreset(preset);
       if (gen !== mapMountGen) return;
     }
     const routeOverlayRel = routeOverlayPathForPreset(preset);
@@ -1685,10 +1732,8 @@
       await loadRouteOverlay(routeOverlayRel);
       if (gen !== mapMountGen) return;
     }
-    const basemapName = preset?.basemap || "levant";
     const allowKingdoms =
       Boolean(preset?.showKingdoms) &&
-      basemapName === "levant" &&
       Boolean(kingdomsGeoJson?.features?.length);
 
     if (els.kingdomsToggleWrap) {
