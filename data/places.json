@@ -1106,12 +1106,14 @@
     "id": "crete_fair_havens",
     "name": "Fair Havens",
     "aliases": [
-      "Fair Havens"
+      "Fair Havens",
+      "Fair Havens near Lasea",
+      "Kali Limenes"
     ],
     "lat": 34.9275,
     "lng": 24.8081,
     "modernName": "Kali Limenes, Crete, Greece",
-    "eraNotes": "Harbor on Crete during Paul’s voyage to Rome.",
+    "eraNotes": "Acts 27:8 — harbour on the south coast of Crete near Lasea, reached after sailing under Crete past Salmone.",
     "eras": [
       "acts"
     ],
@@ -6901,17 +6903,19 @@
   },
   {
     "id": "cauda",
-    "name": "Cauda (Clauda)",
+    "name": "Cauda (Gavdos)",
     "aliases": [
-      "Cauda (Clauda)",
-      "Clauda",
+      "Cauda (Gavdos)",
       "Cauda",
-      "Gavdos"
+      "Clauda",
+      "Gavdos",
+      "island of Cauda",
+      "island called Cauda"
     ],
-    "lat": 34.85,
-    "lng": 24.08,
-    "modernName": "Gavdos, Greece",
-    "eraNotes": "Islet where the lifeboat was secured (Acts 27:16).",
+    "lat": 34.848,
+    "lng": 24.077,
+    "modernName": "Gavdos island, Greece (Acts 27:16)",
+    "eraNotes": "Acts 27:16 — small island south-west of Crete (Gavdos) under whose lee they secured the ship’s boat in the storm.",
     "eras": [
       "acts"
     ],
@@ -6957,7 +6961,7 @@
     "lat": 36.686,
     "lng": 27.373,
     "modernName": "Knidos, Datça peninsula, Turkey",
-    "eraNotes": "Acts 27:7.",
+    "eraNotes": "Acts 27:7 — SW Asia Minor headland; they made Cnidus with difficulty, then could not go farther into the wind and turned under Crete.",
     "eras": [
       "acts"
     ],
@@ -7610,12 +7614,14 @@
     "id": "salmone",
     "name": "Salmone",
     "aliases": [
-      "Salmone"
+      "Salmone",
+      "Cape Salmone",
+      "Cape Sideros"
     ],
     "lat": 35.31,
     "lng": 26.31,
-    "modernName": "Cape Sideros, eastern Crete",
-    "eraNotes": "Acts 27:7.",
+    "modernName": "Cape Sideros (Salmone), eastern Crete",
+    "eraNotes": "Acts 27:7 — eastern cape of Crete; they sailed under the lee of Crete off Salmone when the wind would not allow them to hold course past Cnidus.",
     "eras": [
       "acts"
     ],
@@ -8211,7 +8217,7 @@
     "lat": 35.24,
     "lng": 24.81,
     "modernName": "Crete, Greece",
-    "eraNotes": "Cretans at Pentecost (Acts 2:11); Paul sailed under Crete (Acts 27:7-21); Titus left in Crete (Titus 1:5).",
+    "eraNotes": "Large Mediterranean island. Pentecost Cretans (Acts 2:11); Paul’s Rome voyage sailed under Crete past Salmone along the south coast to Fair Havens (Acts 27:7–8); Titus left in Crete (Titus 1:5).",
     "eras": [
       "acts"
     ],
@@ -9557,5 +9563,57 @@
       "exile"
     ],
     "region": "levant"
+  },
+  {
+    "id": "cyprus_lee_north",
+    "name": "North coast of Cyprus",
+    "aliases": [
+      "North coast of Cyprus",
+      "under the lee of Cyprus",
+      "lee of Cyprus",
+      "sheltered side of Cyprus"
+    ],
+    "lat": 35.6,
+    "lng": 32.95,
+    "modernName": "North coast of Cyprus (Acts 27:4)",
+    "eraNotes": "Acts 27:4 — sailed under the lee of Cyprus along the north, then across the open sea toward Cilicia and Pamphylia / Myra.",
+    "eras": [
+      "acts"
+    ],
+    "region": "cyprus"
+  },
+  {
+    "id": "crete_south_coast",
+    "name": "South coast of Crete",
+    "aliases": [
+      "South coast of Crete",
+      "southern Crete",
+      "along Crete"
+    ],
+    "lat": 34.98,
+    "lng": 25.45,
+    "modernName": "South-central Crete coast",
+    "eraNotes": "Acts 27:7–8 — after rounding Cape Salmone they worked along the southern coast of Crete toward Fair Havens.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean"
+  },
+  {
+    "id": "cyprus_karpaz_lee",
+    "name": "Off Karpaz (Cyprus)",
+    "aliases": [
+      "Off Karpaz (Cyprus)",
+      "northeast Cyprus",
+      "lee of Cyprus"
+    ],
+    "lat": 35.72,
+    "lng": 34.58,
+    "modernName": "Off the Karpaz peninsula, NE Cyprus",
+    "eraNotes": "Acts 27:4 approach — from Sidon they worked north/west under the lee of Cyprus, passing the island on its northern side (not south).",
+    "eras": [
+      "acts"
+    ],
+    "region": "cyprus"
   }
 ]

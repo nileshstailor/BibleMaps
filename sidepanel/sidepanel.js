@@ -1121,7 +1121,25 @@
       ? routeOverlayGeoJson
       : { type: "FeatureCollection", features: [] };
     map.getSource("era-route")?.setData(eraRoute);
-    map.getSource("route")?.setData(routeToGeoJSON(routePts));
+    // Prefer traced overlay geometry for the active journey when it matches
+    // (keeps Acts 27 north-of-Cyprus / south-Crete teaching track accurate).
+    const overlayJourneyId = routeOverlayGeoJson?.meta?.journeyId;
+    if (
+      journeyOnMap &&
+      activeJourney?.id &&
+      overlayJourneyId &&
+      activeJourney.id === overlayJourneyId &&
+      routeOverlayGeoJson?.features?.length
+    ) {
+      map.getSource("route")?.setData({
+        type: "FeatureCollection",
+        features: routeOverlayGeoJson.features.filter(
+          (f) => f?.geometry?.type === "LineString"
+        ),
+      });
+    } else {
+      map.getSource("route")?.setData(routeToGeoJSON(routePts));
+    }
     // Drop legacy circle layer if an older panel session still has it.
     if (map.getLayer("towns-focus-circle")) {
       try {

@@ -352,12 +352,20 @@
     "name": "Paul’s Journey to Rome",
     "aliases": [
       "voyage to Rome",
-      "Paul to Rome"
+      "Paul to Rome",
+      "Fair Havens",
+      "Cauda",
+      "Clauda",
+      "Gavdos",
+      "Cnidus",
+      "Salmone",
+      "Euroclydon",
+      "northeaster"
     ],
     "scriptureRefs": [
       "Acts 27–28"
     ],
-    "summary": "Paul’s custody voyage from Caesarea to Rome, including shipwreck on Malta.",
+    "summary": "Paul’s custody voyage from Caesarea to Rome: under the lee of Cyprus (north), Myra, Cnidus, under Crete past Salmone along the south coast to Fair Havens, then storm via Cauda (Gavdos) to shipwreck on Malta.",
     "stops": [
       {
         "placeId": "caesarea",
@@ -365,15 +373,39 @@
       },
       {
         "placeId": "sidon",
-        "note": "Humane stop"
+        "note": "Humane stop; friends care for Paul"
+      },
+      {
+        "placeId": "cyprus_karpaz_lee",
+        "note": "Acts 27:4 — under the lee of Cyprus, NE approach (north of the island)"
+      },
+      {
+        "placeId": "cyprus_lee_north",
+        "note": "Acts 27:4 — along the north coast, then across toward Asia Minor"
       },
       {
         "placeId": "myra",
-        "note": "Transfer to an Alexandrian ship"
+        "note": "Transfer to an Alexandrian grain ship for Italy"
+      },
+      {
+        "placeId": "cnidus",
+        "note": "Acts 27:7 — arrived with difficulty; wind blocked further progress"
+      },
+      {
+        "placeId": "salmone",
+        "note": "Acts 27:7 — under the lee of Crete off Cape Salmone"
+      },
+      {
+        "placeId": "crete_south_coast",
+        "note": "Acts 27:8 — along the southern coast of Crete"
       },
       {
         "placeId": "crete_fair_havens",
-        "note": "Difficult sailing season"
+        "note": "Acts 27:8 — Fair Havens near Lasea"
+      },
+      {
+        "placeId": "cauda",
+        "note": "Acts 27:16 — Cauda/Gavdos; secured the boat under its lee"
       },
       {
         "placeId": "malta",
@@ -404,7 +436,7 @@
         "note": "House arrest and witness"
       }
     ],
-    "pathHints": "Levantine coast → southern Asia Minor → Crete → Malta → Syracuse/Rhegium → Puteoli → Appian Way (Forum of Appius, Three Taverns) → Rome."
+    "pathHints": "Sidon → north of Cyprus (Karpaz / north coast) → Myra → Cnidus → Cape Salmone → south Crete → Fair Havens → Cauda/Gavdos → Malta → Italy → Rome."
   },
   {
     "id": "paul_jerusalem_caesarea_transfer",
