@@ -365,7 +365,7 @@
     "scriptureRefs": [
       "Acts 27–28"
     ],
-    "summary": "Paul’s custody voyage from Caesarea to Rome: under the lee of Cyprus (north), Myra, Cnidus, under Crete past Salmone along the south coast to Fair Havens, then storm via Cauda (Gavdos) to shipwreck on Malta.",
+    "summary": "Paul’s custody voyage from Caesarea to Rome: under the lee of Cyprus (north), Myra, past Cnidus in open water, under Crete off Salmone along the south coast to Fair Havens, then storm via Cauda (Gavdos) to shipwreck on Malta.",
     "stops": [
       {
         "placeId": "caesarea",
@@ -382,7 +382,7 @@
       },
       {
         "placeId": "cyprus_lee_north",
-        "note": "North coast of Cyprus",
+        "note": "North of Cyprus in open water",
         "hidden": true
       },
       {
@@ -390,21 +390,48 @@
         "note": "Transfer to an Alexandrian grain ship for Italy"
       },
       {
+        "placeId": "myra_offshore",
+        "note": "South into open water",
+        "hidden": true
+      },
+      {
+        "placeId": "rhodes_south_water",
+        "note": "West in open water south of Rhodes",
+        "hidden": true
+      },
+      {
+        "placeId": "cnidus_approach_water",
+        "note": "South of the Cnidus peninsula",
+        "hidden": true
+      },
+      {
+        "placeId": "cnidus_offshore",
+        "note": "Acts 27:7 — off Cnidus (pass-by)",
+        "hidden": true
+      },
+      {
         "placeId": "cnidus",
-        "note": "Acts 27:7 — arrived with difficulty; wind blocked further progress"
+        "note": "Passed off Cnidus (no landing)",
+        "markerOnly": true
+      },
+      {
+        "placeId": "crete_ne_water",
+        "note": "Open water toward Crete",
+        "hidden": true
       },
       {
         "placeId": "salmone",
-        "note": "Acts 27:7 — Cape Salmone, eastern Crete"
+        "note": "Acts 27:7 — off Cape Salmone",
+        "markerOnly": true
       },
       {
         "placeId": "crete_water_se",
-        "note": "Clear Salmone into open water",
+        "note": "Round into water south of Crete",
         "hidden": true
       },
       {
         "placeId": "crete_water_south",
-        "note": "South of Crete in open water",
+        "note": "Along south Crete in open water",
         "hidden": true
       },
       {

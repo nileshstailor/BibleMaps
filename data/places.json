@@ -9573,8 +9573,8 @@
       "lee of Cyprus",
       "sheltered side of Cyprus"
     ],
-    "lat": 35.6,
-    "lng": 32.95,
+    "lat": 35.72,
+    "lng": 32.9,
     "modernName": "North coast of Cyprus (Acts 27:4)",
     "eraNotes": "Acts 27:4 — sailed under the lee of Cyprus along the north, then across the open sea toward Cilicia and Pamphylia / Myra.",
     "eras": [
@@ -9609,8 +9609,8 @@
       "northeast Cyprus",
       "lee of Cyprus"
     ],
-    "lat": 35.72,
-    "lng": 34.58,
+    "lat": 35.78,
+    "lng": 34.55,
     "modernName": "Off the Karpaz peninsula, NE Cyprus",
     "eraNotes": "Acts 27:4 approach — from Sidon they worked north/west under the lee of Cyprus, passing the island on its northern side (not south).",
     "eras": [
@@ -9625,8 +9625,8 @@
     "aliases": [
       "Off SE Crete"
     ],
-    "lat": 34.78,
-    "lng": 26.12,
+    "lat": 34.7,
+    "lng": 26.25,
     "modernName": "Sea south-east of Cape Salmone",
     "eraNotes": "Routing via only (Acts 27:7–8): clears Cape Salmone into open water south of Crete.",
     "eras": [
@@ -9641,8 +9641,8 @@
     "aliases": [
       "Off south Crete"
     ],
-    "lat": 34.7,
-    "lng": 25.35,
+    "lat": 34.65,
+    "lng": 25.45,
     "modernName": "Sea south of central Crete",
     "eraNotes": "Routing via only (Acts 27:8): keeps the Fair Havens approach in open water along Crete’s south.",
     "eras": [
@@ -9657,7 +9657,7 @@
     "aliases": [
       "Off SW Crete"
     ],
-    "lat": 34.76,
+    "lat": 34.7,
     "lng": 24.95,
     "modernName": "Sea south of Fair Havens approach",
     "eraNotes": "Routing via only: final water approach into Fair Havens from the south.",
@@ -9673,10 +9673,90 @@
     "aliases": [
       "Sea toward Cauda"
     ],
-    "lat": 34.78,
-    "lng": 24.4,
+    "lat": 34.72,
+    "lng": 24.3,
     "modernName": "Open water between Fair Havens and Gavdos",
     "eraNotes": "Routing via only (Acts 27:13–16): leave Fair Havens south into open water before Cauda/Gavdos.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "myra_offshore",
+    "name": "Sea off Myra",
+    "aliases": [
+      "Sea off Myra"
+    ],
+    "lat": 35.85,
+    "lng": 29.55,
+    "modernName": "Open water south of Myra/Demre",
+    "eraNotes": "Routing via only: leave Myra south into open water before working west.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "rhodes_south_water",
+    "name": "Sea south of Rhodes",
+    "aliases": [
+      "Sea south of Rhodes"
+    ],
+    "lat": 35.7,
+    "lng": 27.95,
+    "modernName": "Open water south of Rhodes",
+    "eraNotes": "Routing via only (Acts 27:7 track): westbound in open water south of Rhodes toward Cnidus.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "cnidus_offshore",
+    "name": "Sea off Cnidus",
+    "aliases": [
+      "Sea off Cnidus"
+    ],
+    "lat": 36.3,
+    "lng": 27.05,
+    "modernName": "Open water south-west of Knidos",
+    "eraNotes": "Routing via only (Acts 27:7): they arrived with difficulty off Cnidus — pass-by in open water, not a landing.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "crete_ne_water",
+    "name": "Sea NE of Crete",
+    "aliases": [
+      "Sea NE of Crete"
+    ],
+    "lat": 35.4,
+    "lng": 26.85,
+    "modernName": "Open water north-east of Cape Salmone",
+    "eraNotes": "Routing via only: approach Crete in open water before rounding Salmone under the lee.",
+    "eras": [
+      "acts"
+    ],
+    "region": "mediterranean",
+    "routingOnly": true
+  },
+  {
+    "id": "cnidus_approach_water",
+    "name": "Sea SW toward Cnidus",
+    "aliases": [
+      "Sea SW toward Cnidus"
+    ],
+    "lat": 35.95,
+    "lng": 27.45,
+    "modernName": "Open water south of the Cnidus peninsula",
+    "eraNotes": "Routing via only: stay in open water south of Datça/Knidos.",
     "eras": [
       "acts"
     ],

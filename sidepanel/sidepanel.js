@@ -521,6 +521,11 @@
     return (journey?.stops || []).filter((s) => !s?.hidden);
   }
 
+  /** Stops that shape the sailing line (exclude landmark-only pass-bys). */
+  function routeGeometryStops(stops) {
+    return (stops || []).filter((s) => !s?.markerOnly);
+  }
+
   function fillJourneyStopList(journey) {
     if (!els.stopList || !els.stopListWrap) return;
     els.stopList.innerHTML = "";
@@ -626,8 +631,8 @@
   }
 
   function collectRoutePoints() {
-    // Include hidden routing vias so arcs/overlays stay geographically correct.
-    const stops = activeJourney?.stops || [];
+    // Include hidden routing vias; exclude markerOnly landmarks from the line.
+    const stops = routeGeometryStops(activeJourney?.stops || []);
     if (stops.some((s) => Number.isFinite(s.lat))) return stops;
     return [];
   }
@@ -842,6 +847,15 @@
     }
     for (const s of routePts) {
       if (s?.hidden) continue; // routing vias shape the line only
+      const id = s.placeId || s.id || s.name;
+      if (!id || seen.has(id)) continue;
+      if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
+      seen.add(id);
+      focusPts.push(s);
+    }
+    // Landmark pass-bys (e.g. Cnidus, Salmone): show pins, not line vertices.
+    for (const s of activeJourney?.stops || []) {
+      if (!s?.markerOnly || s?.hidden) continue;
       const id = s.placeId || s.id || s.name;
       if (!id || seen.has(id)) continue;
       if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
