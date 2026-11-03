@@ -905,9 +905,9 @@
         source: "route",
         layout: {
           "symbol-placement": "line",
-          "symbol-spacing": 56,
+          "symbol-spacing": 72,
           "icon-image": "route-arrow",
-          "icon-size": 0.55,
+          "icon-size": 0.32,
           "icon-allow-overlap": true,
           "icon-ignore-placement": true,
           "icon-rotation-alignment": "map",
@@ -922,21 +922,37 @@
         source: "route",
         layout: {
           "symbol-placement": "line",
-          "symbol-spacing": 56,
+          "symbol-spacing": 72,
           "icon-image": "route-arrow",
-          "icon-size": 0.55,
+          "icon-size": 0.32,
           "icon-allow-overlap": true,
           "icon-ignore-placement": true,
           "icon-rotation-alignment": "map",
           "icon-pitch-alignment": "map",
         },
       });
+    } else {
+      // Keep arrow styling in sync when the side panel reloads overlays.
+      try {
+        map.setLayoutProperty("route-arrows", "icon-size", 0.32);
+        map.setLayoutProperty("route-arrows", "symbol-spacing", 72);
+      } catch {
+        /* ignore */
+      }
     }
     // Place pins are DOM markers only (dot + label) — no second circle layer.
   }
 
   function ensureRouteArrowImage(map) {
-    if (!map || map.hasImage("route-arrow")) return;
+    if (!map) return;
+    // Recreate so style tweaks apply even if an older fat arrow was cached.
+    if (map.hasImage("route-arrow")) {
+      try {
+        map.removeImage("route-arrow");
+      } catch {
+        /* ignore */
+      }
+    }
     const size = 128;
     const canvas = document.createElement("canvas");
     canvas.width = size;
@@ -946,15 +962,13 @@
     ctx.clearRect(0, 0, size, size);
     ctx.fillStyle = "#a63024";
     ctx.beginPath();
-    // Point along +x so MapLibre line bearing aims the tip forward.
-    ctx.moveTo(size * 0.18, size * 0.22);
-    ctx.lineTo(size * 0.86, size * 0.5);
-    ctx.lineTo(size * 0.18, size * 0.78);
+    // Slim chevron tip along +x so MapLibre line bearing aims forward.
+    ctx.moveTo(size * 0.28, size * 0.38);
+    ctx.lineTo(size * 0.78, size * 0.5);
+    ctx.lineTo(size * 0.28, size * 0.62);
+    ctx.lineTo(size * 0.34, size * 0.5);
     ctx.closePath();
     ctx.fill();
-    ctx.strokeStyle = "#fff8ef";
-    ctx.lineWidth = size * 0.06;
-    ctx.stroke();
     map.addImage("route-arrow", ctx.getImageData(0, 0, size, size), {
       pixelRatio: 2,
     });
@@ -1285,6 +1299,34 @@
     };
   }
 
+  /**
+   * Quadratic arc from a→b. Positive bulge bends left of travel direction so
+   * A→B and B→A naturally take opposite sides and no longer stack.
+   */
+  function curvedRouteSegment(a, b, bulge, steps = 28) {
+    const dx = b[0] - a[0];
+    const dy = b[1] - a[1];
+    const len = Math.hypot(dx, dy);
+    if (len < 1e-9) return [a.slice(), b.slice()];
+    const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+    // Left-hand normal relative to travel a→b.
+    const px = -dy / len;
+    const py = dx / len;
+    // Keep a minimum geographic bend so short hops still read as arcs.
+    const offset = Math.max(Math.abs(bulge) * len, 0.08) * Math.sign(bulge || 1);
+    const ctrl = [mid[0] + px * offset, mid[1] + py * offset];
+    const coords = [];
+    for (let i = 0; i <= steps; i += 1) {
+      const t = i / steps;
+      const u = 1 - t;
+      coords.push([
+        u * u * a[0] + 2 * u * t * ctrl[0] + t * t * b[0],
+        u * u * a[1] + 2 * u * t * ctrl[1] + t * t * b[1],
+      ]);
+    }
+    return coords;
+  }
+
   function routeToGeoJSON(stops) {
     const coords = (stops || [])
       .filter((s) => Number.isFinite(s.lat) && Number.isFinite(s.lng))
@@ -1292,16 +1334,30 @@
     if (coords.length < 2) {
       return { type: "FeatureCollection", features: [] };
     }
-    return {
-      type: "FeatureCollection",
-      features: [
-        {
-          type: "Feature",
-          properties: {},
-          geometry: { type: "LineString", coordinates: coords },
+
+    const directedUses = new Map();
+    const features = [];
+    for (let i = 0; i < coords.length - 1; i += 1) {
+      const a = coords[i];
+      const b = coords[i + 1];
+      if (a[0] === b[0] && a[1] === b[1]) continue;
+      const dKey = `${a[0].toFixed(5)},${a[1].toFixed(5)}>${b[0].toFixed(5)},${b[1].toFixed(5)}`;
+      const use = directedUses.get(dKey) || 0;
+      directedUses.set(dKey, use + 1);
+      // Always bend left of travel; reverse legs land on the other side.
+      // Repeated same-direction hops fan farther out.
+      const bulge = 0.22 + use * 0.14;
+      features.push({
+        type: "Feature",
+        properties: { segment: i, bulge },
+        geometry: {
+          type: "LineString",
+          coordinates: curvedRouteSegment(a, b, bulge),
         },
-      ],
-    };
+      });
+    }
+
+    return { type: "FeatureCollection", features };
   }
 
   function addDomMarkers(map, points, { dim }) {
