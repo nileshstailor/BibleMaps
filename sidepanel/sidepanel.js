@@ -790,6 +790,39 @@
     if (els.teachingMap) els.teachingMap.innerHTML = "";
   }
 
+  function eraRouteIsActive(preset = resolvePreset()) {
+    if (journeyOnMap) return false;
+    const jid = preset?.journeyId || routeOverlayGeoJson?.meta?.journeyId;
+    if (!jid || !routeOverlayGeoJson?.features?.length) return false;
+    // Only paint the Paul Mediterranean trace when that journey is actually
+    // detected in the chapter — avoids Acts 22–26 (paul_rome basemap) showing
+    // a lonely Rome-voyage dashed line with no relevant pins.
+    return (current?.journeys || []).some((j) => j.id === jid);
+  }
+
+  function eraRouteStopPoints() {
+    if (!eraRouteIsActive()) return [];
+    const out = [];
+    const seen = new Set();
+    for (const f of routeOverlayGeoJson?.features || []) {
+      if (f?.geometry?.type !== "Point") continue;
+      const [lng, lat] = f.geometry.coordinates || [];
+      const id = f.properties?.id;
+      if (!id || seen.has(id)) continue;
+      if (!Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+      seen.add(id);
+      out.push({
+        id,
+        placeId: id,
+        name: f.properties?.name || id,
+        lat,
+        lng,
+        note: f.properties?.note || "",
+      });
+    }
+    return out;
+  }
+
   function chapterFocusPoints() {
     const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
     const routePts = collectRoutePoints();
@@ -805,6 +838,12 @@
       const id = s.placeId || s.id || s.name;
       if (!id || seen.has(id)) continue;
       if (!Number.isFinite(s.lat) || !Number.isFinite(s.lng)) continue;
+      seen.add(id);
+      focusPts.push(s);
+    }
+    for (const s of eraRouteStopPoints()) {
+      const id = s.placeId || s.id;
+      if (!id || seen.has(id)) continue;
       seen.add(id);
       focusPts.push(s);
     }
@@ -937,8 +976,39 @@
         paint: {
           "line-color": "#a63024",
           "line-width": 2.5,
-          "line-opacity": 0.55,
+          "line-opacity": 0.7,
           "line-dasharray": [1.2, 1.4],
+        },
+      });
+      map.addLayer({
+        id: "era-route-stops",
+        type: "circle",
+        source: "era-route",
+        filter: ["==", ["geometry-type"], "Point"],
+        paint: {
+          "circle-radius": 4.5,
+          "circle-color": "#a63024",
+          "circle-stroke-width": 1.5,
+          "circle-stroke-color": "#fff8ef",
+        },
+      });
+      map.addLayer({
+        id: "era-route-labels",
+        type: "symbol",
+        source: "era-route",
+        filter: ["==", ["geometry-type"], "Point"],
+        layout: {
+          "text-field": ["get", "name"],
+          "text-size": 11,
+          "text-offset": [0, 1.1],
+          "text-anchor": "top",
+          "text-optional": true,
+          "text-allow-overlap": false,
+        },
+        paint: {
+          "text-color": "#2c2416",
+          "text-halo-color": "#fff8ef",
+          "text-halo-width": 1.4,
         },
       });
     }
@@ -1045,12 +1115,11 @@
   function updateMapOverlays(map, preset, showKingdoms) {
     const { focusPts, routePts } = chapterFocusPoints();
     ensureOverlayLayers(map, showKingdoms);
-    // Era route overlay (Paul Mediterranean traces). Hide when the user has
-    // explicitly shown the same/another journey so lines don't double up.
-    const eraRoute =
-      !journeyOnMap && routeOverlayGeoJson?.features?.length
-        ? routeOverlayGeoJson
-        : { type: "FeatureCollection", features: [] };
+    // Era route overlay (Paul Mediterranean traces): only when that journey is
+    // detected in-chapter, and not while a user journey is shown on the map.
+    const eraRoute = eraRouteIsActive(preset)
+      ? routeOverlayGeoJson
+      : { type: "FeatureCollection", features: [] };
     map.getSource("era-route")?.setData(eraRoute);
     map.getSource("route")?.setData(routeToGeoJSON(routePts));
     // Drop legacy circle layer if an older panel session still has it.
