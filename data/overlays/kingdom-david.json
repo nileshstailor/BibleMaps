@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "meta": {
     "title": "Kingdom of David",
-    "era": "United monarchy (2 Samuel 5\u201324 / 1 Kings 1\u201311)",
+    "era": "United monarchy (2 Samuel 5–24 / 1 Kings 1–11)",
     "source": "Digitized from media/historical/kingdom-david.jpg",
     "disclaimer": "Illustrative teaching overlays traced from the bundled atlas plate; borders are approximate.",
     "georef": "Shared Israel-frame affine (scripts/georef/israel-frame.npz).",
@@ -16,7 +16,7 @@
         "name": "Kingdom of Israel",
         "shortName": "Israel",
         "eraLabel": "United monarchy",
-        "color": "#9aab5c",
+        "color": "#3d7a8c",
         "fillOpacity": 0.32,
         "labelLng": 34.8152,
         "labelLat": 30.9923
