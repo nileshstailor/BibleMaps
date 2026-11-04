@@ -55,6 +55,7 @@
         "gospels"
       ],
       "showKingdoms": true,
+      "baseOverlay": "overlays/roman-empire-ad14.json",
       "overlay": "overlays/israel-jesus.json",
       "referencePlate": "israel-jesus.jpg",
       "bounds": [
@@ -144,7 +145,8 @@
       "placeEras": [
         "acts"
       ],
-      "showKingdoms": false,
+      "showKingdoms": true,
+      "overlay": "overlays/roman-empire-ad69.json",
       "referencePlate": "paul-first.jpg",
       "bounds": [
         [
@@ -167,7 +169,8 @@
       "placeEras": [
         "acts"
       ],
-      "showKingdoms": false,
+      "showKingdoms": true,
+      "overlay": "overlays/roman-empire-ad69.json",
       "referencePlate": "paul-second.jpg",
       "bounds": [
         [
@@ -190,7 +193,8 @@
       "placeEras": [
         "acts"
       ],
-      "showKingdoms": false,
+      "showKingdoms": true,
+      "overlay": "overlays/roman-empire-ad69.json",
       "referencePlate": "paul-third.jpg",
       "bounds": [
         [
@@ -213,7 +217,8 @@
       "placeEras": [
         "acts"
       ],
-      "showKingdoms": false,
+      "showKingdoms": true,
+      "overlay": "overlays/roman-empire-ad69.json",
       "referencePlate": "paul-rome.jpg",
       "bounds": [
         [

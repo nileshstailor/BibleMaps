@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "meta": {
     "title": "Divided kingdoms",
-    "era": "Approx. after Solomon \u2014 Israel until 722 BCE; Judah continues later",
+    "era": "Approx. after Solomon — Israel until 722 BCE; Judah continues later",
     "source": "Digitized from media/historical/divided-kingdom.jpg (Knowing the Bible / USGS topography)",
     "disclaimer": "Illustrative teaching overlays traced from the bundled atlas plate; borders are approximate and historically debated.",
     "georef": "Affine georeference from Sea of Galilee / Dead Sea / coast control points (RMSE ~2 km). Negev folded into Judah. Aram and Phoenicia are cropped by the plate frame at ~34.0N and are extended north to ~34.5N (Phoenicia along the Lebanese coast). labelLng/labelLat drive the subtle map labels.",
@@ -15,7 +15,7 @@
         "id": "israel",
         "name": "Kingdom of Israel",
         "eraLabel": "Northern kingdom",
-        "color": "#4a6741",
+        "color": "#3d7a8c",
         "fillOpacity": 0.28,
         "labelLng": 35.61622,
         "labelLat": 32.50579,
