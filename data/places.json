@@ -5424,14 +5424,15 @@
     "id": "tarshish",
     "name": "Tarshish",
     "aliases": [
-      "Tarshish",
       "ships of Tarshish",
-      "Tharshish"
+      "from Tarshish",
+      "to Tarshish",
+      "of Tarshish"
     ],
     "lat": 37.26,
     "lng": -6.95,
     "modernName": "Tartessos, SW Spain (traditional)",
-    "eraNotes": "Distant western port; 'ships of Tarshish' (1 Kgs 10:22; 22:48; 2 Chr 9:21; 20:36).",
+    "eraNotes": "Distant western port; 'ships of Tarshish' (1 Kgs 10:22; 22:48; 2 Chr 9:21; 20:36). Bare 'Tarshish' is not matched (also a personal name in Esth 1:14).",
     "eras": [
       "united",
       "divided",

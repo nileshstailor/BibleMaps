@@ -69,6 +69,10 @@
     "tubal",
     "uz",
     "zebulun",
+    // Bare Tarshish is also a Persian courtier's name (Esth 1:14) — only match
+    // geographic phrases like "ships of Tarshish".
+    "tarshish",
+    "tharshish",
     // People ethnonyms / gentilics — match the place via the base toponym
     // or a "land of …" alias instead (1 Chr genealogies list these as persons).
     "arvadites",
