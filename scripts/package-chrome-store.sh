@@ -15,6 +15,7 @@ rsync -a \
   --exclude '.git/' \
   --exclude '.gitignore' \
   --exclude '.DS_Store' \
+  --exclude '.cursor/' \
   --exclude 'store/' \
   --exclude 'scripts/' \
   --exclude 'node_modules/' \
@@ -22,6 +23,10 @@ rsync -a \
   --exclude '.idea/' \
   --exclude '.vscode/' \
   --exclude 'CHANGELOG.md' \
+  --exclude '*.mov' \
+  --exclude '*.mp4' \
+  --exclude 'ScreenRecording_*' \
+  --exclude 'media/tiles/' \
   "$ROOT/" "$STAGE/"
 
 # Drop oversized native CLI if present under scripts was already excluded;
