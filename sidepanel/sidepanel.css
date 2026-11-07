@@ -154,12 +154,22 @@ body.app-shell {
   max-height: 78vh;
   display: flex;
   flex-direction: column;
-  background: var(--surface-dock);
+  background: color-mix(in srgb, var(--surface-dock) 90%, transparent);
+  backdrop-filter: blur(16px) saturate(1.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.08);
   border-top: 1px solid var(--line);
-  border-radius: 18px 18px 0 0;
-  box-shadow: 0 -8px 28px rgba(44, 36, 22, 0.14);
+  border-radius: 14px 14px 0 0;
+  box-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 -10px 32px rgba(44, 36, 22, 0.12);
   overflow: hidden;
   touch-action: none;
+}
+
+@supports not (background: color-mix(in srgb, white 50%, transparent)) {
+  .bottom-dock {
+    background: var(--surface-dock);
+  }
 }
 
 body.is-dock-dragging .bottom-dock {
@@ -167,26 +177,69 @@ body.is-dock-dragging .bottom-dock {
 }
 
 .dock-grabber {
+  position: relative;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 10px 0 8px;
+  gap: 0;
+  padding: 6px 0 3px;
   cursor: ns-resize;
   touch-action: none;
   user-select: none;
 }
 
+.dock-grabber:focus-visible {
+  outline: none;
+}
+
+.dock-grabber:focus-visible .dock-grabber-pill {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--olive) 40%, transparent);
+}
+
+.dock-grabber-pill {
+  display: block;
+  width: 36px;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--muted);
+  opacity: 0.38;
+  transition:
+    width 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.dock-grabber:hover .dock-grabber-pill,
+.dock-grabber:focus-visible .dock-grabber-pill {
+  width: 44px;
+  opacity: 0.55;
+}
+
+body.is-dock-dragging .dock-grabber-pill {
+  width: 48px;
+  opacity: 0.62;
+}
+
 .dock-grabber-hint {
-  margin: 4px 0 0;
-  font-size: 0.72rem;
-  color: var(--terra);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  margin: 0;
+  font-size: 0.62rem;
+  line-height: 1.2;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
   text-align: center;
   pointer-events: none;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.15s ease;
+}
+
+.bottom-dock.is-dock-peek .dock-grabber-hint {
+  max-height: 1.4em;
+  margin-top: 3px;
+  opacity: 1;
 }
 
 .dock-grabber-hint[hidden] {
@@ -200,14 +253,16 @@ body.is-dock-dragging .bottom-dock {
   bottom: calc(var(--dock-height, 228px) + 12px);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 7px 12px;
   font: inherit;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 600;
   cursor: pointer;
-  background: var(--surface-dock);
+  background: color-mix(in srgb, var(--surface-dock) 92%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--terra);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 12px rgba(44, 36, 22, 0.14);
 }
 
 .show-places-btn:hover {
@@ -218,42 +273,93 @@ body.is-dock-dragging .bottom-dock {
   display: none;
 }
 
-.dock-grabber span {
-  display: block;
-  width: 34px;
-  height: 4px;
-  border-radius: 99px;
-  background: var(--muted);
-  opacity: 0.45;
-}
-
 .bottom-dock.is-dock-peek .status-line {
   display: none;
 }
 
-.bottom-dock.is-dock-peek .dock-head {
-  padding-bottom: 4px;
+.bottom-dock.is-dock-peek .dock-chrome {
+  padding-bottom: 2px;
 }
 
 .bottom-dock.is-dock-peek .dock-scroll {
   mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
 }
 
-.dock-head {
-  padding: 0 14px 8px;
+.dock-chrome {
+  flex: 0 0 auto;
+  padding: 0 12px 6px;
 }
 
-.dock-head h2 {
+.dock-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.dock-titles {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.dock-chrome h2,
+.dock-titles h2 {
   margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.2;
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.dock-subtitle,
+#mapSubtitle.dock-subtitle {
+  margin: 1px 0 0;
+  font-size: 0.67rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .status-line {
-  margin: 6px 0 0;
-  font-size: 0.74rem;
-  line-height: 1.35;
+  margin: 4px 0 0;
+  font-size: 0.68rem;
+  line-height: 1.3;
   color: var(--muted);
+}
+
+.dock-toolbar .dock-tabs {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 3px;
+  margin: 0;
+  padding: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--line) 55%, transparent);
+  border: 1px solid var(--line);
+}
+
+.dock-toolbar .tab {
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  min-width: 0;
+}
+
+.dock-toolbar .tab.active {
+  background: var(--surface-dock);
+  box-shadow: 0 1px 4px rgba(44, 36, 22, 0.12);
+  color: var(--ink);
+  border: none;
+}
+
+html[data-theme="night"] .dock-toolbar .tab.active {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .dock-tabs {

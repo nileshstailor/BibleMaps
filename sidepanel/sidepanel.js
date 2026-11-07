@@ -1597,7 +1597,7 @@
   /** Resting height: grabber + tabs + a peek at the first place/journey row. */
   function dockPeekHeight() {
     const h = window.innerHeight;
-    return Math.round(Math.min(Math.max(h * 0.31, 200), 292));
+    return Math.round(Math.min(Math.max(h * 0.28, 184), 268));
   }
 
   function dockExpandedHeight() {
@@ -1692,10 +1692,13 @@
     if (!els.dockGrabberHint) return;
     const peek = dockPeekHeight();
     const cramped = dockHeightPx <= peek + 6;
-    els.dockGrabberHint.hidden = false;
-    els.dockGrabberHint.textContent = cramped
-      ? "↑ Drag for more places & journeys (or tap Places ↑)"
-      : "Drag handle to resize · double-click to expand";
+    if (cramped) {
+      els.dockGrabberHint.hidden = false;
+      els.dockGrabberHint.textContent = "Pull up · or Places ↑ on map";
+    } else {
+      els.dockGrabberHint.hidden = true;
+      els.dockGrabberHint.textContent = "";
+    }
     if (els.showPlacesBtn) {
       els.showPlacesBtn.hidden = !cramped;
     }

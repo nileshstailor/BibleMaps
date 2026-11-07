@@ -84,24 +84,29 @@
         aria-label="Drag up or down to resize places panel"
         tabindex="0"
       >
-        <span></span><span></span><span></span>
-        <p class="dock-grabber-hint" id="dockGrabberHint">Drag here for places &amp; journeys</p>
+        <span class="dock-grabber-pill" aria-hidden="true"></span>
+        <p class="dock-grabber-hint" id="dockGrabberHint" hidden>
+          Drag for places &amp; journeys
+        </p>
       </div>
 
-      <header class="dock-head">
-        <h2 id="mapTitle">Map</h2>
-        <p id="mapSubtitle" class="muted">Places in this chapter</p>
+      <header class="dock-chrome">
+        <div class="dock-toolbar">
+          <div class="dock-titles">
+            <h2 id="mapTitle">Map</h2>
+            <p id="mapSubtitle" class="dock-subtitle muted">Places in this chapter</p>
+          </div>
+          <nav class="tabs dock-tabs" role="tablist" aria-label="Places and journeys">
+            <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+              Places
+            </button>
+            <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+              Journeys
+            </button>
+          </nav>
+        </div>
         <p class="status-line" id="status">Open a supported Bible passage to detect places.</p>
       </header>
-
-      <nav class="tabs dock-tabs" role="tablist">
-        <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
-          Places
-        </button>
-        <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
-          Journeys
-        </button>
-      </nav>
 
       <div class="dock-scroll">
         <section id="placesPanel" class="panel active" role="tabpanel"></section>
