@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bible Maps",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Highlight biblical places and journeys on major Bible sites; open them on an Esri teaching map (Map or Satellite) when online.",
   "permissions": [
     "sidePanel",

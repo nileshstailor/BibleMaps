@@ -679,10 +679,8 @@
 
   function showJourneyOnMap(journey) {
     if (!journey) return;
-    focusedPlaceId = null;
-    lastFocusedLngLat = null;
-    placeFocusGen += 1;
-    placeCameraBusy = false;
+    cancelPlaceCameraFlight();
+    clearPlaceFocusUi();
     requestOverviewFit(true);
     activeJourney = journey;
     selectedJourneyId = journey.id || null;
@@ -713,21 +711,46 @@
     refreshJourneyMapView();
   }
 
+  function cancelPlaceCameraFlight() {
+    placeFocusGen += 1;
+    placeCameraBusy = false;
+  }
+
+  function clearPlaceFocusUi() {
+    focusedPlaceId = null;
+    lastFocusedLngLat = null;
+    openPlaceIds.clear();
+    if (els.placesPanel) {
+      for (const row of els.placesPanel.querySelectorAll(".acc-row[data-place-id]")) {
+        row.open = false;
+        row.classList.remove("is-focused");
+      }
+    }
+  }
+
+  function fitStoryOnMap() {
+    if (!maplibreMap) return;
+    cancelPlaceCameraFlight();
+    clearPlaceFocusUi();
+    requestOverviewFit(true);
+    const preset = resolvePreset();
+    const showKingdoms =
+      Boolean(preset?.showKingdoms) &&
+      Boolean(kingdomsGeoJson?.features?.length) &&
+      Boolean(els.kingdomsToggle?.checked);
+    applyMapViewportNow();
+    updateMapOverlays(maplibreMap, preset, showKingdoms);
+    lastMapFingerprint = mapFingerprint();
+    lastMapPresetId = preset?.id || "";
+  }
+
   function refreshJourneyMapView() {
     const apply = () => {
       if (!maplibreMap) {
         requestAnimationFrame(() => renderMap());
         return;
       }
-      const preset = resolvePreset();
-      const showKingdoms =
-        Boolean(preset?.showKingdoms) &&
-        Boolean(kingdomsGeoJson?.features?.length) &&
-        Boolean(els.kingdomsToggle?.checked);
-      applyMapViewportNow();
-      updateMapOverlays(maplibreMap, preset, showKingdoms);
-      lastMapFingerprint = mapFingerprint();
-      lastMapPresetId = preset?.id || "";
+      fitStoryOnMap();
     };
     requestAnimationFrame(apply);
   }
@@ -1726,10 +1749,6 @@
 
   function initMapNavControls() {
     const zoomStep = () => ({ duration: 220 });
-    const cancelPlaceCameraFlight = () => {
-      placeFocusGen += 1;
-      placeCameraBusy = false;
-    };
     els.mapZoomIn?.addEventListener("click", () => {
       cancelPlaceCameraFlight();
       maplibreMap?.zoomIn(zoomStep());
@@ -1740,16 +1759,7 @@
     });
     els.mapRecenter?.addEventListener("click", () => {
       if (!maplibreMap) return;
-      cancelPlaceCameraFlight();
-      focusedPlaceId = null;
-      lastFocusedLngLat = null;
-      requestOverviewFit(true);
-      const preset = resolvePreset();
-      const showKingdoms =
-        Boolean(preset?.showKingdoms) &&
-        Boolean(kingdomsGeoJson?.features?.length) &&
-        Boolean(els.kingdomsToggle?.checked);
-      updateMapOverlays(maplibreMap, preset, showKingdoms);
+      fitStoryOnMap();
     });
   }
 
