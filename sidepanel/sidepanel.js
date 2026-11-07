@@ -536,7 +536,7 @@
         const id = row.dataset.placeId;
         if (!id) return;
         if (row.open) {
-          openPlaceIds.add(id);
+          closeOtherPlaceAccordions(id);
           diveToPlaceFromList(id);
         } else {
           openPlaceIds.delete(id);
@@ -808,9 +808,26 @@
     return (allPlaces || []).find((p) => p.id === placeId) || null;
   }
 
+  function closeOtherPlaceAccordions(keepPlaceId) {
+    if (!els.placesPanel) return;
+    for (const row of els.placesPanel.querySelectorAll(
+      ".acc-row[data-place-id]"
+    )) {
+      const id = row.dataset.placeId;
+      if (!id || id === keepPlaceId) continue;
+      if (row.open) row.open = false;
+      openPlaceIds.delete(id);
+      row.classList.remove("is-focused");
+    }
+    if (keepPlaceId) {
+      openPlaceIds.clear();
+      openPlaceIds.add(keepPlaceId);
+    }
+  }
+
   function openPlaceAccordion(placeId, { scroll = false } = {}) {
     if (!placeId || !els.placesPanel) return null;
-    openPlaceIds.add(placeId);
+    closeOtherPlaceAccordions(placeId);
     const row = els.placesPanel.querySelector(
       `[data-place-id="${CSS.escape(placeId)}"]`
     );
