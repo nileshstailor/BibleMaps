@@ -74,12 +74,29 @@
   /** Town context on click — closer than chapter overview, not street-level. */
   const PLACE_FOCUS_ZOOM = 10;
   const JOURNEY_FIT_ANIM_MS = 750;
+  /** When chapter pins span farther than this (degrees), frame the densest cluster. */
+  const EMPIRE_CLUSTER_MAX_SPAN_DEG = 12;
   const ESRI_BASEMAP_SOURCE = "esri-basemap";
   const ESRI_LABELS_SOURCE = "esri-labels";
   const ESRI_BASEMAP_LAYER = "esri-basemap";
   const ESRI_LABELS_LAYER = "esri-labels";
   const ESRI_ATTR =
     'Tiles © <a href="https://www.esri.com/">Esri</a> — Esri, TomTom, Garmin, FAO, NOAA, USGS';
+
+  function biblicalTrainingPlaceUrl(place) {
+    try {
+      if (window.BiblicalTrainingLinks?.placeURL) {
+        return window.BiblicalTrainingLinks.placeURL(place);
+      }
+    } catch {
+      /* ignore */
+    }
+    const slug = String(place?.name || "bible")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    return `https://www.biblicaltraining.org/library/${encodeURIComponent(slug || "bible")}`;
+  }
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -512,8 +529,11 @@
               : ""
           }
           <div class="actions">
-            <a class="primary-btn" href="${googlePlaceUrl(place)}" target="_blank" rel="noopener">
+            <a class="primary-btn" href="${escapeAttr(googlePlaceUrl(place))}" target="_blank" rel="noopener">
               Open in Google Maps
+            </a>
+            <a class="ghost-btn wiki-link" href="${escapeAttr(biblicalTrainingPlaceUrl(place))}" target="_blank" rel="noopener">
+              Wiki
             </a>
           </div>
         </div>
@@ -523,6 +543,7 @@
         if (!id) return;
         if (row.open) {
           openPlaceIds.add(id);
+          diveToPlaceFromList(id);
         } else {
           openPlaceIds.delete(id);
           // User closed it — don't let focus/poll force it back open.
@@ -829,6 +850,36 @@
     return true;
   }
 
+  async function diveToPlaceFromList(placeId) {
+    if (!placeId) return;
+    focusedPlaceId = placeId;
+    showPlacesTab();
+    await loadAllPlaces();
+    openPlaceAccordion(placeId, { scroll: false });
+    const place = findPlaceById(placeId);
+    if (!place) return;
+
+    const fly = () => {
+      if (!maplibreMap) return;
+      easeMapToPlace(place, { animate: true });
+      const { focusPts } = chapterFocusPoints();
+      clearMarkers();
+      addDomMarkers(maplibreMap, focusPts, { dim: false });
+      setPlacesMapsLink([place]);
+      setMapHelp("", false);
+    };
+
+    if (!maplibreMap) {
+      await renderMap();
+    }
+    if (!maplibreMap) return;
+    if (typeof maplibreMap.isStyleLoaded === "function" && !maplibreMap.isStyleLoaded()) {
+      maplibreMap.once("idle", fly);
+    } else {
+      requestAnimationFrame(fly);
+    }
+  }
+
   async function focusPlaceFromClick(placeId) {
     if (!placeId) return;
     focusedPlaceId = placeId;
@@ -986,26 +1037,16 @@
     return typeof navigator !== "undefined" ? navigator.onLine !== false : true;
   }
 
-  function esriBasemapTilesUrl(mapType = basemapType, theme = currentTheme()) {
+  function esriBasemapTilesUrl(mapType = basemapType) {
     if (mapType === "satellite") {
       return "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
     }
-    const service =
-      theme === "night"
-        ? "Canvas/World_Dark_Gray_Base"
-        : "Canvas/World_Light_Gray_Base";
-    return `https://server.arcgisonline.com/ArcGIS/rest/services/${service}/MapServer/tile/{z}/{y}/{x}`;
+    // Colorful topo basemap — matches iOS “Map” (not gray Canvas / old PMTiles vector).
+    return "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}";
   }
 
-  function esriLabelsTilesUrl(mapType = basemapType, theme = currentTheme()) {
-    if (mapType === "satellite") {
-      return "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
-    }
-    const service =
-      theme === "night"
-        ? "Canvas/World_Dark_Gray_Reference"
-        : "Canvas/World_Light_Gray_Reference";
-    return `https://server.arcgisonline.com/ArcGIS/rest/services/${service}/MapServer/tile/{z}/{y}/{x}`;
+  function esriLabelsTilesUrl(mapType = basemapType) {
+    return "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
   }
 
   function buildStreamingStyle({
@@ -1023,7 +1064,7 @@
     if (!isOnline()) return style;
     style.sources[ESRI_BASEMAP_SOURCE] = {
       type: "raster",
-      tiles: [esriBasemapTilesUrl(mapType, theme)],
+      tiles: [esriBasemapTilesUrl(mapType)],
       tileSize: 256,
       maxzoom: 19,
       attribution: ESRI_ATTR,
@@ -1036,7 +1077,7 @@
     if (labels) {
       style.sources[ESRI_LABELS_SOURCE] = {
         type: "raster",
-        tiles: [esriLabelsTilesUrl(mapType, theme)],
+        tiles: [esriLabelsTilesUrl(mapType)],
         tileSize: 256,
         maxzoom: 19,
       };
@@ -1057,6 +1098,41 @@
     return isOnline() ? 14 : 8;
   }
 
+  function clusterSpanDeg(pts) {
+    if (!pts.length) return 0;
+    let minLat = pts[0].lat;
+    let maxLat = pts[0].lat;
+    let minLng = pts[0].lng;
+    let maxLng = pts[0].lng;
+    for (const p of pts) {
+      minLat = Math.min(minLat, p.lat);
+      maxLat = Math.max(maxLat, p.lat);
+      minLng = Math.min(minLng, p.lng);
+      maxLng = Math.max(maxLng, p.lng);
+    }
+    return Math.max(maxLat - minLat, maxLng - minLng);
+  }
+
+  /** Empire-scale chapters: frame the densest neighborhood (iOS primaryCluster). */
+  function primaryClusterForCamera(pts, maxSpan = EMPIRE_CLUSTER_MAX_SPAN_DEG) {
+    if (pts.length < 2) return pts;
+    if (clusterSpanDeg(pts) <= maxSpan) return pts;
+    const radius = maxSpan / 2;
+    let best = [pts[0]];
+    for (const seed of pts) {
+      const members = pts.filter(
+        (p) =>
+          Math.abs(p.lat - seed.lat) <= radius && Math.abs(p.lng - seed.lng) <= radius
+      );
+      if (members.length > best.length) {
+        best = members;
+      } else if (members.length === best.length && members.length > 1) {
+        if (clusterSpanDeg(members) < clusterSpanDeg(best)) best = members;
+      }
+    }
+    return best;
+  }
+
   /** Camera bbox points — journey routes only when a journey is on the map. */
   function cameraFitPoints() {
     const { focusPts, routePts } = chapterFocusPoints();
@@ -1067,11 +1143,13 @@
       if (pts.length) return pts;
     }
     const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
-    const fromChapter = matched.filter(
+    let fromChapter = matched.filter(
       (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
     );
-    if (fromChapter.length) return fromChapter;
-    return focusPts.filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng));
+    if (!fromChapter.length) {
+      fromChapter = focusPts.filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng));
+    }
+    return primaryClusterForCamera(fromChapter);
   }
 
   function fitToChapter(map, preset, pts, { animate = false } = {}) {
@@ -1993,7 +2071,6 @@
       const icon = els.themeBtn.querySelector(".icon-btn-glyph");
       if (icon) icon.textContent = isNight ? "☀" : "☾";
     }
-    if (basemapType === "map" && maplibreMap) renderMap({ forceRemount: true });
     if (!persist) return;
     try {
       localStorage.setItem(THEME_KEY, next);
@@ -2083,6 +2160,7 @@
 
   initTheme();
   loadBasemapPrefs();
+  window.BiblicalTrainingLinks?.ensureSlugs?.();
   loadKingdoms();
   loadPresets();
   loadEraMap();
