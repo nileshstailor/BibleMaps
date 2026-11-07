@@ -14,6 +14,7 @@
   const THEME_KEY = "bibleMapsTheme";
   const MAP_TYPE_KEY = "bibleMapsMapType";
   const LABELS_KEY = "bibleMapsBasemapLabels";
+  const DOCK_HEIGHT_KEY = "bibleMapsDockHeight";
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
@@ -30,6 +31,7 @@
     labelsToggle: document.getElementById("labelsToggle"),
     mapTypeButtons: () =>
       Array.from(document.querySelectorAll(".map-type-toggle .seg-btn")),
+    dockGrabber: document.getElementById("dockGrabber"),
     teachingMap: document.getElementById("teachingMap"),
     mapHelp: document.getElementById("mapHelp"),
     mapsLink: document.getElementById("mapsLink"),
@@ -64,6 +66,8 @@
   let mapMountGen = 0;
   let basemapType = "map";
   let basemapLabels = true;
+  let dockHeightPx = 340;
+  let dockDragStart = null;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
   let lastPlacesFingerprint = "";
@@ -564,55 +568,44 @@
       return;
     }
     for (const journey of journeys) {
-      const row = document.createElement("details");
-      row.className = "acc-row";
-      row.dataset.journeyId = journey.id || journey.name;
-      if (openJourneyIds.has(row.dataset.journeyId)) row.open = true;
-      const refs = (journey.scriptureRefs || []).join(" · ");
+      const id = journey.id || journey.name;
+      const row = document.createElement("button");
+      row.type = "button";
+      row.className = "journey-row";
+      row.dataset.journeyId = id;
+      const refs = (journey.scriptureRefs || []).join(", ");
       const hitLabel =
         journey.hitCount != null
-          ? `<span class="badge">${journey.hitCount}/${journey.stopCount}</span>`
+          ? `${journey.hitCount}/${journey.stopCount} stops`
           : "";
+      const selected = journeyOnMap && activeJourney?.id === journey.id;
+      row.classList.toggle("is-selected", selected);
+      row.setAttribute("aria-pressed", selected ? "true" : "false");
       row.innerHTML = `
-        <summary>
-          <span class="acc-title">${escapeHtml(journey.name)}${hitLabel}</span>
-          <span class="acc-aside">${escapeHtml(refs)}</span>
-        </summary>
-        <div class="acc-body">
+        <span class="journey-row-main">
+          <span class="journey-row-title">${escapeHtml(journey.name)}</span>
+          <span class="journey-row-meta">${escapeHtml(hitLabel)}${hitLabel && refs ? " · " : ""}${escapeHtml(refs)}</span>
           ${
             journey.summary
-              ? `<p class="notes">${escapeHtml(journey.summary)}</p>`
+              ? `<span class="journey-row-summary">${escapeHtml(journey.summary)}</span>`
               : ""
           }
-          <div class="actions">
-            <button class="text-btn journey-map-btn" type="button" data-journey-id="${escapeAttr(journey.id)}">
-              Show on map
-            </button>
-          </div>
-        </div>
+        </span>
+        <span class="journey-row-check" aria-hidden="true">${selected ? "✓" : "○"}</span>
       `;
-      row.addEventListener("toggle", () => {
-        const id = row.dataset.journeyId;
-        if (!id) return;
-        if (row.open) openJourneyIds.add(id);
-        else openJourneyIds.delete(id);
-      });
-      row.querySelector("button.journey-map-btn")?.addEventListener("click", (e) => {
-        e.preventDefault();
-        toggleJourneyOnMap(journey);
-      });
+      row.addEventListener("click", () => toggleJourneyOnMap(journey));
       els.journeysPanel.appendChild(row);
     }
-    updateJourneyMapButtons();
   }
 
   function updateJourneyMapButtons() {
-    els.journeysPanel?.querySelectorAll("button.journey-map-btn").forEach((btn) => {
-      const id = btn.getAttribute("data-journey-id");
-      const shown = journeyOnMap && activeJourney?.id === id;
-      btn.textContent = shown ? "Hide on map" : "Show on map";
-      btn.classList.toggle("active-map", shown);
-      btn.setAttribute("aria-pressed", shown ? "true" : "false");
+    els.journeysPanel?.querySelectorAll("button.journey-row").forEach((row) => {
+      const id = row.dataset.journeyId;
+      const selected = journeyOnMap && activeJourney?.id === id;
+      row.classList.toggle("is-selected", selected);
+      row.setAttribute("aria-pressed", selected ? "true" : "false");
+      const check = row.querySelector(".journey-row-check");
+      if (check) check.textContent = selected ? "✓" : "○";
     });
   }
 
@@ -1052,8 +1045,8 @@
     if (mapType === "satellite") {
       return "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
     }
-    // Colorful topo basemap — matches iOS “Map” (not gray Canvas / old PMTiles vector).
-    return "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}";
+    // Land-forward palette (greens/tans) — closer to Bing road maps than pale topo/gray canvas.
+    return "https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}";
   }
 
   function esriLabelsTilesUrl(mapType = basemapType) {
@@ -1461,6 +1454,59 @@
       await new Promise((r) => requestAnimationFrame(r));
     }
     return Boolean(el && el.clientWidth > 0);
+  }
+
+  function clampDockHeight(px) {
+    const min = 132;
+    const max = Math.max(min, window.innerHeight * 0.78);
+    return Math.min(max, Math.max(min, px));
+  }
+
+  function applyDockHeight(px, { persist = true } = {}) {
+    dockHeightPx = clampDockHeight(px);
+    document.documentElement.style.setProperty("--dock-height", `${dockHeightPx}px`);
+    if (persist) {
+      try {
+        localStorage.setItem(DOCK_HEIGHT_KEY, String(Math.round(dockHeightPx)));
+      } catch {
+        /* ignore */
+      }
+    }
+    if (maplibreMap) {
+      requestAnimationFrame(() => maplibreMap.resize());
+    }
+  }
+
+  function loadDockHeight() {
+    try {
+      const n = Number(localStorage.getItem(DOCK_HEIGHT_KEY));
+      if (Number.isFinite(n) && n >= 100) dockHeightPx = n;
+    } catch {
+      /* ignore */
+    }
+    applyDockHeight(dockHeightPx, { persist: false });
+  }
+
+  function initDockGrabber() {
+    const grab = els.dockGrabber;
+    if (!grab) return;
+    grab.addEventListener("pointerdown", (e) => {
+      grab.setPointerCapture(e.pointerId);
+      dockDragStart = { y: e.clientY, h: dockHeightPx };
+    });
+    const end = () => {
+      dockDragStart = null;
+    };
+    grab.addEventListener("pointermove", (e) => {
+      if (!dockDragStart) return;
+      const delta = dockDragStart.y - e.clientY;
+      applyDockHeight(dockDragStart.h + delta);
+    });
+    grab.addEventListener("pointerup", end);
+    grab.addEventListener("pointercancel", end);
+    window.addEventListener("resize", () =>
+      applyDockHeight(dockHeightPx, { persist: false })
+    );
   }
 
   function syncBasemapPreferencesUi() {
@@ -2171,6 +2217,8 @@
 
   initTheme();
   loadBasemapPrefs();
+  loadDockHeight();
+  initDockGrabber();
   window.BiblicalTrainingLinks?.ensureSlugs?.();
   loadKingdoms();
   loadPresets();

@@ -8,64 +8,30 @@
     <link rel="stylesheet" href="sidepanel.css" />
     <script src="theme-boot.js"></script>
   </head>
-  <body>
-    <header class="app-header">
-      <div class="brand">
-        <img src="../icons/icon48.png" width="28" height="28" alt="" />
-        <h1>Bible Maps</h1>
-      </div>
-      <div class="header-actions">
-        <button
-          id="themeBtn"
-          class="ghost-btn icon-btn"
-          type="button"
-          title="Switch to night mode"
-          aria-label="Switch to night mode"
-          aria-pressed="false"
-        >
-          <span class="icon-btn-glyph" aria-hidden="true">☾</span>
-        </button>
-        <button
-          id="refreshBtn"
-          class="ghost-btn icon-btn"
-          type="button"
-          title="Rescan page"
-          aria-label="Rescan page"
-        >
-          <span class="icon-btn-glyph" aria-hidden="true">↻</span>
-        </button>
-      </div>
-    </header>
-
-    <section class="status" id="status">
-      Open a supported Bible passage to detect places.
-    </section>
-
-    <div class="list-block">
-      <nav class="tabs" role="tablist">
-        <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
-          Places
-        </button>
-        <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
-          Journeys
-        </button>
-      </nav>
-
-      <main>
-        <section id="placesPanel" class="panel active" role="tabpanel"></section>
-        <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
-      </main>
-    </div>
-
-    <section class="map-dock" id="mapDock">
-      <div class="map-dock-header">
-        <div>
-          <h2 id="mapTitle">Map</h2>
-          <p id="mapSubtitle" class="muted">Places in this chapter</p>
+  <body class="app-shell">
+    <section class="map-stage" id="mapStage" aria-label="Map">
+      <div class="map-stage-toolbar" id="mapToolbar">
+        <div class="map-toolbar-leading">
+          <button
+            id="themeBtn"
+            class="ghost-btn icon-btn"
+            type="button"
+            title="Switch to night mode"
+            aria-label="Switch to night mode"
+            aria-pressed="false"
+          >
+            <span class="icon-btn-glyph" aria-hidden="true">☾</span>
+          </button>
+          <button
+            id="refreshBtn"
+            class="ghost-btn icon-btn"
+            type="button"
+            title="Rescan page"
+            aria-label="Rescan page"
+          >
+            <span class="icon-btn-glyph" aria-hidden="true">↻</span>
+          </button>
         </div>
-      </div>
-
-      <div class="map-toolbar" id="mapToolbar">
         <div class="map-toolbar-row">
           <div class="segmented map-type-toggle" role="group" aria-label="Basemap">
             <button type="button" class="seg-btn active" data-map-type="map">Map</button>
@@ -75,31 +41,64 @@
             <input type="checkbox" id="labelsToggle" checked />
             Labels
           </label>
+          <label class="kingdom-toggle" id="kingdomsToggleWrap" hidden>
+            <input type="checkbox" id="kingdomsToggle" />
+            Era
+          </label>
         </div>
-        <label class="kingdom-toggle" id="kingdomsToggleWrap" hidden>
-          <input type="checkbox" id="kingdomsToggle" />
-          Era outlines
-        </label>
         <div class="kingdom-legend" id="kingdomLegend" hidden></div>
       </div>
 
       <div id="teachingMap" class="teaching-map" aria-label="Map"></div>
-      <p class="muted small" id="mapHelp" hidden></p>
+      <p class="muted small map-error" id="mapHelp" hidden></p>
 
-      <a id="mapsLink" class="primary-btn" href="#" target="_blank" rel="noopener"
+      <a id="mapsLink" class="maps-link-chip" href="#" target="_blank" rel="noopener"
         >Open in Google Maps</a
       >
+    </section>
 
-      <details class="map-extras" id="stopListWrap" hidden>
-        <summary>Route stops</summary>
-        <ol id="stopList" class="stop-list"></ol>
-      </details>
+    <section class="bottom-dock" id="mapDock">
+      <div
+        class="dock-grabber"
+        id="dockGrabber"
+        role="separator"
+        aria-orientation="horizontal"
+        aria-label="Resize places panel"
+        tabindex="0"
+      >
+        <span></span><span></span><span></span>
+      </div>
 
-      <details class="reference-plate" id="referencePlate">
-        <summary>Reference atlas plate</summary>
-        <img id="referencePlateImg" alt="Historical atlas plate" hidden />
-        <p class="muted small" id="referencePlateNote"></p>
-      </details>
+      <header class="dock-head">
+        <h2 id="mapTitle">Map</h2>
+        <p id="mapSubtitle" class="muted">Places in this chapter</p>
+        <p class="status-line" id="status">Open a supported Bible passage to detect places.</p>
+      </header>
+
+      <nav class="tabs dock-tabs" role="tablist">
+        <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+          Places
+        </button>
+        <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+          Journeys
+        </button>
+      </nav>
+
+      <div class="dock-scroll">
+        <section id="placesPanel" class="panel active" role="tabpanel"></section>
+        <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
+
+        <details class="map-extras" id="stopListWrap" hidden>
+          <summary>Route stops</summary>
+          <ol id="stopList" class="stop-list"></ol>
+        </details>
+
+        <details class="reference-plate" id="referencePlate">
+          <summary>Reference atlas plate</summary>
+          <img id="referencePlateImg" alt="Historical atlas plate" hidden />
+          <p class="muted small" id="referencePlateNote"></p>
+        </details>
+      </div>
     </section>
 
     <footer class="app-footer">
