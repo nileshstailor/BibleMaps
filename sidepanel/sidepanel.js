@@ -15,6 +15,7 @@
   const MAP_TYPE_KEY = "bibleMapsMapType";
   const LABELS_KEY = "bibleMapsBasemapLabels";
   const DOCK_HEIGHT_KEY = "bibleMapsDockHeight";
+  const DOCK_HINT_DISMISSED_KEY = "bibleMapsDockHintDismissed";
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
@@ -37,7 +38,7 @@
     mapRecenter: document.getElementById("mapRecenter"),
     teachingMap: document.getElementById("teachingMap"),
     mapHelp: document.getElementById("mapHelp"),
-    mapsLink: document.getElementById("mapsLink"),
+    dockGrabberHint: document.getElementById("dockGrabberHint"),
     stopListWrap: document.getElementById("stopListWrap"),
     stopList: document.getElementById("stopList"),
     referencePlate: document.getElementById("referencePlate"),
@@ -69,7 +70,9 @@
   let mapMountGen = 0;
   let basemapType = "map";
   let basemapLabels = false;
-  let dockHeightPx = 340;
+  let dockHeightPx = Math.round(
+    Math.min(Math.max(window.innerHeight * 0.46, 220), 440)
+  );
   let dockDragStart = null;
   let pendingOverviewAnimate = false;
   let placeFocusGen = 0;
@@ -1603,6 +1606,7 @@
     if (maplibreMap) {
       requestAnimationFrame(() => maplibreMap.resize());
     }
+    syncDockGrabberHint();
   }
 
   function loadDockHeight() {
@@ -1613,6 +1617,33 @@
       /* ignore */
     }
     applyDockHeight(dockHeightPx, { persist: false });
+    syncDockGrabberHint();
+  }
+
+  function dismissDockGrabberHint() {
+    if (els.dockGrabberHint) els.dockGrabberHint.hidden = true;
+    try {
+      localStorage.setItem(DOCK_HINT_DISMISSED_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function syncDockGrabberHint() {
+    if (!els.dockGrabberHint) return;
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem(DOCK_HINT_DISMISSED_KEY) === "1";
+    } catch {
+      /* ignore */
+    }
+    const cramped = dockHeightPx <= clampDockHeight(168) + 8;
+    els.dockGrabberHint.hidden = dismissed && !cramped;
+    if (!dismissed && cramped) {
+      els.dockGrabberHint.textContent = "Drag up for places & journeys";
+    } else if (!dismissed) {
+      els.dockGrabberHint.textContent = "Drag to resize";
+    }
   }
 
   function initMapNavControls() {
@@ -1638,6 +1669,22 @@
     grab.addEventListener("pointerdown", (e) => {
       grab.setPointerCapture(e.pointerId);
       dockDragStart = { y: e.clientY, h: dockHeightPx };
+      dismissDockGrabberHint();
+    });
+    grab.addEventListener("dblclick", () => {
+      const mid = clampDockHeight(window.innerHeight * 0.52);
+      applyDockHeight(mid);
+      syncDockGrabberHint();
+    });
+    grab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        applyDockHeight(dockHeightPx + 28);
+        dismissDockGrabberHint();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        applyDockHeight(dockHeightPx - 28);
+      }
     });
     const end = () => {
       dockDragStart = null;
@@ -1649,9 +1696,10 @@
     });
     grab.addEventListener("pointerup", end);
     grab.addEventListener("pointercancel", end);
-    window.addEventListener("resize", () =>
-      applyDockHeight(dockHeightPx, { persist: false })
-    );
+    window.addEventListener("resize", () => {
+      applyDockHeight(dockHeightPx, { persist: false });
+      syncDockGrabberHint();
+    });
   }
 
   function syncBasemapPreferencesUi() {
@@ -1994,32 +2042,12 @@
   }
 
   /** Chapter places: pin or region view — never a multi-stop walking route. */
-  function setPlacesMapsLink(pts) {
-    if (pts.length === 1) {
-      els.mapsLink.href = googlePlaceUrl(pts[0]);
-      els.mapsLink.textContent = "Open in Google Maps";
-    } else {
-      els.mapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
-      els.mapsLink.textContent = "Open region in Google Maps";
-    }
-    delete els.mapsLink.dataset.polyline;
+  function setPlacesMapsLink() {
+    /* Per-place Google Maps links live in each place row. */
   }
 
-  /** Journey stops: walking directions (+ shift-click polyline search). */
-  function setJourneyMapsLink(stops) {
-    if (stops.length === 1) {
-      els.mapsLink.href = googlePlaceUrl(stops[0]);
-      els.mapsLink.textContent = "Open in Google Maps";
-      delete els.mapsLink.dataset.polyline;
-    } else if (stops.length > 1) {
-      els.mapsLink.href = googleJourneyUrl(stops);
-      els.mapsLink.textContent = "Open in Google Maps (walking)";
-      els.mapsLink.dataset.polyline = googlePolylineSearchUrl(stops);
-    } else {
-      els.mapsLink.href = "https://www.google.com/maps/@31.7,35.1,8z";
-      els.mapsLink.textContent = "Open region in Google Maps";
-      delete els.mapsLink.dataset.polyline;
-    }
+  function setJourneyMapsLink() {
+    /* Journey map links omitted — use place rows or host site. */
   }
 
   function chapterLabel(payload) {
@@ -2338,18 +2366,6 @@
     basemapLabels = Boolean(els.labelsToggle?.checked);
     persistBasemapPrefs();
     renderMap({ forceRemount: true });
-  });
-
-  els.mapsLink.addEventListener("click", (e) => {
-    if (els.mapsLink.getAttribute("href") === "#") {
-      e.preventDefault();
-      return;
-    }
-    // Shift-click polyline search only applies to journey walking links.
-    if (e.shiftKey && els.mapsLink.dataset.polyline) {
-      e.preventDefault();
-      window.open(els.mapsLink.dataset.polyline, "_blank", "noopener");
-    }
   });
 
   chrome.runtime.onMessage.addListener((message) => {

@@ -52,10 +52,6 @@
       <div id="teachingMap" class="teaching-map" aria-label="Map"></div>
       <p class="muted small map-error" id="mapHelp" hidden></p>
 
-      <a id="mapsLink" class="maps-link-chip" href="#" target="_blank" rel="noopener"
-        >Open in Google Maps</a
-      >
-
       <div class="map-nav-controls" id="mapNavControls">
         <button type="button" class="map-nav-btn" id="mapZoomIn" title="Zoom in" aria-label="Zoom in">
           +
@@ -81,10 +77,11 @@
         id="dockGrabber"
         role="separator"
         aria-orientation="horizontal"
-        aria-label="Resize places panel"
+        aria-label="Drag up or down to resize places panel"
         tabindex="0"
       >
         <span></span><span></span><span></span>
+        <p class="dock-grabber-hint" id="dockGrabberHint">Drag here for places &amp; journeys</p>
       </div>
 
       <header class="dock-head">
