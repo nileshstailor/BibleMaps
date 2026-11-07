@@ -988,48 +988,49 @@
 
   async function flyToPlaceOnMap(place, { ensureMap = false } = {}) {
     if (!place) return;
-    placeCameraBusy = true;
-    try {
-      if (ensureMap && !maplibreMap) {
-        await renderMap();
-      }
-      if (!maplibreMap) return;
+    if (ensureMap && !maplibreMap) {
+      await renderMap();
+    }
+    if (!maplibreMap) return;
 
-      const run = async () => {
-        const { focusPts } = chapterFocusPoints();
-        clearMarkers();
-        addDomMarkers(maplibreMap, focusPts, { dim: false });
-        setPlacesMapsLink([place]);
-        setMapHelp("", false);
-        await cinematicFocusPlace(place);
-      };
+    const run = async () => {
+      const { focusPts } = chapterFocusPoints();
+      clearMarkers();
+      addDomMarkers(maplibreMap, focusPts, { dim: false });
+      setPlacesMapsLink([place]);
+      setMapHelp("", false);
+      await cinematicFocusPlace(place);
+    };
 
-      if (
-        typeof maplibreMap.isStyleLoaded === "function" &&
-        !maplibreMap.isStyleLoaded()
-      ) {
-        await new Promise((resolve) => {
-          maplibreMap.once("idle", () => {
-            run().finally(resolve);
-          });
+    if (
+      typeof maplibreMap.isStyleLoaded === "function" &&
+      !maplibreMap.isStyleLoaded()
+    ) {
+      await new Promise((resolve) => {
+        maplibreMap.once("idle", () => {
+          run().finally(resolve);
         });
-      } else {
-        await run();
-      }
-    } finally {
-      placeCameraBusy = false;
+      });
+    } else {
+      await run();
     }
   }
 
   async function diveToPlaceFromList(placeId, { scrollAccordion = false } = {}) {
     if (!placeId) return;
     focusedPlaceId = placeId;
-    showPlacesTab();
-    await loadAllPlaces();
-    openPlaceAccordion(placeId, { scroll: scrollAccordion });
-    const place = findPlaceById(placeId);
-    if (!place) return;
-    await flyToPlaceOnMap(place, { ensureMap: true });
+    placeFocusGen += 1;
+    placeCameraBusy = true;
+    try {
+      showPlacesTab();
+      await loadAllPlaces();
+      openPlaceAccordion(placeId, { scroll: scrollAccordion });
+      const place = findPlaceById(placeId);
+      if (!place) return;
+      await flyToPlaceOnMap(place, { ensureMap: true });
+    } finally {
+      placeCameraBusy = false;
+    }
   }
 
   async function focusPlaceFromClick(placeId) {
@@ -1563,9 +1564,7 @@
     addDomMarkers(map, focusPts, { dim: false });
     const focused =
       focusedPlaceId && findPlaceById(focusedPlaceId);
-    const keepCamera =
-      !journeyOnMap &&
-      (Boolean(focused) || Boolean(focusedPlaceId) || placeCameraBusy);
+    const keepCamera = Boolean(placeCameraBusy || focused);
     if (keepCamera) {
       if (focused) setPlacesMapsLink([focused]);
       setMapHelp("", false);
@@ -1578,7 +1577,9 @@
       fitToChapter(map, preset, fitPts, { animate });
       setMapHelp("", false);
     }
-    map.resize();
+    if (!placeCameraBusy) {
+      scheduleMapResize();
+    }
   }
 
   async function waitForMapSize(el) {
@@ -1693,11 +1694,23 @@
 
   function initMapNavControls() {
     const zoomStep = () => ({ duration: 220 });
-    els.mapZoomIn?.addEventListener("click", () => maplibreMap?.zoomIn(zoomStep()));
-    els.mapZoomOut?.addEventListener("click", () => maplibreMap?.zoomOut(zoomStep()));
+    const cancelPlaceCameraFlight = () => {
+      placeFocusGen += 1;
+      placeCameraBusy = false;
+    };
+    els.mapZoomIn?.addEventListener("click", () => {
+      cancelPlaceCameraFlight();
+      maplibreMap?.zoomIn(zoomStep());
+    });
+    els.mapZoomOut?.addEventListener("click", () => {
+      cancelPlaceCameraFlight();
+      maplibreMap?.zoomOut(zoomStep());
+    });
     els.mapRecenter?.addEventListener("click", () => {
       if (!maplibreMap) return;
+      cancelPlaceCameraFlight();
       focusedPlaceId = null;
+      lastFocusedLngLat = null;
       requestOverviewFit(true);
       const preset = resolvePreset();
       const showKingdoms =
@@ -2281,7 +2294,9 @@
     const fp = mapFingerprint();
     if (fp !== lastMapFingerprint || !maplibreMap) {
       syncPlacesMapChrome(payload.places || []);
-      if (placeCameraBusy || focusedPlaceId) {
+      if (placeCameraBusy) {
+        lastMapFingerprint = fp;
+      } else if (focusedPlaceId) {
         if (maplibreMap) {
           const preset = resolvePreset();
           const showKingdoms =
