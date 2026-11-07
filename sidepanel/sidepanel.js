@@ -32,6 +32,9 @@
     mapTypeButtons: () =>
       Array.from(document.querySelectorAll(".map-type-toggle .seg-btn")),
     dockGrabber: document.getElementById("dockGrabber"),
+    mapZoomIn: document.getElementById("mapZoomIn"),
+    mapZoomOut: document.getElementById("mapZoomOut"),
+    mapRecenter: document.getElementById("mapRecenter"),
     teachingMap: document.getElementById("teachingMap"),
     mapHelp: document.getElementById("mapHelp"),
     mapsLink: document.getElementById("mapsLink"),
@@ -68,6 +71,7 @@
   let basemapLabels = true;
   let dockHeightPx = 340;
   let dockDragStart = null;
+  let pendingOverviewAnimate = false;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
   let lastPlacesFingerprint = "";
@@ -658,8 +662,13 @@
     updateJourneyMapButtons();
   }
 
+  function requestOverviewFit(animate = true) {
+    pendingOverviewAnimate = Boolean(animate);
+  }
+
   function showJourneyOnMap(journey) {
     if (!journey) return;
+    requestOverviewFit(true);
     activeJourney = journey;
     selectedJourneyId = journey.id || null;
     journeyOnMap = true;
@@ -673,6 +682,7 @@
   }
 
   function hideJourneyFromMap() {
+    requestOverviewFit(true);
     journeyOnMap = false;
     activeJourney = null;
     // Keep chapter places on the map; clear the journey route/chrome.
@@ -1441,7 +1451,10 @@
       setMapHelp("", false);
     } else {
       const fitPts = cameraFitPoints();
-      const animate = Boolean(journeyOnMap && fitPts.length && !focusedPlaceId);
+      const animate =
+        pendingOverviewAnimate ||
+        Boolean(journeyOnMap && fitPts.length && !focusedPlaceId);
+      pendingOverviewAnimate = false;
       fitToChapter(map, preset, fitPts, { animate });
       setMapHelp("", false);
     }
@@ -1485,6 +1498,23 @@
       /* ignore */
     }
     applyDockHeight(dockHeightPx, { persist: false });
+  }
+
+  function initMapNavControls() {
+    const zoomStep = () => ({ duration: 220 });
+    els.mapZoomIn?.addEventListener("click", () => maplibreMap?.zoomIn(zoomStep()));
+    els.mapZoomOut?.addEventListener("click", () => maplibreMap?.zoomOut(zoomStep()));
+    els.mapRecenter?.addEventListener("click", () => {
+      if (!maplibreMap) return;
+      focusedPlaceId = null;
+      requestOverviewFit(true);
+      const preset = resolvePreset();
+      const showKingdoms =
+        Boolean(preset?.showKingdoms) &&
+        Boolean(kingdomsGeoJson?.features?.length) &&
+        Boolean(els.kingdomsToggle?.checked);
+      updateMapOverlays(maplibreMap, preset, showKingdoms);
+    });
   }
 
   function initDockGrabber() {
@@ -1792,7 +1822,6 @@
       failIfMajorPerformanceCaveat: false,
     });
     maplibreMap = map;
-    map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
     map.on("error", (e) => {
       const msg = e?.error?.message || e?.message || String(e?.error || e || "");
       if (msg) {
@@ -2219,6 +2248,7 @@
   loadBasemapPrefs();
   loadDockHeight();
   initDockGrabber();
+  initMapNavControls();
   window.BiblicalTrainingLinks?.ensureSlugs?.();
   loadKingdoms();
   loadPresets();
