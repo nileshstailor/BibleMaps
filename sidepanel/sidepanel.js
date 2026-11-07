@@ -681,6 +681,10 @@
 
   function showJourneyOnMap(journey) {
     if (!journey) return;
+    focusedPlaceId = null;
+    lastFocusedLngLat = null;
+    placeFocusGen += 1;
+    placeCameraBusy = false;
     requestOverviewFit(true);
     activeJourney = journey;
     selectedJourneyId = journey.id || null;
@@ -715,11 +719,6 @@
     if (!journey) return;
     const same = journeyOnMap && activeJourney?.id === journey.id;
     if (same) {
-      if (focusedPlaceId) {
-        focusedPlaceId = null;
-        showJourneyOnMap(journey);
-        return;
-      }
       hideJourneyFromMap();
       return;
     }
@@ -1565,7 +1564,8 @@
     const focused =
       focusedPlaceId && findPlaceById(focusedPlaceId);
     const keepCamera =
-      Boolean(focused) || Boolean(focusedPlaceId) || placeCameraBusy;
+      !journeyOnMap &&
+      (Boolean(focused) || Boolean(focusedPlaceId) || placeCameraBusy);
     if (keepCamera) {
       if (focused) setPlacesMapsLink([focused]);
       setMapHelp("", false);
