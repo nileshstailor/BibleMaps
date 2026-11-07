@@ -1,7 +1,6 @@
 /**
- * Bible Maps side panel — MapLibre + offline PMTiles basemap,
- * with optional online raster fill when the user is online and pans
- * outside (or past) the bundled extract.
+ * Bible Maps side panel — MapLibre + streamed Esri basemap (Canvas / Imagery)
+ * with reference label tiles when online.
  */
 (() => {
   // CSP build ships with empty WORKER_URL; without this, Worker("") loads
@@ -13,6 +12,8 @@
   }
 
   const THEME_KEY = "bibleMapsTheme";
+  const MAP_TYPE_KEY = "bibleMapsMapType";
+  const LABELS_KEY = "bibleMapsBasemapLabels";
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
@@ -26,6 +27,9 @@
     kingdomsToggle: document.getElementById("kingdomsToggle"),
     kingdomsToggleWrap: document.getElementById("kingdomsToggleWrap"),
     kingdomLegend: document.getElementById("kingdomLegend"),
+    labelsToggle: document.getElementById("labelsToggle"),
+    mapTypeButtons: () =>
+      Array.from(document.querySelectorAll(".map-type-toggle .seg-btn")),
     teachingMap: document.getElementById("teachingMap"),
     mapHelp: document.getElementById("mapHelp"),
     mapsLink: document.getElementById("mapsLink"),
@@ -57,10 +61,9 @@
   let maplibreMap = null;
   let markerObjs = [];
   let kingdomLabelMarkers = [];
-  let pmtilesReady = null;
-  let pmtilesProtocol = null;
-  let pmtilesHeader = null;
   let mapMountGen = 0;
+  let basemapType = "map";
+  let basemapLabels = true;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
   let lastPlacesFingerprint = "";
@@ -68,27 +71,15 @@
   let openPlaceIds = new Set();
   let openJourneyIds = new Set();
   let focusedPlaceId = null;
-  let styleCache = null;
-  const PMTILES_KEY = "bible-region.pmtiles";
   /** Town context on click — closer than chapter overview, not street-level. */
   const PLACE_FOCUS_ZOOM = 10;
-  /** Esri public canvas raster — world coverage when online; no API key. */
-  const ONLINE_RASTER_SOURCE = "online-raster";
-  const ONLINE_RASTER_LAYER = "online-basemap";
-  const ONLINE_RASTER_ATTR =
+  const JOURNEY_FIT_ANIM_MS = 750;
+  const ESRI_BASEMAP_SOURCE = "esri-basemap";
+  const ESRI_LABELS_SOURCE = "esri-labels";
+  const ESRI_BASEMAP_LAYER = "esri-basemap";
+  const ESRI_LABELS_LAYER = "esri-labels";
+  const ESRI_ATTR =
     'Tiles © <a href="https://www.esri.com/">Esri</a> — Esri, TomTom, Garmin, FAO, NOAA, USGS';
-  // Bundled PMTiles detail pockets (must stay in sync with scripts/build-pmtiles.sh).
-  // Outside these, only shell z0–7 exists — overzoom looks soft for Acts 27 etc.
-  const OFFLINE_DETAIL = {
-    shellMaxZoom: 7,
-    pockets: [
-      { name: "core", west: 29, south: 24, east: 42, north: 36, maxZoom: 11 },
-      { name: "east", west: 42.2, south: 27, east: 55, north: 38, maxZoom: 10 },
-      // Acts 27–28 sea corridor (Malta, Crete, Cauda, Rhodes). Tight on purpose.
-      // east < core.west (29) so pocket tests match the disjoint PMTiles merge.
-      { name: "med", west: 14, south: 34, east: 28.82, north: 37.2, maxZoom: 10 },
-    ],
-  };
 
   function googlePlaceUrl(place) {
     if (Number.isFinite(place.lat) && Number.isFinite(place.lng)) {
@@ -690,7 +681,13 @@
 
   function toggleJourneyOnMap(journey) {
     if (!journey) return;
-    if (journeyOnMap && activeJourney?.id === journey.id) {
+    const same = journeyOnMap && activeJourney?.id === journey.id;
+    if (same) {
+      if (focusedPlaceId) {
+        focusedPlaceId = null;
+        showJourneyOnMap(journey);
+        return;
+      }
       hideJourneyFromMap();
       return;
     }
@@ -981,15 +978,18 @@
     const preset = suggestPresetId();
     const eraRoute = routeOverlayLoadedPath || "";
     const onMap = journeyOnMap ? "1" : "0";
-    return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}|er:${eraRoute}|jm:${onMap}`;
+    const focus = focusedPlaceId || "";
+    return `${url}|${preset}|${jid}|${placeIds}|${routeIds}|kg:${kingdoms}|er:${eraRoute}|jm:${onMap}|bm:${basemapType}|lb:${basemapLabels ? 1 : 0}|fc:${focus}`;
   }
 
   function isOnline() {
     return typeof navigator !== "undefined" ? navigator.onLine !== false : true;
   }
 
-  function onlineRasterTilesUrl(theme = currentTheme()) {
-    // Esri ArcGIS Online public canvas (no key). Note {z}/{y}/{x} order.
+  function esriBasemapTilesUrl(mapType = basemapType, theme = currentTheme()) {
+    if (mapType === "satellite") {
+      return "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+    }
     const service =
       theme === "night"
         ? "Canvas/World_Dark_Gray_Base"
@@ -997,31 +997,93 @@
     return `https://server.arcgisonline.com/ArcGIS/rest/services/${service}/MapServer/tile/{z}/{y}/{x}`;
   }
 
-  function mapMaxZoom(header) {
-    // Native tiles: shell z7 Spain→India + core z11 Levant/Egypt (+ meso z10).
-    // Overzoom past native max for pin focus; online raster allows deeper zoom.
-    const tileMax = Number(header?.maxZoom);
-    const base = Number.isFinite(tileMax) ? tileMax : 11;
-    const offlineCap = Math.min(14, Math.max(12, base + 2));
-    return isOnline() ? Math.max(offlineCap, 16) : offlineCap;
+  function esriLabelsTilesUrl(mapType = basemapType, theme = currentTheme()) {
+    if (mapType === "satellite") {
+      return "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}";
+    }
+    const service =
+      theme === "night"
+        ? "Canvas/World_Dark_Gray_Reference"
+        : "Canvas/World_Light_Gray_Reference";
+    return `https://server.arcgisonline.com/ArcGIS/rest/services/${service}/MapServer/tile/{z}/{y}/{x}`;
   }
 
-  function fitMaxZoom(header) {
-    const tileMax = Number(header?.maxZoom);
-    return Number.isFinite(tileMax) ? tileMax : 11;
+  function buildStreamingStyle({
+    mapType = basemapType,
+    theme = currentTheme(),
+    labels = basemapLabels,
+  } = {}) {
+    const bg = theme === "night" ? "#2a261f" : "#e2dfda";
+    const style = {
+      version: 8,
+      name: "Bible Maps Esri",
+      sources: {},
+      layers: [{ id: "background", type: "background", paint: { "background-color": bg } }],
+    };
+    if (!isOnline()) return style;
+    style.sources[ESRI_BASEMAP_SOURCE] = {
+      type: "raster",
+      tiles: [esriBasemapTilesUrl(mapType, theme)],
+      tileSize: 256,
+      maxzoom: 19,
+      attribution: ESRI_ATTR,
+    };
+    style.layers.push({
+      id: ESRI_BASEMAP_LAYER,
+      type: "raster",
+      source: ESRI_BASEMAP_SOURCE,
+    });
+    if (labels) {
+      style.sources[ESRI_LABELS_SOURCE] = {
+        type: "raster",
+        tiles: [esriLabelsTilesUrl(mapType, theme)],
+        tileSize: 256,
+        maxzoom: 19,
+      };
+      style.layers.push({
+        id: ESRI_LABELS_LAYER,
+        type: "raster",
+        source: ESRI_LABELS_SOURCE,
+      });
+    }
+    return style;
   }
 
-  function fitToChapter(map, preset, focusPts, header) {
-    const maxZoom = fitMaxZoom(header);
-    if (focusPts.length) {
+  function mapMaxZoom() {
+    return isOnline() ? 18 : 8;
+  }
+
+  function fitMaxZoom() {
+    return isOnline() ? 14 : 8;
+  }
+
+  /** Camera bbox points — journey routes only when a journey is on the map. */
+  function cameraFitPoints() {
+    const { focusPts, routePts } = chapterFocusPoints();
+    if (journeyOnMap) {
+      const pts = routePts.filter(
+        (s) => !s?.hidden && Number.isFinite(s.lat) && Number.isFinite(s.lng)
+      );
+      if (pts.length) return pts;
+    }
+    const matched = Array.isArray(activePlaceMarkers) ? activePlaceMarkers : [];
+    const fromChapter = matched.filter(
+      (p) => Number.isFinite(p.lat) && Number.isFinite(p.lng)
+    );
+    if (fromChapter.length) return fromChapter;
+    return focusPts.filter((p) => Number.isFinite(p.lat) && Number.isFinite(p.lng));
+  }
+
+  function fitToChapter(map, preset, pts, { animate = false } = {}) {
+    const maxZoom = fitMaxZoom();
+    if (pts.length) {
       const bounds = new maplibregl.LngLatBounds();
-      for (const p of focusPts) bounds.extend([p.lng, p.lat]);
-      // Single town → zoom in close; many stops → still allow town-level.
-      const oneStop = focusPts.length === 1 ? Math.min(13, maxZoom + 1) : maxZoom;
+      for (const p of pts) bounds.extend([p.lng, p.lat]);
+      const oneStop = pts.length === 1 ? Math.max(PLACE_FOCUS_ZOOM, 12) : maxZoom;
       map.fitBounds(bounds, {
-        padding: focusPts.length === 1 ? 60 : 40,
+        padding: pts.length === 1 ? 60 : 48,
         maxZoom: oneStop,
-        duration: 0,
+        duration: animate ? JOURNEY_FIT_ANIM_MS : 0,
       });
       return;
     }
@@ -1032,7 +1094,11 @@
           [west, south],
           [east, north],
         ],
-        { padding: 28, maxZoom: Math.min(8, maxZoom), duration: 0 }
+        {
+          padding: 28,
+          maxZoom: Math.min(8, maxZoom),
+          duration: animate ? JOURNEY_FIT_ANIM_MS : 0,
+        }
       );
     }
   }
@@ -1292,7 +1358,9 @@
       setPlacesMapsLink([focused]);
       setMapHelp("", false);
     } else {
-      fitToChapter(map, preset, focusPts, pmtilesHeader);
+      const fitPts = cameraFitPoints();
+      const animate = Boolean(journeyOnMap && fitPts.length && !focusedPlaceId);
+      fitToChapter(map, preset, fitPts, { animate });
       setMapHelp("", false);
     }
     map.resize();
@@ -1306,259 +1374,54 @@
     return Boolean(el && el.clientWidth > 0);
   }
 
-  /** In-memory PMTiles source — avoids chrome-extension:// Range and File quirks. */
-  function bufferSource(key, buffer) {
-    return {
-      getKey() {
-        return key;
-      },
-      async getBytes(offset, length) {
-        return { data: buffer.slice(offset, offset + length) };
-      },
-    };
-  }
-
-  function ensurePmtiles() {
-    if (pmtilesReady) return pmtilesReady;
-    pmtilesReady = (async () => {
-      if (typeof maplibregl === "undefined") {
-        throw new Error("MapLibre failed to load");
-      }
-      if (typeof pmtiles === "undefined") {
-        throw new Error("PMTiles library failed to load");
-      }
-      maplibregl.setWorkerUrl(
-        chrome.runtime.getURL("lib/maplibre/maplibre-gl-csp-worker.js")
-      );
-
-      // Load full archive into memory (extension URLs often lack HTTP Range).
-      // Keep ≤~70 MB: a uniform z10 of the old bbox was ~93 MB and OOM'd the panel.
-      // Coverage uses a merged shell+core+east extract (see scripts/build-pmtiles.sh).
-      const tileUrl = chrome.runtime.getURL(`media/tiles/${PMTILES_KEY}`);
-      let ab;
-      try {
-        const r = await fetch(tileUrl);
-        if (!r.ok) throw new Error(`PMTiles HTTP ${r.status}`);
-        ab = await r.arrayBuffer();
-      } catch (err) {
-        const msg = err?.message || String(err);
-        if (/arraybuffer|memory|allocation|oom/i.test(msg)) {
-          throw new Error(
-            "PMTiles archive too large for the side panel — rebuild with a smaller maxzoom"
-          );
-        }
-        throw err;
-      }
-      if (!ab || ab.byteLength < 1000) {
-        throw new Error("PMTiles archive missing or empty");
-      }
-      if (ab.byteLength > 85 * 1024 * 1024) {
-        console.warn(
-          "Bible Maps: PMTiles archive is",
-          Math.round(ab.byteLength / 1e6),
-          "MB — side panel may crash; prefer ≤80 MB"
-        );
-      }
-
-      try {
-        maplibregl.removeProtocol("pmtiles");
-      } catch {
-        /* first run */
-      }
-      pmtilesProtocol = new pmtiles.Protocol();
-      // MapLibre 5 prefers the async tilev4 handler when present.
-      const loadFn = pmtilesProtocol.tilev4 || pmtilesProtocol.tile;
-      maplibregl.addProtocol("pmtiles", loadFn);
-
-      const archive = new pmtiles.PMTiles(bufferSource(PMTILES_KEY, ab));
-      pmtilesProtocol.add(archive);
-
-      // Sanity-check: header must parse
-      const header = await archive.getHeader();
-      if (header.maxZoom == null) throw new Error("PMTiles header invalid");
-      pmtilesHeader = header;
-      return header;
-    })().catch((err) => {
-      pmtilesReady = null;
-      pmtilesProtocol = null;
-      throw err;
-    });
-    return pmtilesReady;
-  }
-
-  function buildOfflineStyle(baseStyle, header) {
-    const style = JSON.parse(JSON.stringify(baseStyle));
-    // Use explicit tile template so MapLibre does not invent a FetchSource
-    // for a bare relative "bible-region.pmtiles" URL if lookup misses.
-    style.sources = {
-      protomaps: {
-        type: "vector",
-        tiles: [`pmtiles://${PMTILES_KEY}/{z}/{x}/{y}`],
-        minzoom: header?.minZoom ?? 0,
-        maxzoom: header?.maxZoom ?? 11,
-        attribution:
-          '<a href="https://protomaps.com">Protomaps</a> © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      },
-    };
-
-    // Online world raster under the vector extract: fills gaps when the user
-    // pans outside the bundled bbox (or wants more context) while online.
-    // Offline stays vector-only — no remote tile requests.
-    if (isOnline()) {
-      style.sources[ONLINE_RASTER_SOURCE] = {
-        type: "raster",
-        tiles: [onlineRasterTilesUrl()],
-        tileSize: 256,
-        maxzoom: 16,
-        attribution: ONLINE_RASTER_ATTR,
-      };
-      const layers = Array.isArray(style.layers) ? style.layers : [];
-      const bgIdx = layers.findIndex((l) => l.id === "background");
-      const onlineLayer = {
-        id: ONLINE_RASTER_LAYER,
-        type: "raster",
-        source: ONLINE_RASTER_SOURCE,
-        layout: { visibility: "none" },
-        paint: { "raster-opacity": 1 },
-      };
-      if (bgIdx >= 0) layers.splice(bgIdx + 1, 0, onlineLayer);
-      else layers.unshift(onlineLayer);
-      style.layers = layers;
+  function syncBasemapPreferencesUi() {
+    for (const btn of els.mapTypeButtons()) {
+      const active = btn.dataset.mapType === basemapType;
+      btn.classList.toggle("active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
     }
-    return style;
+    if (els.labelsToggle) els.labelsToggle.checked = basemapLabels;
   }
 
-  function offlineExtractBounds(header = pmtilesHeader) {
-    if (!header) return null;
-    const west = Number(header.minLon);
-    const south = Number(header.minLat);
-    const east = Number(header.maxLon);
-    const north = Number(header.maxLat);
-    if (![west, south, east, north].every(Number.isFinite)) return null;
-    return { west, south, east, north };
-  }
-
-  function offlineDetailMaxZoomAt(lng, lat) {
-    for (const p of OFFLINE_DETAIL.pockets) {
-      if (
-        lng >= p.west &&
-        lng <= p.east &&
-        lat >= p.south &&
-        lat <= p.north
-      ) {
-        return p.maxZoom;
-      }
-    }
-    return OFFLINE_DETAIL.shellMaxZoom;
-  }
-
-  /**
-   * True when the viewport sticks out past the bundled PMTiles bbox, or when
-   * the user has zoomed past native detail for this pocket (e.g. Crete/Cauda
-   * before the med extract lands, or Italy past z10).
-   */
-  function viewNeedsOnlineFill(map, header = pmtilesHeader) {
-    if (!isOnline() || !map || typeof map.getBounds !== "function") return false;
-    const box = offlineExtractBounds(header);
-    if (!box) return isOnline();
-    const b = map.getBounds();
-    const pad = 0.15; // small pad so edge pans still get fill
-    if (
-      b.getWest() < box.west - pad ||
-      b.getEast() > box.east + pad ||
-      b.getSouth() < box.south - pad ||
-      b.getNorth() > box.north + pad
-    ) {
-      return true;
-    }
-    const z = map.getZoom?.() ?? 0;
-    const c = map.getCenter?.();
-    if (!c || !Number.isFinite(c.lng) || !Number.isFinite(c.lat)) return false;
-    const native = offlineDetailMaxZoomAt(c.lng, c.lat);
-    // Slight hysteresis so brief zooms don't flicker the raster underlay.
-    return z > native + 0.35;
-  }
-
-  function updateOnlineRasterVisibility(map = maplibreMap) {
-    if (!map?.getLayer?.(ONLINE_RASTER_LAYER)) return;
-    const show = viewNeedsOnlineFill(map);
+  function persistBasemapPrefs() {
     try {
-      map.setLayoutProperty(
-        ONLINE_RASTER_LAYER,
-        "visibility",
-        show ? "visible" : "none"
-      );
+      localStorage.setItem(MAP_TYPE_KEY, basemapType);
+      localStorage.setItem(LABELS_KEY, basemapLabels ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+    try {
+      chrome.storage?.local?.set?.({
+        [MAP_TYPE_KEY]: basemapType,
+        [LABELS_KEY]: basemapLabels,
+      });
     } catch {
       /* ignore */
     }
   }
 
-  function syncOnlineRasterLayer(map = maplibreMap) {
-    if (!map || typeof map.getSource !== "function") return;
-    const want = isOnline();
-    const hasSource = Boolean(map.getSource(ONLINE_RASTER_SOURCE));
-    const hasLayer = Boolean(map.getLayer?.(ONLINE_RASTER_LAYER));
-
-    if (!want) {
-      try {
-        if (hasLayer) map.removeLayer(ONLINE_RASTER_LAYER);
-        if (hasSource) map.removeSource(ONLINE_RASTER_SOURCE);
-      } catch {
-        /* ignore */
+  async function loadBasemapPrefs() {
+    let mapType = "map";
+    let labels = true;
+    try {
+      const stored = await chrome.storage?.local?.get?.([MAP_TYPE_KEY, LABELS_KEY]);
+      if (stored?.[MAP_TYPE_KEY] === "satellite" || stored?.[MAP_TYPE_KEY] === "map") {
+        mapType = stored[MAP_TYPE_KEY];
       }
-      return;
+      if (stored?.[LABELS_KEY] === false || stored?.[LABELS_KEY] === "0") labels = false;
+    } catch {
+      /* ignore */
     }
-
-    const tiles = [onlineRasterTilesUrl()];
-    if (!hasSource) {
-      try {
-        map.addSource(ONLINE_RASTER_SOURCE, {
-          type: "raster",
-          tiles,
-          tileSize: 256,
-          maxzoom: 16,
-          attribution: ONLINE_RASTER_ATTR,
-        });
-      } catch (err) {
-        console.warn("Bible Maps: could not add online raster source", err);
-        return;
-      }
-    } else {
-      // Swap light/dark tiles on theme change by recreating the source.
-      try {
-        if (hasLayer) map.removeLayer(ONLINE_RASTER_LAYER);
-        map.removeSource(ONLINE_RASTER_SOURCE);
-        map.addSource(ONLINE_RASTER_SOURCE, {
-          type: "raster",
-          tiles,
-          tileSize: 256,
-          maxzoom: 16,
-          attribution: ONLINE_RASTER_ATTR,
-        });
-      } catch (err) {
-        console.warn("Bible Maps: could not refresh online raster source", err);
-        return;
-      }
+    try {
+      const lsType = localStorage.getItem(MAP_TYPE_KEY);
+      if (lsType === "satellite" || lsType === "map") mapType = lsType;
+      if (localStorage.getItem(LABELS_KEY) === "0") labels = false;
+    } catch {
+      /* ignore */
     }
-
-    if (!map.getLayer?.(ONLINE_RASTER_LAYER)) {
-      try {
-        const beforeId = map.getLayer("earth") ? "earth" : undefined;
-        map.addLayer(
-          {
-            id: ONLINE_RASTER_LAYER,
-            type: "raster",
-            source: ONLINE_RASTER_SOURCE,
-            layout: { visibility: "none" },
-            paint: { "raster-opacity": 1 },
-          },
-          beforeId
-        );
-      } catch (err) {
-        console.warn("Bible Maps: could not add online raster layer", err);
-      }
-    }
-    updateOnlineRasterVisibility(map);
+    basemapType = mapType;
+    basemapLabels = labels;
+    syncBasemapPreferencesUi();
   }
 
   function filterPeriodPlaces(places, placeEras, focusIds) {
@@ -1711,12 +1574,7 @@
     if (!els.teachingMap) throw new Error("Map container missing");
 
     const gen = ++mapMountGen;
-    const [, , , header] = await Promise.all([
-      loadPresets(),
-      loadEraMap(),
-      loadKingdoms(),
-      ensurePmtiles(),
-    ]);
+    await Promise.all([loadPresets(), loadEraMap(), loadKingdoms()]);
     if (gen !== mapMountGen) return;
     await waitForMapSize(els.teachingMap);
     if (gen !== mapMountGen) return;
@@ -1749,9 +1607,7 @@
         els.kingdomsToggle.checked = true;
       }
     }
-    if (els.mapToolbar) {
-      els.mapToolbar.hidden = !allowKingdoms;
-    }
+    if (els.mapToolbar) els.mapToolbar.hidden = false;
     const showKingdoms = allowKingdoms && Boolean(els.kingdomsToggle?.checked);
     if (els.kingdomLegend) els.kingdomLegend.hidden = !showKingdoms;
 
@@ -1779,23 +1635,24 @@
     destroyMap();
     if (gen !== mapMountGen) return;
 
-    if (!styleCache) {
-      styleCache = await fetch(chrome.runtime.getURL("media/tiles/style.json")).then(
-        (r) => {
-          if (!r.ok) throw new Error(`style.json HTTP ${r.status}`);
-          return r.json();
-        }
-      );
+    if (!isOnline()) {
+      setMapHelp("Connect to the internet to load Esri map tiles.", true);
+      if (els.teachingMap) {
+        els.teachingMap.innerHTML =
+          '<p class="muted" style="padding:12px">Map tiles need a network connection.</p>';
+      }
+      return;
     }
-    if (gen !== mapMountGen) return;
+    setMapHelp("", false);
+    if (els.teachingMap) els.teachingMap.innerHTML = "";
 
-    const style = buildOfflineStyle(styleCache, header);
+    const style = buildStreamingStyle();
     const map = new maplibregl.Map({
       container: els.teachingMap,
       style,
       center: [35.1, 31.7],
       zoom: 6.5,
-      maxZoom: mapMaxZoom(header),
+      maxZoom: mapMaxZoom(),
       attributionControl: true,
       failIfMajorPerformanceCaveat: false,
     });
@@ -1831,9 +1688,6 @@
     }
 
     updateMapOverlays(map, preset, showKingdoms);
-    syncOnlineRasterLayer(map);
-    map.on("moveend", () => updateOnlineRasterVisibility(map));
-    map.on("zoomend", () => updateOnlineRasterVisibility(map));
     lastMapFingerprint = fp;
     lastMapPresetId = presetId;
 
@@ -2139,7 +1993,7 @@
       const icon = els.themeBtn.querySelector(".icon-btn-glyph");
       if (icon) icon.textContent = isNight ? "☀" : "☾";
     }
-    syncOnlineRasterLayer(maplibreMap);
+    if (basemapType === "map" && maplibreMap) renderMap({ forceRemount: true });
     if (!persist) return;
     try {
       localStorage.setItem(THEME_KEY, next);
@@ -2153,8 +2007,8 @@
     }
   }
 
-  window.addEventListener("online", () => syncOnlineRasterLayer(maplibreMap));
-  window.addEventListener("offline", () => syncOnlineRasterLayer(maplibreMap));
+  window.addEventListener("online", () => renderMap({ forceRemount: true }));
+  window.addEventListener("offline", () => renderMap({ forceRemount: true }));
 
   async function initTheme() {
     applyTheme(currentTheme(), { persist: false });
@@ -2189,6 +2043,23 @@
     renderMap();
   });
 
+  for (const btn of els.mapTypeButtons()) {
+    btn.addEventListener("click", () => {
+      const next = btn.dataset.mapType;
+      if (!next || next === basemapType) return;
+      basemapType = next;
+      syncBasemapPreferencesUi();
+      persistBasemapPrefs();
+      renderMap({ forceRemount: true });
+    });
+  }
+
+  els.labelsToggle?.addEventListener("change", () => {
+    basemapLabels = Boolean(els.labelsToggle?.checked);
+    persistBasemapPrefs();
+    renderMap({ forceRemount: true });
+  });
+
   els.mapsLink.addEventListener("click", (e) => {
     if (els.mapsLink.getAttribute("href") === "#") {
       e.preventDefault();
@@ -2211,6 +2082,7 @@
   });
 
   initTheme();
+  loadBasemapPrefs();
   loadKingdoms();
   loadPresets();
   loadEraMap();

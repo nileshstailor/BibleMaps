@@ -66,6 +66,16 @@
       </div>
 
       <div class="map-toolbar" id="mapToolbar">
+        <div class="map-toolbar-row">
+          <div class="segmented map-type-toggle" role="group" aria-label="Basemap">
+            <button type="button" class="seg-btn active" data-map-type="map">Map</button>
+            <button type="button" class="seg-btn" data-map-type="satellite">Satellite</button>
+          </div>
+          <label class="kingdom-toggle labels-toggle">
+            <input type="checkbox" id="labelsToggle" checked />
+            Labels
+          </label>
+        </div>
         <label class="kingdom-toggle" id="kingdomsToggleWrap" hidden>
           <input type="checkbox" id="kingdomsToggle" />
           Era outlines
@@ -118,7 +128,6 @@
     </footer>
 
     <script src="../lib/maplibre/maplibre-gl-csp.js"></script>
-    <script src="../lib/maplibre/pmtiles.js"></script>
     <script src="sidepanel.js"></script>
   </body>
 </html>

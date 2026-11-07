@@ -407,6 +407,41 @@ body {
   gap: 6px;
 }
 
+.map-toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface-soft);
+}
+
+.segmented .seg-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.segmented .seg-btn.active {
+  background: var(--parchment);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.labels-toggle {
+  margin: 0;
+}
+
 .map-toolbar[hidden] {
   display: none;
 }
