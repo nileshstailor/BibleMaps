@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bible Maps</title>
+    <link rel="stylesheet" href="../lib/maplibre/maplibre-gl.css" />
+    <link rel="stylesheet" href="sidepanel.css" />
+    <script src="theme-boot.js"></script>
+  </head>
+  <body class="app-shell">
+    <section class="map-stage" id="mapStage" aria-label="Map">
+      <div class="map-stage-toolbar" id="mapToolbar">
+        <div class="map-toolbar-leading">
+          <button
+            id="themeBtn"
+            class="ghost-btn icon-btn"
+            type="button"
+            title="Switch to night mode"
+            aria-label="Switch to night mode"
+            aria-pressed="false"
+          >
+            <span class="icon-btn-glyph" aria-hidden="true">☾</span>
+          </button>
+          <button
+            id="refreshBtn"
+            class="ghost-btn icon-btn"
+            type="button"
+            title="Rescan page"
+            aria-label="Rescan page"
+          >
+            <span class="icon-btn-glyph" aria-hidden="true">↻</span>
+          </button>
+        </div>
+        <div class="map-toolbar-row">
+          <div class="segmented map-type-toggle" role="group" aria-label="Basemap">
+            <button type="button" class="seg-btn active" data-map-type="map">Map</button>
+            <button type="button" class="seg-btn" data-map-type="satellite">Satellite</button>
+          </div>
+          <label class="kingdom-toggle labels-toggle">
+            <input type="checkbox" id="labelsToggle" />
+            Labels
+          </label>
+          <label class="kingdom-toggle" id="kingdomsToggleWrap" hidden>
+            <input type="checkbox" id="kingdomsToggle" checked />
+            Era outline
+          </label>
+        </div>
+        <div class="kingdom-legend" id="kingdomLegend" hidden></div>
+      </div>
+
+      <div id="teachingMap" class="teaching-map" aria-label="Map"></div>
+      <p class="muted small map-error" id="mapHelp" hidden></p>
+
+      <button type="button" class="show-places-btn" id="showPlacesBtn" title="Show places and journeys">
+        Places ↑
+      </button>
+
+      <div class="map-nav-controls" id="mapNavControls">
+        <button type="button" class="map-nav-btn" id="mapZoomIn" title="Zoom in" aria-label="Zoom in">
+          +
+        </button>
+        <button type="button" class="map-nav-btn" id="mapZoomOut" title="Zoom out" aria-label="Zoom out">
+          −
+        </button>
+        <button
+          type="button"
+          class="map-nav-btn map-nav-fit"
+          id="mapRecenter"
+          title="Fit story on map — chapter places or selected journey"
+          aria-label="Fit story on map: frame all chapter places or the selected journey route"
+        >
+          ⊙
+        </button>
+      </div>
+    </section>
+
+    <section class="bottom-dock" id="mapDock">
+      <div
+        class="dock-grabber"
+        id="dockGrabber"
+        role="separator"
+        aria-orientation="horizontal"
+        aria-label="Drag up or down to resize places panel"
+        tabindex="0"
+      >
+        <span class="dock-grabber-pill" aria-hidden="true"></span>
+        <p class="dock-grabber-hint" id="dockGrabberHint" hidden>
+          Drag for places &amp; journeys
+        </p>
+      </div>
+
+      <header class="dock-chrome">
+        <div class="dock-toolbar">
+          <div class="dock-titles">
+            <h2 id="mapTitle">Map</h2>
+            <p id="mapSubtitle" class="dock-subtitle muted">Places in this chapter</p>
+          </div>
+          <nav class="tabs dock-tabs" role="tablist" aria-label="Places and journeys">
+            <button class="tab active" data-tab="places" type="button" role="tab" aria-selected="true">
+              Places
+            </button>
+            <button class="tab" data-tab="journeys" type="button" role="tab" aria-selected="false">
+              Journeys
+            </button>
+          </nav>
+        </div>
+        <p class="status-line" id="status">Open a supported Bible passage to detect places.</p>
+      </header>
+
+      <div class="dock-scroll">
+        <section id="placesPanel" class="panel active" role="tabpanel"></section>
+        <section id="journeysPanel" class="panel" role="tabpanel" hidden></section>
+
+        <details class="map-extras" id="stopListWrap" hidden>
+          <summary>Route stops</summary>
+          <ol id="stopList" class="stop-list"></ol>
+        </details>
+
+        <details class="reference-plate" id="referencePlate">
+          <summary>Reference map (regions &amp; provinces)</summary>
+          <img id="referencePlateImg" alt="Historical atlas plate" hidden />
+          <p class="muted small" id="referencePlateNote"></p>
+        </details>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <a
+        class="bmc-button"
+        href="https://www.buymeacoffee.com/gujunilesh"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg
+          class="bmc-button-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            fill="currentColor"
+            d="M4 6h13a1 1 0 0 1 1 1v1h1.5A2.5 2.5 0 0 1 22 10.5v1A2.5 2.5 0 0 1 19.5 14H18v1a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V7a1 1 0 0 1 1-1zm14 3v3h1.5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H18zM6 8v7a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V8H6zm1-4h2v1.5H7V4zm4 0h2v1.5h-2V4zm4 0h2v1.5h-2V4z"
+          />
+        </svg>
+        <span class="bmc-button-text">Buy me a coffee</span>
+      </a>
+    </footer>
+
+    <script src="../lib/maplibre/maplibre-gl-csp.js"></script>
+    <script src="biblical-training-links.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+{
+  "presets": [
+    {
+      "id": "divided_kingdom",
+      "title": "Divided Kingdom",
+      "era": "1 Kings – 2 Kings",
+      "basemap": "levant",
+      "placeEras": [
+        "divided",
+        "united"
+      ],
+      "showKingdoms": true,
+      "overlay": "kingdoms.json",
+      "referencePlate": "divided-kingdom.jpg",
+      "bounds": [
+        [
+          30.6,
+          34.2
+        ],
+        [
+          33.6,
+          36.2
+        ]
+      ]
+    },
+    {
+      "id": "kingdom_david",
+      "title": "United Monarchy",
+      "era": "Saul–David–Solomon",
+      "basemap": "levant",
+      "placeEras": [
+        "united",
+        "judges"
+      ],
+      "showKingdoms": true,
+      "overlay": "overlays/kingdom-david.json",
+      "referencePlate": "kingdom-david.jpg",
+      "bounds": [
+        [
+          30.6,
+          34.2
+        ],
+        [
+          33.6,
+          36.2
+        ]
+      ]
+    },
+    {
+      "id": "jesus",
+      "title": "Time of Jesus",
+      "era": "Gospels",
+      "basemap": "levant",
+      "placeEras": [
+        "gospels"
+      ],
+      "showKingdoms": true,
+      "baseOverlay": "overlays/roman-empire-ad14.json",
+      "overlay": "overlays/israel-jesus.json",
+      "referencePlate": "israel-jesus.jpg",
+      "bounds": [
+        [
+          30.8,
+          34.3
+        ],
+        [
+          33.5,
+          36.0
+        ]
+      ]
+    },
+    {
+      "id": "levant_general",
+      "title": "Land of Israel",
+      "era": "Regional",
+      "basemap": "levant",
+      "placeEras": [
+        "conquest",
+        "judges",
+        "united",
+        "divided",
+        "gospels"
+      ],
+      "showKingdoms": false,
+      "referencePlate": "israel-base.jpg",
+      "bounds": [
+        [
+          30.55,
+          34.15
+        ],
+        [
+          33.55,
+          36.15
+        ]
+      ]
+    },
+    {
+      "id": "abraham",
+      "title": "Abraham’s World",
+      "era": "Patriarchs",
+      "basemap": "near-east",
+      "placeEras": [
+        "patriarchs"
+      ],
+      "showKingdoms": false,
+      "referencePlate": null,
+      "bounds": [
+        [
+          28.0,
+          30.0
+        ],
+        [
+          42.0,
+          52.0
+        ]
+      ]
+    },
+    {
+      "id": "exodus",
+      "title": "Exodus Outline",
+      "era": "Exodus",
+      "basemap": "near-east",
+      "placeEras": [
+        "exodus",
+        "conquest"
+      ],
+      "showKingdoms": false,
+      "referencePlate": null,
+      "bounds": [
+        [
+          27.0,
+          29.0
+        ],
+        [
+          35.0,
+          38.0
+        ]
+      ]
+    },
+    {
+      "id": "paul_first",
+      "title": "Paul’s First Journey",
+      "era": "Acts 13–14",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": true,
+      "overlay": "overlays/roman-provinces-mediterranean.json",
+      "referencePlate": "paul-first.jpg",
+      "bounds": [
+        [
+          30.5,
+          28.0
+        ],
+        [
+          42.0,
+          38.0
+        ]
+      ],
+      "journeyId": "paul_first",
+      "routeOverlay": "overlays/paul-first-route.json"
+    },
+    {
+      "id": "paul_second",
+      "title": "Paul’s Second Journey",
+      "era": "Acts 15–18",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": true,
+      "overlay": "overlays/roman-provinces-mediterranean.json",
+      "referencePlate": "paul-second.jpg",
+      "bounds": [
+        [
+          30.5,
+          20.0
+        ],
+        [
+          43.5,
+          40.0
+        ]
+      ],
+      "journeyId": "paul_second",
+      "routeOverlay": "overlays/paul-second-route.json"
+    },
+    {
+      "id": "paul_third",
+      "title": "Paul’s Third Journey",
+      "era": "Acts 18–21",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": true,
+      "overlay": "overlays/roman-provinces-mediterranean.json",
+      "referencePlate": "paul-third.jpg",
+      "bounds": [
+        [
+          30.5,
+          20.0
+        ],
+        [
+          43.5,
+          40.0
+        ]
+      ],
+      "journeyId": "paul_third",
+      "routeOverlay": "overlays/paul-third-route.json"
+    },
+    {
+      "id": "paul_rome",
+      "title": "Paul’s Journey to Rome",
+      "era": "Acts 27–28",
+      "basemap": "mediterranean",
+      "placeEras": [
+        "acts"
+      ],
+      "showKingdoms": true,
+      "overlay": "overlays/roman-provinces-mediterranean.json",
+      "referencePlate": "paul-rome.jpg",
+      "bounds": [
+        [
+          30.5,
+          5.0
+        ],
+        [
+          46.0,
+          40.0
+        ]
+      ],
+      "journeyId": "paul_rome",
+      "routeOverlay": "overlays/paul-rome-route.json"
+    }
+  ]
+}

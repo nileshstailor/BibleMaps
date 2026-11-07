@@ -1,0 +1,6770 @@
+[
+  {
+    "id": "abraham_travels",
+    "name": "Abraham’s Travels",
+    "aliases": [
+      "Abraham",
+      "Abram"
+    ],
+    "scriptureRefs": [
+      "Genesis 11:31–12:9",
+      "Genesis 13",
+      "Genesis 20",
+      "Genesis 22"
+    ],
+    "summary": "Outline of Abraham’s migration from Mesopotamia into Canaan, with sojourns toward Egypt and key patriarchal sites.",
+    "stops": [
+      {
+        "placeId": "ur",
+        "note": "Departure from Ur of the Chaldeans"
+      },
+      {
+        "placeId": "haran",
+        "note": "Family sojourn in Haran"
+      },
+      {
+        "placeId": "shechem",
+        "note": "First altar in Canaan"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Altar between Bethel and Ai"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Sojourn during famine"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Settles by the oaks of Mamre"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Covenant and wells in the south"
+      }
+    ],
+    "pathHints": "Overland arc Ur → Haran → Canaan, with a temporary southward loop toward Egypt."
+  },
+  {
+    "id": "exodus_outline",
+    "name": "Exodus Outline",
+    "aliases": [
+      "Exodus",
+      "the Exodus"
+    ],
+    "scriptureRefs": [
+      "Exodus 12–19",
+      "Numbers 33",
+      "Deuteronomy 1–2"
+    ],
+    "summary": "High-level wilderness itinerary from the Nile Delta to Sinai and on toward the Plains of Moab. Several stops are geographically debated.",
+    "stops": [
+      {
+        "placeId": "egypt_rameses",
+        "note": "Departure from Rameses"
+      },
+      {
+        "placeId": "succoth",
+        "note": "First encampment"
+      },
+      {
+        "placeId": "etham",
+        "note": "Edge of the wilderness"
+      },
+      {
+        "placeId": "pi_hahiroth",
+        "note": "Before the sea crossing"
+      },
+      {
+        "placeId": "marah",
+        "note": "Bitter waters"
+      },
+      {
+        "placeId": "elim",
+        "note": "Oasis with springs and palms"
+      },
+      {
+        "placeId": "rephidim",
+        "note": "Water from the rock; Amalek"
+      },
+      {
+        "placeId": "sinai",
+        "note": "Covenant at the mountain"
+      },
+      {
+        "placeId": "kadesh_barnea",
+        "note": "Spies and long sojourn"
+      },
+      {
+        "placeId": "ezion_geber",
+        "note": "Southern route marker"
+      },
+      {
+        "placeId": "moab_plains",
+        "note": "Camp opposite Jericho"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Entry toward Canaan"
+      }
+    ],
+    "pathHints": "Delta → Isthmus/Sinai corridor → South Sinai tradition → Negev/Kadesh → Arabah → Moab."
+  },
+  {
+    "id": "paul_first",
+    "name": "Paul’s First Missionary Journey",
+    "aliases": [
+      "first missionary journey",
+      "Paul and Barnabas",
+      "Cyprus",
+      "Barnabas"
+    ],
+    "scriptureRefs": [
+      "Acts 13–14"
+    ],
+    "summary": "Paul and Barnabas travel from Syrian Antioch through Cyprus into southern Asia Minor and return.",
+    "stops": [
+      {
+        "placeId": "antioch",
+        "note": "Commissioned and sent out"
+      },
+      {
+        "placeId": "seleucia",
+        "note": "Sail from the port of Antioch"
+      },
+      {
+        "placeId": "cyprus",
+        "note": "Land on the island (Acts 13:4)"
+      },
+      {
+        "placeId": "cyprus_salamis",
+        "note": "Proclaim in the synagogues"
+      },
+      {
+        "placeId": "cyprus_paphos",
+        "note": "Sergius Paulus"
+      },
+      {
+        "placeId": "perga",
+        "note": "Landing in Pamphylia"
+      },
+      {
+        "placeId": "antioch_pisidia",
+        "note": "Sabbath sermon in the synagogue"
+      },
+      {
+        "placeId": "iconium",
+        "note": "Ministry amid opposition"
+      },
+      {
+        "placeId": "lystra",
+        "note": "Healing and misunderstanding"
+      },
+      {
+        "placeId": "derbe",
+        "note": "Make many disciples"
+      },
+      {
+        "placeId": "lystra",
+        "note": "Return visit; strengthen disciples"
+      },
+      {
+        "placeId": "iconium",
+        "note": "Return through the cities"
+      },
+      {
+        "placeId": "antioch_pisidia",
+        "note": "Return through Pisidian Antioch"
+      },
+      {
+        "placeId": "perga",
+        "note": "Speak the word in Perga"
+      },
+      {
+        "placeId": "attalia",
+        "note": "Sail home"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Report to the church"
+      }
+    ],
+    "pathHints": "Syria → Cyprus (east to west) → Pamphylia → Pisidia/Lycaonia loop → return via Attalia."
+  },
+  {
+    "id": "paul_second",
+    "name": "Paul’s Second Missionary Journey",
+    "aliases": [
+      "second missionary journey"
+    ],
+    "scriptureRefs": [
+      "Acts 15:36–18:22"
+    ],
+    "summary": "Paul revisits Galatian churches, crosses into Macedonia and Achaia, then returns via Ephesus and Caesarea.",
+    "stops": [
+      {
+        "placeId": "antioch",
+        "note": "Departure after the Jerusalem council season"
+      },
+      {
+        "placeId": "tarsus",
+        "note": "Through Cilicia/Syria corridor (hometown region)"
+      },
+      {
+        "placeId": "derbe",
+        "note": "Strengthen the churches"
+      },
+      {
+        "placeId": "lystra",
+        "note": "Timothy joins"
+      },
+      {
+        "placeId": "iconium",
+        "note": "Deliver the decrees"
+      },
+      {
+        "placeId": "troas",
+        "note": "Macedonian call vision"
+      },
+      {
+        "placeId": "neapolis",
+        "note": "Seaport for Philippi"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Lydia; prison and release"
+      },
+      {
+        "placeId": "amphipolis",
+        "note": "Via Egnatia pass-through"
+      },
+      {
+        "placeId": "apollonia",
+        "note": "Via Egnatia pass-through"
+      },
+      {
+        "placeId": "thessalonica",
+        "note": "Reasoning in the synagogue"
+      },
+      {
+        "placeId": "berea",
+        "note": "Noble examination of the Scriptures"
+      },
+      {
+        "placeId": "athens",
+        "note": "Areopagus address"
+      },
+      {
+        "placeId": "corinth",
+        "note": "Extended ministry with Aquila and Priscilla"
+      },
+      {
+        "placeId": "cenchreae",
+        "note": "Eastern harbor; haircut vow tradition"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Brief visit; promise to return"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Land in Judea"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Greet the church"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Return base"
+      }
+    ],
+    "pathHints": "Antioch → Asia Minor interior → Troas → Macedonia → Achaia → brief Ephesus → Caesarea/Jerusalem → Antioch."
+  },
+  {
+    "id": "paul_third",
+    "name": "Paul’s Third Missionary Journey",
+    "aliases": [
+      "third missionary journey"
+    ],
+    "scriptureRefs": [
+      "Acts 18:23–21:17"
+    ],
+    "summary": "Paul travels through Galatia and Phrygia, spends extended time in Ephesus, revisits Macedonia and Achaia, then returns toward Jerusalem.",
+    "stops": [
+      {
+        "placeId": "antioch",
+        "note": "Set out again"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Two-plus years of ministry"
+      },
+      {
+        "placeId": "troas",
+        "note": "Travel corridor toward Macedonia"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Macedonia revisit"
+      },
+      {
+        "placeId": "thessalonica",
+        "note": "Encourage the churches"
+      },
+      {
+        "placeId": "corinth",
+        "note": "Three months in Greece"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Passover season departure"
+      },
+      {
+        "placeId": "troas",
+        "note": "Eutychus; departure by land/sea"
+      },
+      {
+        "placeId": "miletus",
+        "note": "Farewell to Ephesian elders"
+      },
+      {
+        "placeId": "tyre",
+        "note": "Disciples warn Paul"
+      },
+      {
+        "placeId": "acco",
+        "note": "Ptolemais — one-day stop with believers"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Stay with Philip; Agabus"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Arrival and reception"
+      }
+    ],
+    "pathHints": "Focus on long Ephesian residence, then a western loop through Macedonia/Achaia before the coastal return to Judea."
+  },
+  {
+    "id": "paul_rome",
+    "name": "Paul’s Journey to Rome",
+    "aliases": [
+      "voyage to Rome",
+      "Paul to Rome",
+      "Fair Havens",
+      "Cauda",
+      "Clauda",
+      "Gavdos",
+      "Cnidus",
+      "Salmone",
+      "Euroclydon",
+      "northeaster"
+    ],
+    "scriptureRefs": [
+      "Acts 27–28"
+    ],
+    "summary": "Paul’s custody voyage from Caesarea to Rome: under the lee of Cyprus (north), Myra, past Cnidus in open water, under Crete off Salmone along the south coast to Fair Havens, then storm under the lee of Cauda (Gavdos) to shipwreck on Malta.",
+    "stops": [
+      {
+        "placeId": "caesarea",
+        "note": "Embark under guard"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Humane stop; friends care for Paul"
+      },
+      {
+        "placeId": "cyprus_karpaz_lee",
+        "note": "Under the lee of Cyprus (NE)",
+        "hidden": true
+      },
+      {
+        "placeId": "cyprus_lee_north",
+        "note": "North of Cyprus in open water",
+        "hidden": true
+      },
+      {
+        "placeId": "myra",
+        "note": "Transfer to an Alexandrian grain ship for Italy"
+      },
+      {
+        "placeId": "myra_offshore",
+        "note": "South into open water",
+        "hidden": true
+      },
+      {
+        "placeId": "rhodes_north_water",
+        "note": "West in the channel north of Rhodes",
+        "hidden": true
+      },
+      {
+        "placeId": "cnidus_approach_water",
+        "note": "South of the Cnidus peninsula",
+        "hidden": true
+      },
+      {
+        "placeId": "cnidus_offshore",
+        "note": "Acts 27:7 — off Cnidus (pass-by)",
+        "hidden": true
+      },
+      {
+        "placeId": "cnidus",
+        "note": "Passed off Cnidus (no landing)",
+        "markerOnly": true
+      },
+      {
+        "placeId": "crete_ne_water",
+        "note": "Open water toward Crete",
+        "hidden": true
+      },
+      {
+        "placeId": "salmone",
+        "note": "Acts 27:7 — off Cape Salmone",
+        "markerOnly": true
+      },
+      {
+        "placeId": "crete_water_se",
+        "note": "Round into water south of Crete",
+        "hidden": true
+      },
+      {
+        "placeId": "crete_water_south",
+        "note": "Along south Crete in open water",
+        "hidden": true
+      },
+      {
+        "placeId": "crete_water_sw",
+        "note": "Water approach to Fair Havens",
+        "hidden": true
+      },
+      {
+        "placeId": "crete_fair_havens",
+        "note": "Acts 27:8 — Fair Havens near Lasea"
+      },
+      {
+        "placeId": "crete_water_to_cauda",
+        "note": "South into open water toward Cauda",
+        "hidden": true
+      },
+      {
+        "placeId": "cauda_lee_water",
+        "note": "Under the lee of Cauda (pass-by)",
+        "hidden": true
+      },
+      {
+        "placeId": "cauda",
+        "note": "Acts 27:16 — under the lee of Cauda; secured the boat (pass-by, not a stay)",
+        "markerOnly": true
+      },
+      {
+        "placeId": "malta",
+        "note": "Shipwreck and wintering"
+      },
+      {
+        "placeId": "syracuse",
+        "note": "Three days"
+      },
+      {
+        "placeId": "rhegium",
+        "note": "South Italian landfall"
+      },
+      {
+        "placeId": "puteoli",
+        "note": "Land in Italy; believers welcome Paul"
+      },
+      {
+        "placeId": "forum_appii",
+        "note": "Believers from Rome meet Paul"
+      },
+      {
+        "placeId": "three_taverns",
+        "note": "Further Roman believers meet Paul"
+      },
+      {
+        "placeId": "rome",
+        "note": "House arrest and witness"
+      }
+    ],
+    "pathHints": "Sidon → north of Cyprus → Myra → north of Rhodes → off Cnidus → Cape Salmone → south Crete → Fair Havens → under lee of Cauda → Malta → Italy → Rome."
+  },
+  {
+    "id": "paul_jerusalem_caesarea_transfer",
+    "name": "Paul Taken to Caesarea",
+    "aliases": [
+      "Antipatris",
+      "Claudius Lysias",
+      "bring him safely to Felix",
+      "soldiers to go to Caesarea"
+    ],
+    "scriptureRefs": [
+      "Acts 23:23–35"
+    ],
+    "summary": "After a plot against Paul in Jerusalem, the Roman commander sends him by night under heavy guard to Antipatris, then on to Governor Felix in Caesarea.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Barracks; plot and night departure"
+      },
+      {
+        "placeId": "aphek_sharon",
+        "note": "Antipatris — overnight stop with the infantry"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Delivered to Felix with Lysias’s letter"
+      }
+    ],
+    "pathHints": "Jerusalem hill country west to Antipatris (Aphek/Sharon), then north along the coastal road to Caesarea Maritima."
+  },
+  {
+    "id": "peter_lydda_joppa_caesarea",
+    "name": "Peter: Lydda, Joppa and Cornelius in Caesarea",
+    "aliases": [
+      "Cornelius",
+      "Simon the tanner",
+      "Aeneas",
+      "Tabitha",
+      "Dorcas",
+      "Italian Regiment"
+    ],
+    "scriptureRefs": [
+      "Acts 9:32–10:48",
+      "Acts 11:1–18"
+    ],
+    "summary": "Peter heals Aeneas in Lydda, raises Tabitha in Joppa, then goes to Caesarea at Cornelius’s invitation and later explains the visit in Jerusalem.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Peter traveling about"
+      },
+      {
+        "placeId": "lod",
+        "note": "Lydda — Aeneas healed"
+      },
+      {
+        "placeId": "joppa",
+        "note": "Tabitha; vision at Simon the tanner’s house"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Cornelius and the Gentile household"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Report to the circumcised believers"
+      }
+    ],
+    "pathHints": "Judean hills to the coastal plain (Lydda/Joppa), north to Caesarea Maritima, then back inland to Jerusalem."
+  },
+  {
+    "id": "paul_festus_agrippa",
+    "name": "Festus, Agrippa and the Appeal to Caesar",
+    "aliases": [
+      "Festus",
+      "King Agrippa",
+      "Bernice",
+      "appeal to Caesar",
+      "I appeal to Caesar"
+    ],
+    "scriptureRefs": [
+      "Acts 25–26"
+    ],
+    "summary": "Festus visits Jerusalem, returns to hear Paul in Caesarea; Paul appeals to Caesar, then defends himself before Agrippa and Bernice still in Caesarea.",
+    "stops": [
+      {
+        "placeId": "caesarea",
+        "note": "Paul in custody under Felix/Festus"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Festus confers with the chief priests"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Hearing; appeal to Caesar; Agrippa’s audience"
+      }
+    ],
+    "pathHints": "Short round trip for Festus between Caesarea and Jerusalem; Paul’s location remains Caesarea."
+  },
+  {
+    "id": "cana_to_capernaum",
+    "name": "From Cana to Capernaum",
+    "aliases": [
+      "wedding at Cana",
+      "water into wine"
+    ],
+    "scriptureRefs": [
+      "John 2:1–12"
+    ],
+    "summary": "After the wedding at Cana in Galilee, Jesus, his mother, brothers and disciples go down to Capernaum for a few days.",
+    "stops": [
+      {
+        "placeId": "cana",
+        "note": "Wedding; first sign"
+      },
+      {
+        "placeId": "capernaum",
+        "note": "Brief stay with the family and disciples"
+      }
+    ],
+    "pathHints": "Short descent within Galilee from Cana to the lakeside town of Capernaum."
+  },
+  {
+    "id": "feast_of_tabernacles",
+    "name": "Up to Jerusalem for the Feast of Tabernacles",
+    "aliases": [
+      "Feast of Tabernacles",
+      "Festival of Shelters",
+      "Sukkot"
+    ],
+    "scriptureRefs": [
+      "John 7"
+    ],
+    "summary": "Jesus remains in Galilee while his brothers go up to the feast, then goes up to Jerusalem later and teaches in the temple.",
+    "stops": [
+      {
+        "placeId": "galilee",
+        "note": "Stays for a time"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Teaches mid-feast in the temple courts"
+      }
+    ],
+    "pathHints": "Galilee south to Jerusalem for Tabernacles."
+  },
+  {
+    "id": "lazarus_bethany_ephraim",
+    "name": "Lazarus, Bethany and Withdrawal to Ephraim",
+    "aliases": [
+      "Lazarus",
+      "Martha",
+      "Mary of Bethany",
+      "four days",
+      "town called Ephraim"
+    ],
+    "scriptureRefs": [
+      "John 11"
+    ],
+    "summary": "Jesus goes to Bethany and raises Lazarus, then withdraws with the disciples to the town of Ephraim near the wilderness until Passover draws near.",
+    "stops": [
+      {
+        "placeId": "perea",
+        "note": "Beyond the Jordan when news arrives"
+      },
+      {
+        "placeId": "bethany",
+        "note": "Lazarus raised"
+      },
+      {
+        "placeId": "ephraim_town",
+        "note": "Withdrawal with the disciples"
+      }
+    ],
+    "pathHints": "East of the Jordan to Bethany near Jerusalem, then north into the Judean hill country toward Ephraim."
+  },
+  {
+    "id": "widow_of_nain",
+    "name": "Raising the Widow’s Son at Nain",
+    "aliases": [
+      "Nain",
+      "widow’s son",
+      "young man"
+    ],
+    "scriptureRefs": [
+      "Luke 7:11–17"
+    ],
+    "summary": "Jesus travels from Capernaum’s region to the village of Nain and raises a widow’s only son at the town gate.",
+    "stops": [
+      {
+        "placeId": "capernaum",
+        "note": "Prior healings (centurion)"
+      },
+      {
+        "placeId": "nain",
+        "note": "Widow’s son raised"
+      }
+    ],
+    "pathHints": "West/southwest from the Sea of Galilee toward Nain in the hills above the Jezreel Valley."
+  },
+  {
+    "id": "jeroboam_wife_shiloh",
+    "name": "Jeroboam’s Wife to Shiloh",
+    "aliases": [
+      "Jeroboam",
+      "Jeroboam’s wife",
+      "wife of Jeroboam",
+      "Ahijah",
+      "Ahijah the prophet"
+    ],
+    "scriptureRefs": [
+      "1 Kings 14:1–18"
+    ],
+    "summary": "Jeroboam’s wife travels from Tirzah to Shiloh to consult Ahijah about their sick son, then returns to Tirzah.",
+    "stops": [
+      {
+        "placeId": "tirzah",
+        "note": "Departs from Jeroboam’s house in Tirzah"
+      },
+      {
+        "placeId": "shiloh",
+        "note": "Meets Ahijah the prophet"
+      },
+      {
+        "placeId": "tirzah",
+        "note": "Returns to Tirzah"
+      }
+    ],
+    "pathHints": "Short highland round trip: Tirzah → Shiloh → Tirzah."
+  },
+  {
+    "id": "shishak_jerusalem",
+    "name": "Shishak Attacks Jerusalem",
+    "aliases": [
+      "Shishak",
+      "King Shishak",
+      "Shishak of Egypt"
+    ],
+    "scriptureRefs": [
+      "1 Kings 14:25–26",
+      "2 Chronicles 12:2–9"
+    ],
+    "summary": "In Rehoboam’s fifth year, Pharaoh Shishak of Egypt comes up and attacks Jerusalem, stripping the Temple and palace treasuries.",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Shishak sets out from Egypt"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Attacks Jerusalem; plunders Temple and palace"
+      }
+    ],
+    "pathHints": "Egypt northward into Judah to Jerusalem (coastal/Via Maris teaching arc)."
+  },
+  {
+    "id": "jeroboam_return_egypt",
+    "name": "Jeroboam Returns from Egypt",
+    "aliases": [
+      "Jeroboam",
+      "Jeroboam son of Nebat"
+    ],
+    "scriptureRefs": [
+      "1 Kings 11:40",
+      "1 Kings 12:1–3"
+    ],
+    "summary": "Jeroboam flees Solomon to Shishak in Egypt, then returns when Israel gathers at Shechem to make Rehoboam king.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Flees Solomon’s court"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Refuge with Shishak in Egypt"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Returns as Israel assembles at Shechem"
+      }
+    ],
+    "pathHints": "Jerusalem → Egypt → return to Shechem for the kingdom split."
+  },
+  {
+    "id": "rehoboam_shechem",
+    "name": "Rehoboam at Shechem",
+    "aliases": [
+      "Rehoboam"
+    ],
+    "scriptureRefs": [
+      "1 Kings 12:1–18"
+    ],
+    "summary": "Rehoboam goes to Shechem to be made king; after rejecting the people’s petition he flees back to Jerusalem as the northern tribes rebel.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Leaves Judah’s capital"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Assembly to make him king"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Flees by chariot to Jerusalem"
+      }
+    ],
+    "pathHints": "Jerusalem → Shechem → panicked return to Jerusalem."
+  },
+  {
+    "id": "man_of_god_bethel",
+    "name": "Man of God to Bethel",
+    "aliases": [
+      "man of God",
+      "man of God from Judah"
+    ],
+    "scriptureRefs": [
+      "1 Kings 13:1–32"
+    ],
+    "summary": "A man of God travels from Judah to Bethel to confront Jeroboam’s altar, then is diverted on the return and dies on the road.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Comes from Judah (Jerusalem region)"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Prophesies against Jeroboam’s altar"
+      }
+    ],
+    "pathHints": "Judah highland → Bethel; return by another road."
+  },
+  {
+    "id": "solomon_ophir_fleet",
+    "name": "Solomon’s Fleet to Ophir",
+    "aliases": [
+      "Ophir",
+      "ships of Solomon",
+      "Solomon’s fleet"
+    ],
+    "scriptureRefs": [
+      "1 Kings 9:26–28",
+      "1 Kings 10:11–12"
+    ],
+    "summary": "Solomon builds a fleet at Ezion-geber on the Red Sea; with Tyrian sailors the ships sail to Ophir for gold.",
+    "stops": [
+      {
+        "placeId": "ezion_geber",
+        "note": "Fleet built on the shore of the Red Sea"
+      },
+      {
+        "placeId": "ophir",
+        "note": "Sail for gold (and related cargo)"
+      }
+    ],
+    "pathHints": "Gulf of Aqaba south/east toward the Ophir trade (locale debated)."
+  },
+  {
+    "id": "queen_of_sheba",
+    "name": "Queen of Sheba to Jerusalem",
+    "aliases": [
+      "Queen of Sheba",
+      "queen of Sheba",
+      "Sheba"
+    ],
+    "scriptureRefs": [
+      "1 Kings 10:1–13"
+    ],
+    "summary": "The queen of Sheba comes to Jerusalem to test Solomon with hard questions, then returns to her own land.",
+    "stops": [
+      {
+        "placeId": "sheba",
+        "note": "Departs from Sheba"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Meets Solomon; royal exchange of gifts"
+      },
+      {
+        "placeId": "sheba",
+        "note": "Returns home"
+      }
+    ],
+    "pathHints": "Long-distance visit from Sheba (Arabia/Horn traditions) to Jerusalem and back."
+  },
+  {
+    "id": "elijah_to_zarephath",
+    "name": "Elijah to Zarephath",
+    "aliases": [
+      "Elijah",
+      "Elijah the Tishbite",
+      "Zarephath"
+    ],
+    "scriptureRefs": [
+      "1 Kings 17:1–24"
+    ],
+    "summary": "Elijah the Tishbite announces the drought, hides by the Brook Cherith, then goes to Zarephath of Sidon where God sustains a widow’s household.",
+    "stops": [
+      {
+        "placeId": "tishbe",
+        "note": "Elijah’s hometown in Gilead (1 Kings 17:1)"
+      },
+      {
+        "placeId": "cherith",
+        "note": "Hides east of the Jordan; fed by ravens"
+      },
+      {
+        "placeId": "zarephath",
+        "note": "Stays with the widow; oil and meal; raises her son"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Zarephath belongs to Sidon"
+      }
+    ],
+    "pathHints": "Tishbe in Gilead → Cherith → Phoenician coast at Zarephath (Sidon region)."
+  },
+  {
+    "id": "elijah_carmel_jezreel",
+    "name": "Elijah: Carmel to Jezreel",
+    "aliases": [
+      "Elijah",
+      "Mount Carmel",
+      "prophets of Baal"
+    ],
+    "scriptureRefs": [
+      "1 Kings 18:16–46"
+    ],
+    "summary": "Elijah confronts the prophets of Baal on Mount Carmel; after the rain comes he runs ahead of Ahab to the entrance of Jezreel.",
+    "stops": [
+      {
+        "placeId": "mt_carmel",
+        "note": "Contest with the prophets of Baal; prayer for rain"
+      },
+      {
+        "placeId": "jezreel",
+        "note": "Runs before Ahab’s chariot to Jezreel"
+      }
+    ],
+    "pathHints": "Mount Carmel eastward into the Jezreel Valley."
+  },
+  {
+    "id": "elijah_flight_horeb",
+    "name": "Elijah Flees to Horeb",
+    "aliases": [
+      "Elijah",
+      "Horeb",
+      "Mount Horeb"
+    ],
+    "scriptureRefs": [
+      "1 Kings 19:1–18"
+    ],
+    "summary": "Threatened by Jezebel, Elijah flees to Beersheba, travels into the wilderness, and reaches Horeb, the mountain of God.",
+    "stops": [
+      {
+        "placeId": "jezreel",
+        "note": "Flees Jezebel’s threat after Carmel"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Leaves his servant in Judah"
+      },
+      {
+        "placeId": "sinai",
+        "note": "Forty days to Horeb; the still small voice"
+      }
+    ],
+    "pathHints": "Jezreel → Beersheba → south to Horeb/Sinai."
+  },
+  {
+    "id": "ahab_aphek",
+    "name": "Ahab and the Arameans at Aphek",
+    "aliases": [
+      "Ben-hadad",
+      "Ben Hadad",
+      "Arameans",
+      "Aphek"
+    ],
+    "scriptureRefs": [
+      "1 Kings 20:1–34"
+    ],
+    "summary": "Ben-hadad of Aram besieges Samaria; after Israel’s victory the remaining Arameans flee into Aphek.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Aramean siege of Samaria"
+      },
+      {
+        "placeId": "aphek_aram",
+        "note": "Aramean survivors flee into Aphek"
+      }
+    ],
+    "pathHints": "Samaria campaign culminating at Aphek (site identification debated)."
+  },
+  {
+    "id": "abram_rescues_lot",
+    "name": "Abram Rescues Lot",
+    "aliases": [
+      "Abram",
+      "Chedorlaomer",
+      "Melchizedek"
+    ],
+    "scriptureRefs": [
+      "Genesis 14"
+    ],
+    "summary": "Eastern kings raid the cities of the plain and carry off Lot; Abram pursues from Mamre to Dan and beyond Damascus, then is blessed by Melchizedek of Salem.",
+    "stops": [
+      {
+        "placeId": "mamre",
+        "note": "Abram camped by the oaks of Mamre"
+      },
+      {
+        "placeId": "dan",
+        "note": "Night attack at Dan"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Pursuit to Hobah, north of Damascus"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Melchizedek king of Salem meets Abram"
+      }
+    ],
+    "pathHints": "Mamre north along the hill-country/Jordan rift to Dan, NE to Damascus, return south to Salem."
+  },
+  {
+    "id": "abraham_moriah",
+    "name": "Abraham to Moriah",
+    "aliases": [
+      "Abraham",
+      "Isaac",
+      "Moriah"
+    ],
+    "scriptureRefs": [
+      "Genesis 22"
+    ],
+    "summary": "Three-day journey from Beersheba to the land of Moriah for the binding of Isaac, and return.",
+    "stops": [
+      {
+        "placeId": "beersheba",
+        "note": "Abraham sets out"
+      },
+      {
+        "placeId": "moriah",
+        "note": "Isaac bound; ram provided"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Abraham returns and lives at Beersheba"
+      }
+    ],
+    "pathHints": "Beersheba north through the Judean hills to Jerusalem's ridge and back."
+  },
+  {
+    "id": "bride_for_isaac",
+    "name": "A Bride for Isaac",
+    "aliases": [
+      "Rebekah",
+      "Abraham's servant",
+      "Laban"
+    ],
+    "scriptureRefs": [
+      "Genesis 24"
+    ],
+    "summary": "Abraham's servant travels to Aram-naharaim (Mesopotamia), finds Rebekah at the city of Nahor, and brings her to Isaac in the Negeb.",
+    "stops": [
+      {
+        "placeId": "hebron",
+        "note": "Abraham commissions his servant"
+      },
+      {
+        "placeId": "aram_naharaim",
+        "note": "City of Nahor; Rebekah at the well"
+      },
+      {
+        "placeId": "negeb",
+        "note": "Isaac meets Rebekah near Beer-lahai-roi"
+      }
+    ],
+    "pathHints": "Long overland route Canaan → Damascus → upper Euphrates (Haran region) and back to the Negeb."
+  },
+  {
+    "id": "isaac_wells",
+    "name": "Isaac's Wells",
+    "aliases": [
+      "Isaac",
+      "Abimelech"
+    ],
+    "scriptureRefs": [
+      "Genesis 26"
+    ],
+    "summary": "Isaac sojourns in Gerar, digs disputed wells in the Valley of Gerar (Esek, Sitnah, Rehoboth), then moves to Beersheba.",
+    "stops": [
+      {
+        "placeId": "gerar",
+        "note": "Sojourn with Abimelech"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Altar, covenant and well Shibah"
+      }
+    ],
+    "pathHints": "Short eastward move across the western Negeb."
+  },
+  {
+    "id": "jacob_flight_haran",
+    "name": "Jacob's Flight to Haran",
+    "aliases": [
+      "Jacob",
+      "Bethel"
+    ],
+    "scriptureRefs": [
+      "Genesis 28",
+      "Genesis 29:1–14"
+    ],
+    "summary": "Jacob flees Esau from Beersheba, dreams of the ladder at Bethel, and arrives at Laban's well in Haran.",
+    "stops": [
+      {
+        "placeId": "beersheba",
+        "note": "Jacob leaves"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Ladder dream; Luz renamed"
+      },
+      {
+        "placeId": "haran",
+        "note": "Meets Rachel at the well"
+      }
+    ],
+    "pathHints": "North through the hill country to Bethel, then the long route via Damascus to Haran."
+  },
+  {
+    "id": "joseph_to_egypt",
+    "name": "Joseph Sold into Egypt",
+    "aliases": [
+      "Joseph",
+      "Ishmaelites",
+      "Midianite traders"
+    ],
+    "scriptureRefs": [
+      "Genesis 37",
+      "Genesis 39"
+    ],
+    "summary": "Jacob sends Joseph from the Valley of Hebron to his brothers at Shechem; he finds them at Dothan, is sold to a caravan from Gilead, and taken to Egypt.",
+    "stops": [
+      {
+        "placeId": "hebron",
+        "note": "Sent from the Valley of Hebron"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Brothers not found"
+      },
+      {
+        "placeId": "dothan",
+        "note": "Thrown into a pit and sold"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Sold to Potiphar"
+      }
+    ],
+    "pathHints": "North along the ridge route to Shechem/Dothan, then the caravan road via the coastal plain (Way of the Sea) to Egypt."
+  },
+  {
+    "id": "jacob_to_egypt",
+    "name": "Jacob's Family Goes to Egypt",
+    "aliases": [
+      "Jacob",
+      "Israel",
+      "Joseph",
+      "Goshen"
+    ],
+    "scriptureRefs": [
+      "Genesis 42",
+      "Genesis 43",
+      "Genesis 45",
+      "Genesis 46",
+      "Genesis 47"
+    ],
+    "summary": "The brothers' grain trips from Canaan, Joseph's revelation, and Jacob's descent via Beersheba to settle in Goshen.",
+    "stops": [
+      {
+        "placeId": "hebron",
+        "note": "Jacob's home in Canaan"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Sacrifice and night vision"
+      },
+      {
+        "placeId": "goshen",
+        "note": "Settled in the land of Goshen / Rameses"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Presented to Pharaoh"
+      }
+    ],
+    "pathHints": "Hebron → Beersheba → across northern Sinai coastal road → eastern Delta."
+  },
+  {
+    "id": "jacob_burial_procession",
+    "name": "Jacob's Burial Procession",
+    "aliases": [
+      "Jacob",
+      "Machpelah"
+    ],
+    "scriptureRefs": [
+      "Genesis 50"
+    ],
+    "summary": "Joseph leads a great company from Egypt to bury Jacob; seven days of mourning at the threshing floor of Atad beyond the Jordan; burial at Machpelah.",
+    "stops": [
+      {
+        "placeId": "goshen",
+        "note": "Departure from Egypt"
+      },
+      {
+        "placeId": "machpelah",
+        "note": "Burial in the cave of Machpelah east of Mamre"
+      }
+    ],
+    "pathHints": "Route 'beyond the Jordan' implies a Transjordan detour (Atad/Abel-mizraim unlocated); direct line is only schematic."
+  },
+  {
+    "id": "moses_flight_midian",
+    "name": "Moses' Flight to Midian and Return",
+    "aliases": [
+      "Moses",
+      "Jethro",
+      "Midian"
+    ],
+    "scriptureRefs": [
+      "Exodus 2",
+      "Exodus 3",
+      "Exodus 4"
+    ],
+    "summary": "Moses kills an Egyptian, flees to Midian, meets God at Horeb, and returns to Egypt with Aaron.",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Moses flees Pharaoh"
+      },
+      {
+        "placeId": "midian",
+        "note": "Marries Zipporah"
+      },
+      {
+        "placeId": "sinai",
+        "note": "Burning bush at Horeb"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Returns with Aaron"
+      }
+    ],
+    "pathHints": "Delta east across Sinai to NW Arabia; Horeb location follows the existing sinai pin (traditional Jebel Musa)."
+  },
+  {
+    "id": "sinai_to_kadesh",
+    "name": "From Sinai to Kadesh",
+    "aliases": [
+      "the cloud",
+      "Hobab"
+    ],
+    "scriptureRefs": [
+      "Numbers 10",
+      "Numbers 11",
+      "Numbers 12",
+      "Deuteronomy 1"
+    ],
+    "summary": "Israel breaks camp at Sinai and travels via Taberah, Kibroth-hattaavah and Hazeroth through the wilderness of Paran to Kadesh.",
+    "stops": [
+      {
+        "placeId": "sinai",
+        "note": "Cloud lifts in the second year"
+      },
+      {
+        "placeId": "paran",
+        "note": "Wilderness of Paran"
+      },
+      {
+        "placeId": "kadesh_barnea",
+        "note": "Kadesh-barnea, eleven days from Horeb"
+      }
+    ],
+    "pathHints": "South Sinai NE through the Hazeroth (Ain Hudra) corridor and the Paran plateau to Kadesh. Intermediate stations unlocated."
+  },
+  {
+    "id": "twelve_spies",
+    "name": "The Twelve Spies",
+    "aliases": [
+      "spies",
+      "Caleb",
+      "Joshua",
+      "Eshcol"
+    ],
+    "scriptureRefs": [
+      "Numbers 13",
+      "Numbers 14",
+      "Deuteronomy 1"
+    ],
+    "summary": "Twelve spies go from the wilderness of Paran/Kadesh through Zin and the Negeb to Hebron and as far as Rehob near Lebo-hamath; they return with grapes from Eshcol and a bad report.",
+    "stops": [
+      {
+        "placeId": "kadesh_barnea",
+        "note": "Sent out / return"
+      },
+      {
+        "placeId": "wilderness_zin",
+        "note": "Start of the reconnaissance"
+      },
+      {
+        "placeId": "negeb",
+        "note": "Up into the Negeb"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Anakim; Valley of Eshcol nearby"
+      },
+      {
+        "placeId": "lebo_hamath",
+        "note": "Northern limit near Rehob"
+      },
+      {
+        "placeId": "kadesh_barnea",
+        "note": "Report after 40 days"
+      }
+    ],
+    "pathHints": "Kadesh north along the ridge route to Hebron and on to the Beqaa (Lebo-hamath), returning the same way."
+  },
+  {
+    "id": "kadesh_to_moab",
+    "name": "From Kadesh to the Plains of Moab",
+    "aliases": [
+      "Edom",
+      "bronze serpent",
+      "Sihon",
+      "Og"
+    ],
+    "scriptureRefs": [
+      "Numbers 20",
+      "Numbers 21",
+      "Numbers 22:1"
+    ],
+    "summary": "Edom refuses passage; Aaron dies at Mount Hor; Israel goes around Edom by the Red Sea road, crosses the Zered and Arnon, defeats Sihon and Og, and camps on the plains of Moab.",
+    "stops": [
+      {
+        "placeId": "kadesh_barnea",
+        "note": "Edom refuses passage"
+      },
+      {
+        "placeId": "arad",
+        "note": "King of Arad attacks; Hormah"
+      },
+      {
+        "placeId": "ezion_geber",
+        "note": "Red Sea road around Edom"
+      },
+      {
+        "placeId": "punon",
+        "note": "Bronze serpent tradition (Num 33:42)"
+      },
+      {
+        "placeId": "zered",
+        "note": "Camp in the Valley of Zered"
+      },
+      {
+        "placeId": "arnon",
+        "note": "Border of Moab"
+      },
+      {
+        "placeId": "heshbon",
+        "note": "Sihon defeated"
+      },
+      {
+        "placeId": "edrei",
+        "note": "Og defeated"
+      },
+      {
+        "placeId": "moab_plains",
+        "note": "Camp opposite Jericho"
+      }
+    ],
+    "pathHints": "Kadesh → (Mount Hor) → south down the Arabah to the Gulf of Aqaba → north along the desert edge east of Edom/Moab → Heshbon; Bashan sortie to Edrei."
+  },
+  {
+    "id": "transjordan_conquest",
+    "name": "Defeat of Sihon and Og",
+    "aliases": [
+      "Sihon",
+      "Og",
+      "Amorites"
+    ],
+    "scriptureRefs": [
+      "Numbers 21",
+      "Deuteronomy 2",
+      "Deuteronomy 3"
+    ],
+    "summary": "Israel defeats Sihon king of Heshbon at Jahaz and Og king of Bashan at Edrei, taking the land from the Arnon to Mount Hermon.",
+    "stops": [
+      {
+        "placeId": "arnon",
+        "note": "Southern boundary"
+      },
+      {
+        "placeId": "heshbon",
+        "note": "Sihon's capital"
+      },
+      {
+        "placeId": "gilead",
+        "note": "Land as far as the Jabbok/Gilead"
+      },
+      {
+        "placeId": "bashan",
+        "note": "Og's kingdom"
+      },
+      {
+        "placeId": "edrei",
+        "note": "Battle with Og"
+      },
+      {
+        "placeId": "hermon",
+        "note": "Northern limit"
+      }
+    ],
+    "pathHints": "Arnon north across the Medeba tableland to Heshbon, then north through Gilead into Bashan."
+  },
+  {
+    "id": "balaam_journey",
+    "name": "Balaam and Balak",
+    "aliases": [
+      "Balaam",
+      "Balak"
+    ],
+    "scriptureRefs": [
+      "Numbers 22",
+      "Numbers 23",
+      "Numbers 24"
+    ],
+    "summary": "Balak summons Balaam from Pethor on the Euphrates; Balaam meets Balak on the Arnon border and blesses Israel from Bamoth-baal, Pisgah and Peor.",
+    "stops": [
+      {
+        "placeId": "euphrates",
+        "note": "Balaam's home at Pethor near the River"
+      },
+      {
+        "placeId": "arnon",
+        "note": "City of Moab on the Arnon"
+      },
+      {
+        "placeId": "pisgah",
+        "note": "Field of Zophim on Pisgah"
+      },
+      {
+        "placeId": "moab_plains",
+        "note": "Israel camped below on the plains of Moab"
+      }
+    ],
+    "pathHints": "Long route from the middle Euphrates (Pethor) to Moab; final vantage points overlook the camp at Shittim."
+  },
+  {
+    "id": "moses_final_view",
+    "name": "Moses on Mount Nebo",
+    "aliases": [
+      "Moses",
+      "Nebo",
+      "Pisgah"
+    ],
+    "scriptureRefs": [
+      "Deuteronomy 32",
+      "Deuteronomy 34"
+    ],
+    "summary": "Moses climbs from the plains of Moab to Mount Nebo/Pisgah, views the land from Gilead to the Negeb, dies, and is buried opposite Beth-peor.",
+    "stops": [
+      {
+        "placeId": "moab_plains",
+        "note": "Camp"
+      },
+      {
+        "placeId": "nebo",
+        "note": "Mount Nebo"
+      },
+      {
+        "placeId": "pisgah",
+        "note": "Top of Pisgah"
+      }
+    ],
+    "pathHints": "Short climb; view lines to Gilead, Dan, Naphtali, the western sea, the Negeb and Zoar."
+  },
+  {
+    "id": "jordan_crossing",
+    "name": "Crossing the Jordan",
+    "aliases": [
+      "Joshua",
+      "ark of the covenant",
+      "Rahab"
+    ],
+    "scriptureRefs": [
+      "Joshua 2",
+      "Joshua 3",
+      "Joshua 4",
+      "Joshua 5"
+    ],
+    "summary": "Spies sent from Shittim to Jericho; Israel crosses the Jordan on dry ground as the waters heap up at Adam; twelve stones at Gilgal.",
+    "stops": [
+      {
+        "placeId": "shittim",
+        "note": "Camp at Shittim"
+      },
+      {
+        "placeId": "adam_city",
+        "note": "Waters stand up at Adam"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Crossing opposite Jericho"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Memorial stones; circumcision; Passover"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Plains of Jericho"
+      }
+    ],
+    "pathHints": "East bank (Shittim) west across the Jordan to Gilgal on the eastern edge of Jericho."
+  },
+  {
+    "id": "jericho_ai_campaign",
+    "name": "Jericho and Ai",
+    "aliases": [
+      "Joshua",
+      "Achan",
+      "Rahab"
+    ],
+    "scriptureRefs": [
+      "Joshua 6",
+      "Joshua 7",
+      "Joshua 8"
+    ],
+    "summary": "Jericho falls; defeat and then victory at Ai near Bethel; covenant renewal at Mount Ebal and Mount Gerizim.",
+    "stops": [
+      {
+        "placeId": "gilgal",
+        "note": "Base camp"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Walls fall"
+      },
+      {
+        "placeId": "ai",
+        "note": "Defeat, then ambush"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Ambush between Bethel and Ai"
+      },
+      {
+        "placeId": "ebal",
+        "note": "Altar on Mount Ebal"
+      },
+      {
+        "placeId": "gerizim",
+        "note": "Blessings read"
+      }
+    ],
+    "pathHints": "Jericho west up the Wadi Qelt/ascent to the Ai–Bethel plateau, then north along the ridge to Shechem's mountains."
+  },
+  {
+    "id": "southern_campaign",
+    "name": "Joshua's Southern Campaign",
+    "aliases": [
+      "Joshua",
+      "Gibeonites",
+      "Adoni-zedek"
+    ],
+    "scriptureRefs": [
+      "Joshua 9",
+      "Joshua 10"
+    ],
+    "summary": "After the Gibeonite treaty, Joshua marches from Gilgal by night, routs five Amorite kings at Gibeon, pursues via Beth-horon to Azekah and Makkedah, then takes Libnah, Lachish, Gezer's army, Eglon, Hebron and Debir.",
+    "stops": [
+      {
+        "placeId": "gilgal",
+        "note": "Gibeonite envoys; night march"
+      },
+      {
+        "placeId": "gibeon",
+        "note": "Sun stands still"
+      },
+      {
+        "placeId": "beth_horon",
+        "note": "Rout down the descent"
+      },
+      {
+        "placeId": "aijalon",
+        "note": "Moon over the valley"
+      },
+      {
+        "placeId": "azekah",
+        "note": "Hailstones"
+      },
+      {
+        "placeId": "lachish",
+        "note": "Taken on the second day"
+      },
+      {
+        "placeId": "gezer",
+        "note": "Horam's army destroyed"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Taken"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Return to camp"
+      }
+    ],
+    "pathHints": "Up from the Jordan valley to the Gibeon plateau, down the Beth-horon pass into the Shephelah, south through the lowland, east up to Hebron, back to Gilgal. Makkedah, Libnah, Eglon and Debir unlocated."
+  },
+  {
+    "id": "northern_campaign",
+    "name": "Joshua's Northern Campaign",
+    "aliases": [
+      "Joshua",
+      "Jabin",
+      "Merom"
+    ],
+    "scriptureRefs": [
+      "Joshua 11"
+    ],
+    "summary": "Jabin of Hazor leads a northern coalition to the waters of Merom; Joshua routs them, pursues to Great Sidon, and burns Hazor.",
+    "stops": [
+      {
+        "placeId": "gilgal",
+        "note": "Departure"
+      },
+      {
+        "placeId": "hazor",
+        "note": "Jabin's coalition; Hazor burned"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Pursuit to Great Sidon"
+      }
+    ],
+    "pathHints": "Long march north up the Jordan valley to Upper Galilee (Merom unlocated), pursuit NW to the Phoenician coast."
+  },
+  {
+    "id": "judah_simeon_campaign",
+    "name": "Judah and Simeon's Campaign",
+    "aliases": [
+      "Judah",
+      "Simeon",
+      "Adoni-bezek",
+      "Caleb",
+      "Othniel"
+    ],
+    "scriptureRefs": [
+      "Judges 1"
+    ],
+    "summary": "Judah and Simeon defeat Adoni-bezek, take Jerusalem, Hebron and Debir, Zephath/Hormah, and the Philistine coast towns.",
+    "stops": [
+      {
+        "placeId": "bezek",
+        "note": "Adoni-bezek defeated"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Taken and burned"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Sheshai, Ahiman, Talmai defeated"
+      },
+      {
+        "placeId": "arad",
+        "note": "Kenites settle near Arad"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Gaza, Ashkelon, Ekron taken"
+      }
+    ],
+    "pathHints": "Schematic: hill country south to the Negeb and west to the coast."
+  },
+  {
+    "id": "ehud_eglon",
+    "name": "Ehud and Eglon",
+    "aliases": [
+      "Ehud",
+      "Eglon"
+    ],
+    "scriptureRefs": [
+      "Judges 3"
+    ],
+    "summary": "Ehud brings tribute to Eglon of Moab at the City of Palms (Jericho), kills him, escapes past the idols near Gilgal to Seirah, rallies Ephraim, and seizes the Jordan fords.",
+    "stops": [
+      {
+        "placeId": "jericho",
+        "note": "Eglon's seat at the City of Palms"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Idols near Gilgal"
+      },
+      {
+        "placeId": "hill_country_ephraim",
+        "note": "Trumpet blown"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Fords seized against Moab"
+      }
+    ],
+    "pathHints": "Jericho oasis → Gilgal → up into Ephraim's hills → back down to the fords."
+  },
+  {
+    "id": "deborah_barak",
+    "name": "Deborah and Barak",
+    "aliases": [
+      "Deborah",
+      "Barak",
+      "Sisera",
+      "Jael"
+    ],
+    "scriptureRefs": [
+      "Judges 4",
+      "Judges 5"
+    ],
+    "summary": "Deborah summons Barak from Kedesh; he musters at Mount Tabor and routs Sisera at the Kishon near Taanach and Megiddo; Sisera flees and is killed by Jael.",
+    "stops": [
+      {
+        "placeId": "ramah",
+        "note": "Deborah's palm between Ramah and Bethel"
+      },
+      {
+        "placeId": "kedesh",
+        "note": "Barak summoned"
+      },
+      {
+        "placeId": "tabor",
+        "note": "Muster of 10,000"
+      },
+      {
+        "placeId": "kishon",
+        "note": "Sisera's chariots swept away"
+      },
+      {
+        "placeId": "taanach",
+        "note": "Battle by Taanach"
+      },
+      {
+        "placeId": "megiddo",
+        "note": "By the waters of Megiddo"
+      },
+      {
+        "placeId": "hazor",
+        "note": "Jabin's seat"
+      }
+    ],
+    "pathHints": "Ephraim hill country → north to Kedesh → Mount Tabor → down into the Jezreel valley along the Kishon."
+  },
+  {
+    "id": "jephthah_ammon",
+    "name": "Jephthah against Ammon",
+    "aliases": [
+      "Jephthah",
+      "Ammonites"
+    ],
+    "scriptureRefs": [
+      "Judges 11",
+      "Judges 12"
+    ],
+    "summary": "Jephthah is recalled from Tob to Mizpah of Gilead, defeats the Ammonites from Aroer to Minnith and Abel-keramim, then fights Ephraim at the Jordan fords.",
+    "stops": [
+      {
+        "placeId": "gilead",
+        "note": "Gilead's elders recall Jephthah"
+      },
+      {
+        "placeId": "ammon",
+        "note": "Ammonite campaign"
+      },
+      {
+        "placeId": "aroer_arnon",
+        "note": "Aroer; 300-year claim"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Shibboleth at the fords"
+      }
+    ],
+    "pathHints": "Schematic: Tob, Mizpah of Gilead, Minnith and Abel-keramim are unlocated."
+  },
+  {
+    "id": "samson_exploits",
+    "name": "Samson's Exploits",
+    "aliases": [
+      "Samson",
+      "Delilah",
+      "Philistines"
+    ],
+    "scriptureRefs": [
+      "Judges 13",
+      "Judges 14",
+      "Judges 15",
+      "Judges 16"
+    ],
+    "summary": "Samson of Zorah marries at Timnah, strikes Ashkelon, hides at Etam, fights at Lehi, carries Gaza's gates toward Hebron, is betrayed in the Valley of Sorek, and dies at Gaza.",
+    "stops": [
+      {
+        "placeId": "zorah",
+        "note": "Birthplace; Spirit stirs him"
+      },
+      {
+        "placeId": "timnah",
+        "note": "Philistine wife; lion"
+      },
+      {
+        "placeId": "ashkelon",
+        "note": "Kills 30 men"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Carries off the gates"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Gates set on the hill facing Hebron"
+      },
+      {
+        "placeId": "valley_of_sorek",
+        "note": "Delilah"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Blinded; Dagon's temple falls"
+      },
+      {
+        "placeId": "zorah",
+        "note": "Buried between Zorah and Eshtaol"
+      }
+    ],
+    "pathHints": "Sorek valley ↔ Philistine plain; long haul from Gaza up to Hebron. Etam and Lehi unlocated."
+  },
+  {
+    "id": "danite_migration",
+    "name": "Migration of Dan",
+    "aliases": [
+      "Danites",
+      "Micah",
+      "Laish"
+    ],
+    "scriptureRefs": [
+      "Judges 17",
+      "Judges 18"
+    ],
+    "summary": "Danite scouts from Zorah and Eshtaol pass Micah's house in Ephraim, find Laish; 600 warriors camp at Kiriath-jearim (Mahaneh-dan), take Micah's idol and Levite, and capture Laish, renaming it Dan.",
+    "stops": [
+      {
+        "placeId": "zorah",
+        "note": "Scouts sent"
+      },
+      {
+        "placeId": "eshtaol",
+        "note": "With Zorah"
+      },
+      {
+        "placeId": "kiriath_jearim",
+        "note": "Camp at Mahaneh-dan"
+      },
+      {
+        "placeId": "hill_country_ephraim",
+        "note": "Micah's shrine"
+      },
+      {
+        "placeId": "dan",
+        "note": "Laish taken and renamed Dan"
+      }
+    ],
+    "pathHints": "Shephelah north through the central hills and the Jordan rift to the Huleh basin."
+  },
+  {
+    "id": "levite_concubine",
+    "name": "The Levite's Concubine and the Benjamite War",
+    "aliases": [
+      "Levite",
+      "Gibeah",
+      "Benjamin"
+    ],
+    "scriptureRefs": [
+      "Judges 19",
+      "Judges 20"
+    ],
+    "summary": "A Levite from Ephraim fetches his concubine from Bethlehem, passes Jebus, lodges at Gibeah where she is abused; Israel assembles at Mizpah and fights Benjamin.",
+    "stops": [
+      {
+        "placeId": "hill_country_ephraim",
+        "note": "Levite's home"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "Father-in-law's house"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Passes Jebus"
+      },
+      {
+        "placeId": "gibeah",
+        "note": "Outrage; later destroyed"
+      },
+      {
+        "placeId": "mizpah",
+        "note": "Assembly of Israel"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Israel inquires of the LORD"
+      }
+    ],
+    "pathHints": "North–south ridge route Bethlehem → Jebus → Gibeah → Ephraim."
+  },
+  {
+    "id": "benjamin_wives",
+    "name": "Wives for Benjamin",
+    "aliases": [
+      "Benjamin",
+      "Jabesh-gilead",
+      "daughters of Shiloh"
+    ],
+    "scriptureRefs": [
+      "Judges 21"
+    ],
+    "summary": "Israel's oath at Mizpah; wives taken from Jabesh-gilead and the daughters of Shiloh (south of Lebonah, east of the Bethel–Shechem highway).",
+    "stops": [
+      {
+        "placeId": "mizpah",
+        "note": "Oath"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Weeping before God"
+      },
+      {
+        "placeId": "shiloh",
+        "note": "Feast; daughters seized"
+      },
+      {
+        "placeId": "lebonah",
+        "note": "Shiloh lies south of Lebonah"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Highway from Bethel to Shechem"
+      }
+    ],
+    "pathHints": "Central ridge highway Bethel → Shiloh → Shechem; Jabesh-gilead raid across the Jordan (unlocated)."
+  },
+  {
+    "id": "hannah_shiloh_pilgrimage",
+    "name": "Elkanah and Hannah's Pilgrimage to Shiloh",
+    "aliases": [
+      "Hannah",
+      "Elkanah"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 1",
+      "1 Samuel 2:11–21"
+    ],
+    "summary": "Elkanah's family goes up yearly from Ramathaim to worship at Shiloh; Hannah prays, then returns to dedicate Samuel to Eli.",
+    "stops": [
+      {
+        "placeId": "ramah",
+        "note": "Home at Ramathaim-zophim"
+      },
+      {
+        "placeId": "shiloh",
+        "note": "Yearly sacrifice; Hannah's vow; Samuel left with Eli"
+      },
+      {
+        "placeId": "ramah",
+        "note": "Return home"
+      }
+    ],
+    "pathHints": "Short highland round trip north along the Benjamin/Ephraim ridge."
+  },
+  {
+    "id": "ark_captured_philistia",
+    "name": "The Ark Captured and Carried through Philistia",
+    "aliases": [
+      "ark of God",
+      "ark of the LORD",
+      "Dagon"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 4",
+      "1 Samuel 5"
+    ],
+    "summary": "Israel camps at Ebenezer against the Philistines at Aphek, brings the ark from Shiloh, loses it, and the ark is moved from Ashdod to Gath to Ekron as plagues follow.",
+    "stops": [
+      {
+        "placeId": "shiloh",
+        "note": "Ark fetched from the sanctuary"
+      },
+      {
+        "placeId": "ebenezer",
+        "note": "Israel's camp; ark captured"
+      },
+      {
+        "placeId": "aphek_sharon",
+        "note": "Philistine camp"
+      },
+      {
+        "placeId": "ashdod",
+        "note": "Dagon's temple; idol falls"
+      },
+      {
+        "placeId": "gath",
+        "note": "Ark moved; tumors"
+      },
+      {
+        "placeId": "ekron",
+        "note": "Ekronites cry out"
+      }
+    ],
+    "pathHints": "Highlands west to the Aphek springs, then south through the Philistine plain."
+  },
+  {
+    "id": "ark_return_beth_shemesh",
+    "name": "The Ark Returns: Ekron to Kiriath-jearim",
+    "aliases": [
+      "ark of the LORD",
+      "new cart",
+      "milk cows"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 6",
+      "1 Samuel 7:1–2"
+    ],
+    "summary": "Cows pull the ark on a new cart from Philistia up the Sorek valley to Beth-shemesh; after judgment there it is taken to Kiriath-jearim for twenty years.",
+    "stops": [
+      {
+        "placeId": "ekron",
+        "note": "Philistine lords send the ark away"
+      },
+      {
+        "placeId": "beth_shemesh",
+        "note": "Reapers rejoice; men struck for looking in"
+      },
+      {
+        "placeId": "kiriath_jearim",
+        "note": "Housed with Abinadab 20 years"
+      }
+    ],
+    "pathHints": "East up the Sorek valley, then NE into the hills of Judah."
+  },
+  {
+    "id": "samuel_circuit",
+    "name": "Samuel's Annual Circuit",
+    "aliases": [
+      "Samuel judged Israel",
+      "circuit"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 7:15–17"
+    ],
+    "summary": "Samuel judges Israel year by year on a circuit of Bethel, Gilgal, and Mizpah, returning home to Ramah.",
+    "stops": [
+      {
+        "placeId": "ramah",
+        "note": "Home and altar"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Circuit"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Circuit"
+      },
+      {
+        "placeId": "mizpah",
+        "note": "Circuit; site of the victory"
+      },
+      {
+        "placeId": "ramah",
+        "note": "Return home"
+      }
+    ],
+    "pathHints": "Tight Benjaminite loop with a descent to Gilgal near Jericho."
+  },
+  {
+    "id": "saul_jabesh_gilead_rescue",
+    "name": "Saul Rescues Jabesh-gilead",
+    "aliases": [
+      "Nahash",
+      "Jabesh"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 11"
+    ],
+    "summary": "Messengers reach Saul at Gibeah; he musters Israel at Bezek, crosses the Jordan by night, routs Nahash, and the kingdom is renewed at Gilgal.",
+    "stops": [
+      {
+        "placeId": "gibeah",
+        "note": "Saul hears the news while ploughing"
+      },
+      {
+        "placeId": "bezek",
+        "note": "Muster of 330,000"
+      },
+      {
+        "placeId": "jabesh_gilead",
+        "note": "Dawn attack on the Ammonites"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Kingship renewed"
+      }
+    ],
+    "pathHints": "North down to the Jordan valley at Bezek, across the river east, then back to Gilgal."
+  },
+  {
+    "id": "saul_michmash_campaign",
+    "name": "Saul and Jonathan at Michmash",
+    "aliases": [
+      "Jonathan",
+      "armor-bearer",
+      "Bozez",
+      "Seneh"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 13",
+      "1 Samuel 14"
+    ],
+    "summary": "Jonathan strikes the garrison at Geba; Philistines camp at Michmash; Saul waits at Gilgal, returns to Geba; Jonathan climbs to the Philistine post and Israel pursues past Beth-aven to Aijalon.",
+    "stops": [
+      {
+        "placeId": "michmash",
+        "note": "Saul's first camp, then Philistine camp"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Saul waits for Samuel; rebuked"
+      },
+      {
+        "placeId": "geba",
+        "note": "Saul and Jonathan opposite Michmash"
+      },
+      {
+        "placeId": "michmash",
+        "note": "Jonathan's cliff assault"
+      },
+      {
+        "placeId": "beth_aven",
+        "note": "Battle passes beyond Beth-aven"
+      },
+      {
+        "placeId": "aijalon",
+        "note": "Pursuit ends at Aijalon"
+      }
+    ],
+    "pathHints": "Wadi Suweinit pass between Geba and Michmash, then west down to the Aijalon valley."
+  },
+  {
+    "id": "saul_amalek_campaign",
+    "name": "Saul's Campaign against Amalek",
+    "aliases": [
+      "Agag",
+      "Amalekites"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 15"
+    ],
+    "summary": "Saul strikes Amalek from Havilah to Shur, spares Agag, sets up a monument at Carmel, and is rejected at Gilgal; Samuel goes to Ramah, Saul to Gibeah.",
+    "stops": [
+      {
+        "placeId": "amalek",
+        "note": "City of Amalek / muster at Telaim"
+      },
+      {
+        "placeId": "shur",
+        "note": "Pursuit toward Shur, east of Egypt"
+      },
+      {
+        "placeId": "carmel_judah",
+        "note": "Saul's monument"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Samuel rejects Saul; Agag killed"
+      },
+      {
+        "placeId": "ramah",
+        "note": "Samuel goes home"
+      },
+      {
+        "placeId": "gibeah",
+        "note": "Saul goes home"
+      }
+    ],
+    "pathHints": "Negev sweep toward NW Sinai, then back north through Judah to the Jordan valley."
+  },
+  {
+    "id": "samuel_anoints_david",
+    "name": "Samuel Anoints David at Bethlehem",
+    "aliases": [
+      "Jesse",
+      "anointed David"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 16:1–13"
+    ],
+    "summary": "Samuel travels from Ramah to Bethlehem, anoints David among Jesse's sons, and returns to Ramah.",
+    "stops": [
+      {
+        "placeId": "ramah",
+        "note": "Samuel sets out"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "David anointed"
+      },
+      {
+        "placeId": "ramah",
+        "note": "Samuel returns"
+      }
+    ],
+    "pathHints": "Short ridge-road trip south past Jerusalem."
+  },
+  {
+    "id": "david_goliath_elah",
+    "name": "David and Goliath in the Valley of Elah",
+    "aliases": [
+      "Goliath",
+      "Philistine"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 17"
+    ],
+    "summary": "David brings food from Bethlehem to the battle line at Elah between Socoh and Azekah, kills Goliath, and Israel pursues to Gath and Ekron; Goliath's head is taken to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "bethlehem",
+        "note": "Jesse sends David"
+      },
+      {
+        "placeId": "valley_of_elah",
+        "note": "Duel with Goliath"
+      },
+      {
+        "placeId": "gath",
+        "note": "Pursuit to Gath"
+      },
+      {
+        "placeId": "ekron",
+        "note": "Pursuit to the gates of Ekron"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Goliath's head brought"
+      }
+    ],
+    "pathHints": "West from the hill country down the Elah valley into the Philistine plain."
+  },
+  {
+    "id": "david_wilderness_years",
+    "name": "David in the Judean Wilderness",
+    "aliases": [
+      "Ziphites",
+      "Keilah",
+      "Nabal",
+      "Abigail",
+      "Hachilah",
+      "Wildgoats' Rocks",
+      "Crags of the Wild Goats",
+      "corner of Saul's robe"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 23",
+      "1 Samuel 24",
+      "1 Samuel 25",
+      "1 Samuel 26"
+    ],
+    "summary": "David saves Keilah, then dodges Saul through the wildernesses of Ziph and Maon, spares him in a cave at En-gedi, meets Abigail at Carmel, and spares him again at the hill of Hachilah.",
+    "stops": [
+      {
+        "placeId": "keilah",
+        "note": "Rescued from the Philistines"
+      },
+      {
+        "placeId": "ziph",
+        "note": "Horesh; Jonathan's visit"
+      },
+      {
+        "placeId": "maon",
+        "note": "Rock of Escape"
+      },
+      {
+        "placeId": "en_gedi",
+        "note": "Spares Saul in the cave"
+      },
+      {
+        "placeId": "paran",
+        "note": "Withdraws after Samuel's death"
+      },
+      {
+        "placeId": "carmel_judah",
+        "note": "Nabal and Abigail"
+      },
+      {
+        "placeId": "ziph",
+        "note": "Hill of Hachilah; takes Saul's spear"
+      }
+    ],
+    "pathHints": "Zig-zag across the Judean desert fringe between the Shephelah and the Dead Sea."
+  },
+  {
+    "id": "david_ziklag_years",
+    "name": "David among the Philistines (Ziklag)",
+    "aliases": [
+      "Achish",
+      "Ziklag",
+      "Amalekites"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 27",
+      "1 Samuel 29",
+      "1 Samuel 30",
+      "1 Chronicles 12:1–22"
+    ],
+    "summary": "David serves Achish of Gath, receives Ziklag, raids toward Shur, marches with the Philistines to Aphek, is sent home, finds Ziklag burned, and pursues the Amalekites across the Besor.",
+    "stops": [
+      {
+        "placeId": "gath",
+        "note": "Takes service with Achish"
+      },
+      {
+        "placeId": "ziklag",
+        "note": "Base for 16 months"
+      },
+      {
+        "placeId": "shur",
+        "note": "Raids toward Shur and Egypt"
+      },
+      {
+        "placeId": "aphek_sharon",
+        "note": "Philistine muster; David dismissed"
+      },
+      {
+        "placeId": "ziklag",
+        "note": "Finds the town burned"
+      },
+      {
+        "placeId": "besor",
+        "note": "200 men stay behind"
+      },
+      {
+        "placeId": "amalek",
+        "note": "Recovers families and spoil"
+      },
+      {
+        "placeId": "ziklag",
+        "note": "Spoil sent to Judah's towns"
+      }
+    ],
+    "pathHints": "Southern Philistine plain and Negev, with a long march north to Aphek and back."
+  },
+  {
+    "id": "philistine_advance_jezreel",
+    "name": "Philistines March to Jezreel",
+    "aliases": [
+      "Philistines gathered",
+      "Shunem"
+    ],
+    "scriptureRefs": [
+      "1 Samuel 28:4",
+      "1 Samuel 29:1",
+      "1 Samuel 29:11"
+    ],
+    "summary": "The Philistine army musters at Aphek, then moves up the coast to the Jezreel Valley and camps at Shunem facing Saul on Gilboa.",
+    "stops": [
+      {
+        "placeId": "aphek_sharon",
+        "note": "Muster of the Philistine lords"
+      },
+      {
+        "placeId": "jezreel",
+        "note": "Philistines go up to Jezreel"
+      },
+      {
+        "placeId": "shunem",
+        "note": "Philistine camp"
+      }
+    ],
+    "pathHints": "North along the Via Maris then east into the Jezreel Valley."
+  },
+  {
+    "id": "david_to_hebron",
+    "name": "David Hears of Saul's Death and Goes to Hebron",
+    "aliases": [
+      "Amalekite",
+      "Song of the Bow",
+      "anointed David king"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 1",
+      "2 Samuel 2:1–4"
+    ],
+    "summary": "An Amalekite brings Saul's crown from Gilboa to Ziklag; David laments, then goes up to Hebron and is anointed king of Judah.",
+    "stops": [
+      {
+        "placeId": "gilboa",
+        "note": "Saul's crown taken"
+      },
+      {
+        "placeId": "ziklag",
+        "note": "News reaches David"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Anointed king over Judah"
+      }
+    ],
+    "pathHints": "Long run south from the Jezreel Valley; then NE from the Negev into the Judean hills."
+  },
+  {
+    "id": "abner_gibeon_campaign",
+    "name": "Abner and Joab at the Pool of Gibeon",
+    "aliases": [
+      "Abner",
+      "Asahel",
+      "Ish-bosheth"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 2:8–32"
+    ],
+    "summary": "Abner crowns Ish-bosheth at Mahanaim, marches to Gibeon, loses the battle at the pool, kills Asahel, and retreats through the Arabah; Joab buries Asahel at Bethlehem and marches all night to Hebron.",
+    "stops": [
+      {
+        "placeId": "mahanaim",
+        "note": "Ish-bosheth's capital"
+      },
+      {
+        "placeId": "gibeon",
+        "note": "Contest at the pool; Asahel killed"
+      },
+      {
+        "placeId": "arabah",
+        "note": "Abner's night march down the Jordan valley"
+      },
+      {
+        "placeId": "mahanaim",
+        "note": "Abner returns"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "Joab buries Asahel"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Joab arrives at daybreak"
+      }
+    ],
+    "pathHints": "Transjordan to Benjamin and back; Joab's arm runs south along the ridge."
+  },
+  {
+    "id": "abner_to_hebron",
+    "name": "Abner Defects to David at Hebron",
+    "aliases": [
+      "Abner",
+      "Michal",
+      "Paltiel"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 3"
+    ],
+    "summary": "Abner brings Michal (Paltiel weeping behind to Bahurim) and negotiates in Hebron, then is murdered by Joab at the gate.",
+    "stops": [
+      {
+        "placeId": "mahanaim",
+        "note": "Abner breaks with Ish-bosheth"
+      },
+      {
+        "placeId": "bahurim",
+        "note": "Paltiel turned back"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Covenant feast; Abner killed by Joab"
+      }
+    ],
+    "pathHints": "Jordan crossing, up past Jerusalem, south along the ridge to Hebron."
+  },
+  {
+    "id": "ishbosheth_murder",
+    "name": "Ish-bosheth's Assassins Go to Hebron",
+    "aliases": [
+      "Ish-bosheth",
+      "Rechab",
+      "Baanah"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 4"
+    ],
+    "summary": "Rechab and Baanah of Beeroth kill Ish-bosheth at noon, travel all night by the Arabah, and bring his head to David, who executes them.",
+    "stops": [
+      {
+        "placeId": "beeroth",
+        "note": "Assassins' home town"
+      },
+      {
+        "placeId": "mahanaim",
+        "note": "Ish-bosheth killed in his bed"
+      },
+      {
+        "placeId": "arabah",
+        "note": "All-night journey"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Executed by David's order"
+      }
+    ],
+    "pathHints": "Down the Jordan valley, then up through the Judean hills."
+  },
+  {
+    "id": "david_takes_jerusalem",
+    "name": "David Takes Jerusalem",
+    "aliases": [
+      "Jebusites",
+      "stronghold of Zion",
+      "water shaft"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 5:1–10",
+      "1 Chronicles 11:1–9"
+    ],
+    "summary": "All Israel anoints David at Hebron; he marches on Jebus, captures the stronghold of Zion, and makes it the City of David.",
+    "stops": [
+      {
+        "placeId": "hebron",
+        "note": "Anointed over all Israel"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Stronghold of Zion taken"
+      }
+    ],
+    "pathHints": "North along the ridge road."
+  },
+  {
+    "id": "david_philistines_rephaim",
+    "name": "David Defeats the Philistines in the Valley of Rephaim",
+    "aliases": [
+      "Baal-perazim",
+      "balsam trees"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 5:17–25",
+      "1 Chronicles 14:8–17"
+    ],
+    "summary": "Philistines spread out in the Valley of Rephaim; David attacks at Baal-perazim, then circles behind them and strikes from Geba (Gibeon in Chronicles) to Gezer.",
+    "stops": [
+      {
+        "placeId": "adullam",
+        "note": "David goes down to the stronghold"
+      },
+      {
+        "placeId": "valley_of_rephaim",
+        "note": "Philistine raids"
+      },
+      {
+        "placeId": "baal_perazim",
+        "note": "First breakthrough"
+      },
+      {
+        "placeId": "geba",
+        "note": "Pursuit from Geba (Gibeon in 1 Chr 14:16)"
+      },
+      {
+        "placeId": "gezer",
+        "note": "Pursuit ends at Gezer"
+      }
+    ],
+    "pathHints": "SW Jerusalem, then a sweep north-west down to the coastal plain."
+  },
+  {
+    "id": "ark_to_jerusalem",
+    "name": "David Brings the Ark to Jerusalem",
+    "aliases": [
+      "ark of God",
+      "Uzzah",
+      "Obed-edom",
+      "Michal"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 6",
+      "1 Chronicles 13",
+      "1 Chronicles 15",
+      "1 Chronicles 16"
+    ],
+    "summary": "David brings the ark from Baale-judah (Kiriath-jearim) on a cart; Uzzah dies at Nacon's threshing floor; the ark stays three months with Obed-edom, then is carried up to the City of David.",
+    "stops": [
+      {
+        "placeId": "kiriath_jearim",
+        "note": "Ark taken from Abinadab's house"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Nearby: Perez-uzzah and Obed-edom's house; then the tent in the City of David"
+      }
+    ],
+    "pathHints": "Short ascent east along the Kiriath-jearim ridge to Jerusalem."
+  },
+  {
+    "id": "ammonite_war_rabbah",
+    "name": "The Ammonite War and the Siege of Rabbah",
+    "aliases": [
+      "Hanun",
+      "Uriah",
+      "Joab",
+      "Hadadezer"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 10",
+      "2 Samuel 11",
+      "2 Samuel 12:26–31",
+      "1 Chronicles 19",
+      "1 Chronicles 20:1–3"
+    ],
+    "summary": "Hanun shames David's envoys (who wait at Jericho); Ammon hires Arameans; Joab wins at Rabbah, David defeats Hadadezer at Helam, Joab besieges Rabbah, Uriah dies, and David takes the city.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Envoys sent; David stays home"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Shamed envoys wait"
+      },
+      {
+        "placeId": "rabbah",
+        "note": "Joab's first battle"
+      },
+      {
+        "placeId": "helam",
+        "note": "David defeats the Arameans"
+      },
+      {
+        "placeId": "rabbah",
+        "note": "Siege; Uriah killed"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "David returns with the crown"
+      }
+    ],
+    "pathHints": "Descent to Jericho, across the Jordan up to the Ammonite plateau; north excursion to Helam."
+  },
+  {
+    "id": "absalom_flight_geshur",
+    "name": "Absalom's Flight to Geshur and Return",
+    "aliases": [
+      "Absalom",
+      "Amnon",
+      "Talmai",
+      "woman of Tekoa"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 13:23–39",
+      "2 Samuel 14"
+    ],
+    "summary": "Absalom kills Amnon at the shearing at Baal-hazor, flees three years to Talmai in Geshur; Joab uses the wise woman of Tekoa and brings him back to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "baal_hazor",
+        "note": "Amnon killed"
+      },
+      {
+        "placeId": "geshur",
+        "note": "Three years with Talmai"
+      },
+      {
+        "placeId": "tekoa",
+        "note": "Joab fetches the wise woman"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Absalom returns"
+      }
+    ],
+    "pathHints": "NE across the Jordan to the Golan; return south to Jerusalem."
+  },
+  {
+    "id": "absalom_hebron_revolt",
+    "name": "Absalom's Revolt from Hebron",
+    "aliases": [
+      "Absalom",
+      "Ahithophel"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 15:7–12",
+      "2 Samuel 15:37",
+      "2 Samuel 16:15"
+    ],
+    "summary": "Absalom goes to Hebron on a vow pretext, is proclaimed king, summons Ahithophel from Giloh, and enters Jerusalem.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Absalom asks leave"
+      },
+      {
+        "placeId": "hebron",
+        "note": "Proclaimed king"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Enters the city"
+      }
+    ],
+    "pathHints": "South along the ridge and back."
+  },
+  {
+    "id": "david_flight_mahanaim",
+    "name": "David Flees Absalom to Mahanaim",
+    "aliases": [
+      "Absalom",
+      "Shimei",
+      "Hushai",
+      "Ziba",
+      "Ahimaaz"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 15:13–37",
+      "2 Samuel 16",
+      "2 Samuel 17"
+    ],
+    "summary": "David leaves Jerusalem, crosses the Kidron, weeps up the Mount of Olives, is cursed by Shimei at Bahurim, crosses the Jordan at night, and is supplied at Mahanaim.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "David leaves the palace"
+      },
+      {
+        "placeId": "kidron",
+        "note": "Crosses the brook; ark sent back"
+      },
+      {
+        "placeId": "mount_of_olives",
+        "note": "Ascent weeping; Hushai sent back"
+      },
+      {
+        "placeId": "bahurim",
+        "note": "Shimei curses"
+      },
+      {
+        "placeId": "arabah",
+        "note": "Fords of the wilderness"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Night crossing"
+      },
+      {
+        "placeId": "mahanaim",
+        "note": "Supplied by Shobi, Machir, Barzillai"
+      }
+    ],
+    "pathHints": "East over Olivet, down the desert road to the Jordan, then up into Gilead."
+  },
+  {
+    "id": "battle_forest_ephraim",
+    "name": "Battle of the Forest of Ephraim",
+    "aliases": [
+      "Absalom",
+      "Joab",
+      "Cushite",
+      "Ahimaaz",
+      "oak"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 18"
+    ],
+    "summary": "David's army goes out from Mahanaim; Absalom is caught in an oak and killed; runners race back to David at the gate.",
+    "stops": [
+      {
+        "placeId": "mahanaim",
+        "note": "David waits at the gate"
+      },
+      {
+        "placeId": "forest_of_ephraim",
+        "note": "Absalom killed"
+      },
+      {
+        "placeId": "mahanaim",
+        "note": "Ahimaaz and the Cushite bring news"
+      }
+    ],
+    "pathHints": "Short Gilead forest sortie."
+  },
+  {
+    "id": "david_return_jerusalem",
+    "name": "David Returns to Jerusalem",
+    "aliases": [
+      "Barzillai",
+      "Shimei",
+      "Mephibosheth",
+      "Chimham"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 19"
+    ],
+    "summary": "David crosses back at the Jordan, pardons Shimei, parts from Barzillai, gathers Judah at Gilgal, and returns to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "mahanaim",
+        "note": "Departure"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Crossing; Shimei pardoned; Barzillai parts"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Judah and Israel quarrel"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Return to the palace"
+      }
+    ],
+    "pathHints": "Jordan valley crossing, then the Jericho road up to Jerusalem."
+  },
+  {
+    "id": "sheba_revolt",
+    "name": "Sheba's Revolt and Joab's Pursuit",
+    "aliases": [
+      "Sheba son of Bichri",
+      "Amasa",
+      "wise woman"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 20"
+    ],
+    "summary": "Sheba rallies Israel; Joab kills Amasa at the great stone in Gibeon and pursues Sheba to Abel-beth-maacah, where a wise woman hands over his head.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Joab and Abishai set out"
+      },
+      {
+        "placeId": "gibeon",
+        "note": "Amasa killed at the great stone"
+      },
+      {
+        "placeId": "abel_beth_maacah",
+        "note": "Siege; Sheba's head thrown over the wall"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Joab returns to the king"
+      }
+    ],
+    "pathHints": "Long march north through Israel to the Huleh basin."
+  },
+  {
+    "id": "saul_bones_jabesh",
+    "name": "Saul's Bones Brought Home",
+    "aliases": [
+      "Rizpah",
+      "Gibeonites",
+      "bones of Saul"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 21:1–14"
+    ],
+    "summary": "After the Gibeonite executions and Rizpah's vigil, David fetches Saul's and Jonathan's bones from Jabesh-gilead and buries them in Zela of Benjamin.",
+    "stops": [
+      {
+        "placeId": "gibeon",
+        "note": "Gibeonites demand justice; Rizpah's vigil at Gibeah"
+      },
+      {
+        "placeId": "jabesh_gilead",
+        "note": "Bones collected (once taken from Beth-shan)"
+      },
+      {
+        "placeId": "gibeah",
+        "note": "Buried at Zela in Benjamin (site unknown)"
+      }
+    ],
+    "pathHints": "Benjamin to Gilead and back."
+  },
+  {
+    "id": "mighty_men_well_bethlehem",
+    "name": "Three Mighty Men Fetch Water from Bethlehem",
+    "aliases": [
+      "mighty men",
+      "well of Bethlehem",
+      "Thirty"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 23:13–17",
+      "1 Chronicles 11:15–19"
+    ],
+    "summary": "While Philistines hold Bethlehem and the Valley of Rephaim, three warriors break through from Adullam to bring David water from the gate well.",
+    "stops": [
+      {
+        "placeId": "adullam",
+        "note": "David at the cave/stronghold"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "Philistine garrison; water drawn"
+      },
+      {
+        "placeId": "adullam",
+        "note": "David pours it out to the LORD"
+      }
+    ],
+    "pathHints": "Shephelah up to the Bethlehem ridge and back."
+  },
+  {
+    "id": "david_census",
+    "name": "David's Census",
+    "aliases": [
+      "census",
+      "Araunah",
+      "Ornan",
+      "Joab numbered"
+    ],
+    "scriptureRefs": [
+      "2 Samuel 24",
+      "1 Chronicles 21"
+    ],
+    "summary": "Joab's officers count Israel: across the Jordan at Aroer, to Jazer and Gilead, north to Dan and Sidon and Tyre, then south to Beersheba, returning after nine months; the plague stops at Araunah's threshing floor.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Order given"
+      },
+      {
+        "placeId": "aroer_arnon",
+        "note": "Start across the Jordan"
+      },
+      {
+        "placeId": "jazer",
+        "note": "Toward Gad and Jazer"
+      },
+      {
+        "placeId": "gilead",
+        "note": "Through Gilead"
+      },
+      {
+        "placeId": "dan",
+        "note": "Dan-jaan"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Around toward Sidon"
+      },
+      {
+        "placeId": "tyre",
+        "note": "Fortress of Tyre"
+      },
+      {
+        "placeId": "beersheba",
+        "note": "Negeb of Judah"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Threshing floor of Araunah/Ornan"
+      }
+    ],
+    "pathHints": "Counter-clockwise circuit of the whole land."
+  },
+  {
+    "id": "solomon_anointed_gihon",
+    "name": "Solomon Anointed at Gihon",
+    "aliases": [
+      "Adonijah",
+      "Zadok",
+      "Nathan",
+      "Benaiah",
+      "Gihon"
+    ],
+    "scriptureRefs": [
+      "1 Kings 1"
+    ],
+    "summary": "While Adonijah feasts at En-rogel, Solomon rides David's mule down to Gihon, is anointed, and returns to the throne.",
+    "stops": [
+      {
+        "placeId": "en_rogel",
+        "note": "Adonijah's feast by the Stone of Zoheleth"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Palace"
+      },
+      {
+        "placeId": "gihon",
+        "note": "Solomon anointed"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Solomon enthroned"
+      }
+    ],
+    "pathHints": "Within Jerusalem: Kidron springs below the City of David."
+  },
+  {
+    "id": "abiathar_to_anathoth",
+    "name": "Abiathar Banished to Anathoth",
+    "aliases": [
+      "Abiathar"
+    ],
+    "scriptureRefs": [
+      "1 Kings 2:26–27"
+    ],
+    "summary": "Solomon removes Abiathar from the priesthood and sends him home to Anathoth.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Removed from office"
+      },
+      {
+        "placeId": "anathoth",
+        "note": "Banished to his estate"
+      }
+    ],
+    "pathHints": "Short trip NE over Mount Scopus."
+  },
+  {
+    "id": "shimei_to_gath",
+    "name": "Shimei's Fatal Trip to Gath",
+    "aliases": [
+      "Shimei",
+      "Achish"
+    ],
+    "scriptureRefs": [
+      "1 Kings 2:36–46"
+    ],
+    "summary": "Confined to Jerusalem, Shimei goes to Achish of Gath after runaway slaves, returns, and is executed.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Confined on oath"
+      },
+      {
+        "placeId": "gath",
+        "note": "Retrieves slaves from Achish"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Executed by Benaiah"
+      }
+    ],
+    "pathHints": "West down to the Philistine plain and back."
+  },
+  {
+    "id": "solomon_gibeon",
+    "name": "Solomon's Sacrifice and Dream at Gibeon",
+    "aliases": [
+      "great high place",
+      "wisdom"
+    ],
+    "scriptureRefs": [
+      "1 Kings 3:4–15",
+      "2 Chronicles 1:2–13"
+    ],
+    "summary": "Solomon offers a thousand burnt offerings at the great high place of Gibeon, asks for wisdom in a dream, and returns to Jerusalem before the ark.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Sets out with the assembly"
+      },
+      {
+        "placeId": "gibeon",
+        "note": "Tent of meeting; dream"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Offerings before the ark"
+      }
+    ],
+    "pathHints": "Short NW trip across the Benjamin plateau."
+  },
+  {
+    "id": "hiram_timber_rafts",
+    "name": "Cedar from Lebanon by Sea",
+    "aliases": [
+      "Hiram",
+      "Huram",
+      "cedar",
+      "rafts"
+    ],
+    "scriptureRefs": [
+      "1 Kings 5",
+      "2 Chronicles 2"
+    ],
+    "summary": "Hiram's men and the Gebalites cut cedar and cypress in Lebanon, float them in rafts down the coast to Joppa, and Solomon's men haul them up to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "lebanon",
+        "note": "Cedars felled; Solomon's levy works in shifts"
+      },
+      {
+        "placeId": "gebal",
+        "note": "Gebalite stonecutters"
+      },
+      {
+        "placeId": "tyre",
+        "note": "Hiram's capital; rafts assembled"
+      },
+      {
+        "placeId": "joppa",
+        "note": "Rafts landed (2 Chr 2:16)"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Temple site"
+      }
+    ],
+    "pathHints": "Mountain to coast, south by sea, then inland up the Aijalon/Beth-horon road."
+  },
+  {
+    "id": "temple_bronze_casting",
+    "name": "Temple Bronzes Cast in the Jordan Valley",
+    "aliases": [
+      "Hiram",
+      "bronze",
+      "clay ground"
+    ],
+    "scriptureRefs": [
+      "1 Kings 7:13–47",
+      "2 Chronicles 4:17"
+    ],
+    "summary": "Hiram of Tyre casts the pillars, sea, and vessels in the clay ground between Succoth and Zarethan, then they are brought up to the temple.",
+    "stops": [
+      {
+        "placeId": "tyre",
+        "note": "Hiram the craftsman summoned"
+      },
+      {
+        "placeId": "succoth_jordan",
+        "note": "Clay moulds between Succoth and Zarethan"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Bronzes installed"
+      }
+    ],
+    "pathHints": "Coastal Tyre to the Jordan valley, then up to Jerusalem."
+  },
+  {
+    "id": "solomon_fortified_cities",
+    "name": "Solomon's Building Program and Store Cities",
+    "aliases": [
+      "forced labor",
+      "store cities",
+      "chariot cities"
+    ],
+    "scriptureRefs": [
+      "1 Kings 9:15–19",
+      "2 Chronicles 8:1–6"
+    ],
+    "summary": "Solomon builds the Millo and wall of Jerusalem, Hazor, Megiddo, Gezer, Lower Beth-horon, Baalath, Tamar, and (per Chronicles) conquers Hamath-zobah and builds Tadmor.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Temple, palace, Millo, wall"
+      },
+      {
+        "placeId": "gezer",
+        "note": "Burned by Pharaoh; rebuilt"
+      },
+      {
+        "placeId": "beth_horon",
+        "note": "Lower and Upper Beth-horon"
+      },
+      {
+        "placeId": "baalath",
+        "note": "Store city"
+      },
+      {
+        "placeId": "megiddo",
+        "note": "Chariot city"
+      },
+      {
+        "placeId": "hazor",
+        "note": "Northern fortress"
+      },
+      {
+        "placeId": "hamath",
+        "note": "Hamath-zobah taken; store cities"
+      },
+      {
+        "placeId": "tadmor",
+        "note": "Tadmor in the wilderness"
+      },
+      {
+        "placeId": "tamar_wilderness",
+        "note": "Tamar in the wilderness of Judah"
+      }
+    ],
+    "pathHints": "Teaching tour of the gates: Via Maris forts north, then desert outposts."
+  },
+  {
+    "id": "solomon_horse_trade",
+    "name": "Solomon's Horse and Chariot Trade",
+    "aliases": [
+      "horses",
+      "chariots",
+      "Kue"
+    ],
+    "scriptureRefs": [
+      "1 Kings 10:26–29",
+      "2 Chronicles 1:14–17",
+      "2 Chronicles 9:25–28"
+    ],
+    "summary": "Royal merchants buy horses from Kue and chariots from Egypt, re-exporting to the Hittite and Aramean kings.",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Chariots at 600 shekels"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Chariot cities and Jerusalem"
+      },
+      {
+        "placeId": "kue",
+        "note": "Horses at 150 shekels"
+      },
+      {
+        "placeId": "aram",
+        "note": "Re-export to Aramean and Hittite kings"
+      }
+    ],
+    "pathHints": "Egypt–Jerusalem–Cilicia trade axis along the coast."
+  },
+  {
+    "id": "hadad_flight_egypt",
+    "name": "Hadad the Edomite Flees to Egypt",
+    "aliases": [
+      "Hadad",
+      "Edomite"
+    ],
+    "scriptureRefs": [
+      "1 Kings 11:14–22"
+    ],
+    "summary": "Young Hadad escapes Joab's slaughter in Edom through Midian and Paran to Pharaoh, marries into the court, and returns as Solomon's adversary.",
+    "stops": [
+      {
+        "placeId": "edom",
+        "note": "Escapes the massacre"
+      },
+      {
+        "placeId": "midian",
+        "note": "Through Midian"
+      },
+      {
+        "placeId": "paran",
+        "note": "Men join from Paran"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Received by Pharaoh"
+      },
+      {
+        "placeId": "edom",
+        "note": "Returns as adversary"
+      }
+    ],
+    "pathHints": "Arabah south to Midian, west across Sinai to Egypt."
+  },
+  {
+    "id": "rezon_damascus",
+    "name": "Rezon Seizes Damascus",
+    "aliases": [
+      "Rezon",
+      "Hadadezer"
+    ],
+    "scriptureRefs": [
+      "1 Kings 11:23–25"
+    ],
+    "summary": "Rezon flees Hadadezer of Zobah, gathers a band, and takes Damascus, becoming Solomon's adversary.",
+    "stops": [
+      {
+        "placeId": "zobah",
+        "note": "Flees his master Hadadezer"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Takes the city and reigns"
+      }
+    ],
+    "pathHints": "Beqaa south-east across the Anti-Lebanon."
+  },
+  {
+    "id": "jeroboam_golden_calves",
+    "name": "Jeroboam Fortifies Shechem and Sets Up the Calves",
+    "aliases": [
+      "golden calves",
+      "Jeroboam"
+    ],
+    "scriptureRefs": [
+      "1 Kings 12:25–33"
+    ],
+    "summary": "Jeroboam builds Shechem and Penuel and sets golden calves at Bethel and Dan to stop pilgrimage to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "shechem",
+        "note": "First capital"
+      },
+      {
+        "placeId": "penuel",
+        "note": "Transjordan stronghold"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Southern calf shrine"
+      },
+      {
+        "placeId": "dan",
+        "note": "Northern calf shrine"
+      }
+    ],
+    "pathHints": "Capital east across the Jordan, then the two frontier shrines."
+  },
+  {
+    "id": "asa_ben_hadad_alliance",
+    "name": "Asa Buys Ben-hadad against Baasha",
+    "aliases": [
+      "Ben-hadad",
+      "Baasha",
+      "Asa"
+    ],
+    "scriptureRefs": [
+      "1 Kings 15:16–21",
+      "2 Chronicles 16:1–6"
+    ],
+    "summary": "Baasha fortifies Ramah; Asa sends temple silver to Ben-hadad in Damascus, who strikes Ijon, Dan, Abel-beth-maacah, Chinneroth, and Naphtali; Baasha withdraws to Tirzah.",
+    "stops": [
+      {
+        "placeId": "ramah",
+        "note": "Baasha's blockade fort"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Asa empties the treasuries"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Ben-hadad breaks his treaty with Baasha"
+      },
+      {
+        "placeId": "ijon",
+        "note": "Struck"
+      },
+      {
+        "placeId": "dan",
+        "note": "Struck"
+      },
+      {
+        "placeId": "abel_beth_maacah",
+        "note": "Struck (Abel-maim in Chronicles)"
+      },
+      {
+        "placeId": "galilee_sea",
+        "note": "All Chinneroth"
+      },
+      {
+        "placeId": "naphtali",
+        "note": "All the land of Naphtali"
+      },
+      {
+        "placeId": "tirzah",
+        "note": "Baasha withdraws"
+      }
+    ],
+    "pathHints": "Envoy route Jerusalem→Damascus; Aramean sweep down the Huleh valley."
+  },
+  {
+    "id": "asa_fortifies_geba_mizpah",
+    "name": "Asa Dismantles Ramah and Builds Geba and Mizpah",
+    "aliases": [
+      "Asa",
+      "Ramah"
+    ],
+    "scriptureRefs": [
+      "1 Kings 15:22",
+      "2 Chronicles 16:6"
+    ],
+    "summary": "All Judah carries away Ramah's stones and timber to build Geba and Mizpah.",
+    "stops": [
+      {
+        "placeId": "ramah",
+        "note": "Fort dismantled"
+      },
+      {
+        "placeId": "geba",
+        "note": "Fortified"
+      },
+      {
+        "placeId": "mizpah",
+        "note": "Fortified (cistern later used, Jer 41)"
+      }
+    ],
+    "pathHints": "Short Benjamin border shuffle."
+  },
+  {
+    "id": "zimri_omri_coup",
+    "name": "Coups at Gibbethon and Tirzah; Omri Builds Samaria",
+    "aliases": [
+      "Zimri",
+      "Omri",
+      "Nadab",
+      "Tibni",
+      "Shemer"
+    ],
+    "scriptureRefs": [
+      "1 Kings 15:27",
+      "1 Kings 16"
+    ],
+    "summary": "Baasha kills Nadab at Gibbethon; years later the army there proclaims Omri, who besieges Tirzah where Zimri burns the palace; Omri later buys the hill of Samaria.",
+    "stops": [
+      {
+        "placeId": "gibbethon",
+        "note": "Siege camp; Nadab killed; Omri proclaimed"
+      },
+      {
+        "placeId": "tirzah",
+        "note": "Zimri burns the palace over himself"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Omri buys the hill from Shemer"
+      }
+    ],
+    "pathHints": "Philistine border up into the Ephraim/Manasseh hills."
+  },
+  {
+    "id": "elijah_calls_elisha",
+    "name": "Elijah Leaves Horeb and Calls Elisha",
+    "aliases": [
+      "Elisha",
+      "mantle",
+      "Shaphat",
+      "Hazael",
+      "Jehu"
+    ],
+    "scriptureRefs": [
+      "1 Kings 19:15–21"
+    ],
+    "summary": "Commissioned toward the wilderness of Damascus, Elijah finds Elisha ploughing at Abel-meholah and casts his cloak on him.",
+    "stops": [
+      {
+        "placeId": "sinai",
+        "note": "Commissioned at Horeb"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Wilderness of Damascus (commission to anoint Hazael)"
+      },
+      {
+        "placeId": "abel_meholah",
+        "note": "Elisha called from the plough"
+      }
+    ],
+    "pathHints": "Long trek north from Sinai to the Jordan valley."
+  },
+  {
+    "id": "naboth_vineyard",
+    "name": "Ahab Takes Naboth's Vineyard",
+    "aliases": [
+      "Naboth",
+      "Jezebel",
+      "vineyard"
+    ],
+    "scriptureRefs": [
+      "1 Kings 21"
+    ],
+    "summary": "Ahab sulks in Samaria; Jezebel's letters have Naboth stoned at Jezreel; Ahab goes down to take the vineyard and meets Elijah.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Ahab's palace"
+      },
+      {
+        "placeId": "jezreel",
+        "note": "Naboth's vineyard; Elijah's sentence"
+      }
+    ],
+    "pathHints": "North-east down to the Jezreel valley."
+  },
+  {
+    "id": "ramoth_gilead_campaign",
+    "name": "Ahab and Jehoshaphat at Ramoth-gilead",
+    "aliases": [
+      "Micaiah",
+      "Ramoth-gilead",
+      "Jehoshaphat",
+      "disguise"
+    ],
+    "scriptureRefs": [
+      "1 Kings 22:1–40",
+      "2 Chronicles 18"
+    ],
+    "summary": "Jehoshaphat visits Samaria; Micaiah prophesies defeat; Ahab dies in disguise at Ramoth-gilead and his chariot is washed at the pool of Samaria.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Jehoshaphat sets out"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Prophets at the threshing floor by the gate"
+      },
+      {
+        "placeId": "ramoth_gilead",
+        "note": "Ahab killed by a random arrow"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Ahab buried; dogs lick the blood"
+      }
+    ],
+    "pathHints": "Ridge north to Samaria, east across the Jordan to the Gilead plateau."
+  },
+  {
+    "id": "jehoshaphat_fleet",
+    "name": "Jehoshaphat's Wrecked Fleet at Ezion-geber",
+    "aliases": [
+      "ships of Tarshish",
+      "Ahaziah",
+      "Ezion-geber"
+    ],
+    "scriptureRefs": [
+      "1 Kings 22:48–49",
+      "2 Chronicles 20:35–37"
+    ],
+    "summary": "Jehoshaphat builds ships at Ezion-geber to go to Ophir for gold (to Tarshish per Chronicles), but they are wrecked.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Royal enterprise (with Ahaziah per Chronicles)"
+      },
+      {
+        "placeId": "ezion_geber",
+        "note": "Ships wrecked"
+      },
+      {
+        "placeId": "ophir",
+        "note": "Intended destination"
+      }
+    ],
+    "pathHints": "Down the Arabah to the Gulf of Aqaba."
+  },
+  {
+    "id": "ahaziah_messengers_ekron",
+    "name": "Ahaziah's Messengers to Baal-zebub",
+    "aliases": [
+      "Baal-zebub",
+      "Ahaziah",
+      "lattice"
+    ],
+    "scriptureRefs": [
+      "2 Kings 1"
+    ],
+    "summary": "Injured Ahaziah sends messengers from Samaria to the god of Ekron; Elijah turns them back and later comes down to the king.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Ahaziah falls through the lattice"
+      },
+      {
+        "placeId": "ekron",
+        "note": "Intended oracle of Baal-zebub"
+      }
+    ],
+    "pathHints": "SW through the Shephelah to Philistia (journey interrupted)."
+  },
+  {
+    "id": "elijah_final_journey",
+    "name": "Elijah Taken Up: Gilgal to the Jordan",
+    "aliases": [
+      "whirlwind",
+      "chariot of fire",
+      "sons of the prophets",
+      "mantle"
+    ],
+    "scriptureRefs": [
+      "2 Kings 2:1–14"
+    ],
+    "summary": "Elijah and Elisha go from Gilgal to Bethel to Jericho and cross the Jordan dry-shod; Elijah is taken up by a whirlwind.",
+    "stops": [
+      {
+        "placeId": "gilgal",
+        "note": "Departure (possibly Gilgal near Bethel)"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Sons of the prophets"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Sons of the prophets"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Waters parted; Elijah taken up east of the river"
+      }
+    ],
+    "pathHints": "Highland Bethel then down to the Jordan valley at Jericho."
+  },
+  {
+    "id": "elisha_return_carmel",
+    "name": "Elisha Returns: Jericho, Bethel, Carmel, Samaria",
+    "aliases": [
+      "Elisha",
+      "bald head",
+      "bears",
+      "healed the water"
+    ],
+    "scriptureRefs": [
+      "2 Kings 2:13–25"
+    ],
+    "summary": "Elisha re-crosses the Jordan with Elijah's cloak, heals Jericho's spring, is jeered at Bethel, then goes to Mount Carmel and back to Samaria.",
+    "stops": [
+      {
+        "placeId": "jordan_river",
+        "note": "Strikes the water with the cloak"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Spring healed"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Youths and the she-bears"
+      },
+      {
+        "placeId": "mt_carmel",
+        "note": "Retreat to Carmel"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Returns to Samaria"
+      }
+    ],
+    "pathHints": "Up from the rift to the hill country, then NW to Carmel and back SE."
+  },
+  {
+    "id": "shunammite_to_carmel",
+    "name": "The Shunammite Rides to Elisha at Carmel",
+    "aliases": [
+      "Shunammite",
+      "Gehazi",
+      "staff"
+    ],
+    "scriptureRefs": [
+      "2 Kings 4:8–37"
+    ],
+    "summary": "Her son dies; the Shunammite rides from Shunem to Elisha at Mount Carmel, and Elisha returns with her to raise the boy.",
+    "stops": [
+      {
+        "placeId": "shunem",
+        "note": "Son dies"
+      },
+      {
+        "placeId": "mt_carmel",
+        "note": "She grasps Elisha's feet"
+      },
+      {
+        "placeId": "shunem",
+        "note": "Boy raised"
+      }
+    ],
+    "pathHints": "West across the Jezreel valley and back."
+  },
+  {
+    "id": "baal_shalishah_firstfruits",
+    "name": "Firstfruits from Baal-shalishah",
+    "aliases": [
+      "firstfruits",
+      "twenty loaves",
+      "death in the pot"
+    ],
+    "scriptureRefs": [
+      "2 Kings 4:38–44"
+    ],
+    "summary": "During famine at Gilgal Elisha heals the stew; a man brings firstfruit loaves from Baal-shalishah that feed a hundred.",
+    "stops": [
+      {
+        "placeId": "baal_shalishah",
+        "note": "Bread brought"
+      },
+      {
+        "placeId": "gilgal",
+        "note": "Sons of the prophets fed"
+      }
+    ],
+    "pathHints": "Short trip through the Ephraim hills."
+  },
+  {
+    "id": "naaman_journey",
+    "name": "Naaman's Journey to Elisha",
+    "aliases": [
+      "Naaman",
+      "Gehazi",
+      "seven times",
+      "Abana",
+      "Pharpar"
+    ],
+    "scriptureRefs": [
+      "2 Kings 5"
+    ],
+    "summary": "Naaman travels from Damascus with a letter to the king of Israel, goes to Elisha, washes seven times in the Jordan, and returns with two mule-loads of earth.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Commander of the army of Aram"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Letter to the king; Elisha's house"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Dips seven times; healed"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Returns to Elisha; Gehazi's greed"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Home to worship only the LORD"
+      }
+    ],
+    "pathHints": "SW over the Golan down to Samaria, east to the Jordan, then home."
+  },
+  {
+    "id": "arameans_at_dothan",
+    "name": "Arameans Blinded at Dothan",
+    "aliases": [
+      "horses and chariots of fire",
+      "struck with blindness"
+    ],
+    "scriptureRefs": [
+      "2 Kings 6:8–23"
+    ],
+    "summary": "An Aramean force surrounds Elisha at Dothan; struck blind, it is led into Samaria, fed, and sent home.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "King of Aram plots"
+      },
+      {
+        "placeId": "dothan",
+        "note": "Hills full of fiery chariots"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Led blind into the city; feast"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Sent home"
+      }
+    ],
+    "pathHints": "Dothan valley south to Samaria."
+  },
+  {
+    "id": "siege_of_samaria",
+    "name": "Ben-hadad's Siege of Samaria",
+    "aliases": [
+      "four lepers",
+      "siege",
+      "Ben-hadad"
+    ],
+    "scriptureRefs": [
+      "2 Kings 6:24–33",
+      "2 Kings 7"
+    ],
+    "summary": "Ben-hadad besieges Samaria into famine; the Arameans hear phantom armies and flee to the Jordan, leaving the camp to four lepers.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Ben-hadad musters"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Famine siege"
+      },
+      {
+        "placeId": "jordan_river",
+        "note": "Fleeing Aramean trail of garments"
+      }
+    ],
+    "pathHints": "Aramean line of retreat east to the Jordan fords."
+  },
+  {
+    "id": "shunammite_in_philistia",
+    "name": "The Shunammite's Seven Years in Philistia",
+    "aliases": [
+      "Shunammite",
+      "famine",
+      "seven years"
+    ],
+    "scriptureRefs": [
+      "2 Kings 8:1–6"
+    ],
+    "summary": "Warned of famine, the Shunammite lives seven years in Philistia, then appeals to the king in Samaria for her land.",
+    "stops": [
+      {
+        "placeId": "shunem",
+        "note": "Leaves home"
+      },
+      {
+        "placeId": "philistia",
+        "note": "Sojourns seven years"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Appeals to the king"
+      },
+      {
+        "placeId": "shunem",
+        "note": "Land restored"
+      }
+    ],
+    "pathHints": "Down the coast and back."
+  },
+  {
+    "id": "elisha_to_damascus",
+    "name": "Elisha in Damascus: Hazael",
+    "aliases": [
+      "Hazael",
+      "Ben-hadad"
+    ],
+    "scriptureRefs": [
+      "2 Kings 8:7–15"
+    ],
+    "summary": "Elisha goes to Damascus; Hazael brings 40 camel-loads of gifts and later smothers Ben-hadad.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Starting point not stated"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Elisha weeps over Hazael"
+      }
+    ],
+    "pathHints": "NE over the Golan."
+  },
+  {
+    "id": "jehu_revolt",
+    "name": "Jehu's Revolt",
+    "aliases": [
+      "Jehu",
+      "drives furiously",
+      "Jezebel",
+      "Joram"
+    ],
+    "scriptureRefs": [
+      "2 Kings 9",
+      "2 Kings 10:1–28",
+      "2 Chronicles 22:7–9"
+    ],
+    "summary": "Anointed at Ramoth-gilead, Jehu drives to Jezreel, kills Joram and Jezebel, then the princes in Samaria, purges Baal worship, but keeps Bethel and Dan.",
+    "stops": [
+      {
+        "placeId": "ramoth_gilead",
+        "note": "Anointed by a prophet's servant"
+      },
+      {
+        "placeId": "jezreel",
+        "note": "Joram shot; Jezebel thrown down"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Ahab's sons beheaded; Baal temple destroyed"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Golden calf left standing"
+      },
+      {
+        "placeId": "dan",
+        "note": "Golden calf left standing"
+      }
+    ],
+    "pathHints": "West across the Jordan into the Jezreel valley, then south to Samaria."
+  },
+  {
+    "id": "hazael_transjordan",
+    "name": "Hazael Takes the Transjordan",
+    "aliases": [
+      "Hazael"
+    ],
+    "scriptureRefs": [
+      "2 Kings 10:32–33"
+    ],
+    "summary": "Hazael strikes Israel's territory east of the Jordan: Gilead, Gad, Reuben, Manasseh, from Aroer by the Arnon, Gilead and Bashan.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Hazael's capital"
+      },
+      {
+        "placeId": "bashan",
+        "note": "Bashan taken"
+      },
+      {
+        "placeId": "gilead",
+        "note": "Gilead taken"
+      },
+      {
+        "placeId": "aroer_arnon",
+        "note": "Southern limit by the Arnon"
+      }
+    ],
+    "pathHints": "King's Highway south from Damascus."
+  },
+  {
+    "id": "hazael_gath_jerusalem",
+    "name": "Hazael Takes Gath and Threatens Jerusalem",
+    "aliases": [
+      "Hazael",
+      "Joash"
+    ],
+    "scriptureRefs": [
+      "2 Kings 12:17–18",
+      "2 Chronicles 24:23–24"
+    ],
+    "summary": "Hazael captures Gath and turns on Jerusalem; Joash buys him off with temple treasure (Chronicles: Aramean army kills the princes).",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Aramean army"
+      },
+      {
+        "placeId": "gath",
+        "note": "Captured"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Tribute paid"
+      }
+    ],
+    "pathHints": "Down the coastal road then up into Judah."
+  },
+  {
+    "id": "joash_aphek_victory",
+    "name": "Joash of Israel's Victories from Aphek",
+    "aliases": [
+      "arrow of victory",
+      "Elisha's bones"
+    ],
+    "scriptureRefs": [
+      "2 Kings 13:14–25"
+    ],
+    "summary": "Dying Elisha has Joash shoot the arrow of victory; Joash defeats Aram at Aphek and recovers Israelite towns three times.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Elisha's deathbed"
+      },
+      {
+        "placeId": "aphek_aram",
+        "note": "Aram defeated"
+      }
+    ],
+    "pathHints": "NE to the Golan."
+  },
+  {
+    "id": "amaziah_edom",
+    "name": "Amaziah Conquers Edom",
+    "aliases": [
+      "Amaziah",
+      "Joktheel"
+    ],
+    "scriptureRefs": [
+      "2 Kings 14:7",
+      "2 Chronicles 25:5–14"
+    ],
+    "summary": "Amaziah (sending home Ephraimite mercenaries) kills 10,000 Edomites in the Valley of Salt and takes Sela, renaming it Joktheel.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Muster; mercenaries dismissed"
+      },
+      {
+        "placeId": "valley_of_salt",
+        "note": "10,000 Edomites killed"
+      },
+      {
+        "placeId": "sela",
+        "note": "Taken; renamed Joktheel"
+      }
+    ],
+    "pathHints": "Down the Arabah into Edom."
+  },
+  {
+    "id": "jehoash_beth_shemesh",
+    "name": "Jehoash Defeats Amaziah at Beth-shemesh",
+    "aliases": [
+      "thistle",
+      "cedar",
+      "Jehoash",
+      "Amaziah"
+    ],
+    "scriptureRefs": [
+      "2 Kings 14:8–14",
+      "2 Chronicles 25:17–24"
+    ],
+    "summary": "Jehoash of Israel defeats Amaziah at Beth-shemesh, breaks 400 cubits of Jerusalem's wall, and carries hostages and treasure to Samaria.",
+    "stops": [
+      {
+        "placeId": "samaria_city",
+        "note": "Jehoash's capital"
+      },
+      {
+        "placeId": "beth_shemesh",
+        "note": "Battle; Amaziah captured"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Wall broken from Ephraim Gate to Corner Gate"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Hostages and treasure"
+      }
+    ],
+    "pathHints": "Down the coast road and up the Sorek valley, then the ridge road home."
+  },
+  {
+    "id": "amaziah_flight_lachish",
+    "name": "Amaziah Flees to Lachish",
+    "aliases": [
+      "Amaziah",
+      "conspiracy"
+    ],
+    "scriptureRefs": [
+      "2 Kings 14:19–20",
+      "2 Chronicles 25:27–28"
+    ],
+    "summary": "Conspirators chase Amaziah from Jerusalem to Lachish, kill him, and bring his body back on horses.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Conspiracy"
+      },
+      {
+        "placeId": "lachish",
+        "note": "Killed"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Buried with his fathers"
+      }
+    ],
+    "pathHints": "SW down into the Shephelah and back."
+  },
+  {
+    "id": "jeroboam2_borders",
+    "name": "Jeroboam II Restores Israel's Borders",
+    "aliases": [
+      "Jeroboam son of Joash",
+      "Jonah son of Amittai"
+    ],
+    "scriptureRefs": [
+      "2 Kings 14:23–29"
+    ],
+    "summary": "As Jonah of Gath-hepher foretold, Jeroboam II restores Israel from Lebo-hamath to the Sea of the Arabah and recovers Damascus and Hamath.",
+    "stops": [
+      {
+        "placeId": "gath_hepher",
+        "note": "Jonah's prophecy"
+      },
+      {
+        "placeId": "lebo_hamath",
+        "note": "Northern limit"
+      },
+      {
+        "placeId": "hamath",
+        "note": "Recovered"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Recovered"
+      },
+      {
+        "placeId": "dead_sea",
+        "note": "Sea of the Arabah, southern limit"
+      }
+    ],
+    "pathHints": "Border teaching line from the Orontes to the Dead Sea."
+  },
+  {
+    "id": "menahem_coup",
+    "name": "Menahem's Coup from Tirzah",
+    "aliases": [
+      "Menahem",
+      "Shallum"
+    ],
+    "scriptureRefs": [
+      "2 Kings 15:13–16"
+    ],
+    "summary": "Menahem marches from Tirzah to Samaria, kills Shallum, and savagely sacks Tiphsah.",
+    "stops": [
+      {
+        "placeId": "tirzah",
+        "note": "Menahem's base"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Shallum killed"
+      },
+      {
+        "placeId": "tiphsah",
+        "note": "Sacked (probably Tappuah near Tirzah, not the Euphrates Tiphsah)"
+      }
+    ],
+    "pathHints": "Short highland moves."
+  },
+  {
+    "id": "tiglath_pileser_galilee",
+    "name": "Tiglath-pileser Conquers Galilee and Gilead",
+    "aliases": [
+      "Tiglath-pileser",
+      "Pul",
+      "Pekah"
+    ],
+    "scriptureRefs": [
+      "2 Kings 15:19–20",
+      "2 Kings 15:29",
+      "1 Chronicles 5:6"
+    ],
+    "summary": "Pul extracts tribute from Menahem; later Tiglath-pileser takes Ijon, Abel-beth-maacah, Janoah, Kedesh, Hazor, Gilead, Galilee, and all Naphtali, deporting the people to Assyria.",
+    "stops": [
+      {
+        "placeId": "assyria",
+        "note": "Imperial base"
+      },
+      {
+        "placeId": "ijon",
+        "note": "Taken"
+      },
+      {
+        "placeId": "abel_beth_maacah",
+        "note": "Taken"
+      },
+      {
+        "placeId": "kedesh",
+        "note": "Taken"
+      },
+      {
+        "placeId": "hazor",
+        "note": "Taken"
+      },
+      {
+        "placeId": "galilee",
+        "note": "Galilee annexed"
+      },
+      {
+        "placeId": "naphtali",
+        "note": "All Naphtali"
+      },
+      {
+        "placeId": "gilead",
+        "note": "Gilead annexed"
+      },
+      {
+        "placeId": "assyria",
+        "note": "Captives deported"
+      }
+    ],
+    "pathHints": "Down the Huleh valley from the north, across to Gilead; return east to Assyria."
+  },
+  {
+    "id": "syro_ephraimite_war",
+    "name": "Syro-Ephraimite War against Ahaz",
+    "aliases": [
+      "Rezin",
+      "Pekah",
+      "Ahaz",
+      "Tiglath-pileser"
+    ],
+    "scriptureRefs": [
+      "2 Kings 16:5–9",
+      "2 Chronicles 28:5–21"
+    ],
+    "summary": "Rezin of Damascus and Pekah of Samaria besiege Jerusalem; Rezin takes Elath; Ahaz bribes Tiglath-pileser, who captures Damascus and deports its people to Kir.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Rezin marches"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Pekah joins"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Besieged; Ahaz appeals to Assyria"
+      },
+      {
+        "placeId": "elath",
+        "note": "Recovered for Edom"
+      },
+      {
+        "placeId": "assyria",
+        "note": "Tiglath-pileser bribed"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Captured; Rezin killed"
+      },
+      {
+        "placeId": "kir",
+        "note": "Damascenes deported"
+      }
+    ],
+    "pathHints": "N-S axis Damascus→Jerusalem→Elath, then Assyrian counter-strike."
+  },
+  {
+    "id": "ahaz_to_damascus",
+    "name": "Ahaz Goes to Damascus and Copies the Altar",
+    "aliases": [
+      "Uriah the priest",
+      "altar",
+      "Ahaz"
+    ],
+    "scriptureRefs": [
+      "2 Kings 16:10–18"
+    ],
+    "summary": "Ahaz meets Tiglath-pileser at Damascus, sends a model of the altar to Uriah, and remodels the temple.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Ahaz departs"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Meets Tiglath-pileser; sees the altar"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Altar built; temple altered"
+      }
+    ],
+    "pathHints": "North over the Golan and back."
+  },
+  {
+    "id": "fall_of_samaria",
+    "name": "Fall of Samaria and Israel's Exile",
+    "aliases": [
+      "Shalmaneser",
+      "Hoshea",
+      "So king of Egypt"
+    ],
+    "scriptureRefs": [
+      "2 Kings 17:1–23",
+      "2 Kings 18:9–12"
+    ],
+    "summary": "Hoshea appeals to So of Egypt; Shalmaneser besieges Samaria three years; Israel is deported to Halah, the Habor river of Gozan, and the cities of the Medes.",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Hoshea's failed appeal to So"
+      },
+      {
+        "placeId": "assyria",
+        "note": "Shalmaneser V / Sargon II"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Three-year siege; falls 722 BC"
+      },
+      {
+        "placeId": "gozan",
+        "note": "Exiles on the Habor"
+      },
+      {
+        "placeId": "halah",
+        "note": "Exiles"
+      },
+      {
+        "placeId": "media",
+        "note": "Cities of the Medes"
+      }
+    ],
+    "pathHints": "Assyrian campaign west, then deportation route east across the Fertile Crescent."
+  },
+  {
+    "id": "resettlement_of_samaria",
+    "name": "Assyria Resettles Samaria",
+    "aliases": [
+      "Samaritans",
+      "lions",
+      "Cuthah"
+    ],
+    "scriptureRefs": [
+      "2 Kings 17:24–41"
+    ],
+    "summary": "The king of Assyria brings people from Babylon, Cuthah, Avva, Hamath, and Sepharvaim to Samaria; an exiled priest is sent back to teach at Bethel.",
+    "stops": [
+      {
+        "placeId": "babylon",
+        "note": "Settlers"
+      },
+      {
+        "placeId": "cuthah",
+        "note": "Settlers"
+      },
+      {
+        "placeId": "sepharvaim",
+        "note": "Settlers"
+      },
+      {
+        "placeId": "hamath",
+        "note": "Settlers"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Resettled"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Priest returns to teach"
+      }
+    ],
+    "pathHints": "Converging arrows from Mesopotamia and Syria into Samaria."
+  },
+  {
+    "id": "hezekiah_gaza_campaign",
+    "name": "Hezekiah Strikes the Philistines to Gaza",
+    "aliases": [
+      "Hezekiah",
+      "watchtower to fortified city"
+    ],
+    "scriptureRefs": [
+      "2 Kings 18:8"
+    ],
+    "summary": "Hezekiah defeats the Philistines as far as Gaza and its territory.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Hezekiah's capital"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Southern limit"
+      }
+    ],
+    "pathHints": "SW down to the coast."
+  },
+  {
+    "id": "sennacherib_campaign",
+    "name": "Sennacherib's Invasion of Judah",
+    "aliases": [
+      "Sennacherib",
+      "Rabshakeh",
+      "Tirhakah",
+      "Hezekiah",
+      "185,000"
+    ],
+    "scriptureRefs": [
+      "2 Kings 18:13–37",
+      "2 Kings 19",
+      "2 Chronicles 32:1–23",
+      "Isaiah 36",
+      "Isaiah 37"
+    ],
+    "summary": "Sennacherib takes Judah's fortified cities, besieges Lachish, sends the Rabshakeh to Jerusalem, moves to Libnah on news of Tirhakah of Cush, loses 185,000 to the angel, and returns to Nineveh where he is murdered.",
+    "stops": [
+      {
+        "placeId": "nineveh",
+        "note": "Assyrian capital"
+      },
+      {
+        "placeId": "lachish",
+        "note": "Siege HQ; Hezekiah's tribute"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Rabshakeh at the conduit of the upper pool"
+      },
+      {
+        "placeId": "libnah",
+        "note": "Sennacherib fights Libnah"
+      },
+      {
+        "placeId": "cush",
+        "note": "Tirhakah's army reported"
+      },
+      {
+        "placeId": "nineveh",
+        "note": "Sennacherib killed in Nisroch's temple; sons flee to Ararat"
+      }
+    ],
+    "pathHints": "Down the Levantine coast to the Shephelah, up to Jerusalem, and home across the Fertile Crescent."
+  },
+  {
+    "id": "babylonian_envoys",
+    "name": "Envoys from Merodach-baladan",
+    "aliases": [
+      "Merodach-baladan",
+      "Berodach-baladan",
+      "envoys"
+    ],
+    "scriptureRefs": [
+      "2 Kings 20:12–19",
+      "2 Chronicles 32:31",
+      "Isaiah 39"
+    ],
+    "summary": "Babylon's king sends envoys after Hezekiah's illness; Hezekiah shows them everything, and Isaiah foretells the Babylonian exile.",
+    "stops": [
+      {
+        "placeId": "babylon",
+        "note": "Merodach-baladan sends letters"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Treasuries displayed"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Envoys report back"
+      }
+    ],
+    "pathHints": "Fertile Crescent arc via the Euphrates and Syria."
+  },
+  {
+    "id": "hezekiahs_tunnel",
+    "name": "Hezekiah's Tunnel",
+    "aliases": [
+      "conduit",
+      "Gihon",
+      "pool"
+    ],
+    "scriptureRefs": [
+      "2 Kings 20:20",
+      "2 Chronicles 32:2–4",
+      "2 Chronicles 32:30"
+    ],
+    "summary": "Hezekiah stops up the upper outlet of the Gihon and directs the water down to the west side of the City of David (Siloam).",
+    "stops": [
+      {
+        "placeId": "gihon",
+        "note": "Spring closed off"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Pool inside the walls (Siloam)"
+      }
+    ],
+    "pathHints": "533 m S-curve beneath the City of David."
+  },
+  {
+    "id": "manasseh_captive_babylon",
+    "name": "Manasseh Taken to Babylon and Restored",
+    "aliases": [
+      "Manasseh",
+      "hooks",
+      "bronze chains"
+    ],
+    "scriptureRefs": [
+      "2 Chronicles 33:10–16"
+    ],
+    "summary": "Assyrian commanders take Manasseh with hooks to Babylon; he humbles himself and is restored to Jerusalem, where he rebuilds the outer wall to Ophel.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Captured"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Repents in captivity"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Restored; Gihon/Ophel walls"
+      }
+    ],
+    "pathHints": "Fertile Crescent round trip."
+  },
+  {
+    "id": "josiah_megiddo",
+    "name": "Josiah Confronts Neco at Megiddo",
+    "aliases": [
+      "Josiah",
+      "Neco",
+      "Pharaoh Neco",
+      "archers"
+    ],
+    "scriptureRefs": [
+      "2 Kings 23:29–30",
+      "2 Chronicles 35:20–25"
+    ],
+    "summary": "Josiah goes out to stop Neco at Megiddo, is shot by archers, and is brought back by chariot to Jerusalem to die.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Josiah marches"
+      },
+      {
+        "placeId": "megiddo",
+        "note": "Mortally wounded in the plain"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Dies; Jeremiah's lament"
+      }
+    ],
+    "pathHints": "North along the ridge and down to the Jezreel valley."
+  },
+  {
+    "id": "neco_campaign",
+    "name": "Pharaoh Neco's March to the Euphrates",
+    "aliases": [
+      "Neco",
+      "Carchemish"
+    ],
+    "scriptureRefs": [
+      "2 Kings 23:29–35",
+      "2 Chronicles 35:20",
+      "2 Chronicles 36:3–4"
+    ],
+    "summary": "Neco marches up the coast to aid Assyria at Carchemish, kills Josiah at Megiddo, and on the return deposes Jehoahaz at Riblah.",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Neco sets out"
+      },
+      {
+        "placeId": "megiddo",
+        "note": "Josiah killed"
+      },
+      {
+        "placeId": "carchemish",
+        "note": "Objective on the Euphrates"
+      },
+      {
+        "placeId": "riblah",
+        "note": "Jehoahaz deposed"
+      }
+    ],
+    "pathHints": "Via Maris north through the Orontes valley to the Euphrates."
+  },
+  {
+    "id": "jehoahaz_to_egypt",
+    "name": "Jehoahaz Taken to Egypt",
+    "aliases": [
+      "Jehoahaz",
+      "Eliakim",
+      "Jehoiakim"
+    ],
+    "scriptureRefs": [
+      "2 Kings 23:31–34",
+      "2 Chronicles 36:1–4"
+    ],
+    "summary": "Neco imprisons Jehoahaz at Riblah, installs Eliakim (Jehoiakim), and takes Jehoahaz to Egypt where he dies.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Reigns three months"
+      },
+      {
+        "placeId": "riblah",
+        "note": "Bound by Neco"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Dies in Egypt"
+      }
+    ],
+    "pathHints": "North to Riblah, then the long coast road to Egypt."
+  },
+  {
+    "id": "jehoiakim_bound_babylon",
+    "name": "Jehoiakim Bound for Babylon",
+    "aliases": [
+      "Jehoiakim",
+      "bronze chains"
+    ],
+    "scriptureRefs": [
+      "2 Chronicles 36:5–8"
+    ],
+    "summary": "Nebuchadnezzar binds Jehoiakim in chains to take him to Babylon and carries off temple vessels (whether he was actually deported is unclear).",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Bound in chains"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Temple vessels placed in Nebuchadnezzar's palace"
+      }
+    ],
+    "pathHints": "Fertile Crescent route."
+  },
+  {
+    "id": "jehoiachin_exile",
+    "name": "Jehoiachin's Exile (597 BC)",
+    "aliases": [
+      "Jehoiachin",
+      "Jeconiah",
+      "Nebuchadnezzar",
+      "craftsmen and smiths"
+    ],
+    "scriptureRefs": [
+      "2 Kings 24:8–17",
+      "2 Chronicles 36:9–10",
+      "2 Kings 25:27–30"
+    ],
+    "summary": "Nebuchadnezzar besieges Jerusalem, deports Jehoiachin, the court, 10,000 captives, craftsmen and smiths, and installs Zedekiah; decades later Evil-merodach frees Jehoiachin.",
+    "stops": [
+      {
+        "placeId": "babylon",
+        "note": "Nebuchadnezzar sets out"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "City surrenders"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Jehoiachin imprisoned, later released"
+      }
+    ],
+    "pathHints": "Via Riblah/Syria and the Euphrates."
+  },
+  {
+    "id": "fall_of_jerusalem",
+    "name": "Fall of Jerusalem and Exile (586 BC)",
+    "aliases": [
+      "Zedekiah",
+      "Nebuzaradan",
+      "Nebuchadnezzar",
+      "plains of Jericho"
+    ],
+    "scriptureRefs": [
+      "2 Kings 25:1–21",
+      "2 Chronicles 36:17–21"
+    ],
+    "summary": "After an 18-month siege Zedekiah flees by the Arabah road, is caught in the plains of Jericho and blinded at Riblah; Nebuzaradan burns Jerusalem and deports the people to Babylon.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Wall breached; temple burned"
+      },
+      {
+        "placeId": "arabah",
+        "note": "Zedekiah flees toward the Arabah"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Captured in the plains of Jericho"
+      },
+      {
+        "placeId": "riblah",
+        "note": "Sons killed; Zedekiah blinded; officials executed"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Exile"
+      }
+    ],
+    "pathHints": "East down to Jericho, then north to Riblah and east to Babylon."
+  },
+  {
+    "id": "gedaliah_flight_egypt",
+    "name": "Gedaliah's Murder and Flight to Egypt",
+    "aliases": [
+      "Gedaliah",
+      "Ishmael son of Nethaniah"
+    ],
+    "scriptureRefs": [
+      "2 Kings 25:22–26"
+    ],
+    "summary": "Gedaliah governs from Mizpah until Ishmael kills him; the remnant flees to Egypt for fear of the Chaldeans.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Ruined city"
+      },
+      {
+        "placeId": "mizpah",
+        "note": "Gedaliah's seat; murdered"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Remnant flees"
+      }
+    ],
+    "pathHints": "Benjamin plateau then the long southern route to Egypt."
+  },
+  {
+    "id": "cyrus_decree",
+    "name": "Cyrus's Decree to Rebuild",
+    "aliases": [
+      "Cyrus",
+      "seventy years",
+      "decree"
+    ],
+    "scriptureRefs": [
+      "2 Chronicles 36:22–23"
+    ],
+    "summary": "In his first year Cyrus of Persia proclaims that exiles may go up to rebuild the house of the LORD in Jerusalem (continued in Ezra 1).",
+    "stops": [
+      {
+        "placeId": "persepolis_region",
+        "note": "Kingdom of Persia"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Exile community"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Go up and build"
+      }
+    ],
+    "pathHints": "Return arc across the Fertile Crescent (detail in Ezra)."
+  },
+  {
+    "id": "simeonite_seir_expansion",
+    "name": "Simeonites Expand to Gedor and Mount Seir",
+    "aliases": [
+      "Simeon",
+      "Gedor",
+      "Meunites"
+    ],
+    "scriptureRefs": [
+      "1 Chronicles 4:39–43"
+    ],
+    "summary": "In Hezekiah's day Simeonites seek pasture east of the valley at Gedor, and 500 go to Mount Seir to destroy the remnant of Amalek.",
+    "stops": [
+      {
+        "placeId": "beersheba",
+        "note": "Simeonite towns"
+      },
+      {
+        "placeId": "edom",
+        "note": "Mount Seir; remnant of Amalek destroyed"
+      }
+    ],
+    "pathHints": "SE from the Negev into Seir."
+  },
+  {
+    "id": "transjordan_tribes_exile",
+    "name": "Transjordan Tribes Deported by Assyria",
+    "aliases": [
+      "Pul",
+      "Tilgath-pilneser",
+      "half-tribe of Manasseh"
+    ],
+    "scriptureRefs": [
+      "1 Chronicles 5:25–26"
+    ],
+    "summary": "Pul/Tilgath-pilneser carry Reuben, Gad, and half-Manasseh to Halah, Habor, Hara, and the river Gozan.",
+    "stops": [
+      {
+        "placeId": "gilead",
+        "note": "Transjordan tribes"
+      },
+      {
+        "placeId": "assyria",
+        "note": "Deported"
+      },
+      {
+        "placeId": "gozan",
+        "note": "River Gozan / Habor"
+      },
+      {
+        "placeId": "halah",
+        "note": "Halah"
+      }
+    ],
+    "pathHints": "East across the Syrian desert along the Euphrates."
+  },
+  {
+    "id": "abijah_zemaraim",
+    "name": "Abijah's Victory at Mount Zemaraim",
+    "aliases": [
+      "Abijah",
+      "Jeroboam",
+      "covenant of salt"
+    ],
+    "scriptureRefs": [
+      "2 Chronicles 13"
+    ],
+    "summary": "Abijah addresses Israel from Mount Zemaraim, survives an ambush, routs Jeroboam, and takes Bethel, Jeshanah, and Ephron.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Abijah marches"
+      },
+      {
+        "placeId": "zemaraim",
+        "note": "Speech; ambush defeated"
+      },
+      {
+        "placeId": "bethel",
+        "note": "Taken"
+      },
+      {
+        "placeId": "jeshanah",
+        "note": "Taken"
+      }
+    ],
+    "pathHints": "North up the ridge into southern Ephraim."
+  },
+  {
+    "id": "asa_zerah_mareshah",
+    "name": "Asa Defeats Zerah the Cushite",
+    "aliases": [
+      "Zerah",
+      "Cushite",
+      "Valley of Zephathah"
+    ],
+    "scriptureRefs": [
+      "2 Chronicles 14:9–15"
+    ],
+    "summary": "Zerah's army comes to Mareshah; Asa meets it in the Valley of Zephathah and pursues to Gerar, plundering the surrounding towns.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Asa marches out"
+      },
+      {
+        "placeId": "mareshah",
+        "note": "Battle in the Valley of Zephathah"
+      },
+      {
+        "placeId": "gerar",
+        "note": "Pursuit and plunder"
+      }
+    ],
+    "pathHints": "SW through the Shephelah into the western Negev."
+  },
+  {
+    "id": "captives_returned_jericho",
+    "name": "Captives Returned to Jericho",
+    "aliases": [
+      "Oded",
+      "captives",
+      "city of palm trees"
+    ],
+    "scriptureRefs": [
+      "2 Chronicles 28:8–15"
+    ],
+    "summary": "Israel takes 200,000 Judean captives to Samaria; at Oded's rebuke they are clothed, fed, and escorted to Jericho.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Judah defeated under Ahaz"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Captives brought; prophet Oded"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Returned to their kin"
+      }
+    ],
+    "pathHints": "North to Samaria, then down the Jordan valley."
+  },
+  {
+    "id": "assyrian_advance_isa10",
+    "name": "Assyrian Advance on Jerusalem (Isaiah 10)",
+    "aliases": [
+      "Aiath",
+      "Migron",
+      "Gebim",
+      "Madmenah",
+      "Laishah",
+      "Gallim"
+    ],
+    "scriptureRefs": [
+      "Isaiah 10:28–32"
+    ],
+    "summary": "Poetic itinerary of an invader marching south along the Benjamin ridge until he shakes his fist at Zion from Nob.",
+    "stops": [
+      {
+        "placeId": "ai",
+        "note": "Aiath"
+      },
+      {
+        "placeId": "michmash",
+        "note": "Baggage stored"
+      },
+      {
+        "placeId": "geba",
+        "note": "Night camp after the pass"
+      },
+      {
+        "placeId": "ramah",
+        "note": "Trembles"
+      },
+      {
+        "placeId": "gibeah",
+        "note": "Gibeah of Saul flees"
+      },
+      {
+        "placeId": "anathoth",
+        "note": "'Poor Anathoth'"
+      },
+      {
+        "placeId": "nob",
+        "note": "Halts in sight of Zion"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Mount of the daughter of Zion"
+      }
+    ],
+    "pathHints": "North-to-south along the watershed: Ai → Michmash pass → Geba → Ramah/Gibeah → Anathoth → Nob → Jerusalem. Migron, Gallim, Laishah, Madmenah and Gebim are unlocated."
+  },
+  {
+    "id": "sargon_ashdod",
+    "name": "Sargon's Commander Takes Ashdod",
+    "aliases": [
+      "Sargon",
+      "Tartan",
+      "commander-in-chief"
+    ],
+    "scriptureRefs": [
+      "Isaiah 20"
+    ],
+    "summary": "Sargon II's commander captures rebel Ashdod (711 BC); Isaiah walks barefoot as a sign against trusting Egypt and Cush.",
+    "stops": [
+      {
+        "placeId": "assyria",
+        "note": "Sargon II"
+      },
+      {
+        "placeId": "ashdod",
+        "note": "Captured"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "False hope"
+      },
+      {
+        "placeId": "cush",
+        "note": "False hope"
+      }
+    ],
+    "pathHints": "Assyria south-west to Ashdod; Egypt and Cush shown as the failed allies."
+  },
+  {
+    "id": "return_from_babylon",
+    "name": "Return from Babylon (the 'Second Exodus')",
+    "aliases": [
+      "Leave Babylon",
+      "Go out of Babylon",
+      "Cyrus",
+      "highway for our God",
+      "Depart, depart",
+      "depart ye"
+    ],
+    "scriptureRefs": [
+      "Isaiah 40",
+      "Isaiah 48",
+      "Isaiah 52",
+      "Zechariah 2",
+      "Ezra 1–2",
+      "Ezra 7–8"
+    ],
+    "summary": "Prophetic summons for the exiles to leave Babylon and return to Zion, fulfilled in the returns under Cyrus (538 BC) and Ezra.",
+    "stops": [
+      {
+        "placeId": "babylon",
+        "note": "Departure"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Zion restored"
+      }
+    ],
+    "pathHints": "Poetic 'highway in the desert' (Isa 40:3); the practical caravan route ran up the Euphrates and south through Syria."
+  },
+  {
+    "id": "jeremiah_linen_belt",
+    "name": "Jeremiah's Linen Belt",
+    "aliases": [
+      "linen belt",
+      "linen waistcloth",
+      "girdle",
+      "Perath"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 13:1–11"
+    ],
+    "summary": "Jeremiah hides a linen belt at Perath and later finds it ruined — a sign of Judah's pride rotting.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Commission"
+      },
+      {
+        "placeId": "euphrates",
+        "note": "'Perath' — Euphrates (or Parah/Wadi Farah near Anathoth)"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Return"
+      }
+    ],
+    "pathHints": "Round trip; the short alternative is Wadi Farah 5 km north-east of Anathoth."
+  },
+  {
+    "id": "uriah_flight_egypt",
+    "name": "Uriah's Flight to Egypt",
+    "aliases": [
+      "Uriah",
+      "Urijah",
+      "Elnathan"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 26:20–23"
+    ],
+    "summary": "The prophet Uriah of Kiriath-jearim flees Jehoiakim to Egypt, is extradited and executed in Jerusalem.",
+    "stops": [
+      {
+        "placeId": "kiriath_jearim",
+        "note": "Uriah's home"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Prophesies"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Refuge"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Brought back and executed"
+      }
+    ],
+    "pathHints": "Jerusalem south-west across Sinai to Egypt and back."
+  },
+  {
+    "id": "deportation_to_babylon",
+    "name": "Deportations to Babylon",
+    "aliases": [
+      "carried away captive",
+      "captivity",
+      "Jeconiah",
+      "Jehoiachin",
+      "exiles"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 24",
+      "Jeremiah 27",
+      "Jeremiah 29",
+      "Jeremiah 52:28–30",
+      "Daniel 1",
+      "Ezekiel 1",
+      "2 Kings 24–25",
+      "2 Chronicles 36"
+    ],
+    "summary": "The deportations of 605, 597 and 587 BC; Daniel among the first group, Jehoiachin and Ezekiel in 597; Jeremiah writes to the exiles (Jer 29).",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Deportation"
+      },
+      {
+        "placeId": "riblah",
+        "note": "Babylonian field HQ on the Orontes route"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Royal captives"
+      },
+      {
+        "placeId": "chebar",
+        "note": "Exile settlement (Tel-abib)"
+      }
+    ],
+    "pathHints": "Fertile-crescent route: Jerusalem → Damascus → Riblah/Hamath → Carchemish → down the Euphrates to Babylon and Nippur."
+  },
+  {
+    "id": "zedekiah_flight",
+    "name": "Zedekiah's Flight and Capture",
+    "aliases": [
+      "Zedekiah",
+      "plains of Jericho",
+      "king's garden",
+      "king’s garden"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 39:1–10",
+      "Jeremiah 52:1–11",
+      "2 Kings 25:1–7"
+    ],
+    "summary": "Zedekiah escapes Jerusalem by night toward the Arabah, is caught in the plains of Jericho, judged at Riblah, blinded and taken to Babylon.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Breach in the wall; flight by night"
+      },
+      {
+        "placeId": "arabah",
+        "note": "Toward the Jordan valley"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Captured in the plains of Jericho"
+      },
+      {
+        "placeId": "riblah",
+        "note": "Sentenced; sons executed"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Imprisoned until death"
+      }
+    ],
+    "pathHints": "East down to Jericho, then the long northern road to Riblah and Babylon."
+  },
+  {
+    "id": "jeremiah_to_mizpah",
+    "name": "Jeremiah Freed at Ramah",
+    "aliases": [
+      "Nebuzaradan",
+      "Gedaliah"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 39:11–14",
+      "Jeremiah 40:1–6"
+    ],
+    "summary": "Nebuzaradan releases Jeremiah from the chained captives at Ramah; he joins Gedaliah at Mizpah.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Court of the guard"
+      },
+      {
+        "placeId": "ramah",
+        "note": "Released from the captive column"
+      },
+      {
+        "placeId": "mizpah",
+        "note": "Gedaliah's administrative centre"
+      }
+    ],
+    "pathHints": "Short hop north along the Benjamin ridge."
+  },
+  {
+    "id": "ishmael_mizpah",
+    "name": "Ishmael's Massacre at Mizpah",
+    "aliases": [
+      "Ishmael son of Nethaniah",
+      "Johanan",
+      "Baalis"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 40:7–16",
+      "Jeremiah 41"
+    ],
+    "summary": "Ishmael murders Gedaliah and 80 pilgrims from Shechem, Shiloh and Samaria, flees with captives, is overtaken at Gibeon and escapes to Ammon.",
+    "stops": [
+      {
+        "placeId": "shechem",
+        "note": "Pilgrims' origin"
+      },
+      {
+        "placeId": "shiloh",
+        "note": "Pilgrims' origin"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Pilgrims' origin"
+      },
+      {
+        "placeId": "mizpah",
+        "note": "Massacre"
+      },
+      {
+        "placeId": "gibeon",
+        "note": "Overtaken at the great pool"
+      },
+      {
+        "placeId": "ammon",
+        "note": "Ishmael escapes to Baalis"
+      }
+    ],
+    "pathHints": "Pilgrims converge on Mizpah from the north; Ishmael's escape runs east across the Jordan to Ammon."
+  },
+  {
+    "id": "flight_to_egypt_jeremiah",
+    "name": "Remnant Flees to Egypt",
+    "aliases": [
+      "Johanan",
+      "Johanan son of Kareah",
+      "Geruth Chimham",
+      "Tahpanhes"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 41:16–18",
+      "Jeremiah 42–44"
+    ],
+    "summary": "Fearing Babylon, Johanan leads the remnant, with Jeremiah and Baruch, to Egypt against God's word; Judean colonies at Migdol, Tahpanhes, Memphis and Pathros.",
+    "stops": [
+      {
+        "placeId": "mizpah",
+        "note": "Remnant gathered"
+      },
+      {
+        "placeId": "gibeon",
+        "note": "Recovered captives"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "Geruth Chimham near Bethlehem"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Into Egypt"
+      },
+      {
+        "placeId": "tahpanhes",
+        "note": "Jeremiah's stones at Pharaoh's house"
+      },
+      {
+        "placeId": "migdol_egypt",
+        "note": "Judean colony"
+      },
+      {
+        "placeId": "egypt_memphis",
+        "note": "Judean colony"
+      },
+      {
+        "placeId": "pathros",
+        "note": "Upper-Egypt colony"
+      }
+    ],
+    "pathHints": "South past Bethlehem, across northern Sinai to the eastern Delta, then dispersal inside Egypt."
+  },
+  {
+    "id": "seraiah_scroll",
+    "name": "Seraiah Takes the Scroll to Babylon",
+    "aliases": [
+      "Seraiah",
+      "Seraiah son of Neriah"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 51:59–64"
+    ],
+    "summary": "Seraiah travels with Zedekiah to Babylon, reads Jeremiah's oracle and sinks it in the Euphrates.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Departure (594/3 BC)"
+      },
+      {
+        "placeId": "babylon",
+        "note": "Oracle read"
+      },
+      {
+        "placeId": "euphrates",
+        "note": "Scroll sunk in the river"
+      }
+    ],
+    "pathHints": "Jerusalem → Syrian corridor → Euphrates → Babylon."
+  },
+  {
+    "id": "neco_carchemish",
+    "name": "Pharaoh Neco to Carchemish",
+    "aliases": [
+      "Pharaoh Neco",
+      "Pharaoh Necoh",
+      "Pharaoh Necho",
+      "Necoh",
+      "Neco"
+    ],
+    "scriptureRefs": [
+      "Jeremiah 46:1–12",
+      "2 Kings 23:29–35",
+      "2 Chronicles 35:20–24"
+    ],
+    "summary": "Neco marches north to aid Assyria, kills Josiah at Megiddo (609 BC), deposes Jehoahaz at Riblah, and is crushed by Nebuchadnezzar at Carchemish (605 BC).",
+    "stops": [
+      {
+        "placeId": "egypt_land",
+        "note": "Neco's army"
+      },
+      {
+        "placeId": "megiddo",
+        "note": "Josiah killed"
+      },
+      {
+        "placeId": "riblah",
+        "note": "Jehoahaz deposed"
+      },
+      {
+        "placeId": "carchemish",
+        "note": "Egyptian defeat on the Euphrates"
+      }
+    ],
+    "pathHints": "Via Maris north through the Megiddo pass, the Beqaa and the Orontes to the Euphrates."
+  },
+  {
+    "id": "ezekiel_visions_jerusalem",
+    "name": "Ezekiel Carried in Visions to Jerusalem",
+    "aliases": [
+      "visions of God",
+      "in the visions of God",
+      "by the Spirit of God",
+      "glory of the God of Israel"
+    ],
+    "scriptureRefs": [
+      "Ezekiel 8–11",
+      "Ezekiel 40"
+    ],
+    "summary": "The Spirit lifts Ezekiel from the exiles by the Chebar to the Jerusalem temple (Ezek 8:3; 40:2) and returns him to Chaldea (11:24).",
+    "stops": [
+      {
+        "placeId": "chebar",
+        "note": "Ezekiel's house among the exiles"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Temple abominations; departure of the glory"
+      },
+      {
+        "placeId": "chebar",
+        "note": "Returned 'in the vision' to Chaldea"
+      }
+    ],
+    "pathHints": "Visionary arc between Nippur and Jerusalem (no physical route)."
+  },
+  {
+    "id": "nebuchadnezzar_crossroads",
+    "name": "Nebuchadnezzar at the Fork in the Road",
+    "aliases": [
+      "parting of the way",
+      "fork in the road",
+      "head of the two ways",
+      "head of the two roads"
+    ],
+    "scriptureRefs": [
+      "Ezekiel 21"
+    ],
+    "summary": "The king of Babylon divines at a road junction whether to strike Rabbah of the Ammonites or Jerusalem; the lot falls on Jerusalem.",
+    "stops": [
+      {
+        "placeId": "babylon",
+        "note": "Army sets out"
+      },
+      {
+        "placeId": "rabbah",
+        "note": "Alternative target"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Chosen target"
+      }
+    ],
+    "pathHints": "Common route through Syria (fork near Damascus/Riblah), one branch to Rabbah, the other to Jerusalem."
+  },
+  {
+    "id": "fugitive_to_ezekiel",
+    "name": "News of Jerusalem's Fall Reaches Ezekiel",
+    "aliases": [
+      "the city has been struck",
+      "The city is taken",
+      "one who had escaped"
+    ],
+    "scriptureRefs": [
+      "Ezekiel 33:21–22"
+    ],
+    "summary": "A fugitive from Jerusalem reaches the exiles in Babylonia: 'The city has fallen.'",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "City fallen (587/6 BC)"
+      },
+      {
+        "placeId": "chebar",
+        "note": "Ezekiel among the exiles"
+      }
+    ],
+    "pathHints": "Fertile-crescent route, about five months' travel."
+  },
+  {
+    "id": "ezekiel_temple_river",
+    "name": "River from the Temple",
+    "aliases": [
+      "waters came out from under the threshold",
+      "river that couldn't be passed through"
+    ],
+    "scriptureRefs": [
+      "Ezekiel 47:1–12"
+    ],
+    "summary": "A deepening river flows east from the temple, through the Arabah, healing the Dead Sea; fishermen spread nets from En-gedi to En-eglaim.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Temple threshold"
+      },
+      {
+        "placeId": "arabah",
+        "note": "Down into the Arabah"
+      },
+      {
+        "placeId": "en_gedi",
+        "note": "Fishermen's nets"
+      },
+      {
+        "placeId": "dead_sea",
+        "note": "Waters healed"
+      }
+    ],
+    "pathHints": "Flow line east and down from Jerusalem to the Dead Sea."
+  },
+  {
+    "id": "jonah_voyage",
+    "name": "Jonah's Flight and Mission",
+    "aliases": [
+      "Jonah",
+      "Jonah son of Amittai"
+    ],
+    "scriptureRefs": [
+      "Jonah 1–4"
+    ],
+    "summary": "Jonah of Gath-hepher flees from Joppa toward Tarshish, is swallowed by a great fish, and then preaches in Nineveh.",
+    "stops": [
+      {
+        "placeId": "gath_hepher",
+        "note": "Jonah's hometown (2 Kgs 14:25)"
+      },
+      {
+        "placeId": "joppa",
+        "note": "Boards a ship for Tarshish"
+      },
+      {
+        "placeId": "nineveh",
+        "note": "Preaches; the city repents"
+      }
+    ],
+    "pathHints": "Joppa westward into the Mediterranean (storm), then overland east to Nineveh. Tarshish is the intended, unreached destination."
+  },
+  {
+    "id": "amos_bethel",
+    "name": "Amos from Tekoa to Bethel",
+    "aliases": [
+      "Amos",
+      "Amaziah",
+      "Amaziah the priest of Bethel"
+    ],
+    "scriptureRefs": [
+      "Amos 1:1",
+      "Amos 7:10–17"
+    ],
+    "summary": "The Judean herdsman Amos prophesies at the royal sanctuary of Bethel and is ordered back to Judah.",
+    "stops": [
+      {
+        "placeId": "tekoa",
+        "note": "Amos's home"
+      },
+      {
+        "placeId": "bethel",
+        "note": "King's sanctuary"
+      },
+      {
+        "placeId": "judah",
+        "note": "'Flee to the land of Judah'"
+      }
+    ],
+    "pathHints": "North along the ridge road from Tekoa past Jerusalem to Bethel and back."
+  },
+  {
+    "id": "amos_oracle_circle",
+    "name": "Amos's Circle of Oracles",
+    "aliases": [
+      "For three transgressions",
+      "for four"
+    ],
+    "scriptureRefs": [
+      "Amos 1–2"
+    ],
+    "summary": "Oracles circle Israel — Damascus, Gaza, Tyre, Edom, Ammon, Moab — then close on Judah and finally Israel.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Aram"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Philistia"
+      },
+      {
+        "placeId": "tyre",
+        "note": "Phoenicia"
+      },
+      {
+        "placeId": "bozrah",
+        "note": "Edom"
+      },
+      {
+        "placeId": "rabbah",
+        "note": "Ammon"
+      },
+      {
+        "placeId": "kerioth",
+        "note": "Moab"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Judah"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Israel"
+      }
+    ],
+    "pathHints": "Rhetorical sequence spiralling in; draw as numbered markers rather than a route."
+  },
+  {
+    "id": "micah_shephelah_lament",
+    "name": "Micah's Lament over the Shephelah",
+    "aliases": [
+      "Beth Ophrah",
+      "Shaphir",
+      "Zaanan",
+      "Beth Ezel",
+      "Maroth",
+      "Achzib"
+    ],
+    "scriptureRefs": [
+      "Micah 1:8–16"
+    ],
+    "summary": "Wordplay lament over Shephelah towns, usually linked to Sennacherib's 701 BC approach toward Jerusalem.",
+    "stops": [
+      {
+        "placeId": "gath",
+        "note": "'Tell it not in Gath'"
+      },
+      {
+        "placeId": "lachish",
+        "note": "Chariot city"
+      },
+      {
+        "placeId": "moresheth_gath",
+        "note": "Micah's home"
+      },
+      {
+        "placeId": "mareshah",
+        "note": "Conqueror comes"
+      },
+      {
+        "placeId": "adullam",
+        "note": "Glory of Israel flees"
+      }
+    ],
+    "pathHints": "Cluster in the Shephelah; Beth-le-aphrah, Shaphir, Zaanan, Beth-ezel, Maroth and Achzib are unlocated."
+  },
+  {
+    "id": "zechariah9_march",
+    "name": "The Conqueror's March (Zechariah 9:1–8)",
+    "aliases": [
+      "Hadrach"
+    ],
+    "scriptureRefs": [
+      "Zechariah 9"
+    ],
+    "summary": "Oracle of judgement sweeping south from Hadrach and Hamath through Damascus, Tyre and Sidon to the Philistine cities, while God guards his house; often compared with Alexander's 332 BC campaign.",
+    "stops": [
+      {
+        "placeId": "hadrach",
+        "note": "Starting point"
+      },
+      {
+        "placeId": "hamath",
+        "note": ""
+      },
+      {
+        "placeId": "damascus",
+        "note": ""
+      },
+      {
+        "placeId": "sidon",
+        "note": ""
+      },
+      {
+        "placeId": "tyre",
+        "note": "Fortress and wealth burned"
+      },
+      {
+        "placeId": "ashkelon",
+        "note": ""
+      },
+      {
+        "placeId": "gaza",
+        "note": ""
+      },
+      {
+        "placeId": "ekron",
+        "note": ""
+      },
+      {
+        "placeId": "ashdod",
+        "note": ""
+      }
+    ],
+    "pathHints": "North-to-south down the Levant coast; Jerusalem protected (Zech 9:8)."
+  },
+  {
+    "id": "hab3_theophany",
+    "name": "God Comes from Teman",
+    "aliases": [
+      "Holy One from Mount Paran",
+      "God came from Teman"
+    ],
+    "scriptureRefs": [
+      "Habakkuk 3"
+    ],
+    "summary": "Theophany march of God from the southern wilderness (Teman, Paran, Cushan, Midian), echoing the Exodus and Sinai traditions.",
+    "stops": [
+      {
+        "placeId": "paran",
+        "note": "Mount Paran"
+      },
+      {
+        "placeId": "teman",
+        "note": "Teman"
+      },
+      {
+        "placeId": "midian",
+        "note": "Tents of Midian tremble"
+      }
+    ],
+    "pathHints": "Southern desert arc toward the land; poetic."
+  },
+  {
+    "id": "mary_visits_elizabeth",
+    "name": "Mary Visits Elizabeth",
+    "aliases": [
+      "Elizabeth",
+      "hill country",
+      "Magnificat"
+    ],
+    "scriptureRefs": [
+      "Luke 1:26–56"
+    ],
+    "summary": "After the annunciation in Nazareth, Mary hurries to Zechariah and Elizabeth in a town in the hill country of Judea (tradition: Ein Karem) and returns after three months.",
+    "stops": [
+      {
+        "placeId": "nazareth",
+        "note": "Annunciation"
+      },
+      {
+        "placeId": "judea",
+        "note": "Town in the hill country of Judah (Ein Karem tradition)"
+      },
+      {
+        "placeId": "nazareth",
+        "note": "Return"
+      }
+    ],
+    "pathHints": "South through the central hill country (or via the Jordan valley) and back."
+  },
+  {
+    "id": "nativity_journey",
+    "name": "Journey to Bethlehem for the Census",
+    "aliases": [
+      "census",
+      "decree from Caesar Augustus",
+      "enrolled",
+      "registered",
+      "enrollment"
+    ],
+    "scriptureRefs": [
+      "Luke 2:1–20"
+    ],
+    "summary": "Joseph and the pregnant Mary travel from Nazareth to Bethlehem, the city of David, where Jesus is born.",
+    "stops": [
+      {
+        "placeId": "nazareth",
+        "note": "Departure from Galilee"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "Birth; shepherds' visit"
+      }
+    ],
+    "pathHints": "Nazareth → (Jezreel, central hills or Jordan valley) → Jerusalem area → Bethlehem."
+  },
+  {
+    "id": "presentation_temple",
+    "name": "Presentation in the Temple and Return to Nazareth",
+    "aliases": [
+      "Simeon",
+      "Anna",
+      "purification"
+    ],
+    "scriptureRefs": [
+      "Luke 2:21–40"
+    ],
+    "summary": "On the fortieth day Jesus is presented in the Jerusalem temple; the family then returns to Nazareth.",
+    "stops": [
+      {
+        "placeId": "bethlehem",
+        "note": "Birthplace"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Temple: Simeon and Anna"
+      },
+      {
+        "placeId": "nazareth",
+        "note": "Return to Galilee"
+      }
+    ],
+    "pathHints": "Bethlehem to Jerusalem, then north to Nazareth."
+  },
+  {
+    "id": "boy_jesus_temple",
+    "name": "Passover Journey at Age Twelve",
+    "aliases": [
+      "Passover",
+      "feast of the Passover",
+      "in my Father's house",
+      "in my Father’s house"
+    ],
+    "scriptureRefs": [
+      "Luke 2:41–52"
+    ],
+    "summary": "Jesus stays behind in the temple; his parents search for him and return together to Nazareth.",
+    "stops": [
+      {
+        "placeId": "nazareth",
+        "note": "Pilgrims depart"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Temple courts"
+      },
+      {
+        "placeId": "nazareth",
+        "note": "Return"
+      }
+    ],
+    "pathHints": "Pilgrim road (often via the Jordan valley) and back."
+  },
+  {
+    "id": "magi_visit",
+    "name": "Visit of the Magi",
+    "aliases": [
+      "wise men",
+      "Magi",
+      "magi",
+      "star in the east",
+      "his star"
+    ],
+    "scriptureRefs": [
+      "Matthew 2:1–12"
+    ],
+    "summary": "Magi from the east consult Herod in Jerusalem, find the child in Bethlehem, and leave by another route.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Herod consulted"
+      },
+      {
+        "placeId": "bethlehem",
+        "note": "Worship and gifts"
+      }
+    ],
+    "pathHints": "Arrival from the east (Babylonia/Persia or Arabia proposals) via Jerusalem; return 'by another way'."
+  },
+  {
+    "id": "flight_to_egypt",
+    "name": "Flight into Egypt and Return to Nazareth",
+    "aliases": [
+      "flee into Egypt",
+      "Out of Egypt I called my son",
+      "Archelaus"
+    ],
+    "scriptureRefs": [
+      "Matthew 2:13–23"
+    ],
+    "summary": "Warned in a dream, Joseph takes the family to Egypt; after Herod's death they avoid Archelaus's Judea and settle in Nazareth of Galilee.",
+    "stops": [
+      {
+        "placeId": "bethlehem",
+        "note": "Flight by night"
+      },
+      {
+        "placeId": "egypt_land",
+        "note": "Refuge until Herod's death"
+      },
+      {
+        "placeId": "nazareth",
+        "note": "Settlement in Galilee"
+      }
+    ],
+    "pathHints": "Coastal road through Gaza into Egypt; return north, bypassing Judea."
+  },
+  {
+    "id": "move_to_capernaum",
+    "name": "Jesus Moves from Nazareth to Capernaum",
+    "aliases": [
+      "by the way of the sea",
+      "Galilee of the Gentiles",
+      "Galilee of the nations"
+    ],
+    "scriptureRefs": [
+      "Matthew 4:12–17",
+      "Luke 4:16–31"
+    ],
+    "summary": "Rejected in the Nazareth synagogue, Jesus makes Capernaum, in the region of Zebulun and Naphtali, his base.",
+    "stops": [
+      {
+        "placeId": "nazareth",
+        "note": "Synagogue rejection"
+      },
+      {
+        "placeId": "capernaum",
+        "note": "New home by the sea"
+      }
+    ],
+    "pathHints": "Nazareth down past Cana/Magdala to the lake shore."
+  },
+  {
+    "id": "through_samaria_john4",
+    "name": "Through Samaria to Galilee",
+    "aliases": [
+      "Jacob's well",
+      "Jacob’s well",
+      "woman of Samaria",
+      "Samaritan woman",
+      "nobleman"
+    ],
+    "scriptureRefs": [
+      "John 4"
+    ],
+    "summary": "Leaving Judea, Jesus passes through Samaria, talks with the woman at Jacob's well near Sychar, and in Cana heals an official's son who lies ill at Capernaum.",
+    "stops": [
+      {
+        "placeId": "judea",
+        "note": "Leaves Judea"
+      },
+      {
+        "placeId": "shechem",
+        "note": "Sychar / Jacob's well"
+      },
+      {
+        "placeId": "cana",
+        "note": "Official's request"
+      },
+      {
+        "placeId": "capernaum",
+        "note": "Son healed at a distance"
+      }
+    ],
+    "pathHints": "Ridge road north through Samaria to Galilee."
+  },
+  {
+    "id": "gerasene_crossing",
+    "name": "Storm and the Gerasene Demoniac",
+    "aliases": [
+      "Legion",
+      "calmed the storm",
+      "herd of pigs",
+      "swine",
+      "herd of hogs",
+      "other side"
+    ],
+    "scriptureRefs": [
+      "Matthew 8:18–34",
+      "Mark 4:35–41",
+      "Mark 5:1–21",
+      "Luke 8:22–40"
+    ],
+    "summary": "Jesus stills a storm crossing the lake, delivers the demoniac in the country of the Gerasenes/Gadarenes, and returns across the lake.",
+    "stops": [
+      {
+        "placeId": "capernaum",
+        "note": "Departure"
+      },
+      {
+        "placeId": "galilee_sea",
+        "note": "Storm stilled"
+      },
+      {
+        "placeId": "gergesa",
+        "note": "Demoniac delivered (Kursi)"
+      },
+      {
+        "placeId": "capernaum",
+        "note": "Return"
+      }
+    ],
+    "pathHints": "Lake crossing north-west shore → east shore and back."
+  },
+  {
+    "id": "feeding_and_walking_on_water",
+    "name": "Feeding the Five Thousand and Walking on the Water",
+    "aliases": [
+      "five thousand",
+      "five loaves",
+      "walked on the sea",
+      "walking on the water",
+      "walking on the sea"
+    ],
+    "scriptureRefs": [
+      "Matthew 14:13–36",
+      "Mark 6:30–56",
+      "Luke 9:10–17",
+      "John 6:1–25"
+    ],
+    "summary": "Jesus withdraws by boat to a remote place near Bethsaida, feeds the crowd, walks on the water, and lands at Gennesaret.",
+    "stops": [
+      {
+        "placeId": "capernaum",
+        "note": "Withdrawal by boat"
+      },
+      {
+        "placeId": "bethsaida",
+        "note": "Remote place: feeding"
+      },
+      {
+        "placeId": "galilee_sea",
+        "note": "Walking on the water"
+      },
+      {
+        "placeId": "gennesaret",
+        "note": "Landing; healings"
+      }
+    ],
+    "pathHints": "North shore crossing and night return along the north-west shore."
+  },
+  {
+    "id": "tyre_sidon_decapolis",
+    "name": "Journey to Tyre, Sidon and the Decapolis",
+    "aliases": [
+      "Syrophoenician",
+      "woman of Canaan",
+      "Canaanite woman",
+      "four thousand",
+      "Ephphatha"
+    ],
+    "scriptureRefs": [
+      "Matthew 15:21–39",
+      "Mark 7:24–37",
+      "Mark 8:1–10"
+    ],
+    "summary": "Jesus withdraws to the region of Tyre and Sidon (the Syrophoenician woman), returns via Sidon to the Decapolis, feeds four thousand and sails to Magadan/Dalmanutha.",
+    "stops": [
+      {
+        "placeId": "gennesaret",
+        "note": "Departure"
+      },
+      {
+        "placeId": "tyre",
+        "note": "Syrophoenician woman"
+      },
+      {
+        "placeId": "sidon",
+        "note": "Northern turning point"
+      },
+      {
+        "placeId": "decapolis",
+        "note": "Deaf man healed; four thousand fed"
+      },
+      {
+        "placeId": "galilee_sea",
+        "note": "Boat crossing"
+      },
+      {
+        "placeId": "magdala",
+        "note": "Magadan / Dalmanutha"
+      }
+    ],
+    "pathHints": "Northwest to the Phoenician coast, north to Sidon, then a wide loop east through the Decapolis to the lake."
+  },
+  {
+    "id": "caesarea_philippi_transfiguration",
+    "name": "Caesarea Philippi and the Transfiguration",
+    "aliases": [
+      "Who do people say",
+      "Caesarea Philippi",
+      "transfigured",
+      "Transfiguration",
+      "high mountain",
+      "Moses and Elijah"
+    ],
+    "scriptureRefs": [
+      "Matthew 16:13–28",
+      "Matthew 17",
+      "Mark 8:22–38",
+      "Mark 9:1–33",
+      "Luke 9:18–50"
+    ],
+    "summary": "After healing a blind man at Bethsaida, Jesus goes to Caesarea Philippi (Peter's confession), is transfigured on a high mountain, and returns to Capernaum.",
+    "stops": [
+      {
+        "placeId": "bethsaida",
+        "note": "Blind man healed"
+      },
+      {
+        "placeId": "caesarea_philippi",
+        "note": "Peter's confession"
+      },
+      {
+        "placeId": "hermon",
+        "note": "'High mountain' — Hermon (Mount Tabor is the Byzantine tradition)"
+      },
+      {
+        "placeId": "capernaum",
+        "note": "Temple tax; who is greatest"
+      }
+    ],
+    "pathHints": "North up the Jordan valley to Banias, then back south to the lake."
+  },
+  {
+    "id": "final_journey_to_jerusalem",
+    "name": "Final Journey to Jerusalem",
+    "aliases": [
+      "set his face to go to Jerusalem",
+      "going up to Jerusalem",
+      "on to Jerusalem",
+      "toward Jerusalem",
+      "beyond the Jordan",
+      "Zacchaeus",
+      "Bartimaeus"
+    ],
+    "scriptureRefs": [
+      "Matthew 19–20",
+      "Mark 10",
+      "Luke 9:51–62",
+      "Luke 13:22–35",
+      "Luke 17:11–19",
+      "Luke 18:31–43",
+      "Luke 19:1–28",
+      "John 10:40–42"
+    ],
+    "summary": "Jesus leaves Galilee, passes along the border of Samaria and through Perea ('beyond the Jordan'), heals at Jericho, meets Zacchaeus and goes up to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "galilee",
+        "note": "Departure"
+      },
+      {
+        "placeId": "samaria_region",
+        "note": "Samaritan village refuses; ten lepers healed on the border"
+      },
+      {
+        "placeId": "perea",
+        "note": "Teaching 'beyond the Jordan'"
+      },
+      {
+        "placeId": "jericho",
+        "note": "Bartimaeus; Zacchaeus"
+      },
+      {
+        "placeId": "bethany",
+        "note": "Arrival near Jerusalem"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Destination"
+      }
+    ],
+    "pathHints": "Galilee → Samaria border → east bank of the Jordan → Jericho ford → ascent to Bethany/Jerusalem."
+  },
+  {
+    "id": "triumphal_entry",
+    "name": "Triumphal Entry into Jerusalem",
+    "aliases": [
+      "Hosanna",
+      "colt",
+      "donkey",
+      "Blessed is he who comes"
+    ],
+    "scriptureRefs": [
+      "Matthew 21:1–17",
+      "Mark 11:1–11",
+      "Luke 19:28–44",
+      "John 12:1–19"
+    ],
+    "summary": "From Jericho Jesus comes to Bethany and Bethphage, rides a colt over the Mount of Olives and enters Jerusalem to acclaim.",
+    "stops": [
+      {
+        "placeId": "jericho",
+        "note": "Departure"
+      },
+      {
+        "placeId": "bethany",
+        "note": "Anointing; overnight"
+      },
+      {
+        "placeId": "bethphage",
+        "note": "Colt fetched"
+      },
+      {
+        "placeId": "mount_of_olives",
+        "note": "Descent; weeping over the city"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Entry; temple"
+      }
+    ],
+    "pathHints": "Jericho road up through the Judean desert to Bethany, over the Mount of Olives into the city."
+  },
+  {
+    "id": "passion_night",
+    "name": "Arrest, Trials and Crucifixion",
+    "aliases": [
+      "Gethsemane",
+      "Caiaphas",
+      "Pilate",
+      "crucified",
+      "Praetorium",
+      "Passover"
+    ],
+    "scriptureRefs": [
+      "Matthew 26–27",
+      "Mark 14–15",
+      "Luke 22–23",
+      "John 18–19"
+    ],
+    "summary": "From the Last Supper Jesus crosses the Kidron to Gethsemane, is arrested, tried before Caiaphas and Pilate, and crucified at Golgotha.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Upper room"
+      },
+      {
+        "placeId": "kidron",
+        "note": "Crossing the brook"
+      },
+      {
+        "placeId": "mount_of_olives",
+        "note": "'As his custom was' (Luke 22:39)"
+      },
+      {
+        "placeId": "gethsemane",
+        "note": "Prayer and arrest"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "High priest's house; Praetorium"
+      },
+      {
+        "placeId": "golgotha",
+        "note": "Crucifixion and burial"
+      }
+    ],
+    "pathHints": "Within and around Jerusalem: upper city → Kidron → Gethsemane → back into the city → Golgotha outside the wall."
+  },
+  {
+    "id": "emmaus_road",
+    "name": "Road to Emmaus",
+    "aliases": [
+      "Cleopas",
+      "road to Emmaus",
+      "breaking of the bread",
+      "breaking of bread"
+    ],
+    "scriptureRefs": [
+      "Luke 24:13–35"
+    ],
+    "summary": "The risen Jesus walks with two disciples to Emmaus and is recognised in the breaking of bread; they hurry back to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Departure"
+      },
+      {
+        "placeId": "emmaus",
+        "note": "Recognition at table"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Return the same night"
+      }
+    ],
+    "pathHints": "About 60 stadia (11 km) west and back."
+  },
+  {
+    "id": "resurrection_galilee",
+    "name": "Resurrection Appearances in Galilee",
+    "aliases": [
+      "before you into Galilee",
+      "Sea of Tiberias",
+      "breakfast",
+      "Feed my sheep"
+    ],
+    "scriptureRefs": [
+      "Matthew 28",
+      "Mark 16",
+      "John 21"
+    ],
+    "summary": "The disciples go from Jerusalem to the appointed mountain in Galilee and meet the risen Jesus by the Sea of Tiberias.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Empty tomb"
+      },
+      {
+        "placeId": "galilee",
+        "note": "Appointed mountain; Great Commission"
+      },
+      {
+        "placeId": "galilee_sea",
+        "note": "Miraculous catch; Peter restored"
+      }
+    ],
+    "pathHints": "Jerusalem north to Galilee."
+  },
+  {
+    "id": "ascension",
+    "name": "Ascension from the Mount of Olives",
+    "aliases": [
+      "taken up",
+      "carried up into heaven",
+      "ascension",
+      "Olivet"
+    ],
+    "scriptureRefs": [
+      "Luke 24:50–53",
+      "Acts 1:1–14"
+    ],
+    "summary": "Jesus leads the disciples out as far as Bethany on the Mount of Olives and is taken up; they return to Jerusalem.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Departure"
+      },
+      {
+        "placeId": "bethany",
+        "note": "'As far as Bethany'"
+      },
+      {
+        "placeId": "mount_of_olives",
+        "note": "Ascension (Olivet)"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Return to the upper room"
+      }
+    ],
+    "pathHints": "Short walk east over the Mount of Olives (a Sabbath day's journey) and back."
+  },
+  {
+    "id": "witness_program",
+    "name": "Witnesses to the Ends of the Earth",
+    "aliases": [
+      "ends of the earth",
+      "uttermost part of the earth",
+      "remotest part of the earth"
+    ],
+    "scriptureRefs": [
+      "Acts 1:8"
+    ],
+    "summary": "Programmatic outline of Acts: Jerusalem, all Judea and Samaria, and the ends of the earth (Acts ends in Rome).",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Acts 1–7"
+      },
+      {
+        "placeId": "judea",
+        "note": "Acts 8"
+      },
+      {
+        "placeId": "samaria_region",
+        "note": "Acts 8"
+      },
+      {
+        "placeId": "rome",
+        "note": "Acts 28"
+      }
+    ],
+    "pathHints": "Expanding rings rather than a single route."
+  },
+  {
+    "id": "philip_evangelist",
+    "name": "Philip the Evangelist",
+    "aliases": [
+      "Philip",
+      "Simon the sorcerer",
+      "Simon Magus",
+      "eunuch",
+      "Azotus"
+    ],
+    "scriptureRefs": [
+      "Acts 8:4–40",
+      "Acts 21:8"
+    ],
+    "summary": "Philip preaches in the city of Samaria, meets the Ethiopian on the Gaza road, reappears at Azotus and preaches along the coast to Caesarea, where he later hosts Paul.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Scattering"
+      },
+      {
+        "placeId": "samaria_city",
+        "note": "Revival in the city of Samaria"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Desert road: Ethiopian baptized"
+      },
+      {
+        "placeId": "ashdod",
+        "note": "Found at Azotus"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Settles; hosts Paul (Acts 21:8)"
+      }
+    ],
+    "pathHints": "North to Samaria, south-west to the Gaza road, then up the coast to Caesarea."
+  },
+  {
+    "id": "ethiopian_eunuch",
+    "name": "Ethiopian Official Returns Home",
+    "aliases": [
+      "Ethiopian",
+      "eunuch",
+      "Candace"
+    ],
+    "scriptureRefs": [
+      "Acts 8:26–39"
+    ],
+    "summary": "The Ethiopian treasurer, returning from worship in Jerusalem, is baptized on the road toward Gaza and goes on his way rejoicing.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Worship"
+      },
+      {
+        "placeId": "gaza",
+        "note": "Baptism on the desert road"
+      },
+      {
+        "placeId": "cush",
+        "note": "Kingdom of Candace (Meroë)"
+      }
+    ],
+    "pathHints": "South-west to Gaza, then the coastal road through Egypt up the Nile."
+  },
+  {
+    "id": "saul_damascus_road",
+    "name": "Saul on the Road to Damascus",
+    "aliases": [
+      "Saul",
+      "road to Damascus",
+      "street called Straight",
+      "Ananias"
+    ],
+    "scriptureRefs": [
+      "Acts 9:1–25",
+      "Acts 22:3–16",
+      "Acts 26:9–20"
+    ],
+    "summary": "Saul sets out from Jerusalem with letters against the believers, is confronted by the risen Jesus near Damascus, and is baptized by Ananias.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Letters from the high priest"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Conversion; Straight Street"
+      }
+    ],
+    "pathHints": "North-east via the Jordan valley or Galilee and the Golan to Damascus (about 220 km)."
+  },
+  {
+    "id": "saul_arabia_tarsus",
+    "name": "Saul: Arabia, Damascus, Jerusalem and Tarsus",
+    "aliases": [
+      "let him down",
+      "basket",
+      "Aretas",
+      "Barnabas"
+    ],
+    "scriptureRefs": [
+      "Acts 9:19–30",
+      "Galatians 1:15–24",
+      "2 Corinthians 11:32–33"
+    ],
+    "summary": "After his conversion Saul goes to Arabia, returns to Damascus, escapes over the wall, meets the apostles in Jerusalem, and is sent via Caesarea to Tarsus.",
+    "stops": [
+      {
+        "placeId": "damascus",
+        "note": "Preaches; plot"
+      },
+      {
+        "placeId": "arabia",
+        "note": "Withdrawal (Gal 1:17)"
+      },
+      {
+        "placeId": "damascus",
+        "note": "Escape in a basket"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Meets Cephas and James"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Sent off by sea"
+      },
+      {
+        "placeId": "tarsus",
+        "note": "Hometown; years in Syria and Cilicia"
+      }
+    ],
+    "pathHints": "Damascus ↔ Nabataean Arabia; Damascus to Jerusalem; coastal departure to Tarsus."
+  },
+  {
+    "id": "barnabas_saul_antioch",
+    "name": "Barnabas, Saul and the Antioch Church",
+    "aliases": [
+      "Agabus",
+      "famine",
+      "relief",
+      "Barnabas"
+    ],
+    "scriptureRefs": [
+      "Acts 11:22–30",
+      "Acts 12:25"
+    ],
+    "summary": "Barnabas is sent to Antioch, fetches Saul from Tarsus, and both take famine relief to Jerusalem before returning with John Mark.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Barnabas sent"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Church grows; 'Christians'"
+      },
+      {
+        "placeId": "tarsus",
+        "note": "Fetches Saul"
+      },
+      {
+        "placeId": "antioch",
+        "note": "A year of teaching"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Famine relief"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Return with John Mark"
+      }
+    ],
+    "pathHints": "Levant coastal road and Cilician coast; repeated legs."
+  },
+  {
+    "id": "herod_agrippa_caesarea",
+    "name": "Peter's Escape and Herod's Death",
+    "aliases": [
+      "Herod",
+      "Blastus",
+      "eaten by worms",
+      "Rhoda"
+    ],
+    "scriptureRefs": [
+      "Acts 12"
+    ],
+    "summary": "Herod Agrippa I executes James, imprisons Peter (who is freed by an angel), then goes to Caesarea, where Tyre and Sidon sue for peace and he dies.",
+    "stops": [
+      {
+        "placeId": "jerusalem",
+        "note": "Peter freed from prison"
+      },
+      {
+        "placeId": "caesarea",
+        "note": "Herod's speech and death"
+      }
+    ],
+    "pathHints": "Jerusalem to the coast at Caesarea; Tyre and Sidon delegations from the north."
+  },
+  {
+    "id": "jerusalem_council",
+    "name": "Journey to the Jerusalem Council",
+    "aliases": [
+      "apostles and elders",
+      "Judas called Barsabbas",
+      "Silas",
+      "circumcised"
+    ],
+    "scriptureRefs": [
+      "Acts 15:1–35",
+      "Galatians 2:1–14"
+    ],
+    "summary": "Paul and Barnabas travel from Antioch through Phoenicia and Samaria to the Jerusalem council and return with the apostolic letter.",
+    "stops": [
+      {
+        "placeId": "antioch",
+        "note": "Dispute over circumcision"
+      },
+      {
+        "placeId": "phoenicia",
+        "note": "Reporting conversions"
+      },
+      {
+        "placeId": "samaria_region",
+        "note": "Reporting conversions"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Council"
+      },
+      {
+        "placeId": "antioch",
+        "note": "Letter delivered"
+      }
+    ],
+    "pathHints": "South along the Phoenician coast and through Samaria; return by the same road."
+  },
+  {
+    "id": "apollos_travels",
+    "name": "Apollos from Alexandria to Corinth",
+    "aliases": [
+      "Apollos",
+      "Aquila and Priscilla",
+      "Priscilla and Aquila"
+    ],
+    "scriptureRefs": [
+      "Acts 18:24–28",
+      "Acts 19:1"
+    ],
+    "summary": "Apollos of Alexandria teaches in Ephesus, is instructed by Priscilla and Aquila, and goes to Achaia (Corinth).",
+    "stops": [
+      {
+        "placeId": "alexandria",
+        "note": "Hometown"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Instructed more accurately"
+      },
+      {
+        "placeId": "corinth",
+        "note": "Waters what Paul planted (1 Cor 3:6)"
+      }
+    ],
+    "pathHints": "Sea route Alexandria → Ephesus → across the Aegean to Corinth."
+  },
+  {
+    "id": "paul_planned_spain",
+    "name": "Paul's Planned Journey to Spain",
+    "aliases": [
+      "Spain",
+      "contribution for the poor",
+      "collection"
+    ],
+    "scriptureRefs": [
+      "Romans 15:22–33"
+    ],
+    "summary": "Writing from Corinth, Paul plans to take the collection to Jerusalem, then visit Rome on his way to Spain.",
+    "stops": [
+      {
+        "placeId": "corinth",
+        "note": "Letter written (Rom 16:1, 23)"
+      },
+      {
+        "placeId": "jerusalem",
+        "note": "Collection delivered"
+      },
+      {
+        "placeId": "rome",
+        "note": "Visit on the way"
+      },
+      {
+        "placeId": "spain",
+        "note": "Intended new mission field"
+      }
+    ],
+    "pathHints": "Planned, not narrated; draw dashed."
+  },
+  {
+    "id": "timothy_to_thessalonica",
+    "name": "Timothy Sent Back to Thessalonica",
+    "aliases": [
+      "Timothy",
+      "Silas"
+    ],
+    "scriptureRefs": [
+      "1 Thessalonians 3",
+      "Acts 17:14–16",
+      "Acts 18:5"
+    ],
+    "summary": "From Athens Paul sends Timothy back to strengthen the Thessalonians; Timothy rejoins Paul in Corinth with good news.",
+    "stops": [
+      {
+        "placeId": "athens",
+        "note": "Paul waits"
+      },
+      {
+        "placeId": "thessalonica",
+        "note": "Timothy strengthens the church"
+      },
+      {
+        "placeId": "corinth",
+        "note": "Timothy and Silas arrive from Macedonia"
+      }
+    ],
+    "pathHints": "Athens north to Thessalonica, then south to Corinth."
+  },
+  {
+    "id": "epaphroditus_courier",
+    "name": "Epaphroditus between Philippi and Rome",
+    "aliases": [
+      "Epaphroditus"
+    ],
+    "scriptureRefs": [
+      "Philippians 2:25–30",
+      "Philippians 4:10–20"
+    ],
+    "summary": "Epaphroditus brings the Philippians' gift to the imprisoned Paul, falls ill, recovers and carries the letter home.",
+    "stops": [
+      {
+        "placeId": "philippi",
+        "note": "Sending church"
+      },
+      {
+        "placeId": "rome",
+        "note": "Paul imprisoned (Caesar's household, Phil 4:22)"
+      },
+      {
+        "placeId": "philippi",
+        "note": "Return with the letter"
+      }
+    ],
+    "pathHints": "Via Egnatia west to the Adriatic, crossing to Brundisium, Via Appia to Rome (assumes a Roman imprisonment)."
+  },
+  {
+    "id": "colossian_couriers",
+    "name": "Tychicus and Onesimus to Colossae",
+    "aliases": [
+      "Tychicus",
+      "Onesimus",
+      "Archippus"
+    ],
+    "scriptureRefs": [
+      "Colossians 4",
+      "Ephesians 6:21–22",
+      "Philemon 1"
+    ],
+    "summary": "Tychicus and the returning slave Onesimus carry Colossians, Ephesians and Philemon from the imprisoned Paul to the Lycus valley.",
+    "stops": [
+      {
+        "placeId": "rome",
+        "note": "Paul in custody (Ephesus and Caesarea are alternative proposals)"
+      },
+      {
+        "placeId": "ephesus",
+        "note": "Port of entry to Asia"
+      },
+      {
+        "placeId": "laodicea",
+        "note": "Letter exchange (Col 4:16)"
+      },
+      {
+        "placeId": "colossae",
+        "note": "Philemon's house church"
+      }
+    ],
+    "pathHints": "Sea route to Ephesus, then the road up the Maeander and Lycus valleys."
+  },
+  {
+    "id": "first_peter_circuit",
+    "name": "Circuit of 1 Peter's Provinces",
+    "aliases": [
+      "elect sojourners",
+      "Dispersion",
+      "chosen ones who are living as foreigners"
+    ],
+    "scriptureRefs": [
+      "1 Peter 1"
+    ],
+    "summary": "1 Peter is addressed to believers in Pontus, Galatia, Cappadocia, Asia and Bithynia — probably the courier's route — from 'Babylon' (Rome, 5:13).",
+    "stops": [
+      {
+        "placeId": "pontus",
+        "note": "Landing on the Black Sea coast"
+      },
+      {
+        "placeId": "galatia",
+        "note": ""
+      },
+      {
+        "placeId": "cappadocia",
+        "note": ""
+      },
+      {
+        "placeId": "asia_province",
+        "note": ""
+      },
+      {
+        "placeId": "bithynia",
+        "note": "Circuit ends"
+      }
+    ],
+    "pathHints": "Clockwise circuit through Anatolian provinces; region centroids only."
+  },
+  {
+    "id": "seven_churches_circuit",
+    "name": "Letters to the Seven Churches",
+    "aliases": [
+      "seven churches",
+      "seven assemblies",
+      "seven congregations",
+      "seven lampstands"
+    ],
+    "scriptureRefs": [
+      "Revelation 1–3"
+    ],
+    "summary": "From Patmos John addresses seven churches of Asia in the order a courier would visit them along the Roman road loop.",
+    "stops": [
+      {
+        "placeId": "patmos",
+        "note": "John's exile"
+      },
+      {
+        "placeId": "ephesus",
+        "note": ""
+      },
+      {
+        "placeId": "smyrna",
+        "note": ""
+      },
+      {
+        "placeId": "pergammum",
+        "note": ""
+      },
+      {
+        "placeId": "thyatira",
+        "note": ""
+      },
+      {
+        "placeId": "sardis",
+        "note": ""
+      },
+      {
+        "placeId": "philadelphia_asia",
+        "note": ""
+      },
+      {
+        "placeId": "laodicea",
+        "note": ""
+      }
+    ],
+    "pathHints": "Patmos to Ephesus by sea, then the circular road north to Pergamum and south-east to Laodicea."
+  }
+]
