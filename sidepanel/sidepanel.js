@@ -1364,7 +1364,11 @@
           source: "kingdoms",
           paint: {
             "fill-color": ["coalesce", ["get", "color"], "#4a6741"],
-            "fill-opacity": ["coalesce", ["get", "fillOpacity"], 0.28],
+            "fill-opacity": [
+              "max",
+              0.24,
+              ["coalesce", ["get", "fillOpacity"], 0.28],
+            ],
           },
         });
         map.addLayer({
@@ -1881,6 +1885,7 @@
         els.referencePlateImg.hidden = true;
         els.referencePlateImg.removeAttribute("src");
       }
+      if (els.referencePlate) els.referencePlate.open = false;
       if (els.referencePlateNote) {
         els.referencePlateNote.textContent =
           "No bundled plate for this era — the interactive map above is the basemap.";
@@ -1890,9 +1895,10 @@
     els.referencePlateImg.src = chrome.runtime.getURL(`media/historical/${file}`);
     els.referencePlateImg.alt = preset.title || "Reference atlas plate";
     els.referencePlateImg.hidden = false;
+    if (els.referencePlate) els.referencePlate.open = true;
     if (els.referencePlateNote) {
       els.referencePlateNote.textContent =
-        "Static reference art (not georeferenced). Pins use gazetteer coordinates on the MapLibre basemap.";
+        "Region names (Macedonia, Cappadocia, Asia, etc.) are on this plate. The live map uses pins + the Era outline for empire borders.";
     }
   }
 
