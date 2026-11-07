@@ -16,6 +16,8 @@
   const LABELS_KEY = "bibleMapsBasemapLabels";
   const DOCK_HEIGHT_KEY = "bibleMapsDockHeight";
   const DOCK_HINT_DISMISSED_KEY = "bibleMapsDockHintDismissed";
+  const DOCK_UI_VERSION_KEY = "bibleMapsDockUiVersion";
+  const DOCK_UI_VERSION = 2;
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
@@ -39,6 +41,7 @@
     teachingMap: document.getElementById("teachingMap"),
     mapHelp: document.getElementById("mapHelp"),
     dockGrabberHint: document.getElementById("dockGrabberHint"),
+    showPlacesBtn: document.getElementById("showPlacesBtn"),
     stopListWrap: document.getElementById("stopListWrap"),
     stopList: document.getElementById("stopList"),
     referencePlate: document.getElementById("referencePlate"),
@@ -1609,10 +1612,26 @@
     syncDockGrabberHint();
   }
 
+  function defaultDockHeight() {
+    return Math.round(Math.min(Math.max(window.innerHeight * 0.52, 240), 480));
+  }
+
+  function expandDockPanel() {
+    applyDockHeight(defaultDockHeight());
+    syncDockGrabberHint();
+  }
+
   function loadDockHeight() {
     try {
-      const n = Number(localStorage.getItem(DOCK_HEIGHT_KEY));
-      if (Number.isFinite(n) && n >= 100) dockHeightPx = n;
+      const uiVer = Number(localStorage.getItem(DOCK_UI_VERSION_KEY));
+      if (!Number.isFinite(uiVer) || uiVer < DOCK_UI_VERSION) {
+        dockHeightPx = defaultDockHeight();
+        localStorage.setItem(DOCK_UI_VERSION_KEY, String(DOCK_UI_VERSION));
+        localStorage.removeItem(DOCK_HINT_DISMISSED_KEY);
+      } else {
+        const n = Number(localStorage.getItem(DOCK_HEIGHT_KEY));
+        if (Number.isFinite(n) && n >= 100) dockHeightPx = n;
+      }
     } catch {
       /* ignore */
     }
@@ -1621,28 +1640,23 @@
   }
 
   function dismissDockGrabberHint() {
-    if (els.dockGrabberHint) els.dockGrabberHint.hidden = true;
     try {
       localStorage.setItem(DOCK_HINT_DISMISSED_KEY, "1");
     } catch {
       /* ignore */
     }
+    syncDockGrabberHint();
   }
 
   function syncDockGrabberHint() {
     if (!els.dockGrabberHint) return;
-    let dismissed = false;
-    try {
-      dismissed = localStorage.getItem(DOCK_HINT_DISMISSED_KEY) === "1";
-    } catch {
-      /* ignore */
-    }
-    const cramped = dockHeightPx <= clampDockHeight(168) + 8;
-    els.dockGrabberHint.hidden = dismissed && !cramped;
-    if (!dismissed && cramped) {
-      els.dockGrabberHint.textContent = "Drag up for places & journeys";
-    } else if (!dismissed) {
-      els.dockGrabberHint.textContent = "Drag to resize";
+    const cramped = dockHeightPx <= clampDockHeight(200);
+    els.dockGrabberHint.hidden = false;
+    els.dockGrabberHint.textContent = cramped
+      ? "↑ Drag up for places & journeys (or tap Places ↑ on the map)"
+      : "Drag handle to resize · double-click to expand";
+    if (els.showPlacesBtn) {
+      els.showPlacesBtn.hidden = !cramped;
     }
   }
 
@@ -1664,6 +1678,11 @@
   }
 
   function initDockGrabber() {
+    els.showPlacesBtn?.addEventListener("click", () => {
+      expandDockPanel();
+      showPlacesTab();
+      dismissDockGrabberHint();
+    });
     const grab = els.dockGrabber;
     if (!grab) return;
     grab.addEventListener("pointerdown", (e) => {

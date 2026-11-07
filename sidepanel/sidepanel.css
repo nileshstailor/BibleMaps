@@ -180,6 +180,31 @@ body.app-shell {
   display: none;
 }
 
+.show-places-btn {
+  position: absolute;
+  z-index: 3;
+  left: 10px;
+  bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--surface-dock);
+  color: var(--terra);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+
+.show-places-btn:hover {
+  filter: brightness(1.03);
+}
+
+.show-places-btn[hidden] {
+  display: none;
+}
+
 .dock-grabber span {
   display: block;
   width: 34px;
