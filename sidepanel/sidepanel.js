@@ -198,9 +198,18 @@
       .trim();
   }
 
+  function provinceOverlayFeatures(feats) {
+    return (feats || []).filter((f) => {
+      const id = String(f?.properties?.id || "");
+      return id && !id.startsWith("roman_empire");
+    });
+  }
+
   function renderKingdomLegend() {
     if (!els.kingdomLegend) return;
-    const feats = kingdomsGeoJson?.features || [];
+    const all = kingdomsGeoJson?.features || [];
+    const feats =
+      provinceOverlayFeatures(all).length > 0 ? provinceOverlayFeatures(all) : all;
     if (!feats.length) {
       els.kingdomLegend.innerHTML = "";
       return;
@@ -830,7 +839,10 @@
   function addKingdomLabels(map) {
     clearKingdomLabels();
     if (!map || !kingdomsGeoJson?.features?.length) return;
-    for (const f of kingdomsGeoJson.features) {
+    const all = kingdomsGeoJson.features;
+    const feats =
+      provinceOverlayFeatures(all).length > 0 ? provinceOverlayFeatures(all) : all;
+    for (const f of feats) {
       const p = f.properties || {};
       const lng = Number(p.labelLng);
       const lat = Number(p.labelLat);
