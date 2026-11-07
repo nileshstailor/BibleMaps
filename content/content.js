@@ -204,41 +204,11 @@
           pointer-events: none;
         }
         .toast.show { opacity: 1; transform: translateY(0); }
-        .hover-chip {
-          position: fixed;
-          display: none;
-          z-index: 2147483647;
-          pointer-events: auto;
-          transform: translate(-50%, -120%);
-          padding: 6px 10px;
-          border: none;
-          border-radius: 8px;
-          background: #2f5d3a;
-          color: #f3fff5;
-          font: 12px/1.3 Georgia, "Times New Roman", serif;
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
-          cursor: pointer;
-          white-space: nowrap;
-        }
-        .hover-chip:hover { filter: brightness(1.08); }
-        .hover-chip.show { display: inline-flex; align-items: center; gap: 6px; }
-        .hover-chip small { opacity: 0.85; font-size: 10px; }
       </style>
       <div class="toast"></div>
-      <button type="button" class="hover-chip" aria-label="Open Bible Maps side panel"></button>
     `;
     document.documentElement.appendChild(host);
     host._bmShadow = shadow;
-    const chip = shadow.querySelector(".hover-chip");
-    chip.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      openPanelForHit(chip._bmHit);
-    });
-    chip.addEventListener("mouseenter", () => {
-      clearTimeout(hideHoverChip._t);
-    });
-    chip.addEventListener("mouseleave", () => hideHoverChip(180));
     return host;
   }
 
@@ -249,41 +219,6 @@
     toast.classList.add("show");
     clearTimeout(showToast._t);
     showToast._t = setTimeout(() => toast.classList.remove("show"), 2800);
-  }
-
-  function showHoverChip(hit, clientX, clientY) {
-    const host = ensureUiHost();
-    const chip = host._bmShadow.querySelector(".hover-chip");
-    chip._bmHit = hit;
-    const name = hit.place?.name || "Place";
-    const blurb = String(hit.place?.pinBlurb || hit.place?.eraNotes || "")
-      .replace(/\s+/g, " ")
-      .trim();
-    const tip =
-      blurb.length > 110
-        ? `${blurb.slice(0, 107).replace(/\s+\S*$/, "")}…`
-        : blurb;
-    const esc = (s) =>
-      String(s)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/"/g, "&quot;");
-    chip.innerHTML = tip
-      ? `<span>${esc(name)}</span><small>Why this pin</small>`
-      : `<span>${esc(name)}</span><small>Show on map</small>`;
-    chip.title = tip || "Show on map";
-    chip.style.left = `${Math.min(window.innerWidth - 20, Math.max(20, clientX))}px`;
-    chip.style.top = `${Math.max(28, clientY)}px`;
-    chip.classList.add("show");
-    clearTimeout(hideHoverChip._t);
-  }
-
-  function hideHoverChip(delay = 0) {
-    clearTimeout(hideHoverChip._t);
-    hideHoverChip._t = setTimeout(() => {
-      const host = document.getElementById("bible-maps-toast-host");
-      host?._bmShadow?.querySelector(".hover-chip")?.classList.remove("show");
-    }, delay);
   }
 
   function openPanelForHit(hit) {
@@ -319,8 +254,6 @@
       shutdown(String(err?.message || err));
       return;
     }
-    showToast(`${hit.place?.name || "Place"} — Bible Maps panel`);
-    hideHoverChip(0);
   }
 
   function warnIfLegacyMarks() {
@@ -495,18 +428,6 @@
     openPanelForHit(hit);
   }
 
-  function onMouseMove(event) {
-    if (STATE.dead || !STATE.hits.length) {
-      hideHoverChip(0);
-      return;
-    }
-    // Ignore when over our own chip host (chip handles its own leave).
-    if (event.target?.id === "bible-maps-toast-host") return;
-    const hit = hitFromPoint(event.clientX, event.clientY);
-    if (hit) showHoverChip(hit, event.clientX, event.clientY);
-    else hideHoverChip(120);
-  }
-
   function observeDom() {
     if (STATE.dead) return;
     if (STATE.observer) STATE.observer.disconnect();
@@ -599,7 +520,6 @@
     if (STATE.dead || !STATE.ready) return;
 
     document.addEventListener("click", onClick, true);
-    document.addEventListener("mousemove", onMouseMove, { passive: true });
     observeSpaNavigation();
     const start = () => {
       if (STATE.dead) return;

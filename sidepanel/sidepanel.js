@@ -516,18 +516,12 @@
       row.dataset.placeId = place.id || place.name;
       if (openPlaceIds.has(row.dataset.placeId)) row.open = true;
       const modern = place.modernName ? ` · ${place.modernName}` : "";
-      const why = whyThisPinText(place);
       row.innerHTML = `
         <summary>
           <span class="acc-title">${escapeHtml(place.name)}</span>
           <span class="acc-aside">${escapeHtml(modern)}</span>
         </summary>
         <div class="acc-body">
-          ${
-            why
-              ? `<p class="why-pin"><span class="why-pin-label">Why this pin</span>${escapeHtml(why)}</p>`
-              : ""
-          }
           <div class="actions">
             <a class="primary-btn" href="${escapeAttr(googlePlaceUrl(place))}" target="_blank" rel="noopener">
               Open in Google Maps
