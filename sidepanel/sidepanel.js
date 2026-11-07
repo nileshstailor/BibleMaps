@@ -693,7 +693,7 @@
     setJourneyMapsLink(visibleJourneyStops(journey));
     fillJourneyStopList(journey);
     updateJourneyMapButtons();
-    requestAnimationFrame(() => renderMap());
+    refreshJourneyMapView();
   }
 
   function hideJourneyFromMap() {
@@ -710,7 +710,26 @@
     setPlacesMapsLink(places);
     hideStopList();
     updateJourneyMapButtons();
-    requestAnimationFrame(() => renderMap());
+    refreshJourneyMapView();
+  }
+
+  function refreshJourneyMapView() {
+    const apply = () => {
+      if (!maplibreMap) {
+        requestAnimationFrame(() => renderMap());
+        return;
+      }
+      const preset = resolvePreset();
+      const showKingdoms =
+        Boolean(preset?.showKingdoms) &&
+        Boolean(kingdomsGeoJson?.features?.length) &&
+        Boolean(els.kingdomsToggle?.checked);
+      applyMapViewportNow();
+      updateMapOverlays(maplibreMap, preset, showKingdoms);
+      lastMapFingerprint = mapFingerprint();
+      lastMapPresetId = preset?.id || "";
+    };
+    requestAnimationFrame(apply);
   }
 
   function toggleJourneyOnMap(journey) {
@@ -1292,6 +1311,7 @@
         padding: pts.length === 1 ? 60 : 48,
         maxZoom: oneStop,
         duration: animate ? JOURNEY_FIT_ANIM_MS : 0,
+        essential: true,
       });
       return;
     }
@@ -1563,6 +1583,9 @@
     const focused =
       focusedPlaceId && findPlaceById(focusedPlaceId);
     const keepCamera = Boolean(placeCameraBusy || focused);
+    if (!placeCameraBusy && !dockDragging) {
+      applyMapViewportNow();
+    }
     if (keepCamera) {
       if (focused) setPlacesMapsLink([focused]);
       setMapHelp("", false);
@@ -1574,9 +1597,6 @@
       pendingOverviewAnimate = false;
       fitToChapter(map, preset, fitPts, { animate });
       setMapHelp("", false);
-    }
-    if (!placeCameraBusy) {
-      syncDockMapViewport();
     }
   }
 
@@ -2098,8 +2118,6 @@
     updateMapOverlays(map, preset, showKingdoms);
     lastMapFingerprint = fp;
     lastMapPresetId = presetId;
-
-    syncDockMapViewport();
   }
 
   async function renderMap(opts = {}) {
