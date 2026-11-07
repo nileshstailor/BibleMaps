@@ -146,7 +146,6 @@
         "acts"
       ],
       "showKingdoms": true,
-      "baseOverlay": "overlays/roman-empire-ad69.json",
       "overlay": "overlays/roman-provinces-mediterranean.json",
       "referencePlate": "paul-first.jpg",
       "bounds": [
@@ -171,7 +170,6 @@
         "acts"
       ],
       "showKingdoms": true,
-      "baseOverlay": "overlays/roman-empire-ad69.json",
       "overlay": "overlays/roman-provinces-mediterranean.json",
       "referencePlate": "paul-second.jpg",
       "bounds": [
@@ -196,7 +194,6 @@
         "acts"
       ],
       "showKingdoms": true,
-      "baseOverlay": "overlays/roman-empire-ad69.json",
       "overlay": "overlays/roman-provinces-mediterranean.json",
       "referencePlate": "paul-third.jpg",
       "bounds": [
@@ -221,7 +218,6 @@
         "acts"
       ],
       "showKingdoms": true,
-      "baseOverlay": "overlays/roman-empire-ad69.json",
       "overlay": "overlays/roman-provinces-mediterranean.json",
       "referencePlate": "paul-rome.jpg",
       "bounds": [
