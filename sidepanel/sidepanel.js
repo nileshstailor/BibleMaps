@@ -68,10 +68,12 @@
   let kingdomLabelMarkers = [];
   let mapMountGen = 0;
   let basemapType = "map";
-  let basemapLabels = true;
+  let basemapLabels = false;
   let dockHeightPx = 340;
   let dockDragStart = null;
   let pendingOverviewAnimate = false;
+  let placeFocusGen = 0;
+  let lastFocusedLngLat = null;
   let lastMapFingerprint = "";
   let lastMapPresetId = "";
   let lastPlacesFingerprint = "";
@@ -683,6 +685,7 @@
 
   function hideJourneyFromMap() {
     requestOverviewFit(true);
+    lastFocusedLngLat = null;
     journeyOnMap = false;
     activeJourney = null;
     // Keep chapter places on the map; clear the journey route/chrome.
@@ -851,16 +854,121 @@
     return row;
   }
 
-  function easeMapToPlace(place, { animate = true } = {}) {
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
+  }
+
+  function approxDistanceKm(a, b) {
+    const toRad = (d) => (d * Math.PI) / 180;
+    const lat1 = toRad(a.lat);
+    const lat2 = toRad(b.lat);
+    const dLat = lat2 - lat1;
+    const dLon = toRad(b.lng - a.lng);
+    const x =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
+    return (6371 * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x)));
+  }
+
+  function waitMapMoveEnd(map, gen) {
+    return new Promise((resolve) => {
+      if (gen !== placeFocusGen) {
+        resolve(false);
+        return;
+      }
+      const done = () => {
+        map.off("moveend", done);
+        resolve(gen === placeFocusGen);
+      };
+      map.once("moveend", done);
+    });
+  }
+
+  async function easeMapStep(map, { center, zoom, duration }, gen) {
+    if (gen !== placeFocusGen) return false;
+    map.easeTo({
+      center,
+      zoom,
+      duration,
+      easing: easeInOutQuad,
+      essential: true,
+    });
+    return waitMapMoveEnd(map, gen);
+  }
+
+  /** iOS-style place dive: pull out, then ease into town-scale (multi-leg when hopping). */
+  async function cinematicFocusPlace(place) {
     if (!maplibreMap || !place) return false;
     if (!Number.isFinite(place.lat) || !Number.isFinite(place.lng)) return false;
-    const camera = {
-      center: [place.lng, place.lat],
-      zoom: PLACE_FOCUS_ZOOM,
-      duration: animate ? 750 : 0,
-    };
-    if (animate) maplibreMap.easeTo(camera);
-    else maplibreMap.jumpTo({ center: camera.center, zoom: camera.zoom });
+    const gen = ++placeFocusGen;
+    const map = maplibreMap;
+    const to = [place.lng, place.lat];
+    const prior = lastFocusedLngLat;
+
+    if (!prior) {
+      const c = map.getCenter();
+      const currentZoom = map.getZoom();
+      const pullZoom = Math.max(5.2, Math.min(currentZoom - 2, 7.5));
+      const ok1 = await easeMapStep(
+        map,
+        { center: [c.lng, c.lat], zoom: pullZoom, duration: 2000 },
+        gen
+      );
+      if (!ok1) return false;
+      const ok2 = await easeMapStep(
+        map,
+        { center: to, zoom: PLACE_FOCUS_ZOOM, duration: 2450 },
+        gen
+      );
+      if (!ok2) return false;
+    } else {
+      const km = approxDistanceKm(
+        { lat: prior[1], lng: prior[0] },
+        { lat: place.lat, lng: place.lng }
+      );
+      if (km < 120) {
+        const bounds = new maplibregl.LngLatBounds();
+        bounds.extend(prior);
+        bounds.extend(to);
+        if (gen !== placeFocusGen) return false;
+        map.fitBounds(bounds, {
+          padding: 72,
+          maxZoom: 9,
+          duration: 2000,
+          easing: easeInOutQuad,
+          essential: true,
+        });
+        const ok1 = await waitMapMoveEnd(map, gen);
+        if (!ok1) return false;
+        const ok2 = await easeMapStep(
+          map,
+          { center: to, zoom: PLACE_FOCUS_ZOOM, duration: 2400 },
+          gen
+        );
+        if (!ok2) return false;
+      } else {
+        const farZoom = 6.2;
+        const ok1 = await easeMapStep(
+          map,
+          { center: prior, zoom: farZoom, duration: 2200 },
+          gen
+        );
+        if (!ok1) return false;
+        const ok2 = await easeMapStep(
+          map,
+          { center: to, zoom: farZoom, duration: 2200 },
+          gen
+        );
+        if (!ok2) return false;
+        const ok3 = await easeMapStep(
+          map,
+          { center: to, zoom: PLACE_FOCUS_ZOOM, duration: 2600 },
+          gen
+        );
+        if (!ok3) return false;
+      }
+    }
+    if (gen === placeFocusGen) lastFocusedLngLat = to;
     return true;
   }
 
@@ -873,14 +981,14 @@
     const place = findPlaceById(placeId);
     if (!place) return;
 
-    const fly = () => {
+    const fly = async () => {
       if (!maplibreMap) return;
-      easeMapToPlace(place, { animate: true });
       const { focusPts } = chapterFocusPoints();
       clearMarkers();
       addDomMarkers(maplibreMap, focusPts, { dim: false });
       setPlacesMapsLink([place]);
       setMapHelp("", false);
+      await cinematicFocusPlace(place);
     };
 
     if (!maplibreMap) {
@@ -888,9 +996,13 @@
     }
     if (!maplibreMap) return;
     if (typeof maplibreMap.isStyleLoaded === "function" && !maplibreMap.isStyleLoaded()) {
-      maplibreMap.once("idle", fly);
+      maplibreMap.once("idle", () => {
+        fly();
+      });
     } else {
-      requestAnimationFrame(fly);
+      requestAnimationFrame(() => {
+        fly();
+      });
     }
   }
 
@@ -916,19 +1028,22 @@
     await renderMap();
     if (!maplibreMap) return;
 
-    const fly = () => {
-      easeMapToPlace(place, { animate: true });
-      // Refresh markers so the focused pin gets the highlight class.
+    const fly = async () => {
       const { focusPts } = chapterFocusPoints();
       clearMarkers();
       addDomMarkers(maplibreMap, focusPts, { dim: false });
       setPlacesMapsLink([place]);
       setMapHelp("", false);
+      await cinematicFocusPlace(place);
     };
     if (typeof maplibreMap.isStyleLoaded === "function" && !maplibreMap.isStyleLoaded()) {
-      maplibreMap.once("idle", fly);
+      maplibreMap.once("idle", () => {
+        fly();
+      });
     } else {
-      requestAnimationFrame(fly);
+      requestAnimationFrame(() => {
+        fly();
+      });
     }
   }
 
@@ -1446,7 +1561,7 @@
     addDomMarkers(map, focusPts, { dim: false });
     const focused =
       focusedPlaceId && findPlaceById(focusedPlaceId);
-    if (focused && easeMapToPlace(focused, { animate: false })) {
+    if (focused) {
       setPlacesMapsLink([focused]);
       setMapHelp("", false);
     } else {
@@ -1567,7 +1682,7 @@
 
   async function loadBasemapPrefs() {
     let mapType = "map";
-    let labels = true;
+    let labels = false;
     try {
       const stored = await chrome.storage?.local?.get?.([MAP_TYPE_KEY, LABELS_KEY]);
       if (stored?.[MAP_TYPE_KEY] === "satellite" || stored?.[MAP_TYPE_KEY] === "map") {
@@ -2015,6 +2130,8 @@
 
     if (payload.url && payload.url !== prevUrl) {
       focusedPlaceId = null;
+      lastFocusedLngLat = null;
+      placeFocusGen += 1;
     }
 
     activePlaceMarkers = payload.places || [];
