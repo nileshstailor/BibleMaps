@@ -1576,7 +1576,7 @@
       setMapHelp("", false);
     }
     if (!placeCameraBusy) {
-      scheduleMapResize();
+      syncDockMapViewport();
     }
   }
 
@@ -1605,41 +1605,35 @@
     return Math.round(Math.min(Math.max(h * 0.52, 260), 520));
   }
 
-  function scheduleMapResize() {
-    if (!maplibreMap) return;
-    if (dockDragging) return;
-    if (mapResizeRaf) cancelAnimationFrame(mapResizeRaf);
-    mapResizeRaf = requestAnimationFrame(() => {
-      mapResizeRaf = 0;
-      try {
-        maplibreMap.resize();
-      } catch {
-        /* ignore */
-      }
-    });
-  }
-
-  function flushMapResizeAfterDock() {
-    if (!maplibreMap) return;
-    if (mapResizeRaf) {
-      cancelAnimationFrame(mapResizeRaf);
-      mapResizeRaf = 0;
-    }
+  function applyMapViewportNow() {
+    if (!maplibreMap || dockDragging) return;
     try {
+      const bottom = Math.round(dockHeightPx);
+      maplibreMap.setPadding({ top: 0, bottom, left: 0, right: 0 });
       maplibreMap.resize();
     } catch {
       /* ignore */
     }
-    requestAnimationFrame(() => {
-      try {
-        maplibreMap?.resize();
-      } catch {
-        /* ignore */
-      }
+  }
+
+  function scheduleMapResize() {
+    if (!maplibreMap || dockDragging) return;
+    if (mapResizeRaf) return;
+    mapResizeRaf = requestAnimationFrame(() => {
+      mapResizeRaf = 0;
+      applyMapViewportNow();
     });
   }
 
-  function applyDockHeight(px, { persist = true, resizeMap = true } = {}) {
+  function syncDockMapViewport() {
+    if (mapResizeRaf) {
+      cancelAnimationFrame(mapResizeRaf);
+      mapResizeRaf = 0;
+    }
+    applyMapViewportNow();
+  }
+
+  function applyDockHeight(px, { persist = true, syncMap = true } = {}) {
     dockHeightPx = clampDockHeight(px);
     document.documentElement.style.setProperty("--dock-height", `${dockHeightPx}px`);
     if (persist) {
@@ -1649,7 +1643,7 @@
         /* ignore */
       }
     }
-    if (resizeMap) scheduleMapResize();
+    if (syncMap && !dockDragging) syncDockMapViewport();
     const peek = dockPeekHeight();
     els.mapDock?.classList.toggle("is-dock-peek", dockHeightPx <= peek + 10);
     if (!dockDragging) syncDockGrabberHint();
@@ -1770,14 +1764,13 @@
       dockDragStart = null;
       dockDragging = false;
       document.body.classList.remove("is-dock-dragging");
-      applyDockHeight(dockHeightPx, { persist: true, resizeMap: false });
-      flushMapResizeAfterDock();
+      applyDockHeight(dockHeightPx, { persist: true, syncMap: true });
       syncDockGrabberHint();
     };
     grab.addEventListener("pointermove", (e) => {
       if (!dockDragStart) return;
       const delta = dockDragStart.y - e.clientY;
-      applyDockHeight(dockDragStart.h + delta, { persist: false, resizeMap: false });
+      applyDockHeight(dockDragStart.h + delta, { persist: false, syncMap: false });
     });
     grab.addEventListener("pointerup", endDockDrag);
     grab.addEventListener("pointercancel", endDockDrag);
@@ -2037,7 +2030,7 @@
 
     if (canReuse) {
       if (fp === lastMapFingerprint) {
-        scheduleMapResize();
+        syncDockMapViewport();
         return;
       }
       updateMapOverlays(maplibreMap, preset, showKingdoms);
@@ -2103,8 +2096,7 @@
     lastMapFingerprint = fp;
     lastMapPresetId = presetId;
 
-    map.resize();
-    scheduleMapResize();
+    syncDockMapViewport();
   }
 
   async function renderMap(opts = {}) {

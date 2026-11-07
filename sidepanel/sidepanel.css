@@ -87,19 +87,18 @@ body.app-shell {
   max-height: 100vh;
   overflow: hidden;
   background: var(--bg-grad-1);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  position: relative;
   padding: 0;
 }
 
 .map-stage {
-  flex: 1 1 auto;
-  min-height: 120px;
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
-  position: relative;
+  min-height: 0;
   background: var(--map-frame);
+  z-index: 1;
 }
 
 .map-stage-toolbar {
@@ -145,7 +144,12 @@ body.app-shell {
 }
 
 .bottom-dock {
-  flex: 0 0 var(--dock-height, 228px);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  height: var(--dock-height, 228px);
   min-height: 200px;
   max-height: 78vh;
   display: flex;
@@ -155,6 +159,11 @@ body.app-shell {
   border-radius: 18px 18px 0 0;
   box-shadow: 0 -8px 28px rgba(44, 36, 22, 0.14);
   overflow: hidden;
+  touch-action: none;
+}
+
+body.is-dock-dragging .bottom-dock {
+  transition: none;
 }
 
 .dock-grabber {
@@ -188,7 +197,7 @@ body.app-shell {
   position: absolute;
   z-index: 3;
   left: 10px;
-  bottom: 12px;
+  bottom: calc(var(--dock-height, 228px) + 12px);
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 8px 14px;
@@ -295,7 +304,7 @@ body.app-shell {
   position: absolute;
   z-index: 3;
   right: 10px;
-  bottom: 12px;
+  bottom: calc(var(--dock-height, 228px) + 12px);
   display: flex;
   flex-direction: column;
   gap: 6px;
