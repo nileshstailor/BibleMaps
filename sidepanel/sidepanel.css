@@ -145,8 +145,8 @@ body.app-shell {
 }
 
 .bottom-dock {
-  flex: 0 0 var(--dock-height, 340px);
-  min-height: 132px;
+  flex: 0 0 var(--dock-height, 228px);
+  min-height: 200px;
   max-height: 78vh;
   display: flex;
   flex-direction: column;
@@ -216,6 +216,18 @@ body.app-shell {
   border-radius: 99px;
   background: var(--muted);
   opacity: 0.45;
+}
+
+.bottom-dock.is-dock-peek .status-line {
+  display: none;
+}
+
+.bottom-dock.is-dock-peek .dock-head {
+  padding-bottom: 4px;
+}
+
+.bottom-dock.is-dock-peek .dock-scroll {
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
 }
 
 .dock-head {

@@ -17,7 +17,7 @@
   const DOCK_HEIGHT_KEY = "bibleMapsDockHeight";
   const DOCK_HINT_DISMISSED_KEY = "bibleMapsDockHintDismissed";
   const DOCK_UI_VERSION_KEY = "bibleMapsDockUiVersion";
-  const DOCK_UI_VERSION = 2;
+  const DOCK_UI_VERSION = 3;
   const els = {
     status: document.getElementById("status"),
     placesPanel: document.getElementById("placesPanel"),
@@ -73,9 +73,7 @@
   let mapMountGen = 0;
   let basemapType = "map";
   let basemapLabels = false;
-  let dockHeightPx = Math.round(
-    Math.min(Math.max(window.innerHeight * 0.46, 220), 440)
-  );
+  let dockHeightPx = 228;
   let dockDragStart = null;
   let dockDragging = false;
   let mapResizeRaf = 0;
@@ -1591,9 +1589,20 @@
   }
 
   function clampDockHeight(px) {
-    const min = 132;
+    const min = dockPeekHeight();
     const max = Math.max(min, window.innerHeight * 0.78);
     return Math.min(max, Math.max(min, px));
+  }
+
+  /** Resting height: grabber + tabs + a peek at the first place/journey row. */
+  function dockPeekHeight() {
+    const h = window.innerHeight;
+    return Math.round(Math.min(Math.max(h * 0.31, 200), 292));
+  }
+
+  function dockExpandedHeight() {
+    const h = window.innerHeight;
+    return Math.round(Math.min(Math.max(h * 0.52, 260), 520));
   }
 
   function scheduleMapResize() {
@@ -1641,28 +1650,33 @@
       }
     }
     if (resizeMap) scheduleMapResize();
+    const peek = dockPeekHeight();
+    els.mapDock?.classList.toggle("is-dock-peek", dockHeightPx <= peek + 10);
     if (!dockDragging) syncDockGrabberHint();
   }
 
-  function defaultDockHeight() {
-    return Math.round(Math.min(Math.max(window.innerHeight * 0.52, 240), 480));
-  }
-
   function expandDockPanel() {
-    applyDockHeight(defaultDockHeight());
+    applyDockHeight(dockExpandedHeight());
     syncDockGrabberHint();
   }
 
   function loadDockHeight() {
     try {
+      const peek = dockPeekHeight();
       const uiVer = Number(localStorage.getItem(DOCK_UI_VERSION_KEY));
+      const stored = Number(localStorage.getItem(DOCK_HEIGHT_KEY));
       if (!Number.isFinite(uiVer) || uiVer < DOCK_UI_VERSION) {
-        dockHeightPx = defaultDockHeight();
+        if (Number.isFinite(stored) && stored >= peek) {
+          dockHeightPx = stored;
+        } else {
+          dockHeightPx = peek;
+        }
         localStorage.setItem(DOCK_UI_VERSION_KEY, String(DOCK_UI_VERSION));
         localStorage.removeItem(DOCK_HINT_DISMISSED_KEY);
+      } else if (Number.isFinite(stored) && stored >= peek) {
+        dockHeightPx = stored;
       } else {
-        const n = Number(localStorage.getItem(DOCK_HEIGHT_KEY));
-        if (Number.isFinite(n) && n >= 100) dockHeightPx = n;
+        dockHeightPx = peek;
       }
     } catch {
       /* ignore */
@@ -1682,10 +1696,11 @@
 
   function syncDockGrabberHint() {
     if (!els.dockGrabberHint) return;
-    const cramped = dockHeightPx <= clampDockHeight(200);
+    const peek = dockPeekHeight();
+    const cramped = dockHeightPx <= peek + 6;
     els.dockGrabberHint.hidden = false;
     els.dockGrabberHint.textContent = cramped
-      ? "↑ Drag up for places & journeys (or tap Places ↑ on the map)"
+      ? "↑ Drag for more places & journeys (or tap Places ↑)"
       : "Drag handle to resize · double-click to expand";
     if (els.showPlacesBtn) {
       els.showPlacesBtn.hidden = !cramped;
@@ -1737,8 +1752,7 @@
       dismissDockGrabberHint();
     });
     grab.addEventListener("dblclick", () => {
-      const mid = clampDockHeight(window.innerHeight * 0.52);
-      applyDockHeight(mid);
+      applyDockHeight(dockExpandedHeight());
       syncDockGrabberHint();
     });
     grab.addEventListener("keydown", (e) => {
